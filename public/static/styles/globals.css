@@ -1,0 +1,19 @@
+html, body {
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+}
+
+/* Main nav styling */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.displayNone {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+}
