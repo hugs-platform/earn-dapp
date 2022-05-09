@@ -1,1 +1,10 @@
-:root {}
+:root {
+  --darkBlue: #003256;
+  --lighterBlue: #00ACD2;
+  --lightestBlue: #E4FAFF;
+  --green: #3ACC8A;
+
+  --darkGrey: #003256;
+  --mediumGrey: #D8D8D8;
+  --lightGrey: #ECEFF1;
+}
