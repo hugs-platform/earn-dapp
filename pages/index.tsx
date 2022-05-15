@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import React from "react";
-import styles from "./homePage.module.css";
-import SolanaLogin from "../components/core/solanaLogIn";
+import styles from "./homepage.module.css";
+import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView";
 
 const Home: NextPage = () => {
   return (
     <div className={styles.index_full}>
-      <SolanaLogin />
+      <ConnectOrDisconnectWallet />
     </div>
   );
 };
