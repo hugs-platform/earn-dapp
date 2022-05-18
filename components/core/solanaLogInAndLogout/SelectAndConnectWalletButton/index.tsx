@@ -35,7 +35,7 @@ export const SelectAndConnectWalletButton: FC = () => {
       onClick={handleWalletClick}
       disabled={connecting}
     >
-      {publicKey ? <div>Use Wallet Address</div> : <div>Connect Wallet</div>}
+      {publicKey ? `Use Wallet Address` : `Connect Wallet`}
     </button>
   );
 };

@@ -1,0 +1,10 @@
+.marquee__text {
+  color: var(--mediumGrey);
+  font-size: 1.4rem;
+  font-family: Helvetica, sans-serif, Arial;
+  padding-left: 0.8rem;
+}
+
+.powerdByHugs_full {
+  padding: 0.5rem 23.5rem 0rem 23.5rem;
+}
