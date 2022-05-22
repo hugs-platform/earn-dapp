@@ -21,6 +21,6 @@
   color: black;
   position: absolute;
   z-index: 1;
-  top: 1.7rem;
+  margin-top: -0.25rem;
   left: 23.3rem;
 }
