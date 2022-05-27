@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styles from "./connectAndDisconnectView.module.css";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletDisconnectButton } from "@solana/wallet-adapter-react-ui";
-import { SelectAndConnectWalletButton } from "./SelectAndConnectWalletButton";
+import { SelectAndConnectWalletButton } from "../SelectAndConnectWalletButton";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 

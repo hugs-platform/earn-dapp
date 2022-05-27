@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React from "react";
 import styles from "./homepage.module.css";
-import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView";
+import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView/connectAndDisconnectView";
 import PoweredByHugs from "../components/feature/poweredByHugs";
 
 
