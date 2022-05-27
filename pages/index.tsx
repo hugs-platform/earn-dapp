@@ -4,6 +4,7 @@ import styles from "./homepage.module.css";
 import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView";
 import PoweredByHugs from "../components/feature/poweredByHugs";
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.index_full}>
@@ -18,7 +19,9 @@ const Home: NextPage = () => {
       <p className={styles.earnDapp_slogan}>Dimsum your own lorum ipsum</p>
 
       <section className={styles.cryptoList}>
-        <h1 className={styles.cryptoList_title}>CryptoCurrencies by Market Cap</h1>
+        <h1 className={styles.cryptoList_title}>
+          CryptoCurrencies by Market Cap
+        </h1>
       </section>
     </div>
   );
