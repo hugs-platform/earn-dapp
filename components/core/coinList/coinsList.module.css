@@ -3,7 +3,7 @@
   border: 0.1rem solid #eceff1;
   padding: 2rem 2.5rem;
   width: 100%;
-  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr 1.25fr;
+  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr 0.75fr;
   border-bottom: 0.1rem solid #eceff1;
 }
 

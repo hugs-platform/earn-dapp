@@ -4,32 +4,92 @@
   flex-direction: column;
 }
 
-/* Style the buttons that are used to open and close the accordion panel */
+/* Style for structure of 1 coin */
 .oneCoinFull {
   display: grid;
-  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr 1.25fr;
+  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr .75fr;
   transition: background-color 0.5s ease;
   align-items: center;
   padding: 2rem 2.5rem;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+/* 1 COIN STYLING */
+
+/* alignment for each part of the "oneCoin" */
+.allignLeft {
+  display: flex;
+  justify-content: flex-start;
+}
+.allignCenter {
+  display: flex;
+  justify-content: center;
+}
+.allignRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* text Styling one Coin */
+.oneCoin_defaultStyling {
+  font-size: 1.6rem;
+  font-family: var(--Helvetica);
+  font-weight: 400;
+  color: var(--darkBlackText);
+}
+
+.oneCoin_updateButton {
+  background-color: var(--darkBlue);
+  border: none;
+  width: 6.9rem;
+  height: 3.3rem;
+  color: white;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--Helvetica);
+  font-size: 1.4rem;
+}
+
+.oneCoin_highestAPY {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.coinNameShort {
+  color: #748596;
+}
+
+/* coinName styling */
+.coinName {
+  display: flex;
+  align-items: center;
+}
+
+.coinName_name {
+  margin: 0rem 1.6rem;
+}
+
+.coinName_image {
+  border-radius: 50rem;
+}
+
+/* different background-color on hover of full coin */
 .oneCoinFull:hover {
   background-color: var(--hoverAndActiveColor);
 }
 
-.oneCoinFull:active .hoverBruh {
+.oneCoinFull:active .showMoreImage {
   transform: rotate(180deg);
 }
 
-/* Style the accordion content panel. Note: hidden by default */
+/* CONTENT OF 1 COIN PANEL. Note: hidden by default */
 .accordion__content {
   background-color: white;
   overflow: auto;
   transition: max-height 0.6s ease;
 }
 
-/* Style the accordion content text */
 .accordion__text {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
