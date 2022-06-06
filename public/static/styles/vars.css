@@ -1,4 +1,8 @@
 :root {
+  --hoverAndActiveColor: #e4faff;
+
+  --darkBlueText: #113353;
+
   --darkBlue: #003256;
   --lighterBlue: #00acd2;
   --lightestBlue: #e4faff;
@@ -12,4 +16,6 @@
   --InterMedium: "Inter-Medium";
   --InterBold: "Inter-Bold";
   --FiraCodeBold: "FiraCode-Bold";
+
+  --Helvetica: Helvetica, Arial;
 }

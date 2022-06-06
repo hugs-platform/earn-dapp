@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
 import React from "react";
 import styles from "./homepage.module.css";
+
+// components
 import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView/connectAndDisconnectView";
 import PoweredByHugs from "../components/feature/poweredByHugs";
-
+import CoinsList from "../components/core/coinList/coinsList";
 
 const Home: NextPage = () => {
   return (
@@ -22,6 +24,8 @@ const Home: NextPage = () => {
         <h1 className={styles.cryptoList_title}>
           CryptoCurrencies by Market Cap
         </h1>
+
+        <CoinsList />
       </section>
     </div>
   );
