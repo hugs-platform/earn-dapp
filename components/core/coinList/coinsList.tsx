@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./coinsList.module.css";
+import axios from "axios";
 
 // images
 
@@ -9,21 +10,17 @@ import styles from "./coinsList.module.css";
 import OneCoin from "./oneCoin/oneCoin";
 
 // data
-import { coinInfo } from "../../../data/oneCoin";
-console.log(coinInfo);
+import { coinInfo } from "../../../data/oneCoinData";
 
 // types
 import { OneCoinTypes } from "../../../types/coinListTypes";
 
-const CoinsList: FC<OneCoinTypes> = () => {
+const CoinsList: FC<OneCoinTypes> = (props) => {
+  console.log(props);
   return (
     <>
       <div className={styles.allCoins_container}>
-        <p
-          className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}
-        >
-          Name
-        </p>
+        <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
         <p className={styles.allCoins_titles}>Price</p>
         <p className={styles.allCoins_titles}>Market Cap</p>
         <p className={styles.allCoins_titles}>Highest Apy</p>
@@ -31,9 +28,11 @@ const CoinsList: FC<OneCoinTypes> = () => {
         <p className={styles.allCoins_titles}>Show more</p>
       </div>
 
-      {coinInfo.map((oneCoin) => (
-        <OneCoin key={oneCoin.id} oneCoinInfo={oneCoin} />
-      ))}
+      <div className={styles.allCoins_group}>
+        {coinInfo.map((oneCoin) => (
+          <OneCoin key={oneCoin.id} oneCoinInfo={oneCoin} />
+        ))}
+      </div>
     </>
   );
 };

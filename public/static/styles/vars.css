@@ -9,6 +9,9 @@
   --lightestBlue: #e4faff;
   --green: #3acc8a;
 
+  --textGrey: #656c7e;
+  --textBlack: #222531;
+
   --darkGrey: #969696;
   --mediumGrey: #d8d8d8;
   --lightGrey: #eceff1;
@@ -18,5 +21,5 @@
   --InterBold: "Inter-Bold";
   --FiraCodeBold: "FiraCode-Bold";
 
-  --Helvetica: Helvetica, Arial;
+  --Helvetica: Helvetica Neue, Arial;
 }

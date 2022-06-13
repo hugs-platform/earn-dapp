@@ -7,13 +7,17 @@
 /* Style for structure of 1 coin */
 .oneCoinFull {
   display: grid;
-  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr .75fr;
+  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr 1fr;
   transition: background-color 0.5s ease;
   align-items: center;
-  padding: 2rem 2.5rem;
+  padding: 2rem 0.65rem 2rem 2.5rem;
 }
 
 /* 1 COIN STYLING */
+
+.accordeonSVG {
+  cursor: pointer;
+}
 
 /* alignment for each part of the "oneCoin" */
 .allignLeft {
@@ -22,8 +26,10 @@
 }
 .allignCenter {
   display: flex;
-  justify-content: center;
+  justify-content: right;
+  padding-right: 3rem;
 }
+
 .allignRight {
   display: flex;
   justify-content: flex-end;
@@ -44,11 +50,17 @@
   height: 3.3rem;
   color: white;
   border-radius: 0.4rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--Helvetica);
   font-size: 1.4rem;
+  transition: 0.5s;
+}
+
+.oneCoin_updateButton:hover {
+  background-color: var(--lighterBlue);
 }
 
 .oneCoin_highestAPY {

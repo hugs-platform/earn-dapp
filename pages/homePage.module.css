@@ -25,7 +25,7 @@
   width: 100%;
   padding: 1.6rem 0rem 14rem 0rem;
   font-size: 2rem;
-  font-family: Helvetica, sans-serif, Arial;
+  font-family: var(--Helvetica);
   font-weight: 500;
   color: black;
 }
@@ -35,7 +35,7 @@
 }
 
 .cryptoList_title {
-  font-family: Helvetica, sans-serif, Arial;
+  font-family: var(--Helvetica);
   font-weight: 500;
   color: black;
   font-size: 2.2rem;

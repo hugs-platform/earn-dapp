@@ -1,0 +1,83 @@
+.oneEchange_full {
+  display: grid;
+  grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
+  padding: 0.7rem 0rem;
+}
+
+.allignLeft {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.allignRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ecxhangesList_number {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+  font-size: 1.5rem;
+}
+
+.exchangeList_fontSize {
+  font-size: 1.4rem;
+}
+.ecxhangesList_name {
+  font-family: var(--InterRegular);
+  color: var(--textBlack);
+  padding-left: 0.8rem;
+}
+
+.oneEchange_stakingLink_full {
+  cursor: pointer;
+}
+
+.ecxhangesList_stakingLink {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+  padding-right: 0.7rem;
+}
+
+.ecxhangesList_totalValue {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+}
+
+.ecxhangesList_apy {
+  font-family: var(--InterMedium);
+  color: var(--textBlack);
+  padding-left: 0.8rem;
+}
+
+.ecxhangesList_lastUpdated {
+  font-family: var(--Helvetica);
+  font-weight: 300;
+}
+
+.allign_updateButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ecxhangesList_updateButton {
+  width: 6.9rem;
+  height: 3.3rem;
+  border-radius: 0.4rem;
+  color: white;
+  border: none;
+  background-color: var(--lighterBlue);
+  font-size: 1.4rem;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.ecxhangesList_updateButton:hover {
+  background-color: var(--darkBlue);
+}
+
+.ecxhangesList_lastUpdated {
+}
