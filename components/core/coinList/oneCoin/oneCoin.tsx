@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, FC } from "react";
 import styles from "./oneCoin.module.css";
 import Image from "next/image";
 
@@ -8,25 +8,28 @@ import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.s
 // helper functions
 
 // components
+import Exchanges from "../oneCoin/topExchanges/exchangesList";
+
+// types
+import { OneCoinTypes } from "../../../../types/coinListTypes";
 
 // data
-import { allExchangesInfo } from "../../../../data/exchanges";
+import { ApyData } from "../../../../data/ApyData";
 
-// eslint-disable-next-line require-jsdoc
-function Accordion({ oneCoinInfo, contentOneCoin }) {
-  console.log(oneCoinInfo);
+const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
+  const { name, nameShort, price, marketCap } = oneCoinInfo;
+
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
 
-  const content = useRef(null);
+  const content = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  // eslint-disable-next-line require-jsdoc
-  function toggleAccordion() {
+  const toggleAccordion = () => {
     setActiveState(setActive === "" ? "active" : "");
     setHeightState(
       setActive === "active" ? "0px" : `${content.current.scrollHeight}px`
     );
-  }
+  };
 
   return (
     <section className={styles.oneCoinContainer}>
@@ -41,19 +44,19 @@ function Accordion({ oneCoinInfo, contentOneCoin }) {
           <p
             className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}
           >
-            {oneCoinInfo.name}
+            {name}
           </p>
           <p
             className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}
           >
-            {oneCoinInfo.nameShort}
+            {nameShort}
           </p>
         </div>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>
-          {oneCoinInfo.price}
+          {price}
         </p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>
-          {oneCoinInfo.marketCap}
+          {marketCap}
         </p>
         <p className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
           23,55%
@@ -71,19 +74,19 @@ function Accordion({ oneCoinInfo, contentOneCoin }) {
           />
         </div>
       </article>
-      {/* content of one coin */}
+
       <div
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
         className={styles.accordion__content}
       >
-        <div
-          className={styles.accordion__text}
-          dangerouslySetInnerHTML={{ __html: contentOneCoin }}
-        />
+        <Exchanges typeCoin={name} />
       </div>
     </section>
   );
-}
+};
 
-export default Accordion;
+export default OneCoin;
+
+// hier fetchen we de data van APY
+// hier fetchen we de data van exchanges

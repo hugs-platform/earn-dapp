@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./coinsList.module.css";
 
 // images
@@ -10,10 +10,12 @@ import OneCoin from "./oneCoin/oneCoin";
 
 // data
 import { coinInfo } from "../../../data/oneCoin";
-
 console.log(coinInfo);
 
-const CoinsList = () => {
+// types
+import { OneCoinTypes } from "../../../types/coinListTypes";
+
+const CoinsList: FC<OneCoinTypes> = () => {
   return (
     <>
       <div className={styles.allCoins_container}>
@@ -30,11 +32,7 @@ const CoinsList = () => {
       </div>
 
       {coinInfo.map((oneCoin) => (
-        <OneCoin
-          key={oneCoin.id}
-          oneCoinInfo={oneCoin}
-          contentOneCoin={oneCoin.name}
-        />
+        <OneCoin key={oneCoin.id} oneCoinInfo={oneCoin} />
       ))}
     </>
   );
