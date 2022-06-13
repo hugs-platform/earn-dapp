@@ -6,7 +6,7 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 
 export const SelectAndConnectWalletButton: FC = () => {
   const { setVisible } = useWalletModal();
-  const { wallet, connect, connecting, publicKey } = useWallet();
+  const { wallet, connect, connecting, publicKey, disconnect } = useWallet();
 
   useEffect(() => {
     if (!publicKey && wallet) {
@@ -17,15 +17,20 @@ export const SelectAndConnectWalletButton: FC = () => {
   }, [wallet]);
 
   const handleWalletClick = () => {
-    try {
-      if (!wallet) {
-        setVisible(true);
-      } else {
-        connect();
+    // for checking if there is a wallet
+    if (!wallet) {
+      setVisible(true);
+    } else {
+      // for connecting or disconnecting the wallet
+      try {
+        if (publicKey) {
+          disconnect();
+        } else {
+          connect();
+        }
+      } catch (error) {
+        alert("Error connecting to the wallet: ", (error as any).message);
       }
-      console.log(connect);
-    } catch (error) {
-      console.log("Error connecting to the wallet: ", (error as any).message);
     }
   };
 
@@ -35,7 +40,7 @@ export const SelectAndConnectWalletButton: FC = () => {
       onClick={handleWalletClick}
       disabled={connecting}
     >
-      {publicKey ? `Use Wallet Address` : `Connect Wallet`}
+      {publicKey ? `${publicKey.substring(0, 15)}...` : `Connect Wallet`}
     </button>
   );
 };

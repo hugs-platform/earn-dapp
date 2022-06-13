@@ -4,7 +4,6 @@ import styles from "./homepage.module.css";
 import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView/connectAndDisconnectView";
 import PoweredByHugs from "../components/feature/poweredByHugs";
 
-
 const Home: NextPage = () => {
   return (
     <div className={styles.index_full}>
