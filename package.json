@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@solana/wallet-adapter-react": "^0.15.4",
+    "@solana/wallet-adapter-react": "^0.15.5",
     "@solana/wallet-adapter-react-ui": "^0.9.6",
     "@solana/wallet-adapter-wallets": "^0.16.1",
     "next": "12.1.6",
