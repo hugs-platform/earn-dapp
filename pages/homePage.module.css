@@ -1,0 +1,42 @@
+.earnDapp_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 12rem;
+  font-size: 4.8rem;
+  font-family: var(--InterBold);
+  font-weight: 700;
+  color: black;
+}
+
+.earnDapp_title:before {
+  content: "Lorem ipsum slogan dimsum";
+  color: var(--lighterBlue);
+  position: absolute;
+  padding-bottom: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+.earnDapp_slogan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.6rem 0rem 14rem 0rem;
+  font-size: 2rem;
+  font-family: Helvetica, sans-serif, Arial;
+  font-weight: 500;
+  color: black;
+}
+
+.cryptoList {
+  padding: 0rem 23.5rem;
+}
+
+.cryptoList_title {
+  font-family: Helvetica, sans-serif, Arial;
+  font-weight: 500;
+  color: black;
+  font-size: 2.2rem;
+}

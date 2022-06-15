@@ -1,1 +1,15 @@
-:root {}
+:root {
+  --darkBlue: #003256;
+  --lighterBlue: #00acd2;
+  --lightestBlue: #e4faff;
+  --green: #3acc8a;
+
+  --darkGrey: #003256;
+  --mediumGrey: #d8d8d8;
+  --lightGrey: #eceff1;
+
+  --InterRegular: "Inter-Regular";
+  --InterMedium: "Inter-Medium";
+  --InterBold: "Inter-Bold";
+  --FiraCodeBold: "FiraCode-Bold";
+}
