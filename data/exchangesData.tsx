@@ -38,7 +38,7 @@ export const allExchangesInfo = [
     lastUpdated: "1 Maart 2021",
   },
   {
-    id: 23423429455359334,
+    id: 23423422394359334,
     name: "Coineal",
     image: "",
     stakingLink: "link",

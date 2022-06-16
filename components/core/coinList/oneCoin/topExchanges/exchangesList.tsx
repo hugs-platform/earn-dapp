@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./exchangeList.module.css";
 
 // components
@@ -7,7 +7,7 @@ import OneExchange from "./oneExchange";
 // data (replace with axios fetch later)
 import { allExchangesInfo } from "../../../../../data/exchangesData";
 
-const ExchangesList = () => {
+const ExchangesList: FC = () => {
   return (
     <section className={styles.exchangesList_full}>
       <div className={styles.exchangesList_titles}>
@@ -22,7 +22,7 @@ const ExchangesList = () => {
 
       <div className={styles.exchangesList}>
         {allExchangesInfo.map((oneExchange) => (
-          <OneExchange key={oneExchange.id} oneExchangeData={oneExchange} />
+          <OneExchange key={oneExchange.id} oneExchangeData={oneExchange} placeExchange={allExchangesInfo.indexOf(oneExchange)} />
         ))}
       </div>
     </section>

@@ -13,7 +13,8 @@ import Exchanges from "../oneCoin/topExchanges/exchangesList";
 // types
 import { OneCoinTypes } from "../../../../types/coinListTypes";
 
-// data (exchanges) -> hier we willen we de top 5 exchanges fetchen van een coin
+// converters functions
+import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
 
 const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
   const { name, nameShort, price, marketCap } = oneCoinInfo;
@@ -37,7 +38,7 @@ const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameShort}</p>
         </div>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{price}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>USD {marketCap}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{numberToCurrencyAbbreviation(marketCap, 1)}</p>
         {/* hier enkel de hoogste an de 5 pakken + rood of groen maken op basis of het positief of negatief is*/}
         <p className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>23,55%</p>
         {/* change to component later */}
