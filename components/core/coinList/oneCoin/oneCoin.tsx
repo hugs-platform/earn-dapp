@@ -4,6 +4,7 @@ import Image from "next/image";
 
 // images
 import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.svg";
+import stakingLink from "../../../../public/static/assets/oneCoin/exchanges/staking_link_image.svg";
 
 // helper functions
 
@@ -17,10 +18,11 @@ import { OneCoinTypes } from "../../../../types/coinListTypes";
 import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
 
 const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
-  const { name, nameShort, price, marketCap } = oneCoinInfo;
+  const { name, nameAbbreviation, price, marketCap, apy } = oneCoinInfo;
 
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
+  const [isOpen, setIsOpen] = useState(false);
 
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
 
@@ -35,18 +37,27 @@ const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
         <div className={styles.coinName}>
           <Image className={styles.coinName_image} height={32} width={32} src={viewMore} />
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
-          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameShort}</p>
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameAbbreviation}</p>
         </div>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{price}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{numberToCurrencyAbbreviation(marketCap, 1)}</p>
-        {/* hier enkel de hoogste an de 5 pakken + rood of groen maken op basis of het positief of negatief is*/}
-        <p className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>23,55%</p>
+        <p style={{ color: Math.sign(apy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
+          {apy}%
+        </p>
         {/* change to component later */}
         <div className={styles.allignRight}>
           <button className={styles.oneCoin_updateButton}>Update</button>
         </div>
         <div className={styles.allignCenter}>
-          <Image height={8} width={12} onClick={toggleAccordion} src={viewMore} className={styles.accordeonSVG} />
+          <Image
+            onClickCapture={() => setIsOpen(!isOpen)}
+            style={{ transition: ".5s", transform: isOpen === true ? "rotate(180deg)" : "rotate(0deg)" }}
+            height={8}
+            width={12}
+            onClick={toggleAccordion}
+            src={viewMore}
+            className={styles.accordeonSVG}
+          />
         </div>
       </article>
 
@@ -58,6 +69,3 @@ const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
 };
 
 export default OneCoin;
-
-// hier fetchen we de data van APY
-// hier fetchen we de data van exchanges
