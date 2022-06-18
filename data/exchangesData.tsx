@@ -6,7 +6,7 @@ export const allExchangesInfo = [
     stakingLink: "link",
     totalValue: 3480239,
     totalApy: 21.55,
-    lastUpdated: "00:10:14",
+    lastUpdated: "2020-08-27T08:24:37.642Z",
   },
   {
     id: 32423429455359334,
@@ -15,7 +15,7 @@ export const allExchangesInfo = [
     stakingLink: "link",
     totalValue: 234234124234,
     totalApy: 14.14,
-    lastUpdated: "00:23:52",
+    lastUpdated: "2022-06-27T11:59:27.642Z",
   },
   {
     id: 48323429455359334,
@@ -24,7 +24,7 @@ export const allExchangesInfo = [
     stakingLink: "link",
     totalValue: 238482392349234,
     totalApy: 12.32,
-    lastUpdated: "02:49:09",
+    lastUpdated: "2021-04-27T11:32:27.642Z",
   },
   {
     id: 44933429455359334,
@@ -33,7 +33,7 @@ export const allExchangesInfo = [
     stakingLink: "link",
     totalValue: 23499450234,
     totalApy: 3.3,
-    lastUpdated: "01:37:31",
+    lastUpdated: "2021-04-27T11:52:17.642Z",
   },
   {
     id: 23423422394359334,
@@ -42,6 +42,6 @@ export const allExchangesInfo = [
     stakingLink: "link",
     totalValue: 6785453,
     totalApy: 0,
-    lastUpdated: "00:00:01",
+    lastUpdated: "2021-04-27T11:59:58.642Z",
   },
 ];

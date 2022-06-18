@@ -8,6 +8,7 @@ import stakingLink from "../../../../../public/static/assets/oneCoin/exchanges/s
 
 // converters
 import { toAmericanCurrencyNotation } from "../../../../../core/utils/converters/numberToAmericanCurrencyNotation";
+import { toTimeAgo } from "../../../../../core/utils/converters/databaseTimeToTimeAgo";
 
 const OneExchange: FC = ({ oneExchangeData, placeExchange }) => {
   return (
@@ -29,7 +30,7 @@ const OneExchange: FC = ({ oneExchangeData, placeExchange }) => {
         <button className={styles.ecxhangesList_updateButton}>update</button>
       </div>
       <p className={`${styles.ecxhangesList_lastUpdated} ${styles.exchangeList_fontSize} ${styles.allignRight}`}>
-        {oneExchangeData.lastUpdated}
+        {toTimeAgo(oneExchangeData.lastUpdated)}
       </p>
     </div>
   );
