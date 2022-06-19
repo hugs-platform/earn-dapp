@@ -15,8 +15,7 @@ import { coinInfo } from "../../../data/oneCoinData";
 // types
 import { OneCoinTypes } from "../../../types/coinListTypes";
 
-const CoinsList: FC<OneCoinTypes> = (props) => {
-  console.log(props);
+const CoinsList: FC<OneCoinTypes> = () => {
   return (
     <>
       <div className={styles.allCoins_container}>

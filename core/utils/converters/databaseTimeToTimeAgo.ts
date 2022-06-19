@@ -24,7 +24,8 @@ export const toTimeAgo = (time: number) => {
   };
 
   // groups all time variables after they've been converted
-  const totalTimeFromLastUpdate = giveTimeTwoNumbers(hours) + ":" + giveTimeTwoNumbers(minutes) + ":" + giveTimeTwoNumbers(seconds);
+  const totalTimeFromLastUpdate =
+    days + "d " + giveTimeTwoNumbers(hours) + ":" + giveTimeTwoNumbers(minutes) + ":" + giveTimeTwoNumbers(seconds);
 
   // return formatDistanceToNow(new Date(time), { includeSeconds: true, addSuffix: true });
   return totalTimeFromLastUpdate;
