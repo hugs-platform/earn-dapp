@@ -12,14 +12,14 @@ datasource db {
 model Coin {
   id      Int     @id @default(autoincrement())
   symbol  String  @unique
-  name    String
+  name    String?
   apys    Apy[]
 }
 
 model Project {
   id            Int  @id @default(autoincrement())
   name          String
-  referralLink String
+  referralLink String?
   apys    Apy[]
 }
 
