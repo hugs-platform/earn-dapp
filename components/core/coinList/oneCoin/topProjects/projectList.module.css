@@ -1,22 +1,22 @@
-.exchangesList_full {
+.projectList_full {
   padding: 2rem 2.3rem 0rem 6.5rem;
   border-top: 0.1rem solid #eceff1;
   border-bottom: 0.1rem solid #eceff1;
 }
 
-.exchangesList_titles {
+.projectList_titles {
   display: grid;
   grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
   padding-bottom: 1.25rem;
   border-bottom: 0.1rem solid #eceff1;
 }
 
-.exchangesList {
+.projectList {
   display: flex;
   flex-direction: column;
 }
 
-.ecxhangesList_defaultText {
+.projectList_defaultText {
   font-family: var(--InterRegular);
   text-align: right;
   font-size: 1.2rem;

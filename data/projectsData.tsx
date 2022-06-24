@@ -1,4 +1,4 @@
-export const allExchangesInfo = [
+export const allProjectsInfo = [
   {
     id: 23423429455359334,
     name: "Binance",

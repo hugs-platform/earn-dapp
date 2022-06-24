@@ -1,4 +1,4 @@
-.oneEchange_full {
+.oneProject_full {
   display: grid;
   grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
   padding: 0.7rem 0rem;
@@ -17,43 +17,43 @@
   justify-content: flex-end;
 }
 
-.ecxhangesList_number {
+.oneProject_number {
   font-family: var(--InterMedium);
   color: var(--textGrey);
   font-size: 1.5rem;
 }
 
-.exchangeList_fontSize {
+.projectList_fontSize {
   font-size: 1.4rem;
 }
-.ecxhangesList_name {
+.oneProject_name {
   font-family: var(--InterRegular);
   color: var(--textBlack);
   padding-left: 0.8rem;
 }
 
-.oneEchange_stakingLink_full {
+.oneProject_stakingLink_full {
   cursor: pointer;
 }
 
-.ecxhangesList_stakingLink {
+.oneProject_stakingLink {
   font-family: var(--InterMedium);
   color: var(--textGrey);
   padding-right: 0.7rem;
 }
 
-.ecxhangesList_totalValue {
+.oneProject_totalValue {
   font-family: var(--InterMedium);
   color: var(--textGrey);
 }
 
-.ecxhangesList_apy {
+.oneProject_apy {
   font-family: var(--InterMedium);
   color: var(--textBlack);
   padding-left: 0.8rem;
 }
 
-.ecxhangesList_lastUpdated {
+.oneProject_lastUpdated {
   font-family: var(--Helvetica);
   font-weight: 300;
 }
@@ -63,7 +63,7 @@
   justify-content: flex-end;
 }
 
-.ecxhangesList_updateButton {
+.oneProject_updateButton {
   width: 6.9rem;
   height: 3.3rem;
   border-radius: 0.4rem;
@@ -76,9 +76,6 @@
   cursor: pointer;
 }
 
-.ecxhangesList_updateButton:hover {
+.oneProject_updateButton:hover {
   background-color: var(--darkBlue);
-}
-
-.ecxhangesList_lastUpdated {
 }

@@ -8,7 +8,7 @@ import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.s
 // helper functions
 
 // components
-import Exchanges from "../oneCoin/topExchanges/exchangesList";
+import Projects from "./topProjects/projectList";
 
 // types
 import { CoinTypes } from "../../../../core/types/types";
@@ -69,7 +69,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       </article>
 
       <div ref={content} style={{ maxHeight: `${setHeight}` }} className={styles.accordion__content}>
-        <Exchanges />
+        <Projects />
       </div>
     </section>
   );
