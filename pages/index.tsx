@@ -7,7 +7,10 @@ import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/c
 import PoweredByHugs from "../components/feature/poweredByHugs";
 import CoinsList from "../components/core/coinList/coinsList";
 
-const Home: NextPage = () => {
+// types
+import { HomePageProps } from "../core/types/types";
+
+const Home: NextPage<HomePageProps> = () => {
   return (
     <div className={styles.index_full}>
       <div className={styles.coinsInfo_full}>
@@ -21,9 +24,7 @@ const Home: NextPage = () => {
       <p className={styles.earnDapp_slogan}>Dimsum your own lorum ipsum</p>
 
       <section className={styles.cryptoList}>
-        <h1 className={styles.cryptoList_title}>
-          CryptoCurrencies by Market Cap
-        </h1>
+        <h1 className={styles.cryptoList_title}>CryptoCurrencies by Market Cap</h1>
 
         <CoinsList />
       </section>

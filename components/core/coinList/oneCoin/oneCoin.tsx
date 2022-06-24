@@ -4,7 +4,6 @@ import Image from "next/image";
 
 // images
 import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.svg";
-import stakingLink from "../../../../public/static/assets/oneCoin/exchanges/staking_link_image.svg";
 
 // helper functions
 
@@ -12,12 +11,20 @@ import stakingLink from "../../../../public/static/assets/oneCoin/exchanges/stak
 import Exchanges from "../oneCoin/topExchanges/exchangesList";
 
 // types
-import { OneCoinTypes } from "../../../../types/coinListTypes";
+import { CoinTypes } from "../../../../core/types/types";
 
 // converters functions
 import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
 
-const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
+// types
+export interface OneCoinProps {
+  key: number;
+  oneCoinInfo: CoinTypes;
+}
+
+const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
+  const { oneCoinInfo } = props;
+
   const { name, nameAbbreviation, price, marketCap, apy } = oneCoinInfo;
 
   const [setActive, setActiveState] = useState("");
@@ -39,7 +46,7 @@ const OneCoin: FC<OneCoinTypes> = ({ oneCoinInfo }: OneCoinTypes) => {
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameAbbreviation}</p>
         </div>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{price}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>USD {price}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{numberToCurrencyAbbreviation(marketCap, 1)}</p>
         <p style={{ color: Math.sign(apy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
           {apy}%

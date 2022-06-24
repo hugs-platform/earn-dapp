@@ -10,7 +10,17 @@ import stakingLink from "../../../../../public/static/assets/oneCoin/exchanges/s
 import { toAmericanCurrencyNotation } from "../../../../../core/utils/converters/numberToAmericanCurrencyNotation";
 import { toTimeAgo } from "../../../../../core/utils/converters/databaseTimeToTimeAgo";
 
-const OneExchange: FC = ({ oneExchangeData, placeExchange }) => {
+// types
+import { ProjectTypes } from "../../../../../core/types/types";
+
+export interface OneExchangeProps {
+  oneExchangeData: ProjectTypes;
+  placeExchange: number;
+}
+
+const OneExchange: FC<OneExchangeProps> = (props: OneExchangeProps) => {
+  const { oneExchangeData, placeExchange } = props;
+
   return (
     <div className={styles.oneEchange_full}>
       <p className={`${styles.ecxhangesList_number} ${styles.allignLeft}`}>{placeExchange + 1}</p>

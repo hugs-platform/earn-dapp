@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styles from "./coinsList.module.css";
-import axios from "axios";
 
 // images
 
@@ -12,10 +11,7 @@ import OneCoin from "./oneCoin/oneCoin";
 // data
 import { coinInfo } from "../../../data/oneCoinData";
 
-// types
-import { OneCoinTypes } from "../../../types/coinListTypes";
-
-const CoinsList: FC<OneCoinTypes> = () => {
+const CoinsList: FC = () => {
   return (
     <>
       <div className={styles.allCoins_container}>
