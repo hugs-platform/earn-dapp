@@ -361,6 +361,22 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@prisma/client@^3.15.1":
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-3.15.1.tgz#798e8bf0370abe686d599c822e93f7adb7c0c9c0"
+  integrity sha512-Lsk7oupvO9g99mrIs07iE6BIMouHs46Yq/YY8itTsUQNKfecsPuZvVYvcKci0pqRQ0neOpvIvoA/ouZmIMBCrQ==
+  dependencies:
+    "@prisma/engines-version" "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
+
+"@prisma/engines-version@3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e":
+  version "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e.tgz#bf5e2373ca68ce7556b967cb4965a7095e93fe53"
+  integrity sha512-e3k2Vd606efd1ZYy2NQKkT4C/pn31nehyLhVug6To/q8JT8FpiMrDy7zmm3KLF0L98NOQQcutaVtAPhzKhzn9w==
+
+"@prisma/engines@3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e":
+  version "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
+  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e.tgz#f691893df506b93e3cb1ccc15ec6e5ac64e8e570"
+  integrity sha512-NHlojO1DFTsSi3FtEleL9QWXeSF/UjhCW0fgpi7bumnNZ4wj/eQ+BJJ5n2pgoOliTOGv9nX2qXvmHap7rJMNmg==
 "@pedrouid/environment@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@pedrouid/environment/-/environment-1.0.1.tgz#858f0f8a057340e0b250398b75ead77d6f4342ec"
@@ -543,13 +559,20 @@
     "@solana/wallet-adapter-react" "^0.15.3"
     "@solana/web3.js" "^1.36.0"
 
-"@solana/wallet-adapter-react@^0.15.3", "@solana/wallet-adapter-react@^0.15.4":
+"@solana/wallet-adapter-react@^0.15.3":
   version "0.15.4"
   resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.15.4.tgz#413c3fa6893e9d809e5a6dd4730695fba942967b"
   integrity sha512-QB8tE1IqYxvHrdDZP3DGICuCq6xydvjUYhW+usIahORmHniFF62Mp/LPfdAGZRDFF7U2/rZPktGFiOxWUJA7Qw==
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.4"
     "@solana/web3.js" "^1.36.0"
+
+"@solana/wallet-adapter-react@^0.15.5":
+  version "0.15.5"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.15.5.tgz#20fa5d1044b24778cc2c504ff9668d353b4bcc92"
+  integrity sha512-R5VVrJE4RYAF0d8EAAOtWTRCNoMM76ocmLl3SjORCpkCvNq5x7mh3yKBjKNv/kcihkVnDi1kgCtMiJuDX/x+lQ==
+  dependencies:
+    "@solana/wallet-adapter-base" "^0.9.4"
 
 "@solana/wallet-adapter-safepal@^0.5.2":
   version "0.5.3"

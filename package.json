@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^3.15.1",
-    "@solana/wallet-adapter-react": "^0.15.4",
+    "@solana/wallet-adapter-react": "^0.15.5",
     "@solana/wallet-adapter-react-ui": "^0.9.6",
     "@solana/wallet-adapter-wallets": "^0.16.1",
     "axios": "^0.27.2",
