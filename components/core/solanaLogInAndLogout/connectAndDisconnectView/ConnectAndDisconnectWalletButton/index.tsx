@@ -11,7 +11,7 @@ export const SelectAndConnectWalletButton: FC = () => {
   useEffect(() => {
     if (!publicKey && wallet) {
       connect().catch((error) => {
-        console.log("Error connecting to the wallet: ", (error as any).message);
+        console.log("Error connecting to the wallet: ", error.message);
       });
     }
   }, [wallet]);
@@ -28,23 +28,15 @@ export const SelectAndConnectWalletButton: FC = () => {
         } else {
           connect();
         }
-      } catch (error) {
-        alert("Error connecting to the wallet: ", (error as any).message);
+      } catch (error: any) {
+        alert(`Error connecting to the wallet: ${error.message}`);
       }
     }
   };
 
   return (
-    <button
-      className={styles.selectAndConnectWallet_container}
-      onClick={handleWalletClick}
-      disabled={connecting}
-    >
-      {publicKey
-        ? `0x${publicKey.toBase58().slice(0, 4)}...${publicKey
-            .toBase58()
-            .slice(-4)}`
-        : `Connect Wallet`}
+    <button className={styles.selectAndConnectWallet_container} onClick={handleWalletClick} disabled={connecting}>
+      {publicKey ? `0x${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}` : `Connect Wallet`}
     </button>
   );
 };
