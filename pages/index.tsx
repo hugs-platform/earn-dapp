@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import React from "react";
-import styles from "./homepage.module.css";
+import styles from "./homePage.module.css";
 
 // components
 import ConnectOrDisconnectWallet from "../components/core/solanaLogInAndLogout/connectAndDisconnectView/connectAndDisconnectView";
