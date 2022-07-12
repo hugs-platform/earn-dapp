@@ -10,7 +10,26 @@ import CoinsList from "../components/core/coinList/coinsList";
 // types
 import { HomePageProps } from "../core/types/types";
 
-const Home: NextPage<HomePageProps> = () => {
+// prismaClient
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+// eslint-disable-next-line require-jsdoc
+export async function getServerSideProps() {
+  // opschrijven in welke vollegorde we best fetchen
+  // first fetch from coinGecko?
+
+  const coins = await prisma.coin.findMany();
+  return {
+    props: {
+      initialCoins: coins,
+    },
+  };
+}
+
+const Home: NextPage<HomePageProps> = (props) => {
+  console.log(props);
   return (
     <div className={styles.index_full}>
       <div className={styles.coinsInfo_full}>
