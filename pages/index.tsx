@@ -17,13 +17,17 @@ const prisma = new PrismaClient();
 
 // eslint-disable-next-line require-jsdoc
 export async function getServerSideProps() {
-  // opschrijven in welke vollegorde we best fetchen
-  // first fetch from coinGecko?
-
-  const coins = await prisma.coin.findMany();
+  // hier moeten we 2 dingen fetchen
+  // /// de coin data (bevat id, naam, afkorting,)
+  // /// het tekentje per coin van coinGecko
+  const coins = await prisma.coin.findMany({
+    include: { apys: true }, // max-limit to 5 apy's
+  });
+  const test = await prisma.apy.findMany();
   return {
     props: {
-      initialCoins: coins,
+      initialCoins: JSON.parse(JSON.stringify(coins)),
+      initialTest: JSON.parse(JSON.stringify(test)),
     },
   };
 }

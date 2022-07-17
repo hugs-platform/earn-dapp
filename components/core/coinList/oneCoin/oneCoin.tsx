@@ -46,8 +46,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameAbbreviation}</p>
         </div>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>USD {price}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{numberToCurrencyAbbreviation(marketCap, 1)}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{!price ? "no price" : `USD ` + price}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>
+          {!marketCap ? "no data available" : numberToCurrencyAbbreviation(marketCap, 1)}
+        </p>
         <p style={{ color: Math.sign(apy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
           {apy}%
         </p>

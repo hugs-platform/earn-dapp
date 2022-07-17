@@ -33,7 +33,7 @@ const OneProject: FC<OneProjectProps> = (props: OneProjectProps) => {
         <Image className={styles.oneProject_stakingLink} height={10} width={10} src={stakingLink} />
       </div>
       <p className={`${styles.oneProject_totalValue} ${styles.projectList_fontSize} ${styles.allignRight}`}>
-        {toAmericanCurrencyNotation(oneProjectData.totalValue)}
+        {oneProjectData.totalValue <= 0 ? "no data available" : toAmericanCurrencyNotation(oneProjectData.totalValue)}
       </p>
       <p className={`${styles.oneProject_apy} ${styles.projectList_fontSize} ${styles.allignRight}`}>{oneProjectData.totalApy} %</p>
       <div className={styles.allign_updateButton}>
