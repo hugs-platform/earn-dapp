@@ -1,8 +1,13 @@
 .oneProject_full {
-  display: grid;
-  grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
   padding: 0.7rem 0rem;
   border-bottom: 0.1rem solid #eceff1;
+  display: flex;
+  align-items: center;
+}
+
+.verticallyCenter {
+  display: flex;
+  align-items: center;
 }
 
 .allignLeft {

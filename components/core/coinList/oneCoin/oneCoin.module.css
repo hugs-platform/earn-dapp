@@ -1,15 +1,5 @@
-/* Style the accordion section */
-.oneCoinContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Style for structure of 1 coin */
 .oneCoinFull {
-  display: grid;
-  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr 1fr;
-  transition: background-color 0.5s ease;
-  align-items: center;
   padding: 2rem 0.65rem 2rem 2.5rem;
 }
 

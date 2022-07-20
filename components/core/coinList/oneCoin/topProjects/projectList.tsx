@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./projectList.module.css";
+import Grid from "@material-ui/core/Grid/Grid";
 
 // components
 import OneProject from "./oneProject";
@@ -11,13 +12,33 @@ const ProjectList: FC = () => {
   return (
     <section className={styles.projectList_full}>
       <div className={styles.projectList_titles}>
-        <p className={`${styles.projectList_defaultText} ${styles.allignLeft}`}>N°</p>
-        <p className={`${styles.projectList_defaultText} ${styles.allignLeft}`}>Name</p>
-        <p className={`${styles.projectList_defaultText} ${styles.allignRight}`}>Staking Link</p>
-        <p className={`${styles.projectList_defaultText} ${styles.allignRight}`}>Total Value Locked</p>
-        <p className={`${styles.projectList_defaultText} ${styles.allignRight}`}>APY</p>
-        <p className={`${styles.projectList_defaultText} ${styles.allignRight}`}>Update</p>
-        <p className={`${styles.projectList_defaultText} ${styles.allignRight}`}>LastUpdated</p>
+        <Grid container>
+          <Grid item xs={2} container>
+            <Grid item xs={2}>
+              <p className={styles.projectList_defaultText}>N°</p>
+            </Grid>
+            <Grid item xs={10}>
+              <p className={styles.projectList_defaultText}>Name</p>
+            </Grid>
+          </Grid>
+          <Grid item xs={10} container>
+            <Grid item xs={3}>
+              <p className={styles.projectList_defaultText_end}>Staking Link</p>
+            </Grid>
+            <Grid item xs={3}>
+              <p className={styles.projectList_defaultText_end}>Total Value Locked</p>
+            </Grid>
+            <Grid item xs={2}>
+              <p className={styles.projectList_defaultText_end}>APY</p>
+            </Grid>
+            <Grid item xs={2}>
+              <p className={styles.projectList_defaultText_end}>Update</p>
+            </Grid>
+            <Grid item xs={2}>
+              <p className={styles.projectList_defaultText_end}>Last Updated</p>
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
 
       <div className={styles.projectList}>

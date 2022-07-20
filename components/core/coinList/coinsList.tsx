@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./coinsList.module.css";
+import Grid from "@material-ui/core/Grid/Grid";
 
 // images
 
@@ -15,12 +16,26 @@ const CoinsList: FC = () => {
   return (
     <>
       <div className={styles.allCoins_container}>
-        <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
-        <p className={styles.allCoins_titles}>Price</p>
-        <p className={styles.allCoins_titles}>Market Cap</p>
-        <p className={styles.allCoins_titles}>Highest Apy</p>
-        <p className={styles.allCoins_titles}>Update</p>
-        <p className={styles.allCoins_titles}>Show more</p>
+        <Grid container>
+          <Grid item xs={4}>
+            <p className={styles.allCoins_titles_first}>Name</p>
+          </Grid>
+          <Grid item xs={2}>
+            <p className={styles.allCoins_titles}>Price</p>
+          </Grid>
+          <Grid item xs={2}>
+            <p className={styles.allCoins_titles}>Market Cap</p>
+          </Grid>
+          <Grid item xs={2}>
+            <p className={styles.allCoins_titles}>Highest Apy</p>
+          </Grid>
+          <Grid item xs={1}>
+            <p className={styles.allCoins_titles}>Update</p>
+          </Grid>
+          <Grid item xs={1}>
+            <p className={styles.allCoins_titles}>Show more</p>
+          </Grid>
+        </Grid>
       </div>
 
       <div className={styles.allCoins_group}>

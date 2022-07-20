@@ -5,8 +5,6 @@
 }
 
 .projectList_titles {
-  display: grid;
-  grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
   padding-bottom: 1.25rem;
   border-bottom: 0.1rem solid #eceff1;
 }
@@ -20,12 +18,12 @@
   font-family: var(--InterRegular);
   text-align: right;
   font-size: 1.2rem;
+  text-align: start;
 }
 
-.allignRight {
+.projectList_defaultText_end {
+  font-family: var(--InterRegular);
   text-align: right;
-}
-
-.allignLeft {
-  text-align: left;
+  font-size: 1.2rem;
+  text-align: end;
 }
