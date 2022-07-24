@@ -1,17 +1,17 @@
 import React, { FC } from "react";
 import styles from "./coinsList.module.css";
 
-// images
-
-// helper functions
+// store
+import { useStore } from "../../../store/store";
 
 // components
 import OneCoin from "./oneCoin/oneCoin";
 
-// data
-import { coinInfo } from "../../../data/oneCoinData";
-
 const CoinsList: FC = () => {
+  // state
+  const coinInfo = useStore((state) => state.coins.coinInfo);
+  console.log(coinInfo);
+
   return (
     <>
       <div className={styles.allCoins_container}>
@@ -24,7 +24,7 @@ const CoinsList: FC = () => {
       </div>
 
       <div className={styles.allCoins_group}>
-        {coinInfo.map((oneCoin) => (
+        {coinInfo.map((oneCoin: any) => (
           <OneCoin key={oneCoin.id} oneCoinInfo={oneCoin} />
         ))}
       </div>

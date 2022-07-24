@@ -25,7 +25,12 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
 
-  const { name, nameAbbreviation, price, marketCap, apy } = oneCoinInfo;
+  const { name } = oneCoinInfo;
+
+  const apy = oneCoinInfo.apys[0].apy;
+  const price = "";
+  const nameAbbreviation = "BTC";
+  const marketCap = "";
 
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");

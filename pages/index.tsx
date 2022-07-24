@@ -13,27 +13,46 @@ import { HomePageProps } from "../core/types/types";
 // prismaClient
 import { PrismaClient } from "@prisma/client";
 
+// store
+import { useStore } from "../store/store";
+
 const prisma = new PrismaClient();
 
 // eslint-disable-next-line require-jsdoc
 export async function getServerSideProps() {
-  // hier moeten we 2 dingen fetchen
-  // /// de coin data (bevat id, naam, afkorting,)
-  // /// het tekentje per coin van coinGecko
+
   const coins = await prisma.coin.findMany({
-    include: { apys: true }, // max-limit to 5 apy's
+    take: 50, // max limit 50 coins
+    include: {
+      apys: {
+        take: 5,
+        orderBy: {
+          apy: "desc",
+        },
+        include: {
+          project: true,
+        },
+      },
+    }, // max-limit to 5 apy's
   });
-  const test = await prisma.apy.findMany();
+
   return {
     props: {
       initialCoins: JSON.parse(JSON.stringify(coins)),
-      initialTest: JSON.parse(JSON.stringify(test)),
     },
   };
 }
 
 const Home: NextPage<HomePageProps> = (props) => {
-  console.log(props);
+  const { initialCoins } = props;
+
+  // error -> geeft in het begin nog 100 coins mee + geeft coins mee op basis van de render
+  // adds this to state
+  // addCoinInfo(props.initialCoins);
+
+  const updateObject = useStore((state) => state.updateObject);
+  updateObject("coins", "coinInfo", initialCoins);
+
   return (
     <div className={styles.index_full}>
       <div className={styles.coinsInfo_full}>
