@@ -4,10 +4,12 @@ import styles from "./projectList.module.css";
 // components
 import OneProject from "./oneProject";
 
-// data (replace with axios fetch later)
-import { allProjectsInfo } from "../../../../../data/projectsData";
+const ProjectList: FC = (data) => {
 
-const ProjectList: FC = () => {
+  // const apys = data.oneCoinInfo.apys
+  const apys = data.data.oneCoinInfo.apys
+  console.log(apys)
+
   return (
     <section className={styles.projectList_full}>
       <div className={styles.projectList_titles}>
@@ -21,8 +23,8 @@ const ProjectList: FC = () => {
       </div>
 
       <div className={styles.projectList}>
-        {allProjectsInfo.map((oneProject) => (
-          <OneProject key={oneProject.id} oneProjectData={oneProject} placeOfProject={allProjectsInfo.indexOf(oneProject)} />
+        {apys.map((oneProject) => (
+          <OneProject projectData={oneProject} key={oneProject.id} placeOfProject={apys.indexOf(oneProject)} />
         ))}
       </div>
     </section>

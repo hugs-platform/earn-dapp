@@ -25,9 +25,8 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
 
-  const { name } = oneCoinInfo;
-
   const apy = oneCoinInfo.apys[0].apy;
+  const { name } = oneCoinInfo;
   const price = "";
   const nameAbbreviation = "BTC";
   const marketCap = "";
@@ -76,7 +75,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       </article>
 
       <div ref={content} style={{ maxHeight: `${setHeight}` }} className={styles.accordion__content}>
-        <Exchanges />
+        <Exchanges data={props} />
       </div>
     </section>
   );
