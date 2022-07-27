@@ -10,7 +10,6 @@ import OneCoin from "./oneCoin/oneCoin";
 const CoinsList: FC = () => {
   // state
   const coinInfo = useStore((state) => state.coins.coinInfo);
-  console.log(coinInfo);
 
   return (
     <>

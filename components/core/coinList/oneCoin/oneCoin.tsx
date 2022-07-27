@@ -25,12 +25,13 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
 
-  const apy = oneCoinInfo.apys[0].apy;
-  const { name } = oneCoinInfo;
+  const highestApy = oneCoinInfo.apys[0].apy;
+
+  const { name, symbol } = oneCoinInfo;
   const price = "";
-  const nameAbbreviation = "BTC";
   const marketCap = "";
 
+  // states
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
   const [isOpen, setIsOpen] = useState(false);
@@ -48,14 +49,14 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         <div className={styles.coinName}>
           <Image className={styles.coinName_image} height={32} width={32} src={viewMore} />
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
-          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameAbbreviation}</p>
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{symbol}</p>
         </div>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{!price ? "no price" : `USD ` + price}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>
           {!marketCap ? "no data available" : numberToCurrencyAbbreviation(marketCap, 1)}
         </p>
-        <p style={{ color: Math.sign(apy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
-          {apy}%
+        <p style={{ color: Math.sign(highestApy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
+          {highestApy}%
         </p>
         {/* change to component later */}
         <div className={styles.allignRight}>
@@ -75,7 +76,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       </article>
 
       <div ref={content} style={{ maxHeight: `${setHeight}` }} className={styles.accordion__content}>
-        <Exchanges data={props} />
+        <Exchanges projectData={oneCoinInfo} />
       </div>
     </section>
   );

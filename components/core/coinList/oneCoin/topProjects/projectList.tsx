@@ -4,10 +4,10 @@ import styles from "./projectList.module.css";
 // components
 import OneProject from "./oneProject";
 
-const ProjectList: FC = (data) => {
+const ProjectList: FC = ({projectData}) => {
 
-  // const apys = data.oneCoinInfo.apys
-  const apys = data.data.oneCoinInfo.apys
+  const {apys} = projectData
+
   console.log(apys)
 
   return (
@@ -24,7 +24,7 @@ const ProjectList: FC = (data) => {
 
       <div className={styles.projectList}>
         {apys.map((oneProject) => (
-          <OneProject projectData={oneProject} key={oneProject.id} placeOfProject={apys.indexOf(oneProject)} />
+          <OneProject oneProjectData={oneProject} key={oneProject.id} placeOfProject={apys.indexOf(oneProject)} />
         ))}
       </div>
     </section>

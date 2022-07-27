@@ -4,7 +4,7 @@ import Image from "next/image";
 
 // images
 import projectLogo from "../../../../../public/static/assets/oneCoin/projects/project_logo.svg";
-import stakingLink from "../../../../../public/static/assets/oneCoin/projects/staking_link_image.svg";
+import stakingLinkImage from "../../../../../public/static/assets/oneCoin/projects/staking_link_image.svg";
 
 // converters
 import { toAmericanCurrencyNotation } from "../../../../../core/utils/converters/numberToAmericanCurrencyNotation";
@@ -19,15 +19,15 @@ export interface OneProjectProps {
 }
 
 const OneProject: FC<OneProjectProps> = (props: OneProjectProps) => {
-  const { placeOfProject, projectData } = props;
+  const { placeOfProject, oneProjectData } = props;
 
-  console.log(placeOfProject)
+  console.log(oneProjectData);
 
-  const projectName = projectData.project.name
-  const projectSymbol = projectData.project.symbol
-  const stakingLinks = projectData.project.stakingLink
-  const lastUpdated = 321
-  const totalApy = projectData.apy
+  const projectName = oneProjectData.project.name
+  const projectSymbol = oneProjectData.project.symbol
+  const stakingLink = oneProjectData.project.referralLink
+  const lastUpdated = 1658799000000
+  const totalApy = oneProjectData.apy
 
   const totalValue = ''
 
@@ -39,8 +39,8 @@ const OneProject: FC<OneProjectProps> = (props: OneProjectProps) => {
         <p className={`${styles.oneProject_name} ${styles.projectList_fontSize}`}>{projectName}</p>
       </div>
       <div className={`${styles.oneProject_stakingLink_full} ${styles.allignRight}`}>
-        <a className={`${styles.oneProject_stakingLink} ${styles.projectList_fontSize}`}>{stakingLinks}</a>
-        <Image className={styles.oneProject_stakingLink} height={10} width={10} src={stakingLink} />
+        <a className={`${styles.oneProject_stakingLink} ${styles.projectList_fontSize}`}>{!stakingLink ? `${'-'}` : stakingLink}</a>
+        <Image className={styles.oneProject_stakingLink} height={10} width={10} src={stakingLinkImage} />
       </div>
       <p className={`${styles.oneProject_totalValue} ${styles.projectList_fontSize} ${styles.allignRight}`}>
         {!totalValue ? "no data available" : toAmericanCurrencyNotation(totalValue)}
