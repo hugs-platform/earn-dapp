@@ -4,31 +4,24 @@ import "../public/static/styles/reset.css";
 import "../public/static/styles/globals.css";
 import React from "react";
 import type { AppProps } from "next/app";
-import { ConnectionProvider } from "@solana/wallet-adapter-react";
-import dynamic from "next/dynamic";
+import { DAppProvider, Config, Mainnet } from "@usedapp/core"
+import { getDefaultProvider } from 'ethers'
 
-// set custom RPC server endpoint for the final website
-const endpoint = process.env.NEXT_PUBLIC_ENDPOINT ? process.env.NEXT_PUBLIC_ENDPOINT : "http://127.0.0.1:8899";
-// ERROR -> NEXT_PUBLIC_ENDPOINT not in .env variables !!
+const config: Config = {
+    readOnlyChainId: Mainnet.chainId,
+    readOnlyUrls: {
+      [Mainnet.chainId]: getDefaultProvider('mainnet'),
+    //   [Mainnet.chainId]: `https://mainnet.infura.io/v3/` + process.env.INFURA_ID, // TODO: Uncommit with product INFURA_ID
+    },
+  }
 
-const WalletProvider = dynamic(
-    () => import("../contexts/ClientWalletProvider"),
-    {
-        ssr: false,
-    }
-);
-
-// eslint-disable-next-line require-jsdoc
-function MyApp({ Component, pageProps }: AppProps) {
-    // const endpoint = useMemo(() => clusterApiUrl(network), []);
+function App({ Component, pageProps }: AppProps) {
 
     return (
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider>
-                <Component {...pageProps} />
-            </WalletProvider>
-        </ConnectionProvider>
+        <DAppProvider config={config}>
+            <Component {...pageProps} />
+        </DAppProvider>
     );
 }
 
-export default MyApp;
+export default App;
