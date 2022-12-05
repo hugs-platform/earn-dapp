@@ -11,6 +11,18 @@ export interface CoinTypes {
   price: number;
   marketCap: number;
   apy: number;
+  image: {
+    small: string,
+  };
+  market_data: {
+    current_price: {
+      usd: number
+    },
+    market_cap: {
+      usd: number
+    },
+    price_change_percentage_1y: number
+  }
 }
 
 export interface ProjectTypes {

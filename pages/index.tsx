@@ -6,7 +6,7 @@ import styles from "./homePage.module.css";
 
 // components
 import PoweredByHugs from "../components/feature/poweredByHugs";
-import CoinsList from "../components/core/coinList/coinsList";
+import CoinsList from "../components/core/coinGecko/coinList";
 import ConnectButton from "../components/core/metaMask/authentications";
 import AccountModal from "../components/core/metaMask/accountModal";
 import Layout from "../components/core/Layout";
@@ -33,11 +33,11 @@ const Home: NextPage<HomePageProps> = () => {
       <h1 className={styles.earnDapp_title}>Lorem ipsum slogan dimsum</h1>
       <p className={styles.earnDapp_slogan}>Dimsum your own lorum ipsum</p>
 
-      {/* <section className={styles.cryptoList}>
-        <h1 className={styles.cryptoList_title}>CryptoCurrencies by Market Cap</h1>
+      <section className={styles.cryptoList}>
+        <h1 className={styles.cryptoList_title}>CryptoCurrencies by Coin Gecko</h1>
 
         <CoinsList />
-      </section> */}
+      </section>
     </div>
   );
 };

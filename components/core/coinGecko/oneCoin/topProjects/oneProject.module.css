@@ -1,0 +1,81 @@
+.oneProject_full {
+  display: grid;
+  grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
+  padding: 0.7rem 0rem;
+  border-bottom: 0.1rem solid #eceff1;
+}
+
+.allignLeft {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.allignRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.oneProject_number {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+  font-size: 1.5rem;
+}
+
+.projectList_fontSize {
+  font-size: 1.4rem;
+}
+.oneProject_name {
+  font-family: var(--InterRegular);
+  color: var(--textBlack);
+  padding-left: 0.8rem;
+}
+
+.oneProject_stakingLink_full {
+  cursor: pointer;
+}
+
+.oneProject_stakingLink {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+  padding-right: 0.7rem;
+}
+
+.oneProject_totalValue {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+}
+
+.oneProject_apy {
+  font-family: var(--InterMedium);
+  color: var(--textBlack);
+  padding-left: 0.8rem;
+}
+
+.oneProject_lastUpdated {
+  font-family: var(--Helvetica);
+  font-weight: 300;
+}
+
+.allign_updateButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.oneProject_updateButton {
+  width: 6.9rem;
+  height: 3.3rem;
+  border-radius: 0.4rem;
+  color: white;
+  border: none;
+  background-color: var(--lighterBlue);
+  font-size: 1.4rem;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.oneProject_updateButton:hover {
+  background-color: var(--darkBlue);
+}

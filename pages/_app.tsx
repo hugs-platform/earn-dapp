@@ -10,8 +10,7 @@ import { getDefaultProvider } from 'ethers'
 const config: Config = {
     readOnlyChainId: Mainnet.chainId,
     readOnlyUrls: {
-      [Mainnet.chainId]: getDefaultProvider('mainnet'),
-    //   [Mainnet.chainId]: `https://mainnet.infura.io/v3/` + process.env.INFURA_ID, // TODO: Uncommit with product INFURA_ID
+      [Mainnet.chainId]: `https://mainnet.infura.io/v3/` + process.env.NEXT_PUBLIC_INFURA_ID,
     },
   }
 

@@ -1,0 +1,110 @@
+/* Style the accordion section */
+.oneCoinContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for structure of 1 coin */
+.oneCoinFull {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr 1fr 1fr;
+  transition: background-color 0.5s ease;
+  align-items: center;
+  padding: 2rem 0.65rem 2rem 2.5rem;
+}
+
+/* 1 COIN STYLING */
+
+.accordeonSVG {
+  cursor: pointer;
+}
+
+/* alignment for each part of the "oneCoin" */
+.allignLeft {
+  display: flex;
+  justify-content: flex-start;
+}
+.allignCenter {
+  display: flex;
+  justify-content: right;
+  padding-right: 3rem;
+}
+
+.allignRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* text Styling one Coin */
+.oneCoin_defaultStyling {
+  font-size: 1.6rem;
+  font-family: var(--Helvetica);
+  font-weight: 400;
+  color: var(--darkBlackText);
+}
+
+.oneCoin_updateButton {
+  background-color: var(--darkBlue);
+  border: none;
+  width: 6.9rem;
+  height: 3.3rem;
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--Helvetica);
+  font-size: 1.4rem;
+  transition: 0.5s;
+}
+
+.oneCoin_updateButton:hover {
+  background-color: var(--lighterBlue);
+}
+
+.oneCoin_highestAPY {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.coinNameShort {
+  color: #748596;
+}
+
+/* coinName styling */
+.coinName {
+  display: flex;
+  align-items: center;
+}
+
+.coinName_name {
+  margin: 0rem 1.6rem;
+}
+
+.coinName_image {
+  border-radius: 50rem;
+}
+
+/* different background-color on hover of full coin */
+.oneCoinFull:hover {
+  background-color: var(--hoverAndActiveColor);
+}
+
+.oneCoinFull:active .showMoreImage {
+  transform: rotate(180deg);
+}
+
+/* CONTENT OF 1 COIN PANEL. Note: hidden by default */
+.accordion__content {
+  background-color: white;
+  overflow: auto;
+  transition: max-height 0.6s ease;
+}
+
+.accordion__text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 18px;
+}
