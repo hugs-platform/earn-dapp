@@ -4,25 +4,14 @@ export interface HomePageProps {
 }
 
 export interface CoinTypes {
-  id: number;
+  cg_coin_id: number;
   name: string;
-  symbol: string;
-  nameAbbreviation: string;
+  abbreviature: string;
+  image: string;
+  last_updated: string;
   price: number;
-  marketCap: number;
+  market_cup: number;
   apy: number;
-  image: {
-    small: string,
-  };
-  market_data: {
-    current_price: {
-      usd: number
-    },
-    market_cap: {
-      usd: number
-    },
-    price_change_percentage_1y: number
-  }
 }
 
 export interface ProjectTypes {

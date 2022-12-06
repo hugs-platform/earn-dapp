@@ -30,16 +30,17 @@ function App() {
     <>
       <div className={styles.allCoins_container}>
         <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
+        <p className={styles.allCoins_titles}>Abbreviature</p>
         <p className={styles.allCoins_titles}>Price</p>
         <p className={styles.allCoins_titles}>Market Cap</p>
-        <p className={styles.allCoins_titles}>Highest Apy</p>
+        <p className={styles.allCoins_titles}>Highest APY</p>
         <p className={styles.allCoins_titles}>Update</p>
         <p className={styles.allCoins_titles}>Show more</p>
       </div>
 
       <div className={styles.allCoins_group}>
         {list.map((oneCoin) => (
-          <OneCoin key={oneCoin.id} oneCoinInfo={oneCoin} />
+          <OneCoin key={oneCoin['cg_coin_id']} oneCoinInfo={oneCoin} />
         ))}
       </div>
     </>

@@ -25,7 +25,7 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
 
-  const { name, nameAbbreviation, image, market_data } = oneCoinInfo;
+  const { cg_coin_id, name, abbreviature, image, last_updated, price, market_cup, apy } = oneCoinInfo;
 
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
@@ -42,17 +42,17 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     <section className={styles.oneCoinContainer}>
       <article className={styles.oneCoinFull}>
         <div className={styles.coinName}>
-          <Image className={styles.coinName_image} height={32} width={32} src={image.small} />
+          <Image className={styles.coinName_image} height={32} width={32} src={image} />
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
-          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinNameShort}`}>{nameAbbreviation}</p>
         </div>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>USD {market_data.current_price.usd}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignRight}`}>{numberToCurrencyAbbreviation(market_data.market_cap.usd, 1)}</p>
-        <p style={{ color: Math.sign(market_data.price_change_percentage_1y) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignRight}`}>
-          {market_data.price_change_percentage_1y}%
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{abbreviature}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>USD {price}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{numberToCurrencyAbbreviation(market_cup, 1)}</p>
+        <p style={{ color: Math.sign(apy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignCenter}`}>
+          {apy}%
         </p>
         {/* change to component later */}
-        <div className={styles.allignRight}>
+        <div className={styles.allignCenter}>
           <button className={styles.oneCoin_updateButton}>Update</button>
         </div>
         <div className={styles.allignCenter}>
