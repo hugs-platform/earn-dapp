@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
 import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
 
 import styles from "./homePage.module.css";
@@ -34,8 +34,6 @@ const Home: NextPage<HomePageProps> = () => {
       <p className={styles.earnDapp_slogan}>Dimsum your own lorum ipsum</p>
 
       <section className={styles.cryptoList}>
-        <h1 className={styles.cryptoList_title}>CryptoCurrencies by Coin Gecko</h1>
-
         <CoinsList />
       </section>
     </div>

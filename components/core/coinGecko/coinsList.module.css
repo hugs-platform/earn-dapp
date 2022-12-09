@@ -5,23 +5,83 @@
     width: 100%;
     grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr 1fr; 
     border-bottom: 0.1rem solid #eceff1;
-  }
+}
   
-  .allCoins_titles {
-    font-family: var(--Helvetica);
-    font-size: 1.4rem;
-    color: var(--darkBlueText);
-    font-weight: 400;
-    text-align: center;
-  }
-  
-  .allCoins_group {
-    border-right: 0.1rem solid #eceff1;
-    border-bottom: 0.1rem solid #eceff1;
-    border-left: 0.1rem solid #eceff1;
-  }
-  
-  .allCoins_titles_first {
-    text-align: start;
-  }
-  
+.allCoins_titles {
+  font-family: var(--Helvetica);
+  font-size: 1.4rem;
+  color: var(--darkBlueText);
+  font-weight: 400;
+  text-align: center;
+}
+
+.allCoins_group {
+  border-right: 0.1rem solid #eceff1;
+  border-bottom: 0.1rem solid #eceff1;
+  border-left: 0.1rem solid #eceff1;
+}
+
+.allCoins_titles_first {
+  text-align: start;
+}
+
+.allCoins_title {
+  font-family: var(--Helvetica);
+  font-weight: 500;
+  color: black;
+  font-size: 2.2rem;
+}
+
+.cryptoHeader {
+  display: flex; 
+  justify-content: space-between;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+}
+
+.coinsListPagination {
+  margin: auto;
+  padding: 3em;
+  display: flex;
+  justify-content: center;
+}
+
+.coinsListPaginationPage {
+  margin: 1em;
+}
+
+.coinsListPaginationPage a {
+  all: initial;
+  background-color: var(--darkBlue);
+  border: none;
+  color: white;
+  width: 6.9rem;
+  height: 3.3rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--Helvetica);
+  font-size: 1.4rem;
+  transition: 0.5s;
+}
+
+.coinsListPaginationPage a:hover {
+  background-color: var(--lighterBlue);
+}
+
+.coinsListPaginationPageActive a {
+  background-color: var(--lighterBlue);
+}
+
+.coinsListPaginationPageBreak {
+  margin: 0;
+  padding: 0;
+}
+
+.coinsListPaginationPageActiveDisabled a {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
