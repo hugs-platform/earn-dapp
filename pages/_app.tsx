@@ -5,7 +5,6 @@ import "../public/static/styles/globals.css";
 import React from "react";
 import type { AppProps } from "next/app";
 import { DAppProvider, Config, Mainnet } from "@usedapp/core"
-import { getDefaultProvider } from 'ethers'
 
 const config: Config = {
     readOnlyChainId: Mainnet.chainId,

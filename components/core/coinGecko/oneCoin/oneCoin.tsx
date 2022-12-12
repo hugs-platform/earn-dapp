@@ -1,6 +1,7 @@
 import React, { useState, useRef, FC } from "react";
 import styles from "./oneCoin.module.css";
 import Image from "next/image";
+import { findTimeDelta } from "../../../../core/utils/converters/timeDelta";
 
 // images
 import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.svg";
@@ -25,11 +26,12 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
 
-  const { cg_coin_id, name, abbreviature, image, last_updated, price, market_cup, apy } = oneCoinInfo;
+  const { cg_coin_id, name, abbreviature, image, last_updated, price, market_cup, click } = oneCoinInfo;
 
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
   const [isOpen, setIsOpen] = useState(false);
+  const age = findTimeDelta(last_updated);
 
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
 
@@ -48,13 +50,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{abbreviature}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>USD {price}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{numberToCurrencyAbbreviation(market_cup, 1)}</p>
-        <p style={{ color: Math.sign(apy) > 0 ? "#3ACC8A" : "#DF2F2F" }} className={`${styles.oneCoin_highestAPY} ${styles.allignCenter}`}>
-          {apy}%
-        </p>
-        {/* change to component later */}
-        <div className={styles.allignCenter}>
-          <button className={styles.oneCoin_updateButton}>Update</button>
-        </div>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{click}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{age}</p>
         <div className={styles.allignCenter}>
           <Image
             onClickCapture={() => setIsOpen(!isOpen)}

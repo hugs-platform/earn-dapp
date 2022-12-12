@@ -1,5 +1,5 @@
-export function getCoinsList(page = 1, search = '') {
-    let params = {'page': page}
+export function getCoinsList(page = 0, search = '', orderBy='-market_cup') {
+    let params = {'page': page, 'order_by': orderBy}
     if (search) {
         params['search'] = search
     }

@@ -11,7 +11,7 @@ export interface CoinTypes {
   last_updated: string;
   price: number;
   market_cup: number;
-  apy: number;
+  click: number;
 }
 
 export interface ProjectTypes {

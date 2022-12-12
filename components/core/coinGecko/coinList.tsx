@@ -10,7 +10,7 @@ import { getCoinsList } from "../../../services/coinsList";
 
 // styles
 import styles from "../coinGecko/coinsList.module.css";
-// import { style } from "@mui/system";
+import { style } from "@mui/system";
 
 function App() {
   const [list, setList] = useState([]);
@@ -18,10 +18,11 @@ function App() {
   const [isLoaded, setisLoaded] = useState(true);
   const search = useRef("");
   const currentPage = useRef(0);
+  const orderBy= useRef("-market_cup");
 
 
   const handleFetch = () => {
-    getCoinsList(currentPage.current, search.current)
+    getCoinsList(currentPage.current, search.current, orderBy.current)
       .then(response => {
           setList(response['items']);
           setPageCount(response['number_of_pages']);
@@ -37,6 +38,17 @@ function App() {
 
   const inputHandler = (selectedObject) => {
     search.current = selectedObject.target.value;
+    currentPage.current = 0;
+    handleFetch();
+  };
+
+  const orderByChange = (selectedObject) => {
+    if (orderBy.current == selectedObject.target.id){
+      orderBy.current = "-" + selectedObject.target.id;
+    } else {
+      orderBy.current = selectedObject.target.id;
+    };
+    currentPage.current = 0;
     handleFetch();
   };
 
@@ -57,13 +69,14 @@ function App() {
             />
           </div>
       </div>
+      {/* "cg_coin_id", "name", "abbreviature", "image", "last_updated", "price", "market_cup", "click" */}
       <div className={styles.allCoins_container}>
         <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
-        <p className={styles.allCoins_titles}>Abbreviature</p>
-        <p className={styles.allCoins_titles}>Price</p>
-        <p className={styles.allCoins_titles}>Market Cap</p>
-        <p className={styles.allCoins_titles}>Highest APY</p>
-        <p className={styles.allCoins_titles}>Update</p>
+        <p id='abbreviature' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Abbreviature</p>
+        <p id='price' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Price</p>
+        <p id='market_cup' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Market Cap</p>
+        <p id='click' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>
+        <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Age</p>
         <p className={styles.allCoins_titles}>Show more</p>
       </div>
 

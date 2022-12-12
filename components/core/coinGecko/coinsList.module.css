@@ -85,3 +85,31 @@
   pointer-events: none;
 }
 
+p.sortBy {
+  display: block;
+  width: 100%;
+  padding-right: 18px;
+	position: relative;
+}
+
+p.sortBy:before,
+p.sortBy:after {
+	border: 4px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	right: 5px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+}
+
+p.sortBy:before {
+	border-bottom-color: #666;
+	margin-top: -9px;
+}
+
+p.sortBy:after {
+	border-top-color: #666;
+	margin-top: 1px;
+}
