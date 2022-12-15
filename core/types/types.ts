@@ -4,7 +4,7 @@ export interface HomePageProps {
 }
 
 export interface CoinTypes {
-  cg_coin_id: number;
+  coin_id: number;
   name: string;
   abbreviature: string;
   image: string;
@@ -22,4 +22,17 @@ export interface ProjectTypes {
   stakingLink: string;
   totalApy: number;
   lastUpdated: number;
+}
+
+export interface CoinMarkets {
+  apy: number;
+  last_updated: string;
+  status: boolean;
+  market: {
+    link: string;
+    logo: string;
+    market_id: string;
+    platform: string;
+    click: number;
+  }
 }

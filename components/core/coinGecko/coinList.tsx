@@ -8,9 +8,12 @@ import OneCoin from "../coinGecko/oneCoin/oneCoin";
 // data
 import { getCoinsList } from "../../../services/coinsList";
 
+// types
+import {CoinTypes } from "../../../core/types/types";
+
 // styles
 import styles from "../coinGecko/coinsList.module.css";
-import { style } from "@mui/system";
+// import { style } from "@mui/system";
 
 function App() {
   const [list, setList] = useState([]);
@@ -62,6 +65,7 @@ function App() {
           <h1 className={styles.allCoins_title}>Cryptocurrencies by CoinGecko</h1>
           <div className="search">
             <TextField
+              key="search-coin-list"
               onChange={inputHandler}
               id="search-coin-list-id"
               variant="outlined"
@@ -69,7 +73,7 @@ function App() {
             />
           </div>
       </div>
-      {/* "cg_coin_id", "name", "abbreviature", "image", "last_updated", "price", "market_cup", "click" */}
+      {/* "coin_id", "name", "abbreviature", "image", "last_updated", "price", "market_cup", "click" */}
       <div className={styles.allCoins_container}>
         <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
         <p id='abbreviature' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Abbreviature</p>
@@ -81,8 +85,8 @@ function App() {
       </div>
 
       <div className={styles.allCoins_group}>
-        {list.map((oneCoin) => (
-          <OneCoin key={oneCoin['cg_coin_id']} oneCoinInfo={oneCoin} />
+        {list.map((oneCoin: CoinTypes) => (
+          <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
         ))}
       </div>
       {isLoaded ? (
