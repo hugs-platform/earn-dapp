@@ -6,46 +6,50 @@ import ReactPaginate from "react-paginate";
 import OneCoin from "../coinGecko/oneCoin/oneCoin";
 
 // data
-import { getCoinsList } from "../../../services/coinsList";
+import { HugsApi } from "../../../services/hugsApi";
 
 // types
 import {CoinTypes } from "../../../core/types/types";
 
 // styles
 import styles from "../coinGecko/coinsList.module.css";
-// import { style } from "@mui/system";
+
 
 function App() {
   const [list, setList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
-  const [isLoaded, setisLoaded] = useState(true);
+  const isLoaded = useRef(true);
   const search = useRef("");
   const currentPage = useRef(0);
   const orderBy= useRef("-market_cup");
 
-
   const handleFetch = () => {
-    getCoinsList(currentPage.current, search.current, orderBy.current)
-      .then(response => {
-          setList(response['items']);
-          setPageCount(response['number_of_pages']);
-          setisLoaded(true);
-      })
-    return () => [];
-	};
+    if (isLoaded.current == true) {
+      isLoaded.current = false;
+      new HugsApi().getCoinsList(currentPage.current, search.current, orderBy.current)
+        .then(response => {
+            if (response){
+              setList(response['items']);
+              setPageCount(response['number_of_pages']);
+              isLoaded.current = true;
+            }
+        })
+      return () => [];
+    }
+  };
 
-  const handlePageChange = (selectedObject) => {
+  const handlePageChange = (selectedObject: any) => {
     currentPage.current = selectedObject.selected;
     handleFetch();
 	};
 
-  const inputHandler = (selectedObject) => {
+  const inputHandler = (selectedObject: any) => {
     search.current = selectedObject.target.value;
     currentPage.current = 0;
     handleFetch();
   };
 
-  const orderByChange = (selectedObject) => {
+  const orderByChange = (selectedObject: any) => {
     if (orderBy.current == selectedObject.target.id){
       orderBy.current = "-" + selectedObject.target.id;
     } else {

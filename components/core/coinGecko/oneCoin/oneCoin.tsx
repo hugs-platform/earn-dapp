@@ -9,8 +9,7 @@ import Image from "next/image";
 import { findTimeDelta } from "../../../../core/utils/converters/timeDelta";
 
 // data
-import { getCoinMarketsList } from "../../../../services/coinMarketsList";
-import { marketClick} from "../../../../services/marketClick";
+import { HugsApi } from "../../../../services/hugsApi";
 
 // images
 import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.svg";
@@ -48,9 +47,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
 
   const toggleAccordion = async () => {
     setActiveState(setActive === "" ? "active" : "");
-
     if (setActive == "") {
-      getCoinMarketsList(coin_id)
+      new HugsApi().getCoinMarketsList(coin_id)
         .then(response => {
           setList(response['items']);
         }) 
@@ -59,7 +57,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   };
 
   const linkHangler = (selectedObject) => {
-    marketClick(selectedObject.target.id);
+    new HugsApi().marketClick(selectedObject.target.id);
   };
 
   useEffect(() => {
