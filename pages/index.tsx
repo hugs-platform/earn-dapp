@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React from "react";
 import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
 
 import styles from "./homePage.module.css";

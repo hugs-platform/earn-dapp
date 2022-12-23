@@ -3,7 +3,6 @@ import styles from "./oneProject.module.css";
 import Image from "next/image";
 
 // images
-import projectLogo from "../../../../../public/static/assets/oneCoin/projects/project_logo.svg";
 import stakingLink from "../../../../../public/static/assets/oneCoin/projects/staking_link_image.svg";
 
 // types

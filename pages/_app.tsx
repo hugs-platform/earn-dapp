@@ -6,6 +6,9 @@ import React from "react";
 import type { AppProps } from "next/app";
 import { DAppProvider, Config, Mainnet } from "@usedapp/core"
 
+/**
+ * Configuration for connect to Infura network
+ */
 const config: Config = {
     readOnlyChainId: Mainnet.chainId,
     readOnlyUrls: {
@@ -13,8 +16,11 @@ const config: Config = {
     },
   }
 
+/**
+ * @class
+ * @ignore
+ */
 function App({ Component, pageProps }: AppProps) {
-
     return (
         <DAppProvider config={config}>
             <Component {...pageProps} />

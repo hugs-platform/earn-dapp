@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import ReactPaginate from "react-paginate";
 
@@ -15,6 +15,10 @@ import {CoinTypes } from "../../../core/types/types";
 import styles from "../coinGecko/coinsList.module.css";
 
 
+/**
+ * @class
+ * @ignore
+ */
 function App() {
   const [list, setList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
@@ -90,7 +94,7 @@ function App() {
 
       <div className={styles.allCoins_group}>
         {list.map((oneCoin: CoinTypes) => (
-          <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
+          <OneCoin key={oneCoin.coinId} oneCoinInfo={oneCoin} />
         ))}
       </div>
       {isLoaded ? (

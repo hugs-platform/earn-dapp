@@ -4,13 +4,13 @@ export interface HomePageProps {
 }
 
 export interface CoinTypes {
-  coin_id: number;
+  coinId: number;
   name: string;
   abbreviature: string;
   image: string;
-  last_updated: string;
+  lastUpdated: string;
   price: number;
-  market_cup: number;
+  marketCup: number;
   click: number;
 }
 

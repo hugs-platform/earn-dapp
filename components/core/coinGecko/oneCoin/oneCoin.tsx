@@ -1,8 +1,7 @@
-import React, { useState, useRef, FC, useMemo, useEffect } from "react";
+import React, { useState, useRef, FC, useEffect } from "react";
 
 import styles from "./oneCoin.module.css";
-import market_styles from "../oneCoin/topProjects/projectList.module.css";
-import one_market_styles from "../oneCoin/topProjects/oneProject.module.css";
+import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.css";
 
 // import styles from "./projectList.module.css";
 import Image from "next/image";
@@ -13,13 +12,6 @@ import { HugsApi } from "../../../../services/hugsApi";
 
 // images
 import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.svg";
-
-// helper functions
-
-// components
-import Exchanges from "./topProjects/projectList";
-import OneProject from "./topProjects/oneProject";
-import CoinMarketsList from "./topProjects/marketsList";
 
 // types
 import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
@@ -36,19 +28,19 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
 
-  const { coin_id, name, abbreviature, image, last_updated, price, market_cup, click } = oneCoinInfo;
+  const { coinId, name, abbreviature, image, lastUpdated, price, marketCup, click } = oneCoinInfo;
 
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
   const [list, setList] = useState([]);
-  const age = findTimeDelta(last_updated);
+  const age = findTimeDelta(lastUpdated);
 
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const toggleAccordion = async () => {
     setActiveState(setActive === "" ? "active" : "");
     if (setActive == "") {
-      new HugsApi().getCoinMarketsList(coin_id)
+      new HugsApi().getCoinMarketsList(coinId)
         .then(response => {
           setList(response['items']);
         }) 
@@ -56,7 +48,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     }
   };
 
-  const linkHangler = (selectedObject) => {
+  const linkHangler = (selectedObject: any) => {
     new HugsApi().marketClick(selectedObject.target.id);
   };
 
@@ -73,7 +65,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         </div>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{abbreviature}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>USD {price}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{numberToCurrencyAbbreviation(market_cup, 1)}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{numberToCurrencyAbbreviation(marketCup, 1)}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{click}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{age}</p>
         <div className={styles.allignCenter}>
@@ -89,29 +81,29 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       </article>
       
       <div ref={content} style={{ maxHeight: `${setHeight}` }} className={styles.accordion__content}>
-        <section className={one_market_styles.coinMarketsTable}>
-          <div className={one_market_styles.coinMarketsRow}>
-            <p className={one_market_styles.coinMarketsColumn}>Platform</p>
-            <p className={one_market_styles.coinMarketsColumn}>APY</p>
-            <p className={one_market_styles.coinMarketsColumn}>Age</p>
-            <p className={one_market_styles.coinMarketsColumn}>Type</p>
-            <p className={one_market_styles.coinMarketsColumn}>Link</p>
-            <p className={one_market_styles.coinMarketsColumn}>Clicks</p>
-            <p className={one_market_styles.coinMarketsColumn}>Contribute</p>
+        <section className={oneMarketStyles.coinMarketsTable}>
+          <div className={oneMarketStyles.coinMarketsRow}>
+            <p className={oneMarketStyles.coinMarketsColumn}>Platform</p>
+            <p className={oneMarketStyles.coinMarketsColumn}>APY</p>
+            <p className={oneMarketStyles.coinMarketsColumn}>Age</p>
+            <p className={oneMarketStyles.coinMarketsColumn}>Type</p>
+            <p className={oneMarketStyles.coinMarketsColumn}>Link</p>
+            <p className={oneMarketStyles.coinMarketsColumn}>Clicks</p>
+            <p className={oneMarketStyles.coinMarketsColumn}>Contribute</p>
           </div>
 
           {list.map((coinMarkets: CoinMarkets) => (
-            <div className={one_market_styles.coinMarketsRow}>
-              <div className={`${one_market_styles.coinMarketsColumn} ${one_market_styles.oneProject_stakingLinkName_full} ${one_market_styles.allignLeft}`}>
-                <Image className={one_market_styles.oneProject_coinLogo} height={24} width={24} src={coinMarkets.market.logo} />
-                <p className={`${one_market_styles.oneProject_name} ${one_market_styles.projectList_fontSize}`}>{coinMarkets.market.platform}</p>
+            <div key={coinMarkets.market.market_id} className={oneMarketStyles.coinMarketsRow}>
+              <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
+                <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={coinMarkets.market.logo} />
+                <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{coinMarkets.market.platform}</p>
               </div>
-              <p className={one_market_styles.coinMarketsColumn}>{coinMarkets.apy}%</p>
-              <p className={one_market_styles.coinMarketsColumn}>{findTimeDelta(coinMarkets.last_updated)}</p>
-              <p className={one_market_styles.coinMarketsColumn}>Locked</p>
-              <a id={coinMarkets.market.market_id} className={one_market_styles.coinMarketsColumn} href={coinMarkets.market.link} target="_blank" onClick={linkHangler}>{coinMarkets.market.platform}</a>
-              <p className={one_market_styles.coinMarketsColumn}>{coinMarkets.market.click}</p>
-              <p className={one_market_styles.coinMarketsColumn}>Yea | Not</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.apy}%</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(coinMarkets.last_updated)}</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Locked</p>
+              <a id={coinMarkets.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={coinMarkets.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{coinMarkets.market.platform}</a>
+              <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.market.click}</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Yea | Not</p>
             </div>
           ))};
         </section>

@@ -1,17 +1,27 @@
 import { Button, Box, Text } from "@chakra-ui/react";
 import { useEthers, useEtherBalance } from "@usedapp/core";
 import { formatEther } from "@ethersproject/units";
+import { HugsApi } from "../../../services/hugsApi";
 
 type Props = {
   handleOpenModal: any;
 };
 
+/**
+ * @class
+ * @ignore 
+ */
 export default function ConnectButton({ handleOpenModal }: Props) {
   const { activateBrowserWallet, account } = useEthers();
   const etherBalance = useEtherBalance(account);
 
+  /**
+   * @class
+   * @ignore
+   */
   function handleConnectWallet() {
     activateBrowserWallet();
+    new HugsApi().createToken();
   }
 
   return account ? (

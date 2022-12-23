@@ -20,9 +20,17 @@ import {
     onClose: any;
   };
   
+  /**
+   * @class 
+   * @ignore 
+   */
   export default function AccountModal({ isOpen, onClose }: Props) {
     const { account, deactivate } = useEthers();
-  
+    
+    /**
+     * @class
+     * @ignore
+     */
     function handleDeactivateAccount() {
       deactivate();
       onClose();
