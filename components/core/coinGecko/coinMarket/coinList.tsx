@@ -3,16 +3,16 @@ import TextField from "@mui/material/TextField";
 import ReactPaginate from "react-paginate";
 
 // components
-import OneCoin from "../coinGecko/oneCoin/oneCoin";
+import OneCoin from "../oneCoin/oneCoin";
 
 // data
-import { HugsApi } from "../../../services/hugsApi";
+import { HugsApi } from "../../../../services/hugsApi";
 
 // types
-import {CoinTypes } from "../../../core/types/types";
+import {CoinTypes } from "../../../../core/types/types";
 
 // styles
-import styles from "../coinGecko/coinsList.module.css";
+import styles from "../coinMarket/coinsList.module.css";
 
 
 /**
@@ -33,8 +33,9 @@ function App() {
       new HugsApi().getCoinsList(currentPage.current, search.current, orderBy.current)
         .then(response => {
             if (response){
-              setList(response['items']);
-              setPageCount(response['number_of_pages']);
+              let result = response.data.items;
+              setList(result);
+              setPageCount(response.data.number_of_pages);
               isLoaded.current = true;
             }
         })
@@ -94,7 +95,7 @@ function App() {
 
       <div className={styles.allCoins_group}>
         {list.map((oneCoin: CoinTypes) => (
-          <OneCoin key={oneCoin.coinId} oneCoinInfo={oneCoin} />
+          <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
         ))}
       </div>
       {isLoaded ? (

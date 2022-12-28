@@ -1,21 +1,44 @@
 import  Web3  from "web3";
+import axios from "axios";
+import { headers } from "../next.config";
 
 export class HugsApi {
-    call_hugs_api(url, method='GET', body={}) {
-        if (method == "POST"){
-            return fetch(url, { 
-                method: method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-                })
-                .then(data => data.json())
-                .catch((err) => {});
+    get(url) {
+        let token = this.getCookie();
+        if (token ) {
+            return axios.get(url, {
+                withCredentials: false,
+                headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json',
+                    "Authorization": token            
+                }
+        })
         } else {
-            return fetch(url, { 
-                method: method,
-                })
-                .then(data => data.json())
-                .catch((err) => {});
+            return axios.get(url)
+        }
+    }
+
+    post(url, body) {
+        let token = this.getCookie();
+        if ( token ) {
+            return axios.post(url, {
+                body: body,
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json',
+                    "Authorization": token            
+                }
+            })
+        } else {
+            return axios.post(url, {
+                body: body,
+                headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json',
+                },
+            })
         }
     }
 
@@ -40,10 +63,11 @@ export class HugsApi {
         const account = web3.eth.accounts;
         const walletAddress = account.givenProvider.selectedAddress;
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL + "contributions/authentication";
-        this.call_hugs_api(url, "POST", {"wallet": walletAddress, "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
+        this.post(url, {"wallet": walletAddress, "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
             .then(response => {
                 if (response){
-                    document.cookie = "token=" + response['token'] + ";expires=" + response['exp'] + ";path=/";
+                    let data = response.data;
+                    document.cookie = "token=" + data['token'] + ";expires=" + data['exp'] + ";path=/";
                 }
             })
         return;
@@ -59,16 +83,21 @@ export class HugsApi {
             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
             .join('&');
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/coins/list?" + query;
-        return this.call_hugs_api(url)
+        return this.get(url)
     }
 
     getCoinMarketsList(coinId) {
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/coin/" + coinId + "/markets";
-        return this.call_hugs_api(url)
+        return this.get(url)
     }
 
     marketClick(market_id) {
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market/" + market_id + "/click";
-        return this.call_hugs_api(url)
+        return this.get(url)
+    }
+
+    getMarketsList() {
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "/applications/markets/list";
+        return this.get(url);
     }
 }
