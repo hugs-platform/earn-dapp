@@ -33,7 +33,7 @@ function App() {
       new HugsApi().getCoinsList(currentPage.current, search.current, orderBy.current)
         .then(response => {
             if (response){
-              let result = response.data.items;
+              const result = response.data.items;
               setList(result);
               setPageCount(response.data.number_of_pages);
               isLoaded.current = true;

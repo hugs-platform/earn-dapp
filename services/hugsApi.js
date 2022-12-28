@@ -4,43 +4,33 @@ import { headers } from "../next.config";
 
 export class HugsApi {
     get(url) {
-        let token = this.getCookie();
-        if (token ) {
-            return axios.get(url, {
-                withCredentials: false,
-                headers: {
-                    'Access-Control-Allow-Origin': '*', 
-                    'Content-Type': 'application/json',
-                    "Authorization": token            
-                }
-        })
-        } else {
-            return axios.get(url)
+        let config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*', 
+                'Content-Type': 'application/json',
+            }
         }
+        // if (token) {
+        //     config.headers['Hugs-Token'] = token
+        // }
+        return axios.get(url, config)
     }
 
     post(url, body) {
-        let token = this.getCookie();
-        if ( token ) {
-            return axios.post(url, {
-                body: body,
-                withCredentials: true,
-                headers: {
-                    'Access-Control-Allow-Origin': '*', 
-                    'Content-Type': 'application/json',
-                    "Authorization": token            
-                }
-            })
-        } else {
-            return axios.post(url, {
-                body: body,
-                headers: {
-                    'Access-Control-Allow-Origin': '*', 
-                    'Content-Type': 'application/json',
-                },
-            })
+        let config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*', 
+                'Content-Type': 'application/json',
+            }
         }
+        let token = this.getCookie();
+        
+        if (token) {
+            config.headers['Hugs-Token'] = token
+        }
+        return axios.post(url, body, config)
     }
+
 
     getCookie() {
         let name = "token" + "=";
@@ -89,6 +79,19 @@ export class HugsApi {
     getCoinMarketsList(coinId) {
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/coin/" + coinId + "/markets";
         return this.get(url)
+    }
+
+    createCoinMarket(market_id, coin_id, apy, locked) {
+        let body = {
+            "market_id": market_id,
+            "coin_id": coin_id,
+            "contribution_data": {
+                "apy": apy,
+                "locked": locked
+            }
+        }
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
+        return this.post(url=url, body=body)
     }
 
     marketClick(market_id) {

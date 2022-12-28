@@ -2,7 +2,7 @@ import React, { useState, useRef, FC, useEffect } from "react";
 import styles from "./oneCoin.module.css";
 import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.css";
 import Select from "react-select";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 // import styles from "./projectList.module.css";
 import Image from "next/image";
@@ -20,9 +20,6 @@ import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
 // converters functions
 import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
 
-import { valideApyTime } from "../../../../core/validators/newContribution";
-
-
 // types
 export interface OneCoinProps {
   key: number;
@@ -39,8 +36,12 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const age = findTimeDelta(last_updated);
   const [isOpen, setIsOpen] = useState(false);
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [apyTime, setApyTime] = useState("00:00:00");
-  const [apyTimeErr, setApyTimeErr] = useState(false);
+  const [apyValue, setApyValue] = useState(0.00);
+  const [apyValueErr, setApyValueErr] = useState(false);
+  const [marketValue, setMarketValue] = useState();
+  const [marketValueErr, setMarketValueErr] = useState(false);
+  const [stackingValue, setStackingValue] = useState(0);
+  const [stackingValueErr, setStackingValueErr] = useState(true);
   const stakingTypes = [
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
@@ -48,10 +49,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
 
   const openModal = () => {
     const getData = async () => {
-      let arr = [];
+      const arr = new Array(0);
       new HugsApi().getMarketsList().then((res) => {
-        let result = res.data.items;
-        result.map((market) => {
+        const result = res.data.items;
+        result.map((market: any) => {
           return arr.push({value: market.market_id, label: market.platform});
         });
         setMarketsList(arr);
@@ -70,7 +71,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     if (setActive == "") {
       new HugsApi().getCoinMarketsList(coin_id)
         .then(response => {
-          let items = response.data.items;
+          const items = response.data.items;
           setList(items);
         }) 
         return () => [];
@@ -86,10 +87,48 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   })
 
   const validate = () => {
-    if (!valideApyTime.test(apyTime)) {
-      setApyTimeErr(true);
+    if (apyValue < 0) {
+      setApyValueErr(true);
+    } 
+    if ((apyValueErr == false) && (marketValueErr == false) && (stackingValueErr == false)){
+      new HugsApi().createCoinMarket(marketValue, coin_id, apyValue, stackingValue)
+        .then()
+        .catch(error => {
+          const error_msg = error.response.data.error;
+          if (error_msg == 'Cant create existed connection') {
+            setMarketValueErr(true);
+          }
+          
+        })
     }
   }
+
+  const marketListHandle = (selectedObject: any) => {
+    setMarketValue(selectedObject.value);
+    if ( selectedObject.value == undefined){
+      setMarketValueErr(true)
+    } else {
+      setMarketValueErr(false)
+    }
+  }
+
+  const stackingHandle = (selectedObject: any) => {
+    setStackingValue(selectedObject.value);
+    if ( selectedObject.value == undefined){
+      setStackingValueErr(true)
+    } else {
+      setStackingValueErr(false)
+    }
+  }
+
+  const apyHandle = (selectedObject: any) => {
+    setApyValue(selectedObject.target.value);
+    if (selectedObject.target.value){
+      setApyValueErr(false);
+    } else {
+      setApyValueErr(true);
+    }
+  } 
 
   return (
     <section className={styles.oneCoinContainer}>
@@ -97,16 +136,15 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         <div className={styles.modal}>
           <div className={styles.modalDialog}>
             <div className={styles.modalContent}>
-              <h2>Add new contribution for {name}</h2>
+              <h2>Add new contribution for {name} <Image className={styles.coinName_image} height={32} width={32} src={image} /></h2> 
               <div className={styles.modalClose} onClick={closeModal}></div>
-              <Select id="marketListIdSelect" className={styles.modalContentSelect} placeholder="Select Market" options={marketsList} />
-              <Select id="stakingTypesIdSelect" className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} />
-              <label>APY age:</label>
-              <input type="text" placeholder="(HH:MM:SS)" name="name" value={apyTime} onChange={(e) => setApyTime(e.target.value)}/>
-              {apyTimeErr && <p>Your APY time is invalid</p>}
-              <div className="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non fuga omnis a sed impedit explicabo accusantium nihil doloremque consequuntur.</div>
-              <div className="actions">
-                <button className="toggle-button" onClick={validate}>Save</button>
+              <Select className={styles.modalContentSelect} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
+              { marketValueErr == true ? <label className={styles.modalCloseError}>Already exist</label>: <></>}
+              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+              <label>Annual Percentage Yield (APY)</label>
+              <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
+              <div className={styles.modalSubmit}>
+                <button className={styles.modalSubmitBtn} onClick={validate}>Submit</button>
               </div>
             </div>
           </div>
@@ -154,10 +192,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               </div>
               <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.apy}%</p>
               <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(coinMarkets.last_updated)}</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Locked</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>{ coinMarkets.locked ? "Locked": "Flexible"}</p>
               <a id={coinMarkets.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={coinMarkets.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{coinMarkets.market.platform}</a>
               <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.market.click}</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Choose your destiny</p>
+              <p className={oneMarketStyles.coinMarketsColumn}></p>
             </div>
           ))};
           <div className={oneMarketStyles.coinMarketsRow}>

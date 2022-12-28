@@ -28,6 +28,7 @@ export interface CoinMarkets {
   apy: number;
   last_updated: string;
   status: boolean;
+  locked: boolean
   market: {
     link: string;
     logo: string;
