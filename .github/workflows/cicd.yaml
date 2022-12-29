@@ -4,7 +4,7 @@ name: CICD
 on:
   push:
     branches:
-      - development
+      - develop
       # - main
       # - master
       # - "releases/**"
