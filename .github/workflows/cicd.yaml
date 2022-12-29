@@ -1,0 +1,88 @@
+
+name: CICD
+
+on:
+  push:
+    branches:
+      - development
+      # - main
+      # - master
+      # - "releases/**"
+
+  pull_request:
+
+env:
+  AWS_REGION: eu-central-1 # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: hugs-dev-dapp_earn-ecr # set this to your Amazon ECR repository name
+  ECS_SERVICE: dapp_earn-service # set this to your Amazon ECS service name
+  ECS_CLUSTER: hugs-dev-cluster # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: hugs-dev-dapp_earn # set this to the path to your Amazon ECS task definition
+  CONTAINER_NAME: dapp_earn-dev-container # set this to the name of the container in the
+    # containerDefinitions section of your task definition
+  NEXT_PUBLIC_INFURA_ID: cdad7283e1ef4591b999551adfb7eca4
+  NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL: https://api.dev.hugsplatform.com/
+  NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL: https://api.dev.hugsplatform.com/
+  NEXT_PUBLIC_HUGS_APP_ID: 63a97e8a3c3e2b1e40ce69d0
+permissions:
+  contents: read
+
+jobs:
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+    #needs: integration-tests
+    environment: dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: latest #${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  \
+          --build-arg NEXT_PUBLIC_HUGS_APP_ID=$NEXT_PUBLIC_HUGS_APP_ID \
+          --build-arg NEXT_PUBLIC_INFURA_ID=$NEXT_PUBLIC_INFURA_ID \
+          --build-arg NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL=$NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL \
+          --build-arg NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL=$NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Download task def
+        run: |
+          aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} --query taskDefinition > task-definition.json
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: false
