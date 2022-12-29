@@ -43,7 +43,6 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const [marketValueErr, setMarketValueErr] = useState(false);
   const [stackingValue, setStackingValue] = useState(0);
   const [stackingValueErr, setStackingValueErr] = useState(true);
-  const [successCreateContrib, setsuccessCreateContrib] = useState(false);
   const stakingTypes = [
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
