@@ -35,6 +35,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const [marketsList, setMarketsList] = useState([""]);
   const age = findTimeDelta(last_updated);
   const [isOpen, setIsOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [apyValue, setApyValue] = useState(0.00);
   const [apyValueErr, setApyValueErr] = useState(false);
@@ -42,6 +43,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const [marketValueErr, setMarketValueErr] = useState(false);
   const [stackingValue, setStackingValue] = useState(0);
   const [stackingValueErr, setStackingValueErr] = useState(true);
+  const [successCreateContrib, setsuccessCreateContrib] = useState(false);
   const stakingTypes = [
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
@@ -64,6 +66,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
 
   const closeModal = () => {
     setIsOpen(false);
+  }
+
+  const closeSuccessModal = () => {
+    setIsSuccess(false);
   }
 
   const toggleAccordion = async () => {
@@ -92,13 +98,15 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     } 
     if ((apyValueErr == false) && (marketValueErr == false) && (stackingValueErr == false)){
       new HugsApi().createCoinMarket(marketValue, coin_id, apyValue, stackingValue)
-        .then()
+        .then(response => {
+          setIsSuccess(true);
+          setIsOpen(false);
+        })
         .catch(error => {
           const error_msg = error.response.data.error;
           if (error_msg == 'Cant create existed connection') {
             setMarketValueErr(true);
           }
-          
         })
     }
   }
@@ -145,6 +153,21 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
               <div className={styles.modalSubmit}>
                 <button className={styles.modalSubmitBtn} onClick={validate}>Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+      <Modal show={isSuccess}>
+        <div className={styles.modal}>
+          <div className={styles.modalDialog}>
+            <div className={styles.modalContent}>
+              <p>Thank you for contributing to the Earn dApp. Please note that your contribution will not be visible in the app right away.</p>
+              <p>This will be sent to a number of Reviewers first, who will the decide whether your entry should be accepted or rejected.</p>
+              <p> Please do net attempt to submit the same staking opportunity more than once and do not try to make fake entries, as both actions will result in lower Reputation Score for you as a user.</p>
+              <p>Also, you will noy be eligible for rewards then.</p>
+              <div className={styles.modalSubmit}>
+                <button className={styles.modalSubmitBtn} onClick={closeSuccessModal}>Close</button>
               </div>
             </div>
           </div>

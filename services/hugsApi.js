@@ -6,13 +6,15 @@ export class HugsApi {
     get(url) {
         let config = {
             headers: {
-                'Access-Control-Allow-Origin': '*', 
-                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
             }
         }
-        // if (token) {
-        //     config.headers['Hugs-Token'] = token
-        // }
+        
+        let token = this.getCookie();
+        if (token) {
+            config.headers['Hugs-Token'] = token
+        }
         return axios.get(url, config)
     }
 
@@ -20,11 +22,11 @@ export class HugsApi {
         let config = {
             headers: {
                 'Access-Control-Allow-Origin': '*', 
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             }
         }
+
         let token = this.getCookie();
-        
         if (token) {
             config.headers['Hugs-Token'] = token
         }
