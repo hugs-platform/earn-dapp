@@ -13,7 +13,7 @@ env:
   AWS_REGION: eu-central-1 # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: hugs-platform-dev-dapp_earn-ecr # set this to your Amazon ECR repository name
   ECS_SERVICE: dapp_earn-service # set this to your Amazon ECS service name
-  ECS_CLUSTER: hugs-dev-cluster # set this to your Amazon ECS cluster name
+  ECS_CLUSTER: hugs-platform-dev-cluster # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: hugs-platform-dev-dapp_earn # set this to the path to your Amazon ECS task definition
   CONTAINER_NAME: dapp_earn-dev-container # set this to the name of the container in the
     # containerDefinitions section of your task definition
