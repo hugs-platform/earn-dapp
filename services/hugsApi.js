@@ -87,10 +87,8 @@ export class HugsApi {
         let body = {
             "market_id": market_id,
             "coin_id": coin_id,
-            "contribution_data": {
-                "apy": apy,
-                "locked": locked
-            }
+            "apy": apy,
+            "locked": locked
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.post(url=url, body=body)
