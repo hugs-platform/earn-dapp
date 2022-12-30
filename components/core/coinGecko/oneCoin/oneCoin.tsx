@@ -30,6 +30,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
   const { coin_id, name, abbreviature, image, last_updated, price, market_cup, click } = oneCoinInfo;
   const [setActive, setActiveState] = useState("");
+  const userAccess = useRef(false);
   const [setHeight, setHeightState] = useState("0px");
   const [list, setList] = useState([]);
   const [marketsList, setMarketsList] = useState([""]);
@@ -76,8 +77,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     if (setActive == "") {
       new HugsApi().getCoinMarketsList(coin_id)
         .then(response => {
-          const items = response.data.items;
-          setList(items);
+          setList(response.data.items);
+          userAccess.current = response.data.user_access;
         }) 
         return () => [];
     }
@@ -217,7 +218,12 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               <p className={oneMarketStyles.coinMarketsColumn}>{ coinMarkets.locked ? "Locked": "Flexible"}</p>
               <a id={coinMarkets.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={coinMarkets.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{coinMarkets.market.platform}</a>
               <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.market.click}</p>
-              <p className={oneMarketStyles.coinMarketsColumn}></p>
+              {/* <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.open_contribution ? "Open": "Closed"} - {userAccess.current}</p> */}
+              {userAccess.current ? <p className={oneMarketStyles.coinMarketsColumn}>
+                {coinMarkets.open_contribution ? "In Review": "Update"}</p>:
+                <p className={oneMarketStyles.coinMarketsColumn}>Access Denied</p>
+              }
+              {/* <p className={oneMarketStyles.coinMarketsColumn}>{userAccess.current ? "Open": "Access Denied"}</p> */}
             </div>
           ))};
           <div className={oneMarketStyles.coinMarketsRow}>
