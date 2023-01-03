@@ -5,10 +5,7 @@ import { headers } from "../next.config";
 export class HugsApi {
     get(url) {
         let config = {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
-            }
+            headers: {}
         }
         
         let token = this.getCookie();
@@ -20,10 +17,7 @@ export class HugsApi {
 
     post(url, body) {
         let config = {
-            headers: {
-                'Access-Control-Allow-Origin': '*', 
-                'Content-Type': 'application/json'
-            }
+            headers: {}
         }
 
         let token = this.getCookie();
