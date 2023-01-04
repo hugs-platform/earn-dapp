@@ -28,11 +28,6 @@ const Home: NextPage<HomePageProps> = () => {
         </Layout>
       </ChakraProvider>
 
-      <PoweredByHugs />
-
-      <h1 className={styles.earnDapp_title}>Lorem ipsum slogan dimsum</h1>
-      <p className={styles.earnDapp_slogan}>Dimsum your own lorum ipsum</p>
-
       <section className={styles.cryptoList}>
         <CoinsList />
       </section>
