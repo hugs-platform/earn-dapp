@@ -5,7 +5,6 @@ import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
 import styles from "./homePage.module.css";
 
 // components
-import PoweredByHugs from "../components/feature/poweredByHugs";
 import CoinsList from "../components/core/coinGecko/coinMarket/coinList";
 import ConnectButton from "../components/core/metaMask/authentications";
 import AccountModal from "../components/core/metaMask/accountModal";
