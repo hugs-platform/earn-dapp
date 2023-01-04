@@ -10,7 +10,7 @@ export class HugsApi {
         
         let token = this.getCookie();
         if (token) {
-            config.headers['Hugs-Token'] = token
+            config.headers['Authorization'] = "Bearer " + token
         }
         return axios.get(url, config)
     }
@@ -22,7 +22,7 @@ export class HugsApi {
 
         let token = this.getCookie();
         if (token) {
-            config.headers['Hugs-Token'] = token
+            config.headers['Authorization'] = "Bearer " + token
         }
         return axios.post(url, body, config)
     }
