@@ -71,7 +71,7 @@ function App() {
   return (
     <>
       <div className={styles.cryptoHeader}>
-          <h1 className={styles.allCoins_title}>Cryptocurrencies by CoinGecko</h1>
+          <h1 className={styles.allCoins_title}>Cryptocurrencies by APIs</h1>
           <div className="search">
             <TextField
               key="search-coin-list"
