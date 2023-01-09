@@ -44,12 +44,11 @@ export class HugsApi {
         return "";
       }
 
-    createToken(){
+    async createToken() {
         window.web3 = new Web3(window.ethereum);
-        const account = web3.eth.accounts;
-        const walletAddress = account.givenProvider.selectedAddress;
+        const accounts = await web3.eth.requestAccounts();
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL + "contributions/authentication";
-        this.post(url, {"wallet": walletAddress, "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
+        this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
             .then(response => {
                 if (response){
                     let data = response.data;
