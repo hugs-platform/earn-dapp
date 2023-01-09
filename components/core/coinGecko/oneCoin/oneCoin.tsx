@@ -172,7 +172,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               <p>This will be sent to a number of Reviewers first, who will the decide whether your entry should be accepted or rejected.</p>
               <p> Please do net attempt to submit the same staking opportunity more than once and do not try to make fake entries, as both actions will result in lower Reputation Score for you as a user.</p>
               <p>Also, you will noy be eligible for rewards then.</p>
-              <p>You can see your transaction on <a rel="noreferrer" target="_blank" href={`${process.env.NEXT_PUBLIC_SCAN_URL}/${txHash}`}>Ploygon Scan</a></p>
+              <p>You can see your transaction on <a rel="noreferrer" target="_blank" href={`https://mumbai.polygonscan.com/tx/${txHash}`}>Ploygon Scan</a></p>
               <div className={styles.modalSubmit}>
                 <button className={styles.modalSubmitBtn} onClick={closeSuccessModal}>Close</button>
               </div>
