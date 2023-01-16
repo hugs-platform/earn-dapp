@@ -40,3 +40,14 @@
   color: black;
   font-size: 2.2rem;
 }
+
+.hugsNavBar {
+  display: flex;
+  align-items: center;
+}
+
+.hugsNavBarLink {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0.5em;
+}

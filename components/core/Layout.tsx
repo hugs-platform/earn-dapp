@@ -20,9 +20,10 @@ export default function Layout({ children }: Props) {
       alignItems="end"
       justifyContent="center"
       bg="white"
-      paddingRight="20%"
-      paddingTop="1%"
-      paddingBottom="1%"
+      paddingRight="23.5rem"
+      paddingLeft="23.5rem"
+      paddingTop="5rem"
+      paddingBottom="5rem"
     >
       {children}
     </Flex>
