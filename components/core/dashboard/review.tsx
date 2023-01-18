@@ -33,7 +33,6 @@ const style = {
   };
 
 const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
-    const API = new HugsApi;
     const { reviewData } = props;
     const Completionist = () => <span>expired</span>;
     const [ open, setOpen ] = useState(false);
@@ -42,21 +41,21 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
     const [ isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [ remarks, setRemarks ] = useState("");
-    const [ isCoinInMarket, setIsCoinInMarket ] = useState("");
+    const [ isCoinInMarket, setIsCoinInMarket ] = useState(NaN);
     const [ coinInMarketError, setCoinInMarketError ] = useState(false);
-    const [ isCoinAPYCurrently, setIsCoinAPYCurrently ] = useState("");
+    const [ isCoinAPYCurrently, setIsCoinAPYCurrently ] = useState(NaN);
     const [ isCoinAPYCurrentlyError, setIsCoinAPYCurrentlyError ] = useState(false);
 
   const inputHandler = (inputObject: any) => {
     setRemarks(inputObject.target.value);
   };
 
-  const setIsCoinInMarketAnswer = (state: boolean) => {
+  const setIsCoinInMarketAnswer = (state: any) => {
     setIsCoinInMarket(state);
     setCoinInMarketError(false);
   }
   
-  const setIsCoinAPYCurrentlyAnswer = (state: boolean) => {
+  const setIsCoinAPYCurrentlyAnswer = (state: any) => {
     setIsCoinAPYCurrently(state);
     setIsCoinAPYCurrentlyError(false);
   }
@@ -71,12 +70,12 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
     } else {
         setIsLoading(true);
     
-        if (isCoinInMarket == "") {
+        if (Object.is(isCoinInMarket, NaN)) {
             setCoinInMarketError(true);
         } else {
             setCoinInMarketError(false);
         }
-        if (isCoinAPYCurrently == "") {
+        if (Object.is(isCoinAPYCurrently, NaN)) {
             setIsCoinAPYCurrentlyError(true);
         } else {
             setIsCoinAPYCurrentlyError(false);
@@ -88,21 +87,17 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
         }
         else {
             let answer = false;
-            console.log('OK');
-            if ( isCoinInMarket == true && isCoinAPYCurrently == true) {
+            if ( Object.is(isCoinInMarket, true) && Object.is(isCoinAPYCurrently, true)) {
                 answer = true;
             }
-            API.sendReviewAnswer(reviewData.id, answer, remarks).then(response => {
-                setIsLoading(false);
+            new HugsApi().sendReviewAnswer(reviewData.id, answer, remarks)
+            .then(response => {
                 if (response){
                     setIsSuccess(true);
                     handleClose();
-                    setIsSuccess(true);
                 }
-            }, [])
-
-            // TODO: delete
-            setIsLoading(false);
+            })
+        return () => [];
         }
     };
   };
