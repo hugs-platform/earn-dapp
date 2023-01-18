@@ -44,3 +44,133 @@
     margin-left: 5%;
     color: #B3B3B3;
 }
+
+.dashboard_modal_title_first {
+    font-family: 'Gilroy-Bold';
+    font-size: 5em;
+    letter-spacing: 0.016em;
+    font-weight: 900;
+    text-align: center;
+    line-height: 3em;
+}
+
+.dashboard_modal_title_second_span {
+    text-align: center;
+    color: #949698;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3em;
+    line-height: 1.5em;
+}
+
+.dashboard_modal_title_second_info {
+    color: #ff0000;
+    font-family: 'Gilroy';
+    font-style: normal;
+}
+
+.dashboard_modal_main {
+    color: #4C92AB;
+    font-weight: 700;
+    justify-content: space-between;
+}
+
+.dashboard_modal_main a {
+    padding-left: 0.5vw;
+    color: #638EFE;
+}
+
+.dashboard_modal_main_second_info {
+    font-size: 3.5em;
+    color: #949698;
+    text-align: end;
+    
+}
+
+.dashboard_modal_main_second_info a {
+    color: #638EFE;
+}
+
+.dashboard_modal_main_container_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5em 0;
+}
+
+.dashboard_modal_main_container {
+    font-size: 3.5em;
+    display: flex;
+    padding: 0.5em 0;
+}
+
+.dashboard_modal_main_container h1 {
+    width: 70%;
+    background-color: #E2F6FA;
+    padding: 1em;
+    font-weight: 400;
+    border-radius: 10px;
+}
+
+.dashboard_modal_main_container button {
+    width: 15%;
+    margin-left: 0.5em;
+    font-size: 1em;
+}
+
+.dasboard_modal_accept_btn {
+    color: #ffffff;
+    font-weight: 900;
+    background-color: #00C395;
+}
+
+.dasboard_modal_reject_btn {
+    color: #ffffff;
+    font-weight: 900;
+    background-color: #FA584E;
+}
+
+.dasboard_modal_submit_btn {
+    color: #ffffff;
+    font-weight: 900;
+    background-color: #307994;
+}
+
+.dasboard_modal_submit_btn:active {
+    opacity: 0.5;
+}
+
+.dashboard_modal_main_text_area {
+    width: 100%;
+    height: 350px;
+    border-color: #D8D8D8;
+    box-shadow: 0 0 10px #719ECE;
+    border-radius: 15px;
+    padding: 1em;
+}
+
+.dashboard_modal_submit_container {
+    text-align: center;
+    padding: 5em 0;
+}
+
+.dashboard_modal_submit_container button {
+    padding: 1em 2em; 
+    font-family: 'Gilroy';
+    font-weight: 600;
+    font-size: 3em;
+    line-height: 119.7%;
+}
+
+.dashboard_modal_main_container_error {
+    font-size: 2em;
+    display: flex;
+    padding: 0.5em 0;
+}
+
+.dashboard_modal_main_container_error p {
+    width: 70%;
+    color: #ff0000;
+    padding: 1em;
+    font-weight: 400;
+}

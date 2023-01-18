@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Countdown from 'react-countdown';
 
 // data
 import { HugsApi } from "../../../services/hugsApi";
@@ -7,6 +6,9 @@ import { HugsApi } from "../../../services/hugsApi";
 // styles
 import styles from "../dashboard/dashboard.module.css";
 
+import { Review } from "../../../core/types/types";
+
+import OneReview from "../dashboard/review";
 
 /**
  * @class
@@ -29,7 +31,6 @@ function App() {
   const [reviewsPending, setReviewsPending] = useState(0);
   const [reviewsAccepted, setReviewsAccepted] = useState(0);
   const [reviewsRejected, setReviewsRejected] = useState(0);
-  const Completionist = () => <span>expired</span>;
   
   useEffect(() => {
     setIsLoaded(false);
@@ -71,14 +72,8 @@ function App() {
         <main className={styles.dashboard_main}>
           <hgroup>
               <h1>Review Requests</h1>
-              {listReview.map((data) => (
-                <div className="row" key={data['id']}>
-                  <p>{data['coin']} on {data['market']}</p>
-                  <a>Review now</a>
-                  <Countdown date={data['time_left']}>
-                    <Completionist />
-                  </Countdown>
-                </div>
+              {listReview.map((review: Review) => (
+                <OneReview key={review.id} reviewData={review} />
               ))}
           </hgroup>
           <hgroup>
