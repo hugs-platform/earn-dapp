@@ -38,3 +38,12 @@ export interface CoinMarkets {
     click: number;
   }
 }
+
+export interface Review {
+  id: number,
+  market: string,
+  time_left: string,
+  apy: number,
+  link: string,
+  coin: string
+}

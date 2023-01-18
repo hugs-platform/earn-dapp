@@ -101,4 +101,13 @@ export class HugsApi {
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile";
         return this.get(url);
     }
+
+    sendReviewAnswer(answerId, answer, remarks) {
+        let body = {
+            "answer": answer,
+            "remarks": remarks
+        }
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions/" + answerId;
+        return this.post(url=url, body=body)
+    }
 }

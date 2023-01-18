@@ -82,7 +82,6 @@ function App() {
             />
           </div>
       </div>
-      {/* "coin_id", "name", "abbreviature", "image", "last_updated", "price", "market_cup", "click" */}
       <div className={styles.allCoins_container}>
         <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
         <p id='abbreviature' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Abbreviature</p>
