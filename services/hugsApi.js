@@ -47,7 +47,7 @@ export class HugsApi {
     async createToken() {
         window.web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.requestAccounts();
-        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL + "contributions/authentication";
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/authentication";
         this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
             .then(response => {
                 if (response){
