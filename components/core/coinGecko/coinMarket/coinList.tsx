@@ -84,6 +84,7 @@ function App() {
       </div>
       <div className={styles.allCoins_container}>
         <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
+        <p id='highest_apy' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Highest APY</p>
         <p id='abbreviature' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Abbreviature</p>
         <p id='price' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Price</p>
         <p id='market_cup' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Market Cap</p>
