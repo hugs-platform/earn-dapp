@@ -5,6 +5,7 @@ export interface HomePageProps {
 
 export interface CoinTypes {
   coin_id: number;
+  highest_apy: number;
   name: string;
   abbreviature: string;
   image: string;

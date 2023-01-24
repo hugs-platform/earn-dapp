@@ -28,7 +28,7 @@ export interface OneCoinProps {
 
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
-  const { coin_id, name, abbreviature, image, last_updated, price, market_cup, click } = oneCoinInfo;
+  const { coin_id, name, abbreviature, image, last_updated, price, market_cup, click, highest_apy } = oneCoinInfo;
   const [setActive, setActiveState] = useState("");
   const userAccess = useRef(false);
   const [setHeight, setHeightState] = useState("0px");
@@ -182,6 +182,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
           <Image className={styles.coinName_image} height={32} width={32} src={image} />
           <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
         </div>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{highest_apy}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{abbreviature}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>USD {price}</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{numberToCurrencyAbbreviation(market_cup, 1)}</p>
