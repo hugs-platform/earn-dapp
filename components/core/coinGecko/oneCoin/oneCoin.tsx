@@ -22,6 +22,7 @@ import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
 import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
 import { saveContributionToContract } from "../../../../services/web3/controller";
 
+
 // types
 export interface OneCoinProps {
   key: number;
@@ -100,12 +101,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     if ((apyValueErr == false) && (marketValueErr == false) && (stackingValueErr == false)){
       new HugsApi().createCoinMarket(marketValue, coin_id, apyValue, stackingValue)
         .then(response => {
-          saveContributionToContract(response.data).then((r: any) => {
-            console.log(r)
+          // console.log(response)
             setIsSuccess(true);
-            setTxHash(r.transactionHash);
+            setTxHash(response.data.result);
             setIsOpen(false);
-          })
         })
         .catch(error => {
           const error_msg = error.response.data.error;
@@ -171,7 +170,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               <p>This will be sent to a number of Reviewers first, who will the decide whether your entry should be accepted or rejected.</p>
               <p> Please do net attempt to submit the same staking opportunity more than once and do not try to make fake entries, as both actions will result in lower Reputation Score for you as a user.</p>
               <p>Also, you will noy be eligible for rewards then.</p>
-              <p>You can see your transaction on <a rel="noreferrer" target="_blank" href={`${process.env.NEXT_PUBLIC_SCAN_URL}/${txHash}`}>Ploygon Scan</a></p>
+              <p>You can see your transaction on <a rel="noreferrer" target="_blank" href={`https://mumbai.polygonscan.com/tx/${txHash}`}>Ploygon Scan</a></p>
               <div className={styles.modalSubmit}>
                 <button className={styles.modalSubmitBtn} onClick={closeSuccessModal}>Close</button>
               </div>
