@@ -4,6 +4,7 @@ import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.css";
 import Select from "react-select";
 import { Modal } from "react-bootstrap";
 
+import OneCoinMarket from "../oneCoin/topProjects/oneCoinMarket";
 // import styles from "./projectList.module.css";
 import Image from "next/image";
 import { findTimeDelta } from "../../../../core/utils/converters/timeDelta";
@@ -19,6 +20,8 @@ import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
 
 // converters functions
 import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
+import { saveContributionToContract } from "../../../../services/web3/controller";
+
 
 // types
 export interface OneCoinProps {
@@ -43,7 +46,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const [apyValueErr, setApyValueErr] = useState(false);
   const [marketValue, setMarketValue] = useState();
   const [marketValueErr, setMarketValueErr] = useState(false);
-  const [stackingValue, setStackingValue] = useState(0);
+  const [stackingValue, setStackingValue] = useState(true);
   const [stackingValueErr, setStackingValueErr] = useState(true);
   const stakingTypes = [
     { value: true, label: "Locked" },
@@ -85,9 +88,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     }
   };
 
-  const linkHangler = (selectedObject: any) => {
-    new HugsApi().marketClick(selectedObject.target.id);
-  };
+  
 
   useEffect(() => {
     setHeightState(setActive === "" ? "0px" : `${content.current.scrollHeight}px`);
@@ -151,7 +152,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               <div className={styles.modalClose} onClick={closeModal}></div>
               <Select className={styles.modalContentSelect} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
               { marketValueErr == true ? <label className={styles.modalCloseError}>Already exist</label>: <></>}
-              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} defaultValue={stakingTypes[0]} onChange={stackingHandle}/>
               <label>Annual Percentage Yield (APY)</label>
               <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
               <div className={styles.modalSubmit}>
@@ -211,25 +212,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
             <p className={oneMarketStyles.coinMarketsColumn}>Clicks</p>
             <p className={oneMarketStyles.coinMarketsColumn}>Contribute</p>
           </div>
-
           {list.map((coinMarkets: CoinMarkets) => (
-            <div key={coinMarkets.market.market_id} className={oneMarketStyles.coinMarketsRow}>
-              <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
-                <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={coinMarkets.market.logo} />
-                <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{coinMarkets.market.platform}</p>
-              </div>
-              <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.apy}%</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(coinMarkets.last_updated)}</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>{ coinMarkets.locked ? "Locked": "Flexible"}</p>
-              <a id={coinMarkets.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={coinMarkets.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{coinMarkets.market.platform}</a>
-              <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.market.click}</p>
-              {/* <p className={oneMarketStyles.coinMarketsColumn}>{coinMarkets.open_contribution ? "Open": "Closed"} - {userAccess.current}</p> */}
-              {userAccess.current ? <p className={oneMarketStyles.coinMarketsColumn}>
-                {coinMarkets.open_contribution ? "In Review": "Update"}</p>:
-                <p className={oneMarketStyles.coinMarketsColumn}>Access Denied</p>
-              }
-              {/* <p className={oneMarketStyles.coinMarketsColumn}>{userAccess.current ? "Open": "Access Denied"}</p> */}
-            </div>
+            <OneCoinMarket key={coinMarkets.market.platform} oneProjectData={coinMarkets} oneCoinInfo={oneCoinInfo}/>
           ))};
           <div className={oneMarketStyles.coinMarketsRow}>
             <p className={oneMarketStyles.coinMarketsColumn} onClick={openModal}>Add new</p>

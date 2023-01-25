@@ -27,6 +27,18 @@ export class HugsApi {
         return axios.post(url, body, config)
     }
 
+    put(url, body) {
+        let config = {
+            headers: {}
+        }
+
+        let token = this.getCookie();
+        if (token) {
+            config.headers['Authorization'] = "Bearer " + token
+        }
+        return axios.put(url, body, config)
+    }
+
 
     getCookie() {
         let name = "token" + "=";
@@ -85,6 +97,17 @@ export class HugsApi {
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.post(url=url, body=body)
+    }
+
+    updateCoinMarket(market_id, coin_id, apy, locked) {
+        let body = {
+            "market_id": market_id,
+            "coin_id": coin_id,
+            "apy": apy,
+            "locked": locked
+        }
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
+        return this.put(url=url, body=body)
     }
 
     marketClick(market_id) {

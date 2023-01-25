@@ -37,7 +37,7 @@
 
 /* text Styling one Coin */
 .oneCoin_defaultStyling {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-family: var(--Helvetica);
   font-weight: 400;
   color: var(--darkBlackText);
