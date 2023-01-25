@@ -20,7 +20,6 @@ import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
 
 // converters functions
 import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
-import { saveContributionToContract } from "../../../../services/web3/controller";
 
 
 // types
@@ -101,7 +100,6 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     if ((apyValueErr == false) && (marketValueErr == false) && (stackingValueErr == false)){
       new HugsApi().createCoinMarket(marketValue, coin_id, apyValue, stackingValue)
         .then(response => {
-          // console.log(response)
             setIsSuccess(true);
             setTxHash(response.data.result);
             setIsOpen(false);
