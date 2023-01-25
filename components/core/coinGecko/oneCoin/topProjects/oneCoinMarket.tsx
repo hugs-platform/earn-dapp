@@ -7,7 +7,6 @@ import { Modal } from "react-bootstrap";
 import { HugsApi } from "../../../../../services/hugsApi";
 import { findTimeDelta } from "../../../../../core/utils/converters/timeDelta";
 import { CoinMarkets, CoinTypes } from "../../../../../core/types/types";
-import { saveContributionToContract } from "../../../../../services/web3/controller";
 
 import oneMarketStyles from "../../oneCoin/topProjects/oneProject.module.css";
 
@@ -66,12 +65,9 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
     if (apyValueErr == false) {
       new HugsApi().updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, apyValue, stackingValue)
         .then(response => {
-          saveContributionToContract(response.data).then((r: any) => {
-            console.log(r)
-            setIsSuccess(true);
-            setTxHash(r.transactionHash);
-            setIsOpen(false);
-          })
+          setIsSuccess(true);
+          setTxHash(response.data.result);
+          setIsOpen(false);
         })
         .catch(error => {
           setErrMsg(error.response.data.error);
