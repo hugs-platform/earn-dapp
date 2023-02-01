@@ -87,8 +87,6 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     }
   };
 
-  
-
   useEffect(() => {
     setHeightState(setActive === "" ? "0px" : `${content.current.scrollHeight}px`);
   })

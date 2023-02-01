@@ -31,7 +31,8 @@
 }
 
 .cryptoList {
-  padding: 0rem 23.5rem 5rem 23.5rem;
+  margin-left: auto;
+  margin: 5em;
 }
 
 .cryptoList_title {
@@ -49,5 +50,166 @@
 .hugsNavBarLink {
   font-size: 3em;
   font-weight: bold;
-  margin: 0.5em;
+  margin: 1em auto 1em 5em;
+}
+
+.hugsNavBarLink:before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  float: left;
+  margin: 0 6px 0 0;
+}
+
+.overview:before {
+  background: url('/static/src/overview.svg') no-repeat;
+}
+
+.platform:before {
+  background: url('/static/src/platform.svg') no-repeat;
+}
+
+.dashboard:before {
+  background: url('/static/src/dashboard.svg') no-repeat;
+}
+
+.settings:before {
+  background: url('/static/src/settings.svg') no-repeat;
+}
+
+.index_full {
+  background: #E4F7FC;
+}
+
+.hugsNavBarMain {
+  background: #E4F7FC;
+}
+
+.hugsSideNavBar {
+  border-radius: 0 25px 25px 0;
+  height: 100%;  
+  width: 20%;  
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0; 
+  background-color:#FFFFFF; 
+  transition: .5s ease; 
+  overflow-x: hidden; 
+  padding-top: 20px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+.hugsSideNavBarTitle {
+  background-image: url("/static/src/earn.svg");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  width: 150px;
+  height: 150px;
+}
+
+.hugsSideNavBarFooter {
+  width: 60%;
+  margin-bottom: 5em;
+  border: 1px solid #7CDBFF;
+  border-radius: 15px;
+}
+
+.hugsSideNavBarFooter h1 {
+  padding-top: 5em;
+  text-align: center;
+  font-size: 3em;
+}
+
+.hugsSideNavBarFooter p {
+  padding: 0 3em;
+  font-size: 2em;
+  line-height: 2em;
+}
+
+.hugsSideNavBarFooterGift {
+  margin: auto auto -12em auto;
+  z-index: 1;
+}
+
+.hugsSideNavBarFooter button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainButton {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  padding: 1em 3em;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  background: linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%);
+  border-radius: 8px;
+  color: #FFFFFF;
+  margin: 1em auto;
+}
+
+.hugsHeaderNavBar {
+  background: #FFFFFF;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+}
+
+.hugsHeaderNavBarLink {
+  font-size: 3em;
+  color: #4D93AC;
+  padding: 1em;
+  align-self: center;
+}
+
+
+.hugsHeaderNavBarLink:last-child {
+  margin-left: auto;
+}
+
+.walletLoginButton {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  font-size: 14px;
+  padding: 1em 3em;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  background: linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%);
+  border-radius: 8px;
+  color: #FFFFFF;
+  height: 50px;
+}
+
+.mainPageContainer {
+  width: 80%;
+  margin-left: 20%;
+  padding: 5em;
 }

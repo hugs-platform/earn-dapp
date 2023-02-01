@@ -8,9 +8,10 @@
 .oneCoinFull {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  transition: background-color 0.5s ease;
   align-items: center;
   padding: 2rem 0.65rem 2rem 2.5rem;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
 }
 
 /* 1 COIN STYLING */
@@ -87,9 +88,9 @@
 }
 
 /* different background-color on hover of full coin */
-.oneCoinFull:hover {
+/* .oneCoinFull:hover {
   background-color: var(--hoverAndActiveColor);
-}
+} */
 
 .oneCoinFull:active .showMoreImage {
   transform: rotate(180deg);
