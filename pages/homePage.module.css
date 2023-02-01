@@ -185,6 +185,7 @@
 }
 
 .walletLoginButton {
+  all: initial;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
