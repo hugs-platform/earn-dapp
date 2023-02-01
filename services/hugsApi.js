@@ -70,8 +70,8 @@ export class HugsApi {
         return;
     }
 
-    getCoinsList(page = 0, search = '', orderBy='-market_cup') {
-        let params = {'page': page, 'order_by': orderBy};
+    getCoinsList(page = 0, search = '', orderBy='-market_cup', per_page='all') {
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page};
         if (search) {
             params['search'] = search;
         }
@@ -88,12 +88,18 @@ export class HugsApi {
         return this.get(url)
     }
 
-    createCoinMarket(market_id, coin_id, apy, locked) {
+    createCoinMarket(market_id, coin_id, apy, locked, market_name="", market_link="", coin_name="", coin_abbreviature="", market_cup=0, price=0) {
         let body = {
             "market_id": market_id,
+            "market_name": market_name,
+            "market_link": market_link,
+            "market_cup": market_cup,
             "coin_id": coin_id,
+            "coin_name": coin_name,
+            "coin_abbreviature": coin_abbreviature,
+            "price": price,
             "apy": apy,
-            "locked": locked
+            "locked": locked,
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.post(url=url, body=body)
@@ -131,6 +137,17 @@ export class HugsApi {
             "remarks": remarks
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions/" + answerId;
+        return this.post(url=url, body=body)
+    }
+
+    createNewCoin(coinName, coinAbbreviature, marketCup, price) {
+        let body = {
+            "coin_name": coinName,
+            "coin_abbreviature": coinAbbreviature,
+            "market_cup": marketCup,
+            "price": price
+        }
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "/applications/coins/list";
         return this.post(url=url, body=body)
     }
 }

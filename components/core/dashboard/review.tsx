@@ -38,8 +38,8 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
     const [ open, setOpen ] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [ isLoading, setIsLoading] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ isSuccess, setIsSuccess ] = useState(false);
     const [ remarks, setRemarks ] = useState("");
     const [ isCoinInMarket, setIsCoinInMarket ] = useState(NaN);
     const [ coinInMarketError, setCoinInMarketError ] = useState(false);
