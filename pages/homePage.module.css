@@ -104,7 +104,7 @@
 }
 
 .hugsSideNavBarTitle {
-  background-image: url("/static/src/earn.svg");
+  background-image: url("/src/earn.svg");
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
