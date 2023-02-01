@@ -47,7 +47,7 @@ const Home: NextPage<HomePageProps> = () => {
 
   return (
     <div className={styles.index_full}>
-      <Favicon url="/static/favicon.ico"/>
+      <Favicon url="/favicon.ico"/>
       <ChakraProvider>
         <Layout>
           <Navbar>

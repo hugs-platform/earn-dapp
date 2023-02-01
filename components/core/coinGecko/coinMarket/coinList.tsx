@@ -437,7 +437,7 @@ function App() {
       </Modal>
 
       <div className={styles.cryptoHeader}>
-          <h1 className={styles.allCoins_title}>Platforms</h1>
+          <h1 className={styles.allCoins_title}>Coins</h1>
           <div className="search">
             <TextField
               key="search-coin-list"
