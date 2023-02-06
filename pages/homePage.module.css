@@ -62,6 +62,17 @@
   margin: 0 6px 0 0;
 }
 
+
+.hugsNavBarLinkActive:after {
+  content:"\A";
+  margin-left: 10px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background: #000000;
+  display:inline-block;
+}
+
 .overview:before {
   background: url('/static/src/overview.svg') no-repeat;
 }
@@ -80,6 +91,7 @@
 
 .index_full {
   background: #E4F7FC;
+  min-height: 100vh;
 }
 
 .hugsNavBarMain {
@@ -104,7 +116,7 @@
 }
 
 .hugsSideNavBarTitle {
-  background-image: url("/src/earn.svg");
+  background-image: url("/static/src/earn.svg");
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
@@ -211,6 +223,7 @@
 
 .mainPageContainer {
   width: 80%;
+  min-height: 100%;
   margin-left: 20%;
   padding: 5em;
 }

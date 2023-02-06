@@ -88,6 +88,11 @@ export class HugsApi {
         return this.get(url)
     }
 
+    getMarketCoinsList(market_id) {
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market/" + market_id + "/coins";
+        return this.get(url)
+    }
+
     createCoinMarket(market_id, coin_id, apy, locked, market_name="", market_link="", coin_name="", coin_abbreviature="", market_cup=0, price=0) {
         let body = {
             "market_id": market_id,
@@ -121,8 +126,21 @@ export class HugsApi {
         return this.get(url)
     }
 
-    getMarketsList() {
-        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/markets/list";
+    coinClick(coin_id) {
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/coin/" + coin_id + "/click";
+        return this.get(url)
+    }
+
+    getMarketsList(page = 0, search = '', orderBy='-market_cup', per_page=25) {
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page};
+        if (search) {
+            params['search'] = search;
+        }
+
+        let query = Object.keys(params)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+            .join('&');
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/markets/list?" + query;
         return this.get(url);
     }
 
