@@ -37,7 +37,8 @@ export interface CoinMarkets {
     market_id: string;
     platform: string;
     click: number;
-  }
+  },
+  coin : CoinTypes,
 }
 
 export interface Review {
@@ -47,4 +48,15 @@ export interface Review {
   apy: number,
   link: string,
   coin: string
+}
+
+export interface MarketTypes {
+  market_id: string,
+  highest_apy: number;
+  last_update: string,
+  click: number,
+  link: string,
+  logo: string,
+  platform: string,
+  earn_coins: number
 }

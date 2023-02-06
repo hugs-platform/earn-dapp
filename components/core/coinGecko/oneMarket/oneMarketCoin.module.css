@@ -1,0 +1,177 @@
+.coinMarketsRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10em;
+    padding: 0.7rem;
+    border-bottom: 0.1rem solid #eceff1;
+}
+
+.coinMarketsColumn:first-child {
+    text-align: start;
+    max-width: 100px;
+}
+
+.coinMarketsColumn:not(:first-child){
+    text-align: center;
+}
+
+.coinMarketsColumn {
+    font-size: 2.5em;
+    flex: 1 1 0
+}
+
+.coinMarketsColumn.p {
+    font-size: 5em;
+}
+
+.allignLeft {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.oneMarketName {
+    font-size: 1em;
+    font-family: var(--InterRegular);
+    color: var(--textBlack);
+    padding-left: 0.8rem;
+}
+
+.coinLogo {
+    width: 24px;
+    height: 24px;
+}
+
+.oneMarketAbbreveature {
+    font-size: 1.4em;
+    font-family: var(--InterRegular);
+    color: var(--textBlack);
+    padding-left: 0.8rem;
+}
+
+.oneMarket_upToDate {
+    color: #2AAE39;
+}
+
+.oneMarket_updateNowButton{
+    color: #1FADFF;
+    border: 1px solid #1FADFF;
+    height: 30px;
+    margin: auto;
+    border-radius: 5px;
+    line-height: 25px;
+}
+
+.modal {
+    --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #222;
+    text-align: left;
+    box-sizing: border-box;
+    transition: opacity .15s linear;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 15px;
+    display: block;
+}
+
+.modalDialog {
+    --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #222;
+    text-align: left;
+    box-sizing: border-box;
+    position: relative;
+    width: auto;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    margin: 1.75rem auto;
+    min-height: calc(100% - 3.5rem);
+    max-width: 800px;
+    transition: transform .3s ease-out;
+    transform: none;
+}
+
+.modalContent {
+    padding: 0.5em 1em;
+    font-size: 3em;
+    --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #222;
+    text-align: left;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: lightblue;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+    text-align: center;
+}
+
+.modalContent h2 {
+    border-bottom: 0.5rem solid #000;
+    text-align: center;
+}
+
+.modalContent p a {
+    color: #129a2e;
+    text-decoration: underline;
+}
+
+.modalClose {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    color: black;
+}
+
+.modalClose::before{
+    content: "\00d7";
+}
+
+.modalContentSelect {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.modalSubmit {
+    text-align: center;
+}
+
+.modalSubmitBtn {
+    width: 200px;
+    margin: 0.5em;
+    color: #ffffff;
+    background-color: #000;
+    padding: 0.25em 1em;
+}
+
+.modalCloseError {
+    color: red;
+    font-weight: bolder;
+}

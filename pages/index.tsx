@@ -14,7 +14,7 @@ import ConnectButton from "../components/core/metaMask/authentications";
 import AccountModal from "../components/core/metaMask/accountModal";
 import Layout from "../components/core/Layout";
 import Dashboard from "../components/core/dashboard/dashboard";
-
+import MarketList from "../components/core/coinGecko/coinMarket/marketList";
 
 // types
 import { HomePageProps } from "../core/types/types";
@@ -48,16 +48,16 @@ const Home: NextPage<HomePageProps> = () => {
   return (
     <div className={styles.index_full}>
       <Favicon url="/favicon.ico"/>
+      <title>Earn Markets</title>
       <ChakraProvider>
         <Layout>
           <Navbar>
             <Container>
               <Nav className={styles.hugsSideNavBar}>
                 <Nav.Item className={styles.hugsSideNavBarTitle}></Nav.Item>
-                <Nav.Link onClick={handlePageChange} className={styles.hugsNavBarLink + " " + styles.overview}>Overview</Nav.Link>
-                <Nav.Link onClick={handlePageChange} className={styles.hugsNavBarLink + " " + styles.platform}>Platforms</Nav.Link>
-                <Nav.Link onClick={handlePageChange} className={styles.hugsNavBarLink + " " + styles.dashboard}>Dashboard</Nav.Link>
-                <Nav.Link onClick={handlePageChange} className={styles.hugsNavBarLink + " " + styles.settings}>Settings</Nav.Link>
+                <Nav.Link onClick={handlePageChange} className={isCoins ? styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.overview}>Overview</Nav.Link>
+                <Nav.Link onClick={handlePageChange} className={isPlatforms ? styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.platform}>Platforms</Nav.Link>
+                <Nav.Link onClick={handlePageChange} className={isDashboard ? styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.dashboard}>Dashboard</Nav.Link>
                 <img className={styles.hugsSideNavBarFooterGift} src='/static/src/gift.png'/>
                 <Nav.Item className={styles.hugsSideNavBarFooter}>
                   <h1>Mint your NFT!</h1>
@@ -85,7 +85,7 @@ const Home: NextPage<HomePageProps> = () => {
           <section className={styles.cryptoList}>
             { isCoins ? (<CoinsList />) : (<div></div>) }
             { isDashboard ? (<Dashboard />) : (<div></div>) }
-            { isPlatforms ? (<h1>PLATFORMS</h1>) : (<div></div>) }
+            { isPlatforms ? (<MarketList />) : (<div></div>) }
           </section>
       </Container>
     </div>
