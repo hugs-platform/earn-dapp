@@ -15,6 +15,7 @@ import AccountModal from "../components/core/metaMask/accountModal";
 import Layout from "../components/core/Layout";
 import Dashboard from "../components/core/dashboard/dashboard";
 import MarketList from "../components/core/coinGecko/coinMarket/marketList";
+import Footer from "../components/core/footer/footer";
 
 // types
 import { HomePageProps } from "../core/types/types";
@@ -69,7 +70,7 @@ const Home: NextPage<HomePageProps> = () => {
               </Nav>
             </Container>
           </Navbar>
-          <Container className={styles.mainPageContainer}>
+          <Container className={styles.mainPageContainer + " " + styles.hugsSideNavContainer}>
             <Navbar className={styles.hugsHeaderNavBar}>
                 <Nav.Link className={styles.hugsHeaderNavBarLink}>Overview</Nav.Link>
                 <Nav.Link className={styles.hugsHeaderNavBarLink}>How It works</Nav.Link>
@@ -80,13 +81,14 @@ const Home: NextPage<HomePageProps> = () => {
           
           <AccountModal isOpen={isOpen} onClose={onClose} />
         </Layout>
-        </ChakraProvider>
+      </ChakraProvider>
         <Container className={styles.mainPageContainer}>
           <section className={styles.cryptoList}>
             { isCoins ? (<CoinsList />) : (<div></div>) }
             { isDashboard ? (<Dashboard />) : (<div></div>) }
             { isPlatforms ? (<MarketList />) : (<div></div>) }
           </section>
+        <Footer></Footer>
       </Container>
     </div>
   );

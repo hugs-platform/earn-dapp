@@ -1,0 +1,61 @@
+.footer {
+    width: 80%;
+    height: 95px;
+    background-color: #FFFFFF;
+    bottom: 0;
+    position: absolute;
+    padding: 0 25px 0 25px;
+}
+
+.footer p {
+    justify-content: end;
+    display: flex;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.02em;
+    color: rgba(41, 45, 50, 0.5);
+    padding-right: 100px;
+}
+
+.footer img {
+    background-image: url("/static/src/hugs-footer-logo.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: 70px;
+    height: 25px;
+}
+
+.footerNavBar {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: end;
+}
+
+.footerNavBarItem {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.02em;
+    color: #4D93AC;
+    padding: 0 1em 0 1em;
+    align-self: center;
+}
+
+.footerNavBarItemCreatedBy {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.02em;
+    padding: 0 0.5em 0 0.5em;
+    align-self: center;
+    color: rgba(41, 45, 50, 0.5) !important;
+}
