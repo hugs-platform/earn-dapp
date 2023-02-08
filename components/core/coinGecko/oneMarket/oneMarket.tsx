@@ -160,6 +160,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
               { stackingValueErr ? <label className={styles.modalCloseError}>Select one</label>: <></>}
               <label>Annual Percentage Yield (APY)</label>
               <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
+              { apyValueErr ? <label className={styles.modalCloseError}>Please input number</label>: <></>}
               <div className={styles.modalSubmit}>
                 <button className={styles.modalSubmitBtn} onClick={validate}>Submit</button>
               </div>
