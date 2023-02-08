@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useRef } from "react";
 import Image from "next/image";
 import Select from "react-select";
 import { Modal } from "react-bootstrap";
@@ -19,12 +19,15 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   const { oneProjectData, oneCoinInfo } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [apyValue, setApyValue] = useState(0.00);
+  const apyValue = useRef(0.00);
   const [apyValueErr, setApyValueErr] = useState(false);
-  const [stackingValue, setStackingValue] = useState(true);
+  const stackingValue = useRef("");
+  const [stackingValueErr, setStackingValueErr] = useState(false);
   const [errMsg, setErrMsg] = useState();
   const [txHash, setTxHash] = useState('');
+  const [validation, setValidation] = useState(true);
   const stakingTypes = [
+    { value: NaN, label: "Unknown" },
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
   ];
@@ -46,11 +49,12 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   };
 
   const stackingHandle = (selectedObject: any) => {
-    setStackingValue(selectedObject.value);
+    stackingValue.current = selectedObject.value;
+    setStackingValueErr(false)
   }
 
   const apyHandle = (selectedObject: any) => {
-    setApyValue(selectedObject.target.value);
+    apyValue.current = selectedObject.target.value;
     if (selectedObject.target.value){
       setApyValueErr(false);
     } else {
@@ -59,11 +63,17 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   } 
 
   const validate = () => {
-    if (apyValue < 0) {
+    setValidation(true);
+    if (apyValue.current < 0) {
       setApyValueErr(true);
+      setValidation(false);
     }
-    if (apyValueErr == false) {
-      new HugsApi().updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, apyValue, stackingValue)
+    if (stackingValue.current == ""){
+      setStackingValueErr(true);
+      setValidation(false);
+    }
+    if (validation) {
+      new HugsApi().updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, apyValue.current, stackingValue.current)
         .then(response => {
           setIsSuccess(true);
           setTxHash(response.data.result);
@@ -97,9 +107,11 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
               <div className={oneMarketStyles.modalContent}>
                 <h2>Up to date contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform} <Image className={oneMarketStyles.coinName_image} height={32} width={32} src={oneProjectData.market.logo} /></h2> 
                 <div className={oneMarketStyles.modalClose} onClick={closeModal}></div>
-                <Select className={oneMarketStyles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} defaultValue={stakingTypes[0]} onChange={stackingHandle}/>
-                <label>Annual Percentage Yield (APY)</label>
-                <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
+                <Select className={oneMarketStyles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+                { stackingValueErr ? <label className={oneMarketStyles.modalCloseError}>Select one</label>: <></>}
+                <label>Annual Percentage Yield (APY 123)</label>
+                <input type="number" placeholder="0.00" name="apy_value" onChange={apyHandle}/>
+                { apyValueErr ? <label className={oneMarketStyles.modalCloseError}>Please input number</label>: <></>}
                 { errMsg ? <label className={oneMarketStyles.modalCloseError}>{errMsg}</label>: <></>}
                 <div className={oneMarketStyles.modalSubmit}>
                   <button className={oneMarketStyles.modalSubmitBtn} onClick={validate}>Submit</button>

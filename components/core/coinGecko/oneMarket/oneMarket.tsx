@@ -38,11 +38,13 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [apyValue, setApyValue] = useState(0.00);
   const [apyValueErr, setApyValueErr] = useState(false);
-  const [coinValue, setCoinValue] = useState();
-  const [coinValueErr, setCoinValueErr] = useState(false);
-  const [stackingValue, setStackingValue] = useState(true);
-  const [stackingValueErr, setStackingValueErr] = useState(true);
+  const [coinValue, setCoinValue] = useState("");
+  const [coinValueErr, setCoinValueErr] = useState("");
+  const stackingValue = useRef("");
+  const [stackingValueErr, setStackingValueErr] = useState(false);
+  const validation = useRef(true);
   const stakingTypes = [
+    { value: NaN, label: "Unknown" },
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
   ];
@@ -88,13 +90,21 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   })
 
   const validate = () => {
-    console.log("START VALIDATION", apyValueErr, coinValueErr, stackingValueErr);
+    validation.current = true;
+    if (coinValue == ""){
+      setCoinValueErr("Select one");
+      validation.current = false;
+    }
     if (apyValue < 0) {
       setApyValueErr(true);
+      validation.current = false;
     }
-    if ((apyValueErr == false) && (coinValueErr == false) && (stackingValueErr == false)){
-      console.log("VALIDATION COMPLITE");
-      new HugsApi().createCoinMarket(market_id, coinValue, apyValue, stackingValue)
+    if (stackingValue.current == ""){
+      setStackingValueErr(true);
+      validation.current = false;
+    }
+    if (validation.current){
+      new HugsApi().createCoinMarket(market_id, coinValue, apyValue, stackingValue.current)
         .then(response => {
             setIsSuccess(true);
             setTxHash(response.data.result);
@@ -103,7 +113,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
         .catch(error => {
           const error_msg = error.response.data.error;
           if (error_msg == 'Cant create existed connection') {
-            setCoinValueErr(true);
+            setCoinValueErr("Alredy exist!");
           }
         })
     }
@@ -112,19 +122,15 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   const coinListHandle = (selectedObject: any) => {
     setCoinValue(selectedObject.value);
     if ( selectedObject.value == undefined){
-      setCoinValueErr(true);
+      setCoinValueErr("Select one");
     } else {
-      setCoinValueErr(false);
+      setCoinValueErr("");
     }
   }
 
   const stackingHandle = (selectedObject: any) => {
-    setStackingValue(selectedObject.value);
-    if ( selectedObject.value == undefined){
-      setStackingValueErr(true)
-    } else {
-      setStackingValueErr(false)
-    }
+    stackingValue.current = selectedObject.value;
+    setStackingValueErr(false);
   }
 
   const apyHandle = (selectedObject: any) => {
@@ -149,8 +155,9 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
               <h2>Add new contribution for {platform} <Image className={styles.coinName_image} height={32} width={32} src={logo} /></h2> 
               <div className={styles.modalClose} onClick={closeModal}></div>
               <Select className={styles.modalContentSelect} placeholder="Select Coin" options={coinsList} onChange={coinListHandle}/>
-              { coinValueErr == true ? <label className={styles.modalCloseError}>Already exist</label>: <></>}
-              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+              { coinValueErr ? <label className={styles.modalCloseError}>{coinValueErr}</label>: <></>}
+              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes}  onChange={stackingHandle}/>
+              { stackingValueErr ? <label className={styles.modalCloseError}>Select one</label>: <></>}
               <label>Annual Percentage Yield (APY)</label>
               <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
               <div className={styles.modalSubmit}>
