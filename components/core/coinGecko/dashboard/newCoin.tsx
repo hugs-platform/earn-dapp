@@ -66,10 +66,12 @@ function App() {
   const [ marketLink, setMarketLink ] = useState("");
   const [ marketLinkError , setMarketLinkError ] = useState(false);
   const [showNewCoin, setShowNewCoin] = useState(false);
-  const [stackingValue, setStackingValue] = useState(true);
+  const stackingValue = useRef("");
+  const [stackingValueErr, setStackingValueErr] = useState(false);
   const apyValue = useRef("");
   const [ apyValueError, setApyValueError ] = useState(false);
   const stakingTypes = [
+    { value: NaN, label: "Unknown" },
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
   ];
@@ -181,12 +183,17 @@ function App() {
         setValidation(false);
       }
 
+      if (stackingValue.current == ""){
+        setStackingValueErr(true);
+        setValidation(false);
+      }
+
       if (validation) {
         API.createCoinMarket(
           marketValue.current, 
           coinValue.current, 
           apyValue.current, 
-          stackingValue, 
+          stackingValue.current, 
           marketName, 
           marketLink,
           coinName.current,
@@ -194,7 +201,7 @@ function App() {
           marketCup.current,
           price.current)
           .then(response => {
-            setErrorMsg("");
+            setErrorMsg("Oops, something wrong");
             handleClose();
             handleSuccessOpen();
           })
@@ -222,7 +229,8 @@ function App() {
   }
   
   const stackingHandle = (selectedObject: any) => {
-    setStackingValue(selectedObject.value);
+    stackingValue.current = selectedObject.value;
+    setStackingValueErr(false);
   }
 
   const coinListHandle = (selectedObject: any) => {
@@ -343,15 +351,14 @@ function App() {
                 <TextField 
                   id="apy-id" 
                   label="Annual Percentage Yield" 
-                  variant="outlined" 
+                  variant="outlined"
                   type="number" 
-                  error={apyValueError == true}
-                  helperText={apyValueError == true ? '(required)' : ''}
                   className={styles.newCoinInput + " " + styles.textFielInputLabel} 
                   onChange={apyChange}/>
+                { apyValueError && <p>Required field</p>}
 
-                <Select className={styles.newCoinInput} placeholder="Select Staking type" options={stakingTypes} defaultValue={stakingTypes[0]} onChange={stackingHandle}/>
-                { marketValueErr && <p>Select one</p>}
+                <Select className={styles.newCoinInput} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+                { stackingValueErr && <p>Select one</p>}
                 { errorMsg && <h2 className={styles.errorMsg}>{errorMsg}</h2>}
                 <Container className={styles.submitAddNewCoin}>
                     <Button className={mainStyles.mainButton} onClick={createNewCoin}>Submit</Button>

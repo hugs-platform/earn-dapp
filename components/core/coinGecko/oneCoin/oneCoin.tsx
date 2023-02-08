@@ -45,9 +45,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const [apyValueErr, setApyValueErr] = useState(false);
   const [marketValue, setMarketValue] = useState();
   const [marketValueErr, setMarketValueErr] = useState(false);
-  const [stackingValue, setStackingValue] = useState(true);
-  const [stackingValueErr, setStackingValueErr] = useState(true);
+  const stackingValue = useRef("");
+  const [stackingValueErr, setStackingValueErr] = useState(false);
   const stakingTypes = [
+    { value: NaN, label: "Unknown" },
     { value: true, label: "Locked" },
     { value: false, label: "Flexible" }
   ];
@@ -95,8 +96,11 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     if (apyValue < 0) {
       setApyValueErr(true);
     }
+    if (stackingValue.current == ""){
+      setStackingValueErr(true);
+    }
     if ((apyValueErr == false) && (marketValueErr == false) && (stackingValueErr == false)){
-      new HugsApi().createCoinMarket(marketValue, coin_id, apyValue, stackingValue)
+      new HugsApi().createCoinMarket(marketValue, coin_id, apyValue, stackingValue.current)
         .then(response => {
             setIsSuccess(true);
             setTxHash(response.data.result);
@@ -121,12 +125,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   }
 
   const stackingHandle = (selectedObject: any) => {
-    setStackingValue(selectedObject.value);
-    if ( selectedObject.value == undefined){
-      setStackingValueErr(true)
-    } else {
-      setStackingValueErr(false)
-    }
+    stackingValue.current = selectedObject.value;
+    setStackingValueErr(false);
   }
 
   const apyHandle = (selectedObject: any) => {
@@ -148,7 +148,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
               <div className={styles.modalClose} onClick={closeModal}></div>
               <Select className={styles.modalContentSelect} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
               { marketValueErr == true ? <label className={styles.modalCloseError}>Already exist</label>: <></>}
-              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} defaultValue={stakingTypes[0]} onChange={stackingHandle}/>
+              <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+              { stackingValueErr == true ? <label className={styles.modalCloseError}>Select one</label>: <></>}
               <label>Annual Percentage Yield (APY)</label>
               <input type="number" placeholder="0.00" name="apy_value" value={apyValue} onChange={apyHandle}/>
               <div className={styles.modalSubmit}>
