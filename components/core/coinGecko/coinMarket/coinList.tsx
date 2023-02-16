@@ -101,7 +101,7 @@ function App() {
           <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
         ))}
       </div>
-      {isLoaded ? (
+      {pageCount > 0 ? (
         <ReactPaginate
           initialPage={0}
           pageCount={pageCount}
@@ -121,7 +121,7 @@ function App() {
           nextLabel={'Next >'}
         />
       ) : (
-        <div>Nothing to display</div>
+        <></>
       )} 
     </>
   );

@@ -18,3 +18,13 @@
   font-family: "FiraCode-Bold";
   src: local("FiraCode-Bold"), url("../fonts/FiraCode-Bold.woff") format("woff");
 }
+
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: local("FiraCode-Bold"), url("../fonts/Gilroy-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: local("FiraCode-Bold"), url("../fonts/Gilroy-Regular.woff") format("woff");
+}

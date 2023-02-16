@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import moment from "moment";
+import Select from "react-select";
+import ReactPaginate from "react-paginate";
 
 // data
 import { HugsApi } from "../../../services/hugsApi";
@@ -6,9 +9,12 @@ import { HugsApi } from "../../../services/hugsApi";
 // styles
 import styles from "../dashboard/dashboard.module.css";
 
-import { Review } from "../../../core/types/types";
+import { ReviewRequest, CoinContribution } from "../../../core/types/types";
 
-import OneReview from "../dashboard/review";
+import Dashbord from "../coinGecko/dashboard/newCoin";
+import OneReviewRequest from "../dashboard/reviews/reviewRequest";
+import OneReview from "./reviews/review";
+import OneContribution from "./reviews/contribution";
 
 /**
  * @class
@@ -16,82 +22,236 @@ import OneReview from "../dashboard/review";
  */
 function App() {
   const API = new HugsApi();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [listReview, setListReview] = useState([]);
+  const [reviewsRequestList, setReviewsRequestList] = useState([]);
+  const [reviewsList, setReviewsList] = useState([]);
+  const [contributionsList, setContributionsList] = useState([]);
   const [userAlias, setUserAlias] = useState("");
   const [userWallet, setUserWallet] = useState("");
+  const [userWalletDisplay, setUserWalletDisplay] = useState("");
   const [userReputation, setUserReputation] = useState("");
   const [userEarnedRewards, setUserEarnedRewards] = useState(0);
-  const [userRegistrationDate, setUserRegistrationDate]= useState("");
-  const [contributionsTotal, setContributionsTotal] = useState(0);
-  const [contributionsPending, setContributionsPending] = useState(0);
-  const [contributionsAccepted, setContributionsAccepted] = useState(0);
-  const [contributionsRejected, setContributionsRejected] = useState(0);
-  const [reviewsTotal, setReviewsTotal] = useState(0);
-  const [reviewsPending, setReviewsPending] = useState(0);
-  const [reviewsAccepted, setReviewsAccepted] = useState(0);
-  const [reviewsRejected, setReviewsRejected] = useState(0);
+  const [registrationDate, setRegistrationDate] = useState("");
+  const [reviewRequest, setReviewRequest] = useState(0);
+  const [reviewRequestLastMonth, setReviewRequestLastMonth] = useState(0);
+  const [contributionRequest, setContributionRequest] = useState(0);
+  const [contributionRequestLastMonth, setContributionRequestLastMonth] = useState(0);
+  const [review, setReview] = useState(0);
+  const [reviewLastMonth, setReviewLastMonth] = useState(0);
+  const page = useRef(0);
+  const orderBy = useRef("-created_at");
+  const prePage = useRef(10);
+  const status = useRef("pending");
+  const pageCount = useRef(0);
+  const contribution_type = useRef(0);
+  const selectList = [
+    {value: 0, label: "Review Requests"},
+    {value: 1, label: "Contributions"},
+    {value: 2, label: "Reviews"}
+  ]
   
   useEffect(() => {
-    setIsLoaded(false);
     API.getProfile().then(response => {
-      if (response){
+      if (response) {
           setUserAlias(response.data.alias);
           setUserWallet(response.data.wallet);
           setUserReputation(response.data.reputation_score);
-          setUserRegistrationDate(response.data.registration_date);
-          setUserEarnedRewards(response.data.rewards);
-          setContributionsTotal(response.data.contributions.total);
-          setContributionsPending(response.data.contributions.pending);
-          setContributionsAccepted(response.data.contributions.accepted);
-          setContributionsRejected(response.data.contributions.rejected);
-          setReviewsTotal(response.data.reviews.total);
-          setReviewsPending(response.data.reviews.pending);
-          setReviewsAccepted(response.data.reviews.accepted);
-          setReviewsRejected(response.data.reviews.rejected);
-          setListReview(response.data.reviews_pending);
-          setIsLoaded(true);
+          setUserWalletDisplay(response.data.wallet.slice(0, 6) + "......." + response.data.wallet.slice(-6));
+          const registration_date = Date.parse(response.data.registration_date);
+          setRegistrationDate(moment(registration_date).format("MMM DD YYYY"));
+          setReviewRequest(response.data.reviews.request_total);
+          setReviewRequestLastMonth(response.data.reviews.request_scince_last_month);
+          setContributionRequest(response.data.contributions.total);
+          setContributionRequestLastMonth(response.data.contributions.scince_last_month);
+          setReview(response.data.reviews.total);
+          setReviewLastMonth(response.data.reviews.scince_last_month);
+          setUserEarnedRewards(0);
+      }
+    });
+    getReviewRequests();
+  }, [])
+
+  const getReviewRequests = () => {
+    clearFilters();
+    API.getReviews(page.current, orderBy.current, prePage.current, status.current).then(response => {
+      if (response) {
+        setReviewsRequestList(response.data.items);
+        pageCount.current = response.data.number_of_pages;
+        page.current = response.data.page;
       }
     })
-  }, [])
+  }
+
+  const getReviews = () => {
+    clearFilters();
+    status.current = "closed";
+    API.getReviews(page.current, orderBy.current, prePage.current, status.current).then(response => {
+      if (response) {
+        setReviewsList(response.data.items);
+        pageCount.current = response.data.number_of_pages;
+        page.current = response.data.page;
+      }
+    })
+  }
+
+  const getContributions = () => {
+    clearFilters();
+    API.getContributions(page.current, orderBy.current, prePage.current).then(response => {
+      if (response) {
+        setContributionsList(response.data.items);
+        pageCount.current = response.data.number_of_pages;
+        page.current = response.data.page;
+      }
+    })
+  }
+
+  const clearFilters = () => {
+    page.current = 0;
+    status.current = "pending";
+    orderBy.current = "-created_at";
+    setReviewsList([]);
+    setReviewsRequestList([]);
+    setContributionsList([]);
+  }
+
+  const copyClipboard = (selectedObject: any) => {
+    setUserWalletDisplay("copied");
+    navigator.clipboard.writeText(userWallet);
+    setTimeout(() => {
+      setUserWalletDisplay(userWallet.slice(0, 4) + "......." + userWallet.slice(-4));
+    }, 3000)
+  };
+
+  const selectOnChange = (selectedObject: any) => {
+    if (contribution_type.current != selectedObject.value){
+      contribution_type.current = selectedObject.value;
+      page.current = 0;
+      handleFetch();
+    }
+  }
+
+  const handlePageChange = (selectedObject: any) => {
+    page.current = selectedObject.selected;
+    handleFetch();
+	};
+
+  const handleFetch = () => {
+    if (contribution_type.current === 0) {
+      getReviewRequests();
+    } else {
+      if (contribution_type.current === 1) {
+        getContributions();
+      } else {
+        getReviews();
+      };
+    };
+  };
 
   return (
     <>
+      <Dashbord></Dashbord>
       <header className={styles.dashboard_header}>
         <hgroup>
-            <h1>Hello user { userAlias }</h1>
-            <h2>Wallet address: { userWallet }</h2>
-        </hgroup>
-        <hgroup>
-            <h2>Member scince { userRegistrationDate }</h2>
-            <h1>Reputation: { userReputation }</h1>
-            <h1>Rewards earned: { userEarnedRewards } $HUGS</h1>
+            <h1>Dashboard</h1>
         </hgroup>
       </header>
-      {isLoaded ? (
-        <main className={styles.dashboard_main}>
-          <hgroup>
-              <h1>Review Requests</h1>
-              {listReview.map((review: Review) => (
-                <OneReview key={review.id} reviewData={review} />
-              ))}
-          </hgroup>
-          <hgroup>
-              <h1>Contributions</h1>
-              <p>{contributionsTotal} Contributions</p>
-              <p>{contributionsPending} Pending contributions</p>
-              <p>{contributionsAccepted} Accepted contributions</p>
-              <p>{contributionsRejected} Rejected contributions</p>
-          </hgroup>
-          <hgroup>
-              <h1>Reviews</h1>
-              <p>{reviewsTotal} Reviews</p>
-              <p>{reviewsPending} Pending reviews</p>
-              <p>{reviewsAccepted} Accepted reviews</p>
-              <p>{reviewsRejected} Rejected reviews</p>
-          </hgroup>
-        </main>
-      ): (<div></div>)}
+      <main className={styles.dashboard_main}>
+        <div className={styles.dashboard_row}>
+          <div className={styles.dasboard_col_3}>
+            <div className={styles.dashboard_card + " " + styles.dashboard_card_main_theme + " " + styles.dashboard_card_profile}>
+              <div className={styles.dashboard_card_profile_title}>
+                <img className={styles.dashboard_card_profile_img} src='/static/src/default-profile.png'/>
+                <p>Welcom Back!</p>
+                <h1>{userAlias}</h1>
+              </div>
+              <div className={styles.dashboard_card_profile_body}>
+                <div className={styles.dashboard_card_profile_body_col}>
+                  <p>Wallet address</p>
+                  <p>{userWalletDisplay}</p>
+                  <img onClick={copyClipboard} className={styles.dashboard_card_copy_img} src='/static/src/copy.png'/> 
+                </div>
+                <div className={styles.dashboard_card_profile_body_col}>
+                  <p>Rewards Earned</p>
+                  <p>$HUGS {userEarnedRewards}</p>
+                </div>
+              </div>
+              <div className={styles.dashboard_card_profile_reputation}>
+                <h1>{userReputation}</h1>
+                <h2>Reputation</h2>
+                <p>Member Scince {registrationDate}</p>
+              </div>
+            </div>
+          </div>
+          <div className={styles.dasboard_col_9}>
+            <div className={styles.dashboard_row}>
+              <div className={styles.dasboard_col_4}>
+                <div className={styles.dashboard_card + " " + styles.dashboard_card_review_requests + " " + `${reviewRequestLastMonth >= 0 ? styles.up_background: styles.down_background}`}>
+                  <h1>Review Requests</h1>
+                  <h2>{reviewRequest}</h2>
+                  <p><span className={`${reviewRequestLastMonth >= 0 ? styles.up: styles.down}`}>{reviewRequestLastMonth}%</span> Scince last months</p>
+                </div>
+              </div>
+              <div className={styles.dasboard_col_4}>
+                <div className={styles.dashboard_card + " " + styles.dashboard_card_review_contribtuions + " " + `${contributionRequestLastMonth >= 0 ? styles.up_background: styles.down_background}`}>
+                  <h1>Contributions</h1>
+                  <h2>{contributionRequest}</h2>
+                  <p><span className={`${contributionRequestLastMonth >= 0 ? styles.up: styles.down}`}>{contributionRequestLastMonth}%</span> Scince last months</p>
+                </div>
+              </div>
+              <div className={styles.dasboard_col_4}>
+                <div className={styles.dashboard_card + " " + styles.dashboard_card_reviews + " " + `${reviewLastMonth >= 0 ? styles.up_background: styles.down_background}`}>
+                  <h1>Reviews</h1>
+                  <h2>{review}</h2>
+                  <p><span className={`${reviewLastMonth >= 0 ? styles.up: styles.down}`}>{reviewLastMonth}%</span> Scince last months</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.dashboard_row}>
+              <div className={styles.dasboard_col_12}>
+                <div className={styles.dashboard_card + " " + styles.items_list}>
+                  <div className={styles.items_list_title}>
+                    <h1>Review Request</h1>
+                    <Select className={styles.select} options={selectList} defaultValue={selectList[0]} onChange={selectOnChange}/>
+                  </div>
+                  <div className={styles.items_list_body}>
+                    {reviewsRequestList.map((reviewData: ReviewRequest) => (
+                      <OneReviewRequest key={reviewData.id} reviewData={reviewData}/>
+                    ))}
+                    {reviewsList.map((reviewData: ReviewRequest) => (
+                      <OneReview key={reviewData.id} reviewData={reviewData}/>
+                    ))}
+                    {contributionsList.map((contributionData: CoinContribution) => (
+                      <OneContribution key={contributionData.id} contributionData={contributionData}/>
+                    ))}
+                  </div>
+                  <div className={styles.items_list_footer}>
+                    <img src='/static/src/expand.png'/>
+                    {pageCount.current > 1 ?
+                      <ReactPaginate
+                        initialPage={0}
+                        pageCount={pageCount.current}
+                        pageRangeDisplayed={2}
+                        marginPagesDisplayed={3}
+                        onPageChange={handlePageChange}
+                        containerClassName={styles.coinsListPagination}
+                        previousLinkClassName={styles.coinsListPaginationPage}
+                        breakClassName={styles.coinsListPaginationPageBreak}
+                        nextLinkClassName={styles.coinsListPaginationPage}
+                        pageClassName={styles.coinsListPaginationPage}
+                        nextClassName={styles.coinsListPaginationPage}
+                        previousClassName={styles.coinsListPaginationPage}
+                        disabledClassName={styles.coinsListPaginationPageActiveDisabled}
+                        activeClassName={styles.coinsListPaginationPageActive}
+                        previousLabel={'< Prev'}
+                        nextLabel={'Next >'}
+                      /> : <></>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+      </main>
     </>
   );
 }

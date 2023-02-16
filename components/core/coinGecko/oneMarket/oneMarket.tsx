@@ -152,7 +152,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
         <div className={styles.modal}>
           <div className={styles.modalDialog}>
             <div className={styles.modalContent}>
-              <h2>Add new contribution for {platform} <Image className={styles.coinName_image} height={32} width={32} src={logo} /></h2> 
+              <h2>Add new contribution for {platform} {logo ? <Image className={styles.coinName_image} height={32} width={32} src={logo}/>:<></>}</h2> 
               <div className={styles.modalClose} onClick={closeModal}></div>
               <Select className={styles.modalContentSelect} placeholder="Select Coin" options={coinsList} onChange={coinListHandle}/>
               { coinValueErr ? <label className={styles.modalCloseError}>{coinValueErr}</label>: <></>}
@@ -186,7 +186,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
       </Modal>
       <article className={styles.oneMarketFull}>
         <div className={styles.marketName}>
-          <Image className={styles.marketName_image} height={32} width={32} src={logo} />
+        {logo ? <Image className={styles.marketName_image} height={32} width={32} src={logo} />: <></>}
           <p className={`${styles.oneMarketDefaultStyling} ${styles.marketName_name}`}>{platform}</p>
         </div>
         <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter}`}>{highest_apy}</p>

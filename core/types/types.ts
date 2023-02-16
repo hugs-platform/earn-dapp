@@ -43,11 +43,31 @@ export interface CoinMarkets {
 
 export interface Review {
   id: number,
-  market: string,
   time_left: string,
   apy: number,
   link: string,
-  coin: string
+  answer: boolean;
+  coin: {
+    abbreviature: string;
+    click: number;
+    coin_id: string;
+    market_cup: number;
+    name: string;
+    price: number;
+    last_updated: string;
+  },
+  market: {
+    click: number;
+    earn_coins: number;
+    highest_apy: number;
+    last_updated: string;
+    link: string;
+    market_id: string;
+    platform: string;
+  };
+  contribution : {
+    contribution_type: number
+  }
 }
 
 export interface MarketTypes {
@@ -59,4 +79,76 @@ export interface MarketTypes {
   logo: string,
   platform: string,
   earn_coins: number
+}
+
+export interface ReviewRequest {
+  id: string;
+  updated_at: string,
+  created_at: string,
+  expired: boolean;
+  answer: boolean;
+  coin: {
+    abbreviature: string;
+    click: number;
+    coin_id: string;
+    market_cup: number;
+    name: string;
+    price: number;
+    last_updated: string;
+  },
+  market: {
+    click: number;
+    earn_coins: number;
+    highest_apy: number;
+    last_updated: string;
+    link: string;
+    market_id: string;
+    platform: string;
+  };
+  remarks: string;
+  time_left: string;
+  contribution: {
+    id: string;
+    apy: number;
+    uuid: string;
+    child_uuid: string;
+    contribution_type: number;
+    contributor: {
+      id: string;
+    },
+    created_at: string;
+    updated_at: string;
+    iteration: number;
+    market_coin: {
+      id: string;
+    },
+    expired: boolean
+  };
+}
+
+export interface CoinContribution {
+  id: string;
+  apy: number;
+  locked: boolean;
+  status: boolean;
+  created_at: string;
+  updated_at: string;
+  coin: {
+    abbreviature: string;
+    click: number;
+    coin_id: string;
+    market_cup: number;
+    name: string;
+    price: number;
+    last_updated: string;
+  },
+  market: {
+    click: number;
+    earn_coins: number;
+    highest_apy: number;
+    last_updated: string;
+    link: string;
+    market_id: string;
+    platform: string;
+  };
 }

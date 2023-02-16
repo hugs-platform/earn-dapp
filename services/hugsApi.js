@@ -93,6 +93,28 @@ export class HugsApi {
         return this.get(url)
     }
 
+    getReviews(page, orderBy, per_page, status) {
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page, 'status': status};
+
+        let query = Object.keys(params)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+            .join('&');
+
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/reviews?" + query;
+        return this.get(url=url)
+    }
+
+    getContributions(page, orderBy, per_page) {
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page};
+
+        let query = Object.keys(params)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+            .join('&');
+
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions?" + query;
+        return this.get(url=url)
+    }
+
     createCoinMarket(market_id, coin_id, apy, locked, market_name="", market_link="", coin_name="", coin_abbreviature="", market_cup=0, price=0) {
         let body = {
             "market_id": market_id,
@@ -131,8 +153,8 @@ export class HugsApi {
         return this.get(url)
     }
 
-    getMarketsList(page = 0, search = '', orderBy='-market_cup', per_page=25) {
-        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page};
+    getMarketsList(page = 0, search = '', orderBy='-market_cup', per_page=25, status="") {
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page, 'status': status};
         if (search) {
             params['search'] = search;
         }
@@ -165,7 +187,7 @@ export class HugsApi {
             "market_cup": marketCup,
             "price": price
         }
-        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "/applications/coins/list";
+        let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/coins/list";
         return this.post(url=url, body=body)
     }
 }
