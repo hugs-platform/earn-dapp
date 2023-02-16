@@ -31,7 +31,7 @@ function App() {
 
 
   const handleFetch = () => {
-    API.getMarketsList(currentPage.current, search.current, orderBy.current, perPage)
+    API.getMarketsList(currentPage.current, search.current, orderBy.current, perPage, "approve")
       .then(response => {
           if (response) {
             setMarketsList(response.data.items);

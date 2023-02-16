@@ -49,7 +49,7 @@ const Home: NextPage<HomePageProps> = () => {
   return (
     <div className={styles.index_full}>
       <Favicon url="/favicon.ico"/>
-      <title>Earn Markets</title>
+      <title>(Alpha) Earn Markets</title>
       <ChakraProvider>
         <Layout>
           <Navbar>

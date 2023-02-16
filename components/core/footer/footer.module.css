@@ -8,7 +8,6 @@
 }
 
 .footer p {
-    justify-content: end;
     display: flex;
     font-family: 'Gilroy';
     font-style: normal;

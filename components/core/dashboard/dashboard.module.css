@@ -1,7 +1,33 @@
 .dashboard_header {
-    font-size: 2.5em;
     display: flex;
     line-height: 1.5;
+    padding: 2em 0 2em 0;
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    color: #00261C;
+}
+
+.dashboard_row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 20px;
+}
+
+.dasboard_col_3 {
+    grid-column: span 3;
+}
+
+.dasboard_col_4 {
+    grid-column: span 4;
+}
+
+.dasboard_col_9 {
+    grid-column: span 9;
+}
+.dasboard_col_12 {
+    grid-column: span 12;
 }
 
 .dashboard_header hgroup {
@@ -173,4 +199,361 @@
     color: #ff0000;
     padding: 1em;
     font-weight: 400;
+}
+
+.dashboard_card {
+    box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
+    border-radius: 16px;    
+}
+
+.dashboard_card_main_theme {
+    background: #FFFFFF;
+}
+
+.dashboard_card_profile_img {
+    margin: auto;
+    height: 100px;
+    width: 100px;
+}
+
+.dashboard_card_profile_title {
+    text-align: center;
+    padding: 1em;
+    border-bottom: 1px solid rgba(41, 45, 50, 0.1);
+}
+
+.dashboard_card_profile_title p {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 24px;
+    color: rgba(41, 45, 50, 0.65);
+}
+
+.dashboard_card_copy_img {
+    cursor: pointer;
+    float: left;
+    padding: 5px 0 0 5px;
+    bottom: 0;
+}
+
+.dashboard_card_profile_title h1 {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    color: #292D32
+}
+
+.dashboard_card_profile_body {
+    text-align: start;
+    display: flex;
+    padding: 25px;
+}
+
+.dashboard_card_profile_body_col {
+    width: 150px;
+    padding: 10px;
+}
+
+.dashboard_card_profile_body_col:first-child {
+    border-right: 1px solid rgba(41, 45, 50, 0.1);
+}
+
+.dashboard_card_profile_body_col p:first-child {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(41, 45, 50, 0.65);
+}
+
+.dashboard_card_profile_body_col:nth-child(1) p:nth-child(2) {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 30px;
+    color: rgba(41, 45, 50, 0.5);
+    float: left;
+}
+
+.dashboard_card_profile_body_col:nth-child(2) p:nth-child(2) {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    color: #377E97;
+}
+
+.dashboard_card_profile_reputation {
+    text-align: center;
+    padding: 1em;
+}
+
+.dashboard_card_profile_reputation h1 {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #2AAF38;
+    padding: 2em;
+}
+
+.dashboard_card_profile_reputation h2 {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(41, 45, 50, 0.65);
+}
+
+.dashboard_card_profile_reputation p {
+    padding-top: 5em;
+    margin: auto;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(41, 45, 50, 0.65);
+    opacity: 0.5;
+}
+
+.dashboard_card_review_requests {
+    background-color: #2B3EE9;
+}
+
+.dashboard_card_review_contribtuions {
+    background-color: #E92B7A;
+}
+
+.dashboard_card_reviews {
+    background-color: #1E1A22;
+}
+
+.dashboard_card_review_requests h1,
+.dashboard_card_review_contribtuions h1,
+.dashboard_card_reviews h1  {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.dashboard_card_review_requests h2,
+.dashboard_card_review_contribtuions h2,
+.dashboard_card_reviews h2 {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    color: #FFFFFF;
+    position: absolute;
+    left: 25px;
+    bottom: 40px;
+}
+
+.dashboard_card_review_requests p,
+.dashboard_card_review_contribtuions p,
+.dashboard_card_reviews p {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 25px;
+    bottom: 15px;
+}
+
+.dashboard_card_review_requests p span.up,
+.dashboard_card_review_contribtuions p span.up,
+.dashboard_card_reviews p span.up {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #A9FF00;
+}
+
+.dashboard_card_review_requests p span.down,
+.dashboard_card_review_contribtuions p span.down,
+.dashboard_card_reviews p span.down {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+}
+
+.dashboard_card_review_requests p span.up::before,
+.dashboard_card_review_contribtuions p span.up::before,
+.dashboard_card_reviews p span.up::before {
+    height: 14px;
+    width: 16px;
+    margin: auto;
+    float: left;
+    content: "";
+    margin-top: 2px;
+    display: block;
+    background: url('/static/src/vector-up-2.png') no-repeat;
+}
+
+.dashboard_card_review_requests p span.down::before,
+.dashboard_card_review_contribtuions p span.down::before,
+.dashboard_card_reviews p span.down::before {
+    height: 14px;
+    width: 16px;
+    margin: auto;
+    float: left;
+    content: "";
+    margin-top: 2px;
+    display: block;
+    background: url('/static/src/vector-down-2.png') no-repeat;
+}
+
+.up_background {
+    background-image: url('/static/src/vector-up.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+    background-blend-mode: soft-light;
+    height: 150px;
+    width: -webkit-fill-available;
+    padding: 1em;
+    position: relative;
+}
+
+.down_background {
+    background-image: url('/static/src/vector-down.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+    background-blend-mode: soft-light;
+    height: 150px;
+    width: -webkit-fill-available;
+    padding: 1em;
+    position: relative;
+}
+
+.items_list {
+    background: #FFFFFF;
+    margin: 25px 0 25px 0;
+    display: grid;
+}
+
+.items_list h1 {
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    color: #00261C;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.items_list h2 {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    color: rgba(41, 45, 50, 0.5);
+    float: right;
+}
+
+.items_list_title {
+    padding: 25px;
+    border-bottom: 1px solid rgba(41, 45, 50, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.itmes_row {
+    justify-content: space-between;
+    display: flex;
+    border-bottom: 1px solid rgba(41, 45, 50, 0.1);
+}
+
+.itmes_row p {
+    padding: 25px;
+}
+
+.itmes_row p:last-child {
+    margin-right: 2.5em;
+}
+
+.items_list_footer {
+    padding: 25px;
+}
+
+.items_list_footer img {
+    float: left;
+}
+
+.select div {
+    border-width: 0px;
+}
+
+.select div span {
+    width: 0px;
+}
+
+.coinsListPagination {
+    margin: auto;
+    padding: 3em;
+    display: flex;
+    justify-content: flex-end;
+    background: #FFFFFF;
+    border-radius: 0 0 16px 16px;
+}
+
+.coinsListPaginationPage a {
+    all: initial;
+    border: none;
+    color: #000000;
+    width: 6.9rem;
+    height: 3.3rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--Helvetica);
+    font-size: 1.4rem;
+    transition: 0.5s;
+}
+
+.coinsListPaginationPage a:hover {
+    background-color: #F3F3F3;
+}
+
+.coinsListPaginationPageActive a {
+    background-color: #F3F3F3;
+}
+
+.coinsListPaginationPageBreak {
+    margin: 0;
+    padding: 0;
+}
+
+.coinsListPaginationPageActiveDisabled a {
+    opacity: 0.7;
+    pointer-events: none;
 }

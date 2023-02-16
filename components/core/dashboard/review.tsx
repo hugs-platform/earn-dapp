@@ -30,14 +30,14 @@ const style = {
     boxShadow: 24,
     borderRadius: "25px",
     p: 4,
-  };
+};
 
 const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
     const { reviewData } = props;
     const Completionist = () => <span>expired</span>;
-    const [ open, setOpen ] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [ open, setOpen ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ isSuccess, setIsSuccess ] = useState(false);
     const [ remarks, setRemarks ] = useState("");
@@ -45,6 +45,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
     const [ coinInMarketError, setCoinInMarketError ] = useState(false);
     const [ isCoinAPYCurrently, setIsCoinAPYCurrently ] = useState(NaN);
     const [ isCoinAPYCurrentlyError, setIsCoinAPYCurrentlyError ] = useState(false);
+
 
   const inputHandler = (inputObject: any) => {
     setRemarks(inputObject.target.value);
@@ -104,7 +105,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
 
   return (
     <div className="row" key={reviewData.id}>
-        <p>{reviewData.coin} on {reviewData.market}</p>
+        <p>{reviewData.coin.name} on {reviewData.market.platform}</p>
         <a onClick={handleOpen}>Review now</a>
         <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open} onClose={handleClose} closeAfterTransition>
             <Fade in={open}>
@@ -126,12 +127,12 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                 </Typography>
                 <Container className={styles.dashboard_modal_main_container_info}>
                     <Typography id="transition-modal-main" className={styles.dashboard_modal_main} variant="h3" component="h2">
-                        {reviewData.coin} on {reviewData.market} an APY of {reviewData.apy}% 
+                        {reviewData.coin.name} on {reviewData.market.platform} an APY of {reviewData.apy}% 
                     </Typography>
-                    <span className={styles.dashboard_modal_main_second_info}>Check it on:<a rel="noreferrer" target="_blank" href={reviewData.link}> {reviewData.market}</a></span>
+                    <span className={styles.dashboard_modal_main_second_info}>Check it on: <a rel="noreferrer" target="_blank" href={reviewData.link}> {reviewData.market.platform}</a></span>
                 </Container>
                 <Container className={styles.dashboard_modal_main_container}>
-                    <h1>Is {reviewData.coin} on {reviewData.market}?</h1> 
+                    <h1>Is {reviewData.coin.name} on {reviewData.market.platform}?</h1> 
                     <Button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinInMarketAnswer(true)}>Yes</Button>
                     <Button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinInMarketAnswer(false)}>No</Button>
                 </Container>
@@ -141,7 +142,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                     </Container>
                 }
                 <Container className={styles.dashboard_modal_main_container}>
-                    <h1>Is this APY of {reviewData.coin} currently at {reviewData.apy}%?</h1> 
+                    <h1>Is this APY of {reviewData.coin.name} currently at {reviewData.apy}%?</h1> 
                     <Button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(true)}>Yes</Button> 
                     <Button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(false)}>No</Button>
                 </Container>
