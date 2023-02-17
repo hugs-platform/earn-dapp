@@ -50,7 +50,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
 
   const stackingHandle = (selectedObject: any) => {
     stackingValue.current = selectedObject.value;
-    setStackingValueErr(false)
+    setStackingValueErr(false);
   }
 
   const apyHandle = (selectedObject: any) => {
@@ -68,7 +68,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
       setApyValueErr(true);
       setValidation(false);
     }
-    if (stackingValue.current == ""){
+    if (stackingValue.current === ""){
       setStackingValueErr(true);
       setValidation(false);
     }

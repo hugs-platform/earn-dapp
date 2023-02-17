@@ -255,7 +255,7 @@ function App() {
       const arr = new Array(0);
       arr.push({value: "create_new", label: "Create New"});
       response.data.items.map((coin: any) => {
-        return arr.push({value: coin['coin_id'], label: coin['name']})
+        return arr.push({value: coin['coin_id'], label: coin['abbreviature'] + " - " + coin['name']})
       })
       setCoinsList(arr);
     })
