@@ -68,10 +68,10 @@ export default function ConnectButton({ handleOpenModal }: Props) {
       </Button>
     </Box>
   ) : (
-    <Button 
+    <button 
       className={styles.walletLoginButton}
       onClick={handleConnectWallet}>
         Connect to a wallet
-    </Button>
+    </button>
   );
 }
