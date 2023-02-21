@@ -114,6 +114,11 @@
   margin: auto;
   border-radius: 5px;
   line-height: 25px;
+  cursor: pointer !important;
+}
+
+.pointer_cursor {
+  cursor: pointer !important;
 }
 
 .oneProject_upToDate {

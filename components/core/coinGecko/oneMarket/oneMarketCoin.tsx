@@ -99,7 +99,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
           <div className={styles.modal}>
             <div className={styles.modalDialog}>
               <div className={styles.modalContent}>
-                <h2>Up to date contribution for {coinMarketsData.coin.abbreviature} on {coinMarketsData.market.platform} <Image className={styles.coinName_image} height={32} width={32} src={coinMarketsData.market.logo} /></h2> 
+                <h2>Update contribution for {coinMarketsData.coin.abbreviature} on {coinMarketsData.market.platform} <Image className={styles.coinName_image} height={32} width={32} src={coinMarketsData.market.logo} /></h2> 
                 <div className={styles.modalClose} onClick={closeModal}></div>
                 <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                 { stackingValueErr ? <label className={styles.modalCloseError}>Select one</label>: <></>}

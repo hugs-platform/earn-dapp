@@ -171,7 +171,6 @@
   display: inline-block;
   text-align: center;
   align-items: flex-start;
-  cursor: default;
   box-sizing: border-box;
   font: 400 11px system-ui;
   padding: 1em 3em;
@@ -198,6 +197,9 @@
   align-self: center;
 }
 
+.hugsHeaderNavBarLink:hover {
+  text-decoration: underline #4D93AC;
+}
 
 .hugsHeaderNavBarLink:last-child {
   margin-left: auto;
@@ -214,7 +216,6 @@
   display: inline-block;
   text-align: center;
   align-items: flex-start;
-  cursor: default;
   box-sizing: border-box;
   font: 400 11px system-ui;
   font-size: 14px;

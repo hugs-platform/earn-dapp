@@ -56,7 +56,7 @@ const Home: NextPage<HomePageProps> = () => {
             <Container>
               <Nav className={styles.hugsSideNavBar}>
                 <Nav.Item className={styles.hugsSideNavBarTitle}></Nav.Item>
-                <Nav.Link onClick={handlePageChange} className={isCoins ? styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.overview}>Overview</Nav.Link>
+                <Nav.Link onClick={handlePageChange} className={isCoins ? styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.overview}>Coins</Nav.Link>
                 <Nav.Link onClick={handlePageChange} className={isPlatforms ? styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.platform}>Platforms</Nav.Link>
                 <Nav.Link onClick={handlePageChange} className={isDashboard ? styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.dashboard}>Dashboard</Nav.Link>
                 <img className={styles.hugsSideNavBarFooterGift} src='/static/src/gift.png'/>
@@ -65,7 +65,7 @@ const Home: NextPage<HomePageProps> = () => {
                   <p>&#10004; Get full access</p>
                   <p>&#10004; Earn Rewards</p>
                   <p>&#10004; Gain Reputation.</p>
-                  <button className={styles.mainButton} type="button">Mint Now</button>
+                  <button className={styles.mainButton} type="button">Comming soon</button>
                 </Nav.Item>
               </Nav>
             </Container>

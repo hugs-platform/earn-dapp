@@ -144,16 +144,26 @@
     font-size: 1em;
 }
 
+.active {
+    opacity: 1;
+}
+
+.dasboard_modal_accept_btn:focus {
+    opacity: 1;
+}
+
 .dasboard_modal_accept_btn {
     color: #ffffff;
     font-weight: 900;
     background-color: #00C395;
+    opacity: 0.75;
 }
 
 .dasboard_modal_reject_btn {
     color: #ffffff;
     font-weight: 900;
     background-color: #FA584E;
+    opacity: 0.75;
 }
 
 .dasboard_modal_submit_btn {
@@ -162,8 +172,8 @@
     background-color: #307994;
 }
 
-.dasboard_modal_submit_btn:active {
-    opacity: 0.5;
+.dasboard_modal_submit_btn:hover {
+    opacity: 0.75;
 }
 
 .dashboard_modal_main_text_area {

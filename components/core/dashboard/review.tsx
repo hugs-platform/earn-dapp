@@ -133,8 +133,8 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                 </Container>
                 <Container className={styles.dashboard_modal_main_container}>
                     <h1>Is {reviewData.coin.name} on {reviewData.market.platform}?</h1> 
-                    <Button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinInMarketAnswer(true)}>Yes</Button>
-                    <Button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinInMarketAnswer(false)}>No</Button>
+                    <button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinInMarketAnswer(true)}>Yes</button>
+                    <button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinInMarketAnswer(false)}>No</button>
                 </Container>
                 { coinInMarketError && 
                     <Container className={styles.dashboard_modal_main_container_error}>
@@ -143,8 +143,8 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                 }
                 <Container className={styles.dashboard_modal_main_container}>
                     <h1>Is this APY of {reviewData.coin.name} currently at {reviewData.apy}%?</h1> 
-                    <Button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(true)}>Yes</Button> 
-                    <Button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(false)}>No</Button>
+                    <button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(true)}>Yes</button> 
+                    <button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(false)}>No</button>
                 </Container>
                 { isCoinAPYCurrentlyError && 
                     <Container className={styles.dashboard_modal_main_container_error}>
@@ -174,7 +174,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                     The required number of reviewers needs to be reached until the contribution is accepted or rejected. Until then your review will have a pending status.
                 </Typography>
                 <Container className={styles.dashboard_modal_submit_container}>
-                    <Button className={styles.dasboard_modal_submit_btn} onClick={closeSuccessModal}>Close</Button>
+                    <button className={styles.dasboard_modal_submit_btn} onClick={closeSuccessModal}>Close</button>
                 </Container>
             </Box>
             </Fade>

@@ -5,8 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import Container from 'react-bootstrap/Container';
-import { Button } from '@mui/material';
-import Select from "react-select";
+import Select from 'react-select';
 
 // data
 import { HugsApi } from "../../../../services/hugsApi";
@@ -27,6 +26,48 @@ const style = {
   boxShadow: 24,
   borderRadius: "25px",
   p: 4,
+};
+
+const customStyles = {
+  control: (base: any, state: any) => ({
+    ...base,
+    margin: "1em 0",
+    background: "#E2F5FA",
+    fontFamily: 'Gilroy',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '16px',
+    lineHeight: '20px',
+    fontColor: '#292D32',
+    "&:hover": {
+      // Overwrittes the different states of border
+      borderColor: state.isFocused ? "red" : "blue"
+    }
+  }),
+  menu: (base: any) => ({
+    ...base,
+    // override border radius to match the box
+    borderRadius: 0,
+    // kill the gap
+    marginTop: 0,
+    fontFamily: 'Gilroy',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '16px',
+    lineHeight: '20px',
+    fontColor: '#292D32',
+  }),
+  menuList: (base: any) => ({
+    ...base,
+    // kill the white space on first and last option
+    padding: 0,
+    fontFamily: 'Gilroy',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '16px',
+    lineHeight: '20px',
+    fontColor: '#292D32',
+  })
 };
 
 /**
@@ -61,9 +102,9 @@ function App() {
   const [ marketValueErr, setMarketValueErr ] = useState(false);
   const [ errorMsg, setErrorMsg ] = useState("");
   const [showNewMarket, setShowNewMarket] = useState(false);
-  const [ marketName, setMarketName ] = useState("");
+  const marketName = useRef("");
   const [ marketNameError , setMarketNameError ] = useState(false);
-  const [ marketLink, setMarketLink ] = useState("");
+  const marketLink = useRef("");
   const [ marketLinkError , setMarketLinkError ] = useState(false);
   const [showNewCoin, setShowNewCoin] = useState(false);
   const stackingValue = useRef("");
@@ -77,7 +118,7 @@ function App() {
   ];
 
   const newMarketNameChange = (selectedObject: any) => {
-    setMarketName(selectedObject.target.value);
+    marketName.current = selectedObject.target.value;
     if (selectedObject.target.value == "") {
       setMarketNameError(true);
     } else {
@@ -86,7 +127,7 @@ function App() {
   };
 
   const newMarketLinkChange = (selectedObject: any) => {
-    setMarketLink(selectedObject.target.value);
+    marketLink.current = selectedObject.target.value;
     if (selectedObject.target.value == "") {
       setMarketLinkError(true);
     } else {
@@ -144,12 +185,12 @@ function App() {
       setValidation(true);
       setIsLoading(true);
       if (marketValue.current == 'create_new') {
-        if (marketName == ""){
+        if (marketName.current == ""){
           setMarketNameError(true);
         } else {
           setMarketNameError(false);
         }
-        if (marketLink == "") {
+        if (marketLink.current == "") {
           setMarketLinkError(true);
         } else {
           setMarketLinkError(false)
@@ -194,8 +235,8 @@ function App() {
           coinValue.current, 
           apyValue.current, 
           stackingValue.current, 
-          marketName, 
-          marketLink,
+          marketName.current, 
+          marketLink.current,
           coinName.current,
           coinAbbreviature.current,
           marketCup.current,
@@ -283,7 +324,7 @@ function App() {
                 <Typography id="transition-modal-title" className={styles.newCoinTile} variant="h2" component="h2">
                     Add new coin to the list
                 </Typography>
-                <Select className={styles.newCoinInput} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
+                <Select styles={customStyles} isSearchable={true} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
                 { marketValueErr && <p>Select one</p>}
                 { showNewMarket && 
                   <div>
@@ -306,7 +347,7 @@ function App() {
                       onChange={newMarketLinkChange}/>
                   </div>
                 }
-                <Select className={styles.newCoinInput} placeholder="Select Coin" options={coinsList} onChange={coinListHandle}/>
+                <Select styles={customStyles} isSearchable={true} placeholder="Select Coin" options={coinsList} onChange={coinListHandle}/>
                 { showNewCoin &&
                   <div>
                     <TextField 
@@ -350,18 +391,19 @@ function App() {
                 }
                 <TextField 
                   id="apy-id" 
-                  label="Annual Percentage Yield" 
+                  label="Annual Percentage Yield"
+                  placeholder="0.00"
                   variant="outlined"
                   type="number" 
                   className={styles.newCoinInput + " " + styles.textFielInputLabel} 
                   onChange={apyChange}/>
                 { apyValueError && <p>Required field</p>}
 
-                <Select className={styles.newCoinInput} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+                <Select styles={customStyles} isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                 { stackingValueErr && <p>Select one</p>}
                 { errorMsg && <h2 className={styles.errorMsg}>{errorMsg}</h2>}
                 <Container className={styles.submitAddNewCoin}>
-                    <Button className={mainStyles.mainButton} onClick={createNewCoin}>Submit</Button>
+                    <button className={mainStyles.mainButton} onClick={createNewCoin}>Submit</button>
                 </Container>
             </div>
           </Box>
@@ -387,7 +429,7 @@ function App() {
                   This will be sent to a number of Reviewers first, who will then decide whether your entry should be Accepted or Rejected.
                 </Typography>
                 <Container className={styles.submitAddNewCoin}>
-                    <Button className={mainStyles.mainButton} onClick={handleSuccessClose}>Close</Button>
+                    <button className={mainStyles.mainButton} onClick={handleSuccessClose}>Close</button>
                 </Container>
             </div>
           </Box>

@@ -105,11 +105,11 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
           <div className={oneMarketStyles.modal}>
             <div className={oneMarketStyles.modalDialog}>
               <div className={oneMarketStyles.modalContent}>
-                <h2>Up to date contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform} <Image className={oneMarketStyles.coinName_image} height={32} width={32} src={oneProjectData.market.logo} /></h2> 
+                <h2>Update contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform} <Image className={oneMarketStyles.coinName_image} height={32} width={32} src={oneProjectData.market.logo} /></h2> 
                 <div className={oneMarketStyles.modalClose} onClick={closeModal}></div>
                 <Select className={oneMarketStyles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                 { stackingValueErr ? <label className={oneMarketStyles.modalCloseError}>Select one</label>: <></>}
-                <label>Annual Percentage Yield (APY 123)</label>
+                <label>Annual Percentage Yield (APY)</label>
                 <input type="number" placeholder="0.00" name="apy_value" onChange={apyHandle}/>
                 { apyValueErr ? <label className={oneMarketStyles.modalCloseError}>Please input number</label>: <></>}
                 { errMsg ? <label className={oneMarketStyles.modalCloseError}>{errMsg}</label>: <></>}
