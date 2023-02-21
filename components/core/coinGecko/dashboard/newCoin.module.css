@@ -45,7 +45,6 @@
     text-shadow: none;
     text-align: center;
     align-items: flex-start;
-    cursor: default;
     box-sizing: border-box;
     font: 400 11px system-ui;
     font-size: 2.5em;
@@ -90,10 +89,28 @@
 .newCoinInput {
     font-size: 2em;
     width: 100%;
-    background-color: #E2F5FA;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-} 
+    background-color: #E2F5FA;
+}
+
+.newCoinInput div input fieldset legend {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #292D32;
+}
+
+.textFielInputLabel {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #292D32;
+}
 
 .newCoinInput label {
     z-index: 0;

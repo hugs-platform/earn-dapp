@@ -213,7 +213,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
             <OneCoinMarket key={coinMarkets.market.platform} oneProjectData={coinMarkets} oneCoinInfo={oneCoinInfo}/>
           ))};
           <div className={oneMarketStyles.coinMarketsRow}>
-            <p className={oneMarketStyles.coinMarketsColumn} onClick={openModal}>Add new</p>
+            <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.pointer_cursor} onClick={openModal}>Add new</p>
           </div>
         </section>
       </div>

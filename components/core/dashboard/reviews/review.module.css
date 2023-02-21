@@ -32,6 +32,7 @@
     border-radius: 5px;
     margin-right: 1em;
     padding: 5px 25px 5px 25px !important;
+    cursor: pointer;
 }
 
 .requestName {
@@ -113,16 +114,27 @@
     font-size: 1em;
 }
 
+.clicked_btn {
+    opacity: 1 !important;
+}
+
+.dasboard_modal_accept_btn:hover,
+.dasboard_modal_reject_btn:hover{
+    opacity: 1;
+}
+
 .dasboard_modal_accept_btn {
     color: #ffffff;
     font-weight: 900;
     background-color: #00C395;
+    opacity: 0.7;
 }
 
 .dasboard_modal_reject_btn {
     color: #ffffff;
     font-weight: 900;
     background-color: #FA584E;
+    opacity: 0.75;
 }
 
 .dashboard_modal_main_container_error {
@@ -166,8 +178,8 @@
     background-color: #307994;
 }
 
-.dasboard_modal_submit_btn:active {
-    opacity: 0.5;
+.dasboard_modal_submit_btn:hover {
+    opacity: 0.75;
 }
 
 .contribution_link {

@@ -29,7 +29,7 @@ function App() {
   const [userWallet, setUserWallet] = useState("");
   const [userWalletDisplay, setUserWalletDisplay] = useState("");
   const [userReputation, setUserReputation] = useState("");
-  const [userEarnedRewards, setUserEarnedRewards] = useState(0);
+  const [userEarnedRewards, setUserEarnedRewards] = useState("250,000");
   const [registrationDate, setRegistrationDate] = useState("");
   const [reviewRequest, setReviewRequest] = useState(0);
   const [reviewRequestLastMonth, setReviewRequestLastMonth] = useState(0);
@@ -64,7 +64,7 @@ function App() {
           setContributionRequestLastMonth(response.data.contributions.scince_last_month);
           setReview(response.data.reviews.total);
           setReviewLastMonth(response.data.reviews.scince_last_month);
-          setUserEarnedRewards(0);
+          setUserEarnedRewards("250,000");
       }
     });
     getReviewRequests();
@@ -160,7 +160,7 @@ function App() {
             <div className={styles.dashboard_card + " " + styles.dashboard_card_main_theme + " " + styles.dashboard_card_profile}>
               <div className={styles.dashboard_card_profile_title}>
                 <img className={styles.dashboard_card_profile_img} src='/static/src/default-profile.png'/>
-                <p>Welcom Back!</p>
+                <p>Welcome Back!</p>
                 <h1>{userAlias}</h1>
               </div>
               <div className={styles.dashboard_card_profile_body}>
@@ -170,14 +170,14 @@ function App() {
                   <img onClick={copyClipboard} className={styles.dashboard_card_copy_img} src='/static/src/copy.png'/> 
                 </div>
                 <div className={styles.dashboard_card_profile_body_col}>
-                  <p>Rewards Earned</p>
+                  <p>Alpha testing reward pool </p>
                   <p>$HUGS {userEarnedRewards}</p>
                 </div>
               </div>
               <div className={styles.dashboard_card_profile_reputation}>
                 <h1>{userReputation}</h1>
                 <h2>Reputation</h2>
-                <p>Member Scince {registrationDate}</p>
+                <p>Member Since {registrationDate}</p>
               </div>
             </div>
           </div>

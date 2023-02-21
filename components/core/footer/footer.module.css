@@ -47,6 +47,11 @@
     align-self: center;
 }
 
+.footerNavBarItem a:hover {
+    cursor: pointer;
+    text-decoration: underline #4D93AC;
+}
+
 .footerNavBarItemCreatedBy {
     font-family: 'Gilroy';
     font-style: normal;

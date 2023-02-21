@@ -14,16 +14,16 @@ function App() {
       <section className={styles.footer}>
         <Nav className={styles.footerNavBar}>
             <Nav.Item className={styles.footerNavBarItem}>
-                <Nav.Item>Cookies Policy</Nav.Item>
+                <Nav.Item><a>Cookies Policy</a></Nav.Item>
             </Nav.Item>
             <Nav.Item className={styles.footerNavBarItem}>
-                <Nav.Item>Privacy Policy</Nav.Item>
+                <Nav.Item><a>Privacy Policy</a></Nav.Item>
             </Nav.Item>
             <Nav.Item className={styles.footerNavBarItem}>
-                <Nav.Item>Disclaimer</Nav.Item>
+                <Nav.Item><a>Disclaimer</a></Nav.Item>
             </Nav.Item>
             <Nav.Item className={styles.footerNavBarItem}>
-                <Nav.Item>Terms of Use</Nav.Item>
+                <Nav.Item><a>Terms of Use</a></Nav.Item>
             </Nav.Item>
         </Nav>
         <Nav className={styles.footerNavBar}>

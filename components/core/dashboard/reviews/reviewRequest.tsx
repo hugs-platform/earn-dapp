@@ -49,9 +49,9 @@ function OneReviewRequest(props: ReviewProps) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [ isSuccess, setIsSuccess ] = useState(false);
-    const [ fitstQuestion, setFitstQuestion ] = useState(NaN);
+    const [ fitstQuestion, setFitstQuestion ] = useState(0);
     const [ fitstQuestionError, setFitstQuestionError ] = useState(false);
-    const [ secondQuestion, setSecondQuestion ] = useState(NaN);
+    const [ secondQuestion, setSecondQuestion ] = useState(0);
     const [ secondQuestionError, setSecondQuestionError ] = useState(false);
     const [ remarks, setRemarks ] = useState("");
     const [ isLoading, setIsLoading ] = useState(false);
@@ -81,13 +81,13 @@ function OneReviewRequest(props: ReviewProps) {
         } else {
             setIsLoading(true);
             validation.current = true;
-            if (Object.is(fitstQuestion, NaN)) {
+            if (fitstQuestion == 0) {
                 setFitstQuestionError(true);
                 validation.current = false;
             } else {
                 setFitstQuestionError(false);
             }
-            if (Object.is(secondQuestion, NaN)) {
+            if (secondQuestion == 0) {
                 setSecondQuestionError(true);
                 validation.current = false;
             } else {
@@ -100,7 +100,7 @@ function OneReviewRequest(props: ReviewProps) {
             }
             else {
                 let answer = false;
-                if ( Object.is(fitstQuestion, true) && Object.is(secondQuestion, true)) {
+                if ( (fitstQuestion == 2) && (secondQuestion == 2)) {
                     answer = true;
                 }
                 new HugsApi().sendReviewAnswer(reviewData.id, answer, remarks)
@@ -151,8 +151,8 @@ function OneReviewRequest(props: ReviewProps) {
                         {reviewData.contribution.contribution_type === 1 ? <h1>{reviewData.market.platform} exist?</h1> : 
                          reviewData.contribution.contribution_type === 2 ? <h1>{reviewData.coin.name} - {reviewData.coin.abbreviature} exist?</h1> : 
                          <h1>Is {reviewData.coin.name} on {reviewData.market.platform}?</h1>}
-                        <Button className={styles.dasboard_modal_accept_btn} onClick={() => answerFirstQuestion(true)}>Yes</Button>
-                        <Button className={styles.dasboard_modal_reject_btn} onClick={() => answerFirstQuestion(false)}>No</Button>
+                        <button className={fitstQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerFirstQuestion(2)}>Yes</button>
+                        <button className={fitstQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerFirstQuestion(1)}>No</button>
                     </Container>
                     { fitstQuestionError && 
                         <Container className={styles.dashboard_modal_main_container_error}>
@@ -163,8 +163,8 @@ function OneReviewRequest(props: ReviewProps) {
                         {reviewData.contribution.contribution_type === 1 ? <h1>{reviewData.market.platform} on:<a rel="noreferrer" target="_blank" className={styles.contribution_link} href={reviewData.market.link}> {reviewData.market.platform}</a>?</h1> : 
                          reviewData.contribution.contribution_type === 2 ? <h1>{reviewData.coin.name} market cup is {reviewData.coin.market_cup}$ and price by one is {reviewData.coin.price}$?</h1> : 
                          <h1>Is this APY of {reviewData.coin.name} currently at {reviewData.contribution.apy}%?</h1> }
-                        <Button className={styles.dasboard_modal_accept_btn} onClick={() => answerSecondQuestion(true)}>Yes</Button> 
-                        <Button className={styles.dasboard_modal_reject_btn} onClick={() => answerSecondQuestion(false)}>No</Button>
+                        <button className={secondQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerSecondQuestion(2)}>Yes</button> 
+                        <button className={secondQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerSecondQuestion(1)}>No</button>
                     </Container>
                     { secondQuestionError && 
                         <Container className={styles.dashboard_modal_main_container_error}>
@@ -175,7 +175,7 @@ function OneReviewRequest(props: ReviewProps) {
                         <textarea className={styles.dashboard_modal_main_text_area} onChange={inputHandler} placeholder="Remarks (Optional)"></textarea>
                     </Container>
                     <Container className={styles.dashboard_modal_submit_container}>
-                        <Button className={styles.dasboard_modal_submit_btn} onClick={sendReview}>Submit</Button>
+                        <button className={styles.dasboard_modal_submit_btn} onClick={sendReview}>Submit</button>
                     </Container>
                 </Box>
             </Fade>
