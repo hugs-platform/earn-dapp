@@ -1,20 +1,49 @@
 .allCoins_container {
   display: grid;
   border: 0.1rem solid #eceff1;
-  padding: 2rem 0.65rem 2rem 2.5rem;
+  padding: 25px;
   width: 100%;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
   border-bottom: 0.1rem solid #eceff1;
   background: #FFFFFF;
   box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
   border-radius: 16px 16px 0 0;
 }
-  
+
 .allCoins_titles {
-  font-family: var(--Helvetica);
-  font-size: 1.4rem;
-  color: var(--darkBlueText);
-  font-weight: 400;
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #292D32;
+}
+
+.search {
+  width: 350px; 
+}
+
+.search div {
+  background: #CAE4EE;
+  border-radius: 12px 0 0 12px;
+  height: 46px;
+}
+
+.searchBtn {
+  background: #4D93AC;
+  border-radius: 0 12px 12px 0;
+  height: 46px;
+  width: 70px;
+}
+
+.searchBtn img {
+  margin: auto;
+  width: 14px;
+  height: 14px;
+}
+
+.allCoins_container div:not(:last-child),
+.allCoins_container div:not(:first-child) {
   text-align: center;
 }
 
@@ -24,8 +53,16 @@
   border-left: 0.1rem solid #eceff1;
 }
 
-.allCoins_titles_first {
+.textCenter {
+  margin: auto;
+}
+
+.textStart {
   text-align: start;
+}
+
+.textEnd {
+  text-align: end;
 }
 
 .allCoins_title {
@@ -44,6 +81,7 @@
 }
 
 .coinsListPagination {
+  min-height: 50px;
   margin: auto;
   padding: 3em;
   display: flex;
@@ -88,7 +126,7 @@
 
 p.sortBy {
   display: block;
-  width: 100%;
+  width: max-content;
   padding-right: 18px;
 	position: relative;
 }

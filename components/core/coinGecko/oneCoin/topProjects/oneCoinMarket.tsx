@@ -91,14 +91,14 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
         <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo} />
         <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
       </div>
-      <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.apy}%</p>
+      <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.apy}%</p>
       <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(oneProjectData.last_updated)}</p>
       <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.locked ? "Locked": "Flexible"}</p>
       <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{oneProjectData.market.platform}</a>
       <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.market.click}</p>
       {oneProjectData.open_contribution ? 
-        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.oneProject_upToDate}>Up to date</p> : 
-        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.oneProject_updateNowButton} onClick={openModal}>Update now</p>}
+        <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Up to date</p></div> : 
+        <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_updateNowButton} onClick={openModal}>Update now</p></div>}
 
       <section className={oneMarketStyles.oneCoinMarketContainer}>
         <Modal show={isOpen}>

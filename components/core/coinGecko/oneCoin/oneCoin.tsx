@@ -12,15 +12,8 @@ import { findTimeDelta } from "../../../../core/utils/converters/timeDelta";
 // data
 import { HugsApi } from "../../../../services/hugsApi";
 
-// images
-import viewMore from "../../../../public/static/assets/oneCoin/view_more_arrow.svg";
-
 // types
 import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
-
-// converters functions
-import { numberToCurrencyAbbreviation } from "../../../../core/utils/converters/numberToCurrencyAbbreviation";
-
 
 // types
 export interface OneCoinProps {
@@ -30,7 +23,7 @@ export interface OneCoinProps {
 
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
-  const { coin_id, name, abbreviature, image, last_updated, price, market_cup, click, highest_apy } = oneCoinInfo;
+  const { coin_id, name, abbreviature, image, last_updated, highest_apy } = oneCoinInfo;
   const [setActive, setActiveState] = useState("");
   const userAccess = useRef(false);
   const [setHeight, setHeightState] = useState("0px");
@@ -178,24 +171,11 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       <article className={styles.oneCoinFull}>
         <div className={styles.coinName}>
           <Image className={styles.coinName_image} height={32} width={32} src={image} />
-          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name} {abbreviature}</p>
         </div>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{highest_apy}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{abbreviature}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>USD {price}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{numberToCurrencyAbbreviation(market_cup, 1)}</p>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{click}</p>
+        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{highest_apy}%</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{age}</p>
-        <div className={styles.allignCenter}>
-          <Image
-            style={{ transition: ".5s", transform: setActive === "active" ? "rotate(180deg)" : "rotate(0deg)" }}
-            height={8}
-            width={12}
-            onClick={toggleAccordion}
-            src={viewMore}
-            className={styles.accordeonSVG}
-          />
-        </div>
+        {setActive === "active" ? <p className={`${styles.close} ${styles.allignRight}`} onClick={toggleAccordion}>Close</p> : <p className={`${styles.more} ${styles.allignRight}`} onClick={toggleAccordion}> More</p>}
       </article>
       
       <div ref={content} style={{ maxHeight: `${setHeight}` }} className={styles.accordion__content}>

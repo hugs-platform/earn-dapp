@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10em;
+  margin: 0px 50px;
   padding: 0.7rem;
   border-bottom: 0.1rem solid #eceff1;
 }
@@ -21,8 +21,22 @@
   flex: 1 1 0
 }
 
-.coinMarketsColumn.p {
-  font-size: 5em;
+p.coinMarketsColumn {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(41, 45, 50, 0.65);
+}
+
+a.coinMarketsColumn {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #638FFE;
 }
 
 .oneProject_full {
@@ -108,12 +122,12 @@
 }
 
 .oneProject_updateNowButton{
-  color: #1FADFF;
-  border: 1px solid #1FADFF;
-  height: 30px;
+  color: #1FADFF !important;
+  border: 1px solid #1FADFF !important;
   margin: auto;
+  width: 100px;
   border-radius: 5px;
-  line-height: 25px;
+  line-height: 25px !important;
   cursor: pointer !important;
 }
 
@@ -122,7 +136,13 @@
 }
 
 .oneProject_upToDate {
-  color: #2AAE39;
+  color: #2AAE39 !important;
+}
+
+.apy {
+  font-size: 16px;
+  line-height: 19px;
+  color: #2AAF38 !important;
 }
 
 /* Style the accordion section */

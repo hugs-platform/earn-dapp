@@ -1,26 +1,59 @@
-/* Style the accordion section */
 .oneCoinContainer {
   display: flex;
   flex-direction: column;
 }
 
-/* Style for structure of 1 coin */
 .oneCoinFull {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
-  padding: 2rem 0.65rem 2rem 2.5rem;
+  padding: 15px 25px;
   background: #FFFFFF;
   box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
 }
 
-/* 1 COIN STYLING */
+.highest_apy {
+  font-family: 'Gilroy' !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 19px !important;
+  color: #2AAF38 !important;
+}
+
+.more {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #4D93AC;
+}
+
+.more::before {
+  content: "\002B";
+  font-size: 25px;
+  padding-right: 5px;
+}
+
+.close::before{
+  content: "\2715";
+  padding-right: 5px;
+}
+
+.close {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #E73656;
+}
 
 .accordeonSVG {
   cursor: pointer;
 }
 
-/* alignment for each part of the "oneCoin" */
 .allignLeft {
   display: flex;
   justify-content: flex-start;
@@ -36,7 +69,6 @@
   justify-content: flex-end;
 }
 
-/* text Styling one Coin */
 .oneCoin_defaultStyling {
   font-size: 1.4rem;
   font-family: var(--Helvetica);
@@ -73,7 +105,6 @@
   color: #748596;
 }
 
-/* coinName styling */
 .coinName {
   display: flex;
   align-items: center;
@@ -87,16 +118,10 @@
   border-radius: 50rem;
 }
 
-/* different background-color on hover of full coin */
-/* .oneCoinFull:hover {
-  background-color: var(--hoverAndActiveColor);
-} */
-
 .oneCoinFull:active .showMoreImage {
   transform: rotate(180deg);
 }
 
-/* CONTENT OF 1 COIN PANEL. Note: hidden by default */
 .accordion__content {
   background-color: white;
   overflow: auto;

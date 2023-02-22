@@ -5,7 +5,6 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import Container from 'react-bootstrap/Container';
-import { Button } from '@mui/material';
 
 // styles
 import styles from "../dashboard/dashboard.module.css";
@@ -155,7 +154,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                     <textarea className={styles.dashboard_modal_main_text_area} onChange={inputHandler} placeholder="Remarks (Optional)"></textarea>
                 </Container>
                 <Container className={styles.dashboard_modal_submit_container}>
-                    <Button className={styles.dasboard_modal_submit_btn} onClick={sendReview}>Submit</Button>
+                    <button className={styles.dasboard_modal_submit_btn} onClick={sendReview}>Submit</button>
                 </Container>
             </Box>
             </Fade>

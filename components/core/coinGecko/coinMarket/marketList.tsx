@@ -88,7 +88,7 @@ function App() {
         <p id='earn_coins' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Earn Coins</p>
         <p id='link' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Link</p>
         <p id='click' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>
-        <p className={styles.marketListTitle}>Show more</p>
+        <p className={styles.marketListTitle}>View More</p>
       </div>
 
       <div className={styles.marketList}>
