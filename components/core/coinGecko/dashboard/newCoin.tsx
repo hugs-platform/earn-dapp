@@ -224,7 +224,7 @@ function App() {
         setValidation(false);
       }
 
-      if (stackingValue.current == ""){
+      if (stackingValue.current === ""){
         setStackingValueErr(true);
         setValidation(false);
       }

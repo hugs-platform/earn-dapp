@@ -53,7 +53,6 @@ function App() {
   const inputHandler = (selectedObject: any) => {
     search.current = selectedObject.target.value;
     currentPage.current = 0;
-    handleFetch();
   };
 
   const orderByChange = (selectedObject: any) => {
@@ -75,33 +74,38 @@ function App() {
       <Dashboard></Dashboard>
       <div className={styles.cryptoHeader}>
           <h1 className={styles.allCoins_title}>Coins</h1>
-          <div className="search">
+          <div>
             <TextField
               key="search-coin-list"
               onChange={inputHandler}
               id="search-coin-list-id"
               variant="outlined"
               label="Coins/Platforms"
+              className={styles.search}
             />
+            <button className={styles.searchBtn} onClick={handleFetch}><img src='/static/src/search-normal.svg'></img></button>
           </div>
       </div>
       <div className={styles.allCoins_container}>
-        <p className={`${styles.allCoins_titles} ${styles.allCoins_titles_first}`}>Name</p>
-        <p id='highest_apy' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Highest APY</p>
-        <p id='abbreviature' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Abbreviature</p>
-        <p id='price' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Price</p>
-        <p id='market_cup' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Market Cap</p>
-        <p id='click' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>
-        <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy} onClick={orderByChange}>Age</p>
-        <p className={styles.allCoins_titles}>Show more</p>
+        <div>
+          <p className={styles.allCoins_titles + " " + styles.textStart}>Name</p>
+        </div>
+        <div>
+          <p id='highest_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Highest APY</p>
+        </div>
+        <div>
+          <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Age</p>
+        </div>
+        <div>
+          <p className={styles.allCoins_titles + " " + styles.textEnd}>View More</p>
+        </div>
       </div>
-
       <div className={styles.allCoins_group}>
         {list.map((oneCoin: CoinTypes) => (
           <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
         ))}
       </div>
-      {pageCount > 0 ? (
+      {pageCount > 1 ? (
         <ReactPaginate
           initialPage={0}
           pageCount={pageCount}
@@ -121,7 +125,7 @@ function App() {
           nextLabel={'Next >'}
         />
       ) : (
-        <></>
+        <div className={styles.coinsListPagination}></div>
       )} 
     </>
   );
