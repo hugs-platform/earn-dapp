@@ -78,14 +78,14 @@ function App() {
   const API = new HugsApi();
   const search = useRef("");
   const currentPage = useRef(0);
-  const orderBy= useRef("-market_cup");
+  const orderBy = useRef("-market_cup");
   const [ open, setOpen ] = useState(false);
   const [ isSuccess, setIsSuccess ] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSuccessOpen = () => setIsSuccess(true);
   const handleSuccessClose = () => setIsSuccess(false);
-  const [ isLoading, setIsLoading ] = useState(false);
+  const isLoading = useRef(false);
   const coinName = useRef("");
   const [ coinNameError , setCoinNameError ] = useState(false);
   const coinAbbreviature = useRef("");
@@ -181,9 +181,9 @@ function App() {
   };
 
   const createNewCoin = () => {
-    if (isLoading == false){
+    if (isLoading.current == false){
+      isLoading.current = true;
       setValidation(true);
-      setIsLoading(true);
       if (marketValue.current == 'create_new') {
         if (marketName.current == ""){
           setMarketNameError(true);
@@ -249,9 +249,12 @@ function App() {
           .catch(error => {
             setErrorMsg(error.response.data.error);
           })
+          .finally(() => {
+            isLoading.current = false;
+          })
+      } else {
+        isLoading.current = false;
       }
-
-      setIsLoading(false);
     }
   };
 
@@ -403,7 +406,7 @@ function App() {
                 { stackingValueErr && <p>Select one</p>}
                 { errorMsg && <h2 className={styles.errorMsg}>{errorMsg}</h2>}
                 <Container className={styles.submitAddNewCoin}>
-                    <button className={mainStyles.mainButton} onClick={createNewCoin}>Submit</button>
+                    <button className={mainStyles.mainButton} disabled={isLoading.current} onClick={createNewCoin}>Submit</button>
                 </Container>
             </div>
           </Box>

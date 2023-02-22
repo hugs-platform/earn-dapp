@@ -103,13 +103,16 @@
     color: #292D32;
 }
 
-.textFielInputLabel {
+.textFielInputLabel * {
     font-family: 'Gilroy';
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    color: #292D32;
+}
+
+.textFielInputLabel input {
+    padding: 14px;
 }
 
 .newCoinInput label {

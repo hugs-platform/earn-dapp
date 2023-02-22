@@ -183,6 +183,10 @@
   margin: 1em auto;
 }
 
+.mainButton:disabled {
+  cursor: wait !important; 
+}
+
 .hugsHeaderNavBar {
   background: #FFFFFF;
   border-radius: 10px;
