@@ -171,7 +171,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       <article className={styles.oneCoinFull}>
         <div className={styles.coinName}>
           <Image className={styles.coinName_image} height={32} width={32} src={image} />
-          <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name} {abbreviature}</p>
+          <div>
+            <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{abbreviature}</p>
+            <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{name}</p>
+          </div>
         </div>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{highest_apy}%</p>
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{age}</p>
