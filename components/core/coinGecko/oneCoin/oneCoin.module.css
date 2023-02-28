@@ -138,7 +138,7 @@
 
 .accordion__content {
   background-color: white;
-  overflow: auto;
+  /* overflow: auto; */
   transition: max-height 0.6s ease;
 }
 

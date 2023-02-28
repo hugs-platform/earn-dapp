@@ -94,7 +94,7 @@ function App() {
   const [ marketCupError, setMarketCupError ] = useState(false);
   const price = useRef(0);
   const [ priceError, setPriceError ] = useState(false);
-  const [ validation, setValidation ] = useState(false);
+  const validation = useRef(false);
   const [ marketsList, setMarketsList ] = useState([{value: "create_new", label: "Create new"}]);
   const marketValue = useRef("");
   const [ coinsList, setCoinsList ] = useState([{value: "create_new", label: "Create new"}]);
@@ -181,80 +181,71 @@ function App() {
   };
 
   const createNewCoin = () => {
-    if (isLoading.current == false){
-      isLoading.current = true;
-      setValidation(true);
-      if (marketValue.current == 'create_new') {
-        if (marketName.current == ""){
-          setMarketNameError(true);
-        } else {
-          setMarketNameError(false);
-        }
-        if (marketLink.current == "") {
-          setMarketLinkError(true);
-        } else {
-          setMarketLinkError(false)
-        }
-      }
-
-      if (coinValue.current == 'create_new') {
-        if (coinName.current == ""){
-          setValidation(false);
-          setCoinNameError(true);
-        }
-        
-        if (coinAbbreviature.current == ""){
-          setValidation(false);
-          setCoinAbbreviatureError(true);
-        }
-  
-        if (marketCup.current == 0) {
-          setValidation(false);
-          setMarketCupError(true);
-        }
-  
-        if (price.current == 0) {
-          setValidation(false);
-          setPriceError(true);
-        }
-      }
-
-      if (apyValue.current == ""){
-        setApyValueError(true);
-        setValidation(false);
-      }
-
-      if (stackingValue.current === ""){
-        setStackingValueErr(true);
-        setValidation(false);
-      }
-
-      if (validation) {
-        API.createCoinMarket(
-          marketValue.current, 
-          coinValue.current, 
-          apyValue.current, 
-          stackingValue.current, 
-          marketName.current, 
-          marketLink.current,
-          coinName.current,
-          coinAbbreviature.current,
-          marketCup.current,
-          price.current)
-          .then(response => {
-            setErrorMsg("Oops, something wrong");
-            handleClose();
-            handleSuccessOpen();
-          })
-          .catch(error => {
-            setErrorMsg(error.response.data.error);
-          })
-          .finally(() => {
-            isLoading.current = false;
-          })
+    validation.current = true;
+    if (marketValue.current == 'create_new') {
+      if (marketName.current == ""){
+        setMarketNameError(true);
       } else {
-        isLoading.current = false;
+        setMarketNameError(false);
       }
+      if (marketLink.current == "") {
+        setMarketLinkError(true);
+      } else {
+        setMarketLinkError(false)
+      }
+    }
+
+    if (coinValue.current == 'create_new') {
+      if (coinName.current == ""){
+        validation.current = false;
+        setCoinNameError(true);
+      }
+      
+      if (coinAbbreviature.current == ""){
+        validation.current = false;
+        setCoinAbbreviatureError(true);
+      }
+
+      if (marketCup.current == 0) {
+        validation.current = false;
+        setMarketCupError(true);
+      }
+
+      if (price.current == 0) {
+        validation.current = false;
+        setPriceError(true);
+      }
+    }
+
+    if (apyValue.current == ""){
+      setApyValueError(true);
+      validation.current = false;
+    }
+
+    if (stackingValue.current === ""){
+      setStackingValueErr(true);
+      validation.current = false;
+    }
+    if (validation.current) {
+      API.createCoinMarket(
+        marketValue.current, 
+        coinValue.current, 
+        apyValue.current, 
+        stackingValue.current, 
+        marketName.current, 
+        marketLink.current,
+        coinName.current,
+        coinAbbreviature.current,
+        marketCup.current,
+        price.current)
+        .then(response => {
+          setErrorMsg("Oops, something wrong");
+          handleClose();
+          handleSuccessOpen();
+        })
+        .catch(error => {
+          setErrorMsg(error.response.data.error);
+        })
     }
   };
 
@@ -398,7 +389,7 @@ function App() {
                   placeholder="0.00"
                   variant="outlined"
                   type="number" 
-                  className={styles.newCoinInput + " " + styles.textFielInputLabel} 
+                  className={styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
                   onChange={apyChange}/>
                 { apyValueError && <p>Required field</p>}
 

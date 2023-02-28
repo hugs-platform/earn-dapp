@@ -117,7 +117,29 @@ function OneReviewRequest(props: ReviewProps) {
     
     return (
         <div className={styles.row}>
-            <p className={styles.requestName}>{reviewData.coin.name} on {reviewData.market.platform}</p>
+            {reviewData.contribution.contribution_type == 1 ?
+                <p className={styles.requestName}>New platform {reviewData.market.platform}</p>
+            :
+            reviewData.contribution.contribution_type == 2 ?
+                <p className={styles.requestName}>New coin {reviewData.coin.name}</p>
+            :
+            reviewData.contribution.contribution_type == 3 ?
+                <p className={styles.requestName}>Coin {reviewData.coin.name} stacking on {reviewData.market.platform}</p>
+            :
+            reviewData.contribution.contribution_type == 4 ?
+                <p className={styles.requestName}>Remove coin {reviewData.coin.name}</p>
+            :
+            reviewData.contribution.contribution_type == 5 ?
+                <p className={styles.requestName}>Remove platform {reviewData.market.platform}</p>
+            :
+            reviewData.contribution.contribution_type == 7 ?
+                reviewData.contribution.apy?
+                    <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%</p>
+                :
+                <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform}</p>
+            :
+                <></>
+            }
             <Countdown className={styles.countdown} date={reviewData.time_left}>
                 <Completionist />
             </Countdown>
@@ -148,9 +170,29 @@ function OneReviewRequest(props: ReviewProps) {
                         <span className={styles.dashboard_modal_main_second_info}>Check it on:<a rel="noreferrer" target="_blank" href={reviewData.market.link}> {reviewData.market.platform}</a></span>
                     </Container>
                     <Container className={styles.dashboard_modal_main_container}>
-                        {reviewData.contribution.contribution_type === 1 ? <h1>{reviewData.market.platform} exist?</h1> : 
-                         reviewData.contribution.contribution_type === 2 ? <h1>{reviewData.coin.name} - {reviewData.coin.abbreviature} exist?</h1> : 
-                         <h1>Is {reviewData.coin.name} on {reviewData.market.platform}?</h1>}
+                        {reviewData.contribution.contribution_type == 1 ?
+                            <h1>Platform {reviewData.market.platform} exist?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 2 ?
+                            <h1>Coin {reviewData.coin.name}(reviewData.coin.abbreviature) exist?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 3 ?
+                            <h1>Coin {reviewData.coin.name} stacking on {reviewData.market.platform}?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 4 ?
+                            <h1>You shure remove coin {reviewData.coin.name} from our platform?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 5 ?
+                            <h1>You shure remove market {reviewData.market.platform} from our platform?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 7 ?
+                            reviewData.contribution.apy?
+                                <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%</h1>
+                            :
+                            <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform}?</h1>
+                        :
+                            <></>
+                        }
                         <button className={fitstQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerFirstQuestion(2)}>Yes</button>
                         <button className={fitstQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerFirstQuestion(1)}>No</button>
                     </Container>
@@ -160,9 +202,29 @@ function OneReviewRequest(props: ReviewProps) {
                         </Container>
                     }
                     <Container className={styles.dashboard_modal_main_container}>
-                        {reviewData.contribution.contribution_type === 1 ? <h1>{reviewData.market.platform} on:<a rel="noreferrer" target="_blank" className={styles.contribution_link} href={reviewData.market.link}> {reviewData.market.platform}</a>?</h1> : 
-                         reviewData.contribution.contribution_type === 2 ? <h1>{reviewData.coin.name} market cup is {reviewData.coin.market_cup}$ and price by one is {reviewData.coin.price}$?</h1> : 
-                         <h1>Is this APY of {reviewData.coin.name} currently at {reviewData.contribution.apy}%?</h1> }
+                        {reviewData.contribution.contribution_type == 1 ?
+                            <h1>Is the platform <a rel="noreferrer" target="_blank" className={styles.contribution_link} href={reviewData.market.link}> link</a> valid?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 2 ?
+                            <h1>{reviewData.coin.name} market cup is {reviewData.coin.market_cup}$ and price by one is {reviewData.coin.price}$?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 3 ?
+                            <h1>Coin {reviewData.coin.name} stacking on platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 4 ?
+                            <h1>Confirm your decision to remove coin {reviewData.coin.name} from our platform?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 5 ?
+                            <h1>Confirm your decision to remove market {reviewData.market.platform} from our platform?</h1>
+                        :
+                        reviewData.contribution.contribution_type == 7 ?
+                            reviewData.contribution.apy?
+                                <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%</h1>
+                            :
+                            <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform}?</h1>
+                        :
+                            <></>
+                        }
                         <button className={secondQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerSecondQuestion(2)}>Yes</button> 
                         <button className={secondQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerSecondQuestion(1)}>No</button>
                     </Container>

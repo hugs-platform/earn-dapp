@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from "react";
 import Image from "next/image";
 import Select from "react-select";
-import { Modal } from "react-bootstrap";
+import TextField from "@mui/material/TextField";
 
 
 import { HugsApi } from "../../../../../services/hugsApi";
@@ -18,18 +18,17 @@ export interface OneProjectProps {
 const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   const { oneProjectData, oneCoinInfo } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const apyValue = useRef(0.00);
-  const [apyValueErr, setApyValueErr] = useState(false);
-  const stackingValue = useRef("");
-  const [stackingValueErr, setStackingValueErr] = useState(false);
   const [errMsg, setErrMsg] = useState();
-  const [txHash, setTxHash] = useState('');
+  const [created, setCreated] = useState(false);
+  const [exist, setExist] = useState(false);
   const [validation, setValidation] = useState(true);
-  const stakingTypes = [
-    { value: NaN, label: "Unknown" },
-    { value: true, label: "Locked" },
-    { value: false, label: "Flexible" }
+  const [coinOnMarket, setCoinOnMarket] = useState(NaN);
+  const [coinInMarketTypesErr, setCoinInMarketTypesErr] = useState(false);
+  const API = new HugsApi();
+  const coinInMarketTypes = [
+    { value: true, label: "Yes" },
+    { value: false, label: "No" }
   ];
 
   const openModal = () => {
@@ -40,103 +39,126 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
     setIsOpen(false);
   }
 
-  const closeSuccessModal = () => {
-    setIsSuccess(false);
-  }
-
   const linkHangler = (selectedObject: any) => {
     new HugsApi().marketClick(selectedObject.target.id);
   };
 
-  const stackingHandle = (selectedObject: any) => {
-    stackingValue.current = selectedObject.value;
-    setStackingValueErr(false);
+  const coinOnMarketHandle = (selectedObject: any) => {
+    setCoinOnMarket(selectedObject.value);
+    setCoinInMarketTypesErr(false);
   }
 
-  const apyHandle = (selectedObject: any) => {
+  const apyChange = (selectedObject: any) =>{
     apyValue.current = selectedObject.target.value;
-    if (selectedObject.target.value){
-      setApyValueErr(false);
-    } else {
-      setApyValueErr(true);
-    }
-  } 
+  }
 
   const validate = () => {
     setValidation(true);
-    if (apyValue.current < 0) {
-      setApyValueErr(true);
+    if (Object.is(coinOnMarket, NaN)) {
+      setCoinInMarketTypesErr(true);
       setValidation(false);
-    }
-    if (stackingValue.current === ""){
-      setStackingValueErr(true);
-      setValidation(false);
-    }
-    if (validation) {
-      new HugsApi().updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, apyValue.current, stackingValue.current)
+    } else {
+      if (coinOnMarket) {
+        if (apyValue.current < 0) {
+          setValidation(false);
+        }
+        if (validation) {
+          API.updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, apyValue.current)
+            .then(response => {
+              if (response.status == 200){
+                setExist(true);
+                setIsOpen(false);
+              }
+              if (response.status == 201){
+                setCreated(true);
+                setIsOpen(false);
+              }
+            })
+            .catch(error => {
+              setErrMsg(error.response.data.detail);
+          })
+        }
+      } else {
+        API.deleteCoinMarket(oneProjectData.id)
         .then(response => {
-          setIsSuccess(true);
-          setTxHash(response.data.result);
-          setIsOpen(false);
+          if (response.status == 200){
+            setExist(true);
+            setIsOpen(false);
+          }
+          if (response.status == 201){
+            setCreated(true);
+            setIsOpen(false);
+          }
         })
         .catch(error => {
-          setErrMsg(error.response.data.error);
+          setErrMsg(error.response.data.detail);
         })
+      }
     }
   }
 
   return (
-    <div key={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsRow}>
-      <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
-        <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo} />
-        <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
+    <div key={oneProjectData.market.market_id}>
+      <div className={oneMarketStyles.coinMarketsRow}>
+        <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
+          <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo} />
+          <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
+        </div>
+        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.apy}%</p>
+        <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(oneProjectData.last_updated)}</p>
+        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.locked ? "Locked": "Flexible"}</p>
+        <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{oneProjectData.market.platform}</a>
+        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.market.click}</p>
+        {oneProjectData.open_contribution ? 
+          <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Up to date</p></div> : 
+          isOpen ? 
+            <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_closeNowButton} onClick={closeModal}>Close</p></div>:
+          exist ?
+            <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Pending</p></div> :
+          created ?
+          <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Pending</p></div> :
+          <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_updateNowButton} onClick={openModal}>Update now</p></div>
+        }
       </div>
-      <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.apy}%</p>
-      <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(oneProjectData.last_updated)}</p>
-      <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.locked ? "Locked": "Flexible"}</p>
-      <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{oneProjectData.market.platform}</a>
-      <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.market.click}</p>
-      {oneProjectData.open_contribution ? 
-        <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Up to date</p></div> : 
-        <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_updateNowButton} onClick={openModal}>Update now</p></div>}
-
-      <section className={oneMarketStyles.oneCoinMarketContainer}>
-        <Modal show={isOpen}>
-          <div className={oneMarketStyles.modal}>
-            <div className={oneMarketStyles.modalDialog}>
-              <div className={oneMarketStyles.modalContent}>
-                <h2>Update contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform} <Image className={oneMarketStyles.coinName_image} height={32} width={32} src={oneProjectData.market.logo} /></h2> 
-                <div className={oneMarketStyles.modalClose} onClick={closeModal}></div>
-                <Select className={oneMarketStyles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
-                { stackingValueErr ? <label className={oneMarketStyles.modalCloseError}>Select one</label>: <></>}
-                <label>Annual Percentage Yield (APY)</label>
-                <input type="number" placeholder="0.00" name="apy_value" onChange={apyHandle}/>
-                { apyValueErr ? <label className={oneMarketStyles.modalCloseError}>Please input number</label>: <></>}
-                { errMsg ? <label className={oneMarketStyles.modalCloseError}>{errMsg}</label>: <></>}
-                <div className={oneMarketStyles.modalSubmit}>
-                  <button className={oneMarketStyles.modalSubmitBtn} onClick={validate}>Submit</button>
-                </div>
-              </div>
-            </div>
+      {isOpen ?
+      <div className={oneMarketStyles.updateContainer}>
+        <h2 className={oneMarketStyles.updateContainerTitle}>Update contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform}</h2>
+        <Select className={coinInMarketTypesErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
+        {coinOnMarket ? 
+          <div>
+            <TextField 
+                  id="apy-id" 
+                  label="Annual Percentage Yield"
+                  placeholder="0.00"
+                  variant="outlined"
+                  type="number" 
+                  className={oneMarketStyles.newCoinInput + " " + oneMarketStyles.textFielInputLabel} 
+                  onChange={apyChange}/>
           </div>
-        </Modal>
-        <Modal show={isSuccess}>
-          <div className={oneMarketStyles.modal}>
-            <div className={oneMarketStyles.modalDialog}>
-              <div className={oneMarketStyles.modalContent}>
-                <p>Thank you for contributing to the Earn dApp. Please note that your contribution will not be visible in the app right away.</p>
-                <p>This will be sent to a number of Reviewers first, who will the decide whether your entry should be accepted or rejected.</p>
-                <p> Please do net attempt to submit the same staking opportunity more than once and do not try to make fake entries, as both actions will result in lower Reputation Score for you as a user.</p>
-                <p>Also, you will noy be eligible for rewards then.</p>
-                <p>You can see your transaction on <a rel="noreferrer" target="_blank" href={`${process.env.NEXT_PUBLIC_SCAN_URL}/${txHash}`}>Ploygon Scan</a></p>
-                <div className={oneMarketStyles.modalSubmit}>
-                  <button className={oneMarketStyles.modalSubmitBtn} onClick={closeSuccessModal}>Close</button>
-                </div>
-              </div>
-            </div>
+        : <></>} 
+        { errMsg ? <p className={oneMarketStyles.modalCloseError}>{errMsg}</p>: <></>}
+        <div className={oneMarketStyles.modalSubmit}>
+            <button className={oneMarketStyles.updateBtn} onClick={validate}>Submit</button>
+        </div>
+      </div>
+      : exist ?
+        <div className={oneMarketStyles.updateContainer}>
+          <h2 className={oneMarketStyles.updateContainerTitle}>This contribution has already been created and is being reviewed.</h2>
+          <div className={oneMarketStyles.modalSubmit}>
+            <button className={oneMarketStyles.updateBtn}  onClick={() => setExist(false)}>Close</button>
           </div>
-        </Modal>
-      </section>
+        </div>
+      : created ? 
+      <div className={oneMarketStyles.updateContainer}>
+        <h2 className={oneMarketStyles.updateContainerTitle}>APY Update added for Review.</h2>
+        <p className={oneMarketStyles.updateGreenText}>Thank you!! for Contributing to the Earn dApp.</p>
+        <p className={oneMarketStyles.updateGreyText}>Please note that your contribution will not be visible in the app right away.</p>
+        <p className={oneMarketStyles.updateGreyText}>This will be sent to a number of Reviewers first, who will then decide whether your entry should be Accepted or Rejected.</p>
+        <div className={oneMarketStyles.modalSubmit}>
+          <button className={oneMarketStyles.updateBtn}  onClick={() => setCreated(false)}>Close</button>
+        </div>
+      </div>
+      : <></>}
     </div>
   );
 };

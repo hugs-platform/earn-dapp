@@ -66,11 +66,12 @@
 }
 
 .allCoins_title {
-  font-family: var(--Helvetica);
-  font-weight: 500;
-  color: black;
-  font-size: 2.2rem;
-  margin: auto 0 auto 0;
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    color: #00261C;
+    margin: auto 0 auto 0;
 }
 
 .cryptoHeader {

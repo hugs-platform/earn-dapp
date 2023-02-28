@@ -121,7 +121,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
-    padding: 2rem 0.65rem 2rem 2.5rem;
+    padding: 15px 25px;
     background: #FFFFFF;
     box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
 }
@@ -144,15 +144,20 @@
 }
 
 .oneMarketDefaultStyling {
-    font-size: 1.4rem;
-    font-family: var(--Helvetica);
-    font-weight: 400;
-    color: var(--darkBlackText);
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(41, 45, 50, 0.65);
+}
+
+.highest_apy {
+    color: #2AAF38 !important;
 }
 
 .coinMarketsColumn:first-child {
     text-align: start;
-    max-width: 100px;
 }
 
 .coinMarketsColumn:not(:first-child){
@@ -181,7 +186,7 @@
 
 .accordion__content {
     background-color: white;
-    overflow: auto;
+    /* overflow: auto; */
     transition: max-height 0.6s ease;
 }
 
@@ -189,4 +194,66 @@
     font-family: var(--InterRegular);
     color: var(--textBlack);
     padding-left: 0.8rem;
+}
+
+.modalContentSelectError div {
+    border-color: #E73656 !important;
+}
+
+.newCoinInput {
+    font-size: 2em;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.newCoinInputError div fieldset {
+    border-color: #E73656 !important;
+}
+
+.newCoinInput div input fieldset legend {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #292D32;
+}
+
+.newCoinInput label {
+    z-index: 0;
+}
+
+.more {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #4D93AC;
+}
+
+.more::before {
+    content: "\002B";
+    font-size: 25px;
+    padding-right: 5px;
+}
+
+.allignRight {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close::before{
+    content: "\2715";
+    padding-right: 5px;
+}
+
+.close {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #E73656;
 }
