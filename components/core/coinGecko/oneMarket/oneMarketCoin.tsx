@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from "react";
 import Image from "next/image";
 import Select from "react-select";
-import { Modal } from "react-bootstrap";
+import TextField from "@mui/material/TextField";
 
 
 import { HugsApi } from "../../../../services/hugsApi";
@@ -16,121 +16,141 @@ export interface OneMarketCoinProps {
 
 const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
   const { coinMarketsData } = props;
+  const API = new HugsApi();
   const [isOpen, setIsOpen] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const apyValue = useRef(0.00);
+  const apyValue = useRef(0);
   const [apyValueErr, setApyValueErr] = useState(false);
-  const stackingValue = useRef("");
-  const [stackingValueErr, setStackingValueErr] = useState(true);
   const [errMsg, setErrMsg] = useState();
-  const [txHash, setTxHash] = useState('');
   const [validation, setValidation] = useState(false);
-  const stakingTypes = [
-    { value: NaN, label: "Unknown" },
-    { value: true, label: "Locked" },
-    { value: false, label: "Flexible" }
+  const [coinInMarketTypesErr, setCoinInMarketTypesErr] = useState(false);
+  const [coinOnMarket, setCoinOnMarket] = useState(NaN);
+  const [created, setCreated] = useState(false);
+  const [exist, setExist] = useState(false);
+  const coinInMarketTypes = [
+    { value: true, label: "Yes" },
+    { value: false, label: "No" }
   ];
 
   const openModal = () => {
     setIsOpen(true);
   }
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const coinOnMarketHandle = (selectedObject: any) => {
+    setCoinOnMarket(selectedObject.value);
+    setCoinInMarketTypesErr(false);
   }
 
-  const closeSuccessModal = () => {
-    setIsSuccess(false);
-  }
-
-  const stackingHandle = (selectedObject: any) => {
-    stackingValue.current = selectedObject.value;
-    setStackingValueErr(false);
-  }
-
-  const apyHandle = (selectedObject: any) => {
+  const apyChange = (selectedObject: any) =>{
     apyValue.current = selectedObject.target.value;
-    if (selectedObject.target.value){
+    if (selectedObject.target.value >= 0){
       setApyValueErr(false);
-    } else {
-      setApyValueErr(true);
     }
-  } 
+  }
 
   const validate = () => {
     setValidation(true);
-    if (apyValue.current < 0) {
-      setApyValueErr(true);
+    if (Object.is(coinOnMarket, NaN)) {
+      setCoinInMarketTypesErr(true);
       setValidation(false);
     }
-    if (stackingValue.current === ""){
-      setStackingValueErr(true);
-      setValidation(false);
+    if (coinOnMarket){
+      if (apyValue.current < 0){
+        setApyValueErr(true);
+        setValidation(false);
+      }
     }
     if (validation == true) {
-      new HugsApi().updateCoinMarket(coinMarketsData.market.market_id, coinMarketsData.coin.coin_id, apyValue.current, stackingValue.current)
+      if (coinOnMarket) {
+        API.updateCoinMarket(coinMarketsData.market.market_id, coinMarketsData.coin.coin_id, apyValue.current)
+            .then(response => {
+              if (response.status == 200){
+                setExist(true);
+                setIsOpen(false);
+              }
+              if (response.status == 201){
+                setCreated(true);
+                setIsOpen(false);
+              }
+            })
+            .catch(error => {
+              setErrMsg(error.response.data.detail);
+          })
+      } else {
+        API.deleteCoinMarket(coinMarketsData.id)
         .then(response => {
-          setIsSuccess(true);
-          setTxHash(response.data.result);
-          setIsOpen(false);
+          if (response.status == 200){
+            setExist(true);
+            setIsOpen(false);
+          }
+          if (response.status == 201){
+            setCreated(true);
+            setIsOpen(false);
+          }
         })
         .catch(error => {
-          setErrMsg(error.response.data.error);
+          setErrMsg(error.response.data.detail);
         })
+      }
     }
   }
-
   return (
-    <div key={coinMarketsData.market.market_id} className={styles.coinMarketsRow}>
-      <div className={`${styles.coinMarketsColumn}  ${styles.allignLeft} ${styles.coinLogo}`}>
-        <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image} />
-        <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
+    <div key={coinMarketsData.market.market_id}>
+      <div className={styles.coinMarketsRow}>
+        <div className={`${styles.coinMarketsColumn}  ${styles.allignLeft} ${styles.coinLogo}`}>
+          <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image} />
+          <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
+        </div>
+        <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.apy}%</p>
+        <p className={styles.coinMarketsColumn}>{findTimeDelta(coinMarketsData.last_updated)}</p>
+        <p className={styles.coinMarketsColumn}>{coinMarketsData.locked ? "Locked": "Flexible"}</p>
+        <div className={styles.coinMarketsColumn}>
+          {coinMarketsData.open_contribution ? 
+            <p className={styles.oneMarket_upToDate}>Up to date</p> : 
+            <p className={styles.oneMarket_updateNowButton} onClick={openModal}>Update now</p>
+          }
+        </div>
       </div>
-      <p className={styles.coinMarketsColumn}>{coinMarketsData.apy}%</p>
-      <p className={styles.coinMarketsColumn}>{findTimeDelta(coinMarketsData.last_updated)}</p>
-      <p className={styles.coinMarketsColumn}>{coinMarketsData.locked ? "Locked": "Flexible"}</p>
-      <p className={styles.coinMarketsColumn}>{coinMarketsData.coin.click}</p>
-      {coinMarketsData.open_contribution ? 
-        <p className={styles.coinMarketsColumn + " " + styles.oneMarket_upToDate}>Up to date</p> : 
-        <p className={styles.coinMarketsColumn + " " + styles.oneMarket_updateNowButton} onClick={openModal}>Update now</p>}
-
-    <section className={styles.oneCoinMarketContainer}>
-        <Modal show={isOpen}>
-          <div className={styles.modal}>
-            <div className={styles.modalDialog}>
-              <div className={styles.modalContent}>
-                <h2>Update contribution for {coinMarketsData.coin.abbreviature} on {coinMarketsData.market.platform} <Image className={styles.coinName_image} height={32} width={32} src={coinMarketsData.market.logo} /></h2> 
-                <div className={styles.modalClose} onClick={closeModal}></div>
-                <Select className={styles.modalContentSelect} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
-                { stackingValueErr ? <label className={styles.modalCloseError}>Select one</label>: <></>}
-                <label>Annual Percentage Yield (APY)</label>
-                <input type="number" placeholder="0.00" name="apy_value" onChange={apyHandle}/>
-                { apyValueErr ? <label className={styles.modalCloseError}>Please input number</label>: <></>}
-                { errMsg ? <label className={styles.modalCloseError}>{errMsg}</label>: <></>}
-                <div className={styles.modalSubmit}>
-                  <button className={styles.modalSubmitBtn} onClick={validate}>Submit</button>
-                </div>
-              </div>
+      {isOpen? 
+        <div className={styles.updateContainer}>
+          <h2 className={styles.updateContainerTitle}>Update contribution for {coinMarketsData.coin.abbreviature} on {coinMarketsData.market.platform}</h2>
+          <Select className={coinInMarketTypesErr ? styles.modalContentSelect + " " + styles.modalContentSelectError : styles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
+          {coinOnMarket ? 
+            <div>
+              <TextField 
+                    id="apy-id" 
+                    label="Annual Percentage Yield"
+                    placeholder="0.00"
+                    variant="outlined"
+                    type="number" 
+                    className={apyValueErr? styles.modalContentSelectError + " " + styles.newCoinInput + " " + styles.textFielInputLabel : styles.newCoinInput + " " + styles.textFielInputLabel} 
+                    onChange={apyChange}/>
             </div>
+          : 
+            <></> 
+          } 
+        { errMsg ? <p className={styles.modalCloseError}>{errMsg}</p>: <></>}
+        <div className={styles.modalSubmit}>
+            <button className={styles.updateBtn} onClick={validate}>Submit</button>
+        </div>
+        </div>
+      : exist ?
+        <div className={styles.updateContainer}>
+          <h2 className={styles.updateContainerTitle}>This contribution has already been created and is being reviewed.</h2>
+          <div className={styles.modalSubmit}>
+            <button className={styles.updateBtn}  onClick={() => setExist(false)}>Close</button>
           </div>
-        </Modal>
-        <Modal show={isSuccess}>
-          <div className={styles.modal}>
-            <div className={styles.modalDialog}>
-              <div className={styles.modalContent}>
-                <p>Thank you for contributing to the Earn dApp. Please note that your contribution will not be visible in the app right away.</p>
-                <p>This will be sent to a number of Reviewers first, who will the decide whether your entry should be accepted or rejected.</p>
-                <p> Please do net attempt to submit the same staking opportunity more than once and do not try to make fake entries, as both actions will result in lower Reputation Score for you as a user.</p>
-                <p>Also, you will noy be eligible for rewards then.</p>
-                <p>You can see your transaction on <a rel="noreferrer" target="_blank" href={`${process.env.NEXT_PUBLIC_SCAN_URL}/${txHash}`}>Ploygon Scan</a></p>
-                <div className={styles.modalSubmit}>
-                  <button className={styles.modalSubmitBtn} onClick={closeSuccessModal}>Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Modal>
-      </section>
+        </div>
+      : created ? 
+      <div className={styles.updateContainer}>
+        <h2 className={styles.updateContainerTitle}>APY Update added for Review.</h2>
+        <p className={styles.updateGreenText}>Thank you!! for Contributing to the Earn dApp.</p>
+        <p className={styles.updateGreyText}>Please note that your contribution will not be visible in the app right away.</p>
+        <p className={styles.updateGreyText}>This will be sent to a number of Reviewers first, who will then decide whether your entry should be Accepted or Rejected.</p>
+        <div className={styles.modalSubmit}>
+          <button className={styles.updateBtn}  onClick={() => setCreated(false)}>Close</button>
+        </div>
+      </div>
+      : <></>}
     </div>
   );
 };

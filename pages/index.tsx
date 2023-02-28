@@ -29,7 +29,7 @@ const Home: NextPage<HomePageProps> = () => {
 
   const handlePageChange = (selectedObject: any) => {
     const page = selectedObject.target.innerText;
-    if ( page == "Overview") {
+    if ( page == "Coins") {
       setIsCoins(true);
       setIsDashboard(false);
       setIsPlatforms(false);

@@ -26,6 +26,7 @@ export interface ProjectTypes {
 }
 
 export interface CoinMarkets {
+  id: string;
   apy: number;
   last_updated: string;
   status: boolean;
@@ -130,9 +131,10 @@ export interface CoinContribution {
   id: string;
   apy: number;
   locked: boolean;
-  status: boolean;
+  status: string;
   created_at: string;
   updated_at: string;
+  contribution_type: string;
   coin: {
     abbreviature: string;
     click: number;

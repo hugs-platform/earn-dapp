@@ -23,12 +23,10 @@ function App() {
   const API = new HugsApi();
   const [marketsList, setMarketsList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
-  const isLoaded = useRef(true);
   const search = useRef("");
   const currentPage = useRef(0);
   const orderBy= useRef("-highest_apy");
   const perPage = 25;
-
 
   const handleFetch = () => {
     API.getMarketsList(currentPage.current, search.current, orderBy.current, perPage, "approve")
@@ -46,12 +44,6 @@ function App() {
     currentPage.current = selectedObject.selected;
     handleFetch();
 	};
-  
-  const handleSearchChange = (selectedObject: any) => {
-    search.current = selectedObject.target.value;
-    currentPage.current = 0;
-    handleFetch();
-  };
 
   const orderByChange = (selectedObject: any) => {
     if (orderBy.current == selectedObject.target.id){
@@ -63,6 +55,11 @@ function App() {
     handleFetch();
   };
 
+  const inputHandler = (selectedObject: any) => {
+    search.current = selectedObject.target.value;
+    currentPage.current = 0;
+  };
+
   useEffect(() => {
     handleFetch();
   }, [])
@@ -70,16 +67,18 @@ function App() {
   return (
     <>
       <Dashboard></Dashboard>
-      <div className={styles.marketListHeader}>
-          <h1 className={styles.marketListHeaderTitle}>Platforms</h1>
-          <div className="search">
+      <div className={styles.cryptoHeader}>
+          <h1 className={styles.allCoins_title}>Coins</h1>
+          <div>
             <TextField
               key="search-coin-list"
-              onChange={handleSearchChange}
+              onChange={inputHandler}
               id="search-coin-list-id"
               variant="outlined"
               label="Coins/Platforms"
+              className={styles.search}
             />
+            <button className={styles.searchBtn} onClick={handleFetch}><img src='/static/src/search-normal.svg'></img></button>
           </div>
       </div>
       <div className={styles.marketListContainer}>
@@ -96,28 +95,28 @@ function App() {
           <OneMarket key={market.market_id} oneMarketInfo={market} />
         ))}
       </div>
-      {isLoaded ? (
-        <ReactPaginate
-          initialPage={0}
-          pageCount={pageCount}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={3}
-          onPageChange={handlePageChange}
-          containerClassName={styles.marketListPagination}
-          previousLinkClassName={styles.marketListPaginationPage}
-          breakClassName={styles.marketListPaginationPageBreak}
-          nextLinkClassName={styles.marketListPaginationPage}
-          pageClassName={styles.marketListPaginationPage}
-          nextClassName={styles.marketListPaginationPage}
-          previousClassName={styles.marketListPaginationPage}
-          disabledClassName={styles.marketListPaginationPageActiveDisabled}
-          activeClassName={styles.marketListPaginationPageActive}
-          previousLabel={'< Prev'}
-          nextLabel={'Next >'}
-        />
-      ) : (
-        <div>Nothing to display</div>
-      )} 
+      <div className={styles.marketListPagination}>
+        {pageCount > 1 ? (
+          <ReactPaginate
+            initialPage={0}
+            pageCount={pageCount}
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={3}
+            onPageChange={handlePageChange}
+            containerClassName={styles.marketListPagination}
+            previousLinkClassName={styles.marketListPaginationPage}
+            breakClassName={styles.marketListPaginationPageBreak}
+            nextLinkClassName={styles.marketListPaginationPage}
+            pageClassName={styles.marketListPaginationPage}
+            nextClassName={styles.marketListPaginationPage}
+            previousClassName={styles.marketListPaginationPage}
+            disabledClassName={styles.marketListPaginationPageActiveDisabled}
+            activeClassName={styles.marketListPaginationPageActive}
+            previousLabel={'< Prev'}
+            nextLabel={'Next >'}
+          />
+        ) : <></>} 
+      </div>
     </>
   );
 }

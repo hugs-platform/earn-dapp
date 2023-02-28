@@ -123,10 +123,11 @@
 }
 
 .hugsSideNavBarTitle {
-  background-image: url("/static/src/earn.svg");
+  background-image: url("/static/src/earn-alpha.png");
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
+  background-size: contain;
   width: 150px;
   height: 150px;
 }

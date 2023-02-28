@@ -8,33 +8,43 @@
 .marketListContainer {
     display: grid;
     border: 0.1rem solid #eceff1;
-    padding: 2rem 0.65rem 2rem 2.5rem;
+    padding: 25px;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; 
     border-bottom: 0.1rem solid #eceff1;
     background: #FFFFFF;
     box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
     border-radius: 16px 16px 0 0;
-  }
-
-.marketListHeaderTitle {
-    font-family: var(--Helvetica);
-    font-weight: 500;
-    color: black;
-    font-size: 2.2rem;
-    margin: auto 0 auto 0;
-}
-
-.marketListTitle {
-    font-family: var(--Helvetica);
-    font-size: 1.4rem;
-    color: var(--darkBlueText);
-    font-weight: 400;
-    text-align: center;
 }
 
 .marketListTitle:first-child {
-    text-align: start;
+    margin-left: 0 !important;
+}
+
+.marketListTitle:last-child {
+    margin-right: 0 !important;
+}
+
+.marketListTitle {
+    margin: auto;
+}
+
+.marketListHeaderTitle {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #292D32;
+}
+
+.marketListTitle {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #292D32;
 }
 
 p.sortBy {
@@ -67,6 +77,7 @@ p.sortBy:after {
 }
 
 .marketListPagination {
+    min-height: 50px;
     margin: auto;
     padding: 3em;
     display: flex;
@@ -120,4 +131,43 @@ p.sortBy:after {
     font-family: var(--Helvetica);
     font-weight: 400;
     color: var(--darkBlackText);
+}
+
+.cryptoHeader {
+    display: flex; 
+    justify-content: space-between;
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+}
+
+.allCoins_title {
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    color: #00261C;
+    margin: auto 0 auto 0;
+}
+
+.search {
+    width: 350px; 
+}
+
+.search div {
+    background: #CAE4EE;
+    border-radius: 12px 0 0 12px;
+    height: 46px;
+}
+
+.searchBtn {
+    background: #4D93AC;
+    border-radius: 0 12px 12px 0;
+    height: 46px;
+    width: 70px;
+}
+  
+.searchBtn img {
+    margin: auto;
+    width: 14px;
+    height: 14px;
 }
