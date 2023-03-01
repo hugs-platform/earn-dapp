@@ -85,7 +85,7 @@ function App() {
   const handleClose = () => setOpen(false);
   const handleSuccessOpen = () => setIsSuccess(true);
   const handleSuccessClose = () => setIsSuccess(false);
-  const isLoading = useRef(false);
+  const [isLoading, setIsLoading] = useState(false);
   const coinName = useRef("");
   const [ coinNameError , setCoinNameError ] = useState(false);
   const coinAbbreviature = useRef("");
@@ -181,71 +181,77 @@ function App() {
   };
 
   const createNewCoin = () => {
-    validation.current = true;
-    if (marketValue.current == 'create_new') {
-      if (marketName.current == ""){
-        setMarketNameError(true);
+    if (isLoading === false){
+      setIsLoading(true);
+      validation.current = true;
+      if (marketValue.current == 'create_new') {
+        if (marketName.current == ""){
+          setMarketNameError(true);
+        } else {
+          setMarketNameError(false);
+        }
+        if (marketLink.current == "") {
+          setMarketLinkError(true);
+        } else {
+          setMarketLinkError(false)
+        }
+      }
+
+      if (coinValue.current == 'create_new') {
+        if (coinName.current == ""){
+          validation.current = false;
+          setCoinNameError(true);
+        }
+        
+        if (coinAbbreviature.current == ""){
+          validation.current = false;
+          setCoinAbbreviatureError(true);
+        }
+
+        if (marketCup.current == 0) {
+          validation.current = false;
+          setMarketCupError(true);
+        }
+
+        if (price.current == 0) {
+          validation.current = false;
+          setPriceError(true);
+        }
+      }
+
+      if (apyValue.current == ""){
+        setApyValueError(true);
+        validation.current = false;
+      }
+
+      if (stackingValue.current === ""){
+        setStackingValueErr(true);
+        validation.current = false;
+      }
+      if (validation.current) {
+        API.createCoinMarket(
+          marketValue.current, 
+          coinValue.current, 
+          apyValue.current, 
+          stackingValue.current, 
+          marketName.current, 
+          marketLink.current,
+          coinName.current,
+          coinAbbreviature.current,
+          marketCup.current,
+          price.current)
+          .then(response => {
+            handleClose();
+            handleSuccessOpen();
+            setIsLoading(false);
+          })
+          .catch(error => {
+            setIsLoading(false);
+            setErrorMsg(error.response.data.error);
+          })
       } else {
-        setMarketNameError(false);
+        setIsLoading(false);
       }
-      if (marketLink.current == "") {
-        setMarketLinkError(true);
-      } else {
-        setMarketLinkError(false)
-      }
-    }
-
-    if (coinValue.current == 'create_new') {
-      if (coinName.current == ""){
-        validation.current = false;
-        setCoinNameError(true);
-      }
-      
-      if (coinAbbreviature.current == ""){
-        validation.current = false;
-        setCoinAbbreviatureError(true);
-      }
-
-      if (marketCup.current == 0) {
-        validation.current = false;
-        setMarketCupError(true);
-      }
-
-      if (price.current == 0) {
-        validation.current = false;
-        setPriceError(true);
-      }
-    }
-
-    if (apyValue.current == ""){
-      setApyValueError(true);
-      validation.current = false;
-    }
-
-    if (stackingValue.current === ""){
-      setStackingValueErr(true);
-      validation.current = false;
-    }
-    if (validation.current) {
-      API.createCoinMarket(
-        marketValue.current, 
-        coinValue.current, 
-        apyValue.current, 
-        stackingValue.current, 
-        marketName.current, 
-        marketLink.current,
-        coinName.current,
-        coinAbbreviature.current,
-        marketCup.current,
-        price.current)
-        .then(response => {
-          setErrorMsg("Oops, something wrong");
-          handleClose();
-          handleSuccessOpen();
-        })
-        .catch(error => {
-          setErrorMsg(error.response.data.error);
-        })
     }
   };
 
@@ -397,7 +403,7 @@ function App() {
                 { stackingValueErr && <p>Select one</p>}
                 { errorMsg && <h2 className={styles.errorMsg}>{errorMsg}</h2>}
                 <Container className={styles.submitAddNewCoin}>
-                    <button className={mainStyles.mainButton} disabled={isLoading.current} onClick={createNewCoin}>Submit</button>
+                    <button className={mainStyles.mainButton} disabled={isLoading} onClick={createNewCoin}>Submit</button>
                 </Container>
             </div>
           </Box>
