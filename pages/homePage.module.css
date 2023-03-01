@@ -109,7 +109,7 @@
   border-radius: 0 25px 0 0;
   height: 100%;  
   width: 20%;  
-  position: fixed; 
+  position: absolute; 
   z-index: 1; 
   top: 0; 
   left: 0; 
@@ -133,7 +133,7 @@
 }
 
 .hugsSideNavBarFooter {
-  width: 60%;
+  width: 80%;
   margin-bottom: 5em;
   border: 1px solid #7CDBFF;
   border-radius: 15px;
