@@ -196,7 +196,8 @@
     padding-left: 0.8rem;
 }
 
-.modalContentSelectError div {
+.modalContentSelectError div,
+.modalContentSelectError div fieldset {
     border-color: #E73656 !important;
 }
 

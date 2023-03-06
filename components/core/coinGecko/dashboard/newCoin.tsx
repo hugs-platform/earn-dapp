@@ -90,16 +90,13 @@ function App() {
   const [ coinNameError , setCoinNameError ] = useState(false);
   const coinAbbreviature = useRef("");
   const [ coinAbbreviatureError, setCoinAbbreviatureError ] = useState(false);
-  const marketCup = useRef(0);
-  const [ marketCupError, setMarketCupError ] = useState(false);
-  const price = useRef(0);
-  const [ priceError, setPriceError ] = useState(false);
   const validation = useRef(false);
   const [ marketsList, setMarketsList ] = useState([{value: "create_new", label: "Create new"}]);
   const marketValue = useRef("");
   const [ coinsList, setCoinsList ] = useState([{value: "create_new", label: "Create new"}]);
-  const coinValue = useRef();
+  const coinValue = useRef("");
   const [ marketValueErr, setMarketValueErr ] = useState(false);
+  const [ coinValueErr, setCoinValueErr ] = useState(false);
   const [ errorMsg, setErrorMsg ] = useState("");
   const [showNewMarket, setShowNewMarket] = useState(false);
   const marketName = useRef("");
@@ -107,14 +104,18 @@ function App() {
   const marketLink = useRef("");
   const [ marketLinkError , setMarketLinkError ] = useState(false);
   const [showNewCoin, setShowNewCoin] = useState(false);
-  const stackingValue = useRef("");
+  const stakingValue = useRef("");
   const [stackingValueErr, setStackingValueErr] = useState(false);
-  const apyValue = useRef("");
-  const [ apyValueError, setApyValueError ] = useState(false);
+  const minApyValue = useRef("");
+  const [ minApyValueError, setMinApyValueError ] = useState(false);
+  const maxApyValue = useRef("");
+  const [ maxApyValueError, setMaxApyValueError ] = useState(false);
+  const days = useRef("");
+  const [ daysValueError, setDaysValueError ] = useState(false);
   const stakingTypes = [
-    { value: NaN, label: "Unknown" },
-    { value: true, label: "Locked" },
-    { value: false, label: "Flexible" }
+    { value: "Unknown", label: "Unknown" },
+    { value: "Locked", label: "Locked" },
+    { value: "Flexible", label: "Flexible" }
   ];
 
   const newMarketNameChange = (selectedObject: any) => {
@@ -153,30 +154,32 @@ function App() {
     }
   };
 
-  const marketCupChange = (selectedObject: any) => {
-    marketCup.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setMarketCupError(true);
+  const minApyChange = (selectedObject: any) => {
+    minApyValue.current = selectedObject.target.value;
+    if (selectedObject.target.value === "") {
+      setMinApyValueError(true);
     } else {
-      setMarketCupError(false);
+      setMaxApyValueError(false);
+      setMinApyValueError(false);
     }
   };
 
-  const priceChange = (selectedObject: any) => {
-    price.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setPriceError(true);
+  const maxApyChange = (selectedObject: any) => {
+    maxApyValue.current = selectedObject.target.value;
+    if (selectedObject.target.value === "") {
+      setMaxApyValueError(true);
     } else {
-      setPriceError(false);
+      setMaxApyValueError(false);
+      setMinApyValueError(false);
     }
   };
 
-  const apyChange = (selectedObject: any) => {
-    apyValue.current = selectedObject.target.value;
+  const daysChange = (selectedObject: any) => {
+    days.current = selectedObject.target.value;
     if (selectedObject.target.value == "") {
-      setApyValueError(true);
+      setDaysValueError(true);
     } else {
-      setApyValueError(false);
+      setDaysValueError(false);
     }
   };
 
@@ -184,6 +187,12 @@ function App() {
     if (isLoading === false){
       setIsLoading(true);
       validation.current = true;
+      
+      if (marketValue.current == ""){
+        setMarketValueErr(true);
+        validation.current = false;
+      }
+
       if (marketValue.current == 'create_new') {
         if (marketName.current == ""){
           setMarketNameError(true);
@@ -197,6 +206,12 @@ function App() {
         }
       }
 
+      console.log(coinValue.current);
+      if (coinValue.current == ""){
+        setCoinValueErr(true);
+        validation.current = false;
+      }
+
       if (coinValue.current == 'create_new') {
         if (coinName.current == ""){
           validation.current = false;
@@ -207,24 +222,29 @@ function App() {
           validation.current = false;
           setCoinAbbreviatureError(true);
         }
-
-        if (marketCup.current == 0) {
-          validation.current = false;
-          setMarketCupError(true);
-        }
-
-        if (price.current == 0) {
-          validation.current = false;
-          setPriceError(true);
-        }
       }
 
-      if (apyValue.current == ""){
-        setApyValueError(true);
+      if (days.current === ""){
+        setDaysValueError(true);
         validation.current = false;
+      } else {
+        setDaysValueError(false)
       }
 
-      if (stackingValue.current === ""){
+      if (minApyValue.current === "" && maxApyValue.current === ""){
+        setMaxApyValueError(true);
+        setMinApyValueError(true);
+        validation.current = false;
+      } else {
+        if (minApyValue.current === ""){
+          minApyValue.current = maxApyValue.current
+        } 
+        if (maxApyValue.current === ""){
+          maxApyValue.current = minApyValue.current;
+        }
+      }
+
+      if (stakingValue.current === ""){
         setStackingValueErr(true);
         validation.current = false;
       }
@@ -232,14 +252,14 @@ function App() {
         API.createCoinMarket(
           marketValue.current, 
           coinValue.current, 
-          apyValue.current, 
-          stackingValue.current, 
+          maxApyValue.current,
+          minApyValue.current,
+          stakingValue.current,
+          days.current,
           marketName.current, 
           marketLink.current,
           coinName.current,
-          coinAbbreviature.current,
-          marketCup.current,
-          price.current)
+          coinAbbreviature.current)
           .then(response => {
             handleClose();
             handleSuccessOpen();
@@ -270,7 +290,7 @@ function App() {
   }
   
   const stackingHandle = (selectedObject: any) => {
-    stackingValue.current = selectedObject.value;
+    stakingValue.current = selectedObject.value;
     setStackingValueErr(false);
   }
 
@@ -280,6 +300,11 @@ function App() {
       setShowNewCoin(true);
     } else {
       setShowNewCoin(false);
+    }
+    if ( selectedObject.value == undefined) {
+      setCoinValueErr(true)
+    } else {
+      setCoinValueErr(false)
     }
   }
 
@@ -348,6 +373,7 @@ function App() {
                   </div>
                 }
                 <Select styles={customStyles} isSearchable={true} placeholder="Select Coin" options={coinsList} onChange={coinListHandle}/>
+                { coinValueErr && <p>Select one</p>}
                 { showNewCoin &&
                   <div>
                     <TextField 
@@ -367,37 +393,34 @@ function App() {
                       helperText={coinAbbreviatureError == true ? '(required)' : ''}
                       className={styles.newCoinInput} 
                       onChange={coinAbbreviatureChange}/>
-
-                    <TextField 
-                      id="market-cup-id" 
-                      label="Market cup" 
-                      variant="outlined" 
-                      type="number" 
-                      error={marketCupError == true}
-                      helperText={marketCupError == true ? '(required)' : ''}
-                      className={styles.newCoinInput} 
-                      onChange={marketCupChange}/>
-
-                    <TextField 
-                      id="price-id" 
-                      label="Price" 
-                      variant="outlined" 
-                      type="number" 
-                      error={priceError == true}
-                      helperText={priceError == true ? '(required)' : ''}
-                      className={styles.newCoinInput} 
-                      onChange={priceChange}/>
                   </div>
                 }
                 <TextField 
-                  id="apy-id" 
-                  label="Annual Percentage Yield"
+                  id="min-apy-id" 
+                  label="Minimum Annual Percentage Yield"
                   placeholder="0.00"
                   variant="outlined"
                   type="number" 
-                  className={styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
-                  onChange={apyChange}/>
-                { apyValueError && <p>Required field</p>}
+                  className={minApyValueError? styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField + " " + styles.selectError : styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
+                  onChange={minApyChange}/>
+                
+                <TextField 
+                  id="max-apy-id" 
+                  label="Maximum Annual Percentage Yield"
+                  placeholder="0.00"
+                  variant="outlined"
+                  type="number" 
+                  className={maxApyValueError? styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField + " " + styles.selectError : styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
+                  onChange={maxApyChange}/>
+                
+                <TextField 
+                  id="days-id" 
+                  label="Days"
+                  placeholder="0.00"
+                  variant="outlined"
+                  type="number" 
+                  className={daysValueError? styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField + " " + styles.selectError : styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
+                  onChange={daysChange}/>
 
                 <Select styles={customStyles} isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                 { stackingValueErr && <p>Select one</p>}

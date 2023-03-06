@@ -20,10 +20,10 @@ const OneContribution: FC<ContributionProps> = (props: ContributionProps) => {
                 <h2>Remove {contributionData.coin.name} from {contributionData.market.platform}</h2> 
             : 
             contributionData.contribution_type == "CoinContributionType.APY" ? 
-                contributionData.apy ?
-                <h2>Append new {contributionData.coin.name} to market {contributionData.market.platform} with APY: {contributionData.apy}%</h2> 
+                contributionData.max_apy != contributionData.min_apy ?
+                <h2>Append new {contributionData.coin.name} to market {contributionData.market.platform} with APY: {contributionData.min_apy}..{contributionData.max_apy}%</h2> 
                 :
-                <h2>Append new {contributionData.coin.name} to market {contributionData.market.platform}</h2> 
+                <h2>Append new {contributionData.coin.name} to market {contributionData.market.platform} with APY: {contributionData.max_apy}%</h2> 
             :
             contributionData.contribution_type == "CoinContributionType.Coin" ? 
                 <h2>Add new coin: {contributionData.coin.name} {contributionData.coin.abbreviature}</h2>

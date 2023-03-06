@@ -127,28 +127,31 @@ export class HugsApi {
         return this.get(url=url)
     }
 
-    createCoinMarket(market_id, coin_id, apy, locked, market_name="", market_link="", coin_name="", coin_abbreviature="", market_cup=0, price=0) {
+    createCoinMarket(market_id, coin_id, max_apy, min_apy, staking_type, days, market_name="", market_link="", coin_name="", coin_abbreviature="") {
         let body = {
             "market_id": market_id,
             "market_name": market_name,
             "market_link": market_link,
-            "market_cup": market_cup,
             "coin_id": coin_id,
             "coin_name": coin_name,
             "coin_abbreviature": coin_abbreviature,
-            "price": price,
-            "apy": apy,
-            "locked": locked,
+            "max_apy": max_apy,
+            "min_apy": min_apy,
+            "staking_type": staking_type,
+            "days": days
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.post(url=url, body=body)
     }
 
-    updateCoinMarket(market_id, coin_id, apy) {
+    updateCoinMarket(market_id, coin_id, max_apy, min_apy, staking_type, days) {
         let body = {
-            "market_id": market_id,
+            "market_id": market_id, 
             "coin_id": coin_id,
-            "apy": apy
+            "max_apy": max_apy,
+            "min_apy": min_apy,
+            "staking_type": staking_type,
+            "days": days
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.put(url=url, body=body)

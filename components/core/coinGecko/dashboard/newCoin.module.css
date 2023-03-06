@@ -142,3 +142,7 @@
 .newCoinInputField {
     background-color: #E2F5FA;
 }
+
+.selectError div fieldset {
+    border-color: #E73656 !important;
+}

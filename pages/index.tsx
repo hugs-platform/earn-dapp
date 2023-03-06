@@ -56,7 +56,9 @@ const Home: NextPage<HomePageProps> = () => {
           <Navbar>
             <Container>
               <Nav className={styles.hugsSideNavBar}>
-                <Nav.Item className={styles.hugsSideNavBarTitle}></Nav.Item>
+                <div>
+                  <Nav.Item className={styles.hugsSideNavBarTitle}></Nav.Item>
+                </div>
                 <Nav.Link onClick={handlePageChange} className={isCoins ? styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.overview}>Coins</Nav.Link>
                 <Nav.Link onClick={handlePageChange} className={isPlatforms ? styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.platform}>Platforms</Nav.Link>
                 <Nav.Link onClick={handlePageChange} className={isDashboard ? styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.dashboard}>Dashboard</Nav.Link>

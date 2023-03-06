@@ -2,7 +2,7 @@ import moment from "moment";
 
 export const findTimeDelta = (dateToFind: string) => {
     var now = moment(moment().utc());
-    var second_date = moment(Date.parse(dateToFind));
+    var second_date = moment(Date.parse(dateToFind+"+00:00"));
     var diffDuration = moment.duration(now.diff(second_date));
     if (diffDuration.years() > 0) {
         return diffDuration.years() + " years ago";
