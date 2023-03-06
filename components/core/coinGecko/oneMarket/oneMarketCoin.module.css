@@ -166,10 +166,10 @@
 .modalContentSelect {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    width: 100%;
 }
 
 .modalContentSelect * {
-    text-align: center;
     font-family: 'Gilroy';
     font-style: normal;
     font-weight: 600;

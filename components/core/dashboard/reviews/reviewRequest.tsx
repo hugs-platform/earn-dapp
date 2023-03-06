@@ -124,7 +124,7 @@ function OneReviewRequest(props: ReviewProps) {
                 <p className={styles.requestName}>New coin {reviewData.coin.name}</p>
             :
             reviewData.contribution.contribution_type == 3 ?
-                <p className={styles.requestName}>Coin {reviewData.coin.name} stacking on {reviewData.market.platform}</p>
+                <p className={styles.requestName}>Coin {reviewData.coin.name} staking on {reviewData.market.platform}</p>
             :
             reviewData.contribution.contribution_type == 4 ?
                 <p className={styles.requestName}>Remove coin {reviewData.coin.name}</p>
@@ -133,10 +133,10 @@ function OneReviewRequest(props: ReviewProps) {
                 <p className={styles.requestName}>Remove platform {reviewData.market.platform}</p>
             :
             reviewData.contribution.contribution_type == 7 ?
-                reviewData.contribution.apy?
-                    <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%</p>
+                reviewData.contribution.min_apy != reviewData.contribution.max_apy?
+                    <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%</p>
                 :
-                <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform}</p>
+                <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.max_apy}%</p>
             :
                 <></>
             }
@@ -164,9 +164,14 @@ function OneReviewRequest(props: ReviewProps) {
                         $HUGS to be earned for correct review: <span className={styles.countdown}>2 $HUGS</span>
                     </Typography>
                     <Container className={styles.dashboard_modal_main_container_info}>
+                    {reviewData.contribution.min_apy == reviewData.contribution.max_apy ? 
                         <Typography id="transition-modal-main" className={styles.dashboard_modal_main} variant="h3" component="h2">
-                            {reviewData.coin.name} on {reviewData.market.platform} an APY of {reviewData.contribution.apy}%
+                            {reviewData.coin.name} on {reviewData.market.platform} an APY of {reviewData.contribution.min_apy}%
+                        </Typography>:
+                        <Typography id="transition-modal-main" className={styles.dashboard_modal_main} variant="h3" component="h2">
+                            {reviewData.coin.name} on {reviewData.market.platform} an APY of {reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%
                         </Typography>
+                    }
                         <span className={styles.dashboard_modal_main_second_info}>Check it on:<a rel="noreferrer" target="_blank" href={reviewData.market.link}> {reviewData.market.platform}</a></span>
                     </Container>
                     <Container className={styles.dashboard_modal_main_container}>
@@ -177,7 +182,7 @@ function OneReviewRequest(props: ReviewProps) {
                             <h1>Coin {reviewData.coin.name}(reviewData.coin.abbreviature) exist?</h1>
                         :
                         reviewData.contribution.contribution_type == 3 ?
-                            <h1>Coin {reviewData.coin.name} stacking on {reviewData.market.platform}?</h1>
+                            <h1>Coin {reviewData.coin.name} staking on {reviewData.market.platform}?</h1>
                         :
                         reviewData.contribution.contribution_type == 4 ?
                             <h1>You shure remove coin {reviewData.coin.name} from our platform?</h1>
@@ -186,8 +191,8 @@ function OneReviewRequest(props: ReviewProps) {
                             <h1>You shure remove market {reviewData.market.platform} from our platform?</h1>
                         :
                         reviewData.contribution.contribution_type == 7 ?
-                            reviewData.contribution.apy?
-                                <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%</h1>
+                            reviewData.contribution.min_apy?
+                                <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%</h1>
                             :
                             <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform}?</h1>
                         :
@@ -209,7 +214,10 @@ function OneReviewRequest(props: ReviewProps) {
                             <h1>{reviewData.coin.name} market cup is {reviewData.coin.market_cup}$ and price by one is {reviewData.coin.price}$?</h1>
                         :
                         reviewData.contribution.contribution_type == 3 ?
-                            <h1>Coin {reviewData.coin.name} stacking on platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%?</h1>
+                            reviewData.contribution.min_apy == reviewData.contribution.max_apy ?
+                                <h1>Coin {reviewData.coin.name} staking on platform {reviewData.market.platform} with APY: {reviewData.contribution.max_apy}%?</h1>
+                            :
+                                <h1>Coin {reviewData.coin.name} staking on platform {reviewData.market.platform} with APY: {reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%?</h1>
                         :
                         reviewData.contribution.contribution_type == 4 ?
                             <h1>Confirm your decision to remove coin {reviewData.coin.name} from our platform?</h1>
@@ -218,10 +226,10 @@ function OneReviewRequest(props: ReviewProps) {
                             <h1>Confirm your decision to remove market {reviewData.market.platform} from our platform?</h1>
                         :
                         reviewData.contribution.contribution_type == 7 ?
-                            reviewData.contribution.apy?
-                                <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.apy}%</h1>
+                            reviewData.contribution.min_apy === reviewData.contribution.max_apy ?
+                                <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.max_apy}%</h1>
                             :
-                            <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform}?</h1>
+                            <h1>Remove coin {reviewData.coin.name} form platform {reviewData.market.platform} with APY:{reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%</h1>
                         :
                             <></>
                         }

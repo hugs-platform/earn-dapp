@@ -10,7 +10,7 @@ import Dashboard from "../dashboard/newCoin";
 import { HugsApi } from "../../../../services/hugsApi";
 
 // types
-import {CoinTypes } from "../../../../core/types/types";
+import { CoinTypes } from "../../../../core/types/types";
 
 // styles
 import styles from "../coinMarket/coinsList.module.css";

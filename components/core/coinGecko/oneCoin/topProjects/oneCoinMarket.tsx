@@ -18,17 +18,30 @@ export interface OneProjectProps {
 const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   const { oneProjectData, oneCoinInfo } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const apyValue = useRef(0.00);
   const [errMsg, setErrMsg] = useState();
   const [created, setCreated] = useState(false);
   const [exist, setExist] = useState(false);
-  const [validation, setValidation] = useState(true);
   const [coinOnMarket, setCoinOnMarket] = useState(NaN);
   const [coinInMarketTypesErr, setCoinInMarketTypesErr] = useState(false);
+  const minApyValue = useRef("");
+  const [ minApyValueError, setMinApyValueError ] = useState(false);
+  const maxApyValue = useRef("");
+  const [ maxApyValueError, setMaxApyValueError ] = useState(false);
+  const days = useRef("");
+  const [ daysValueError, setDaysValueError ] = useState(false);
+  const stakingValue = useRef("");
+  const [ stackingValueErr, setStackingValueErr ] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const validation = useRef(false);
   const API = new HugsApi();
   const coinInMarketTypes = [
     { value: true, label: "Yes" },
     { value: false, label: "No" }
+  ];
+  const stakingTypes = [
+    { value: "Unknown", label: "Unknown" },
+    { value: "Locked", label: "Locked" },
+    { value: "Flexible", label: "Flexible" }
   ];
 
   const openModal = () => {
@@ -48,23 +61,76 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
     setCoinInMarketTypesErr(false);
   }
 
-  const apyChange = (selectedObject: any) =>{
-    apyValue.current = selectedObject.target.value;
+  const minApyChange = (selectedObject: any) => {
+    minApyValue.current = selectedObject.target.value;
+    if (selectedObject.target.value === "") {
+      setMinApyValueError(true);
+    } else {
+      setMaxApyValueError(false);
+      setMinApyValueError(false);
+    }
+  };
+
+  const maxApyChange = (selectedObject: any) => {
+    maxApyValue.current = selectedObject.target.value;
+    if (selectedObject.target.value === "") {
+      setMaxApyValueError(true);
+    } else {
+      setMaxApyValueError(false);
+      setMinApyValueError(false);
+    }
+  };
+
+  const daysChange = (selectedObject: any) => {
+    days.current = selectedObject.target.value;
+    if (selectedObject.target.value == "") {
+      setDaysValueError(true);
+    } else {
+      setDaysValueError(false);
+    }
+  };
+
+  const stackingHandle = (selectedObject: any) => {
+    stakingValue.current = selectedObject.value;
+    setStackingValueErr(false);
   }
 
   const validate = () => {
-    setValidation(true);
-    if (Object.is(coinOnMarket, NaN)) {
-      setCoinInMarketTypesErr(true);
-      setValidation(false);
-    } else {
-      if (coinOnMarket) {
-        if (apyValue.current < 0) {
-          setValidation(false);
-        }
-        if (validation) {
-          API.updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, apyValue.current)
-            .then(response => {
+    if (isLoading === false){
+      setIsLoading(true);
+
+      if (Object.is(coinOnMarket, NaN)) {
+        setCoinInMarketTypesErr(true);
+        setIsLoading(false);
+      } else {
+        if (coinOnMarket) {
+          validation.current = true;
+          if (minApyValue.current === "" && maxApyValue.current === ""){
+            setMaxApyValueError(true);
+            setMinApyValueError(true);
+            validation.current = false;
+          } else {
+            if (minApyValue.current === ""){
+              minApyValue.current = maxApyValue.current
+            } 
+            if (maxApyValue.current === ""){
+              maxApyValue.current = minApyValue.current;
+            }
+          }
+          
+          if (days.current === ""){
+            setDaysValueError(true);
+            validation.current = false;
+          }
+
+          if (stakingValue.current === ""){
+            setStackingValueErr(true);
+            validation.current = false;
+          }
+          
+          if (validation.current){
+            // Make update
+            API.updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, maxApyValue.current, minApyValue.current, stakingValue.current, days.current).then(response => {
               if (response.status == 200){
                 setExist(true);
                 setIsOpen(false);
@@ -72,27 +138,29 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
               if (response.status == 201){
                 setCreated(true);
                 setIsOpen(false);
-              }
-            })
+              }})
             .catch(error => {
               setErrMsg(error.response.data.detail);
-          })
+            })
+            setIsLoading(false);
+          }
+        } else {
+          // DELETE CONTRIBUTION
+          API.deleteCoinMarket(oneProjectData.id).then(response => {
+            setIsLoading(false);
+            if (response.status == 200){
+              setExist(true);
+              setIsOpen(false);
+            }
+            if (response.status == 201){
+              setCreated(true);
+              setIsOpen(false);
+            }})
+            .catch(error => {
+              setIsLoading(false);
+              setErrMsg(error.response.data.detail);
+            })
         }
-      } else {
-        API.deleteCoinMarket(oneProjectData.id)
-        .then(response => {
-          if (response.status == 200){
-            setExist(true);
-            setIsOpen(false);
-          }
-          if (response.status == 201){
-            setCreated(true);
-            setIsOpen(false);
-          }
-        })
-        .catch(error => {
-          setErrMsg(error.response.data.detail);
-        })
       }
     }
   }
@@ -104,18 +172,19 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
           <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo} />
           <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
         </div>
-        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.apy}%</p>
+        {oneProjectData.max_apy === oneProjectData.min_apy ? 
+          <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.max_apy}%</p>:
+          <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.min_apy}..{oneProjectData.max_apy}%</p>
+        }
         <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(oneProjectData.last_updated)}</p>
-        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.locked ? "Locked": "Flexible"}</p>
+        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.staking_type}</p>
         <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{oneProjectData.market.platform}</a>
         <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.market.click}</p>
-        {oneProjectData.open_contribution ? 
-          <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Up to date</p></div> : 
-          isOpen ? 
+        {isOpen ? 
             <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_closeNowButton} onClick={closeModal}>Close</p></div>:
-          exist ?
+        exist ?
             <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Pending</p></div> :
-          created ?
+        created ?
           <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_upToDate}>Pending</p></div> :
           <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_updateNowButton} onClick={openModal}>Update now</p></div>
         }
@@ -126,14 +195,35 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
         <Select className={coinInMarketTypesErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
         {coinOnMarket ? 
           <div>
+            {/* TODO: */}
+            <TextField
+              id="min-apy-id"
+              label="Minimum Annual Percentage Yield"
+              placeholder="0.00"
+              variant="outlined"
+              type="number" 
+              className={minApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } 
+              onChange={minApyChange}/>
+                
+            <TextField
+              id="max-apy-id"
+              label="Maximum Annual Percentage Yield"
+              placeholder="0.00"
+              variant="outlined"
+              type="number" 
+              className={maxApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
+              onChange={maxApyChange}/>
+            
             <TextField 
-                  id="apy-id" 
-                  label="Annual Percentage Yield"
-                  placeholder="0.00"
-                  variant="outlined"
-                  type="number" 
-                  className={oneMarketStyles.newCoinInput + " " + oneMarketStyles.textFielInputLabel} 
-                  onChange={apyChange}/>
+              id="days-id"
+              label="Days"
+              placeholder="90"
+              variant="outlined"
+              type="number"
+              className={daysValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
+              onChange={daysChange}/>
+            
+            <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
           </div>
         : <></>} 
         { errMsg ? <p className={oneMarketStyles.modalCloseError}>{errMsg}</p>: <></>}

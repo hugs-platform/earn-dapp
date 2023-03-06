@@ -126,7 +126,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                 </Typography>
                 <Container className={styles.dashboard_modal_main_container_info}>
                     <Typography id="transition-modal-main" className={styles.dashboard_modal_main} variant="h3" component="h2">
-                        {reviewData.coin.name} on {reviewData.market.platform} an APY of {reviewData.apy}% 
+                        {reviewData.coin.name} on {reviewData.market.platform} an APY of {reviewData.min_apy}..{reviewData.max_apy}% 
                     </Typography>
                     <span className={styles.dashboard_modal_main_second_info}>Check it on: <a rel="noreferrer" target="_blank" href={reviewData.link}> {reviewData.market.platform}</a></span>
                 </Container>
@@ -141,7 +141,7 @@ const OneReview: FC<ReviewProps> = (props: ReviewProps) => {
                     </Container>
                 }
                 <Container className={styles.dashboard_modal_main_container}>
-                    <h1>Is this APY of {reviewData.coin.name} currently at {reviewData.apy}%?</h1> 
+                    <h1>Is this APY of {reviewData.coin.name} currently at {reviewData.min_apy}..{reviewData.max_apy}%?</h1> 
                     <button className={styles.dasboard_modal_accept_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(true)}>Yes</button> 
                     <button className={styles.dasboard_modal_reject_btn} onClick={() => setIsCoinAPYCurrentlyAnswer(false)}>No</button>
                 </Container>

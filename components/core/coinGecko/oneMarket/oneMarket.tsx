@@ -30,14 +30,26 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const content = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const apyValue = useRef(-1);
-  const [apyValueErr, setApyValueErr] = useState(false);
   const coinValue = useRef("");
   const [marketValueErr, setMarketValueErr] = useState(false);
   const [addNew, setAddNew] = useState(false);
   const [errorMsg, setErrorMsg] = useState("")
-  const [validation, setValidtion] = useState(false);
   const [coinsList, setCoinsList] = useState([""]);
+  const minApyValue = useRef("");
+  const [ minApyValueError, setMinApyValueError ] = useState(false);
+  const maxApyValue = useRef("");
+  const [ maxApyValueError, setMaxApyValueError ] = useState(false);
+  const days = useRef("");
+  const [ daysValueError, setDaysValueError ] = useState(false);
+  const stakingValue = useRef("");
+  const [ stackingValueErr, setStackingValueErr ] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const validation = useRef(false);
+  const stakingTypes = [
+    { value: "Unknown", label: "Unknown" },
+    { value: "Locked", label: "Locked" },
+    { value: "Flexible", label: "Flexible" }
+  ]
 
   const openModal = () => {
     const getData = async () => {
@@ -76,24 +88,46 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   })
 
   const validate = () => {
-    setValidtion(true);
-    if (apyValue.current < 0) {
-      setValidtion(false);
-      setApyValueErr(true);
-    }
-    if (coinValue.current == ""){
-      setValidtion(false);
-      setMarketValueErr(true);
-    }
-    if (validation){
-      new HugsApi().createCoinMarket(market_id, coinValue.current, apyValue.current)
-        .then(response => {
-            setIsSuccess(true);
-            setAddNew(false);
-        })
-        .catch(error => {
+    if (isLoading === false){
+      setIsLoading(true);
+      validation.current = true;
+      if (coinValue.current == ""){
+        setMarketValueErr(true);
+        validation.current = false;
+      }
+      if (minApyValue.current === "" && maxApyValue.current === ""){
+        setMaxApyValueError(true);
+        setMinApyValueError(true);
+        validation.current = false;
+      } else {
+        if (minApyValue.current === ""){
+          minApyValue.current = maxApyValue.current
+        } 
+        if (maxApyValue.current === ""){
+          maxApyValue.current = minApyValue.current;
+        }
+      }
+
+      if (days.current === ""){
+        setDaysValueError(true);
+        validation.current = false;
+      }
+
+      if (stakingValue.current === ""){
+        setStackingValueErr(true);
+        validation.current = false;
+      }
+      if (validation.current === true){
+        API.createCoinMarket(market_id, coinValue.current, maxApyValue.current, minApyValue.current, stakingValue.current, days.current).then(response => {
+          setIsSuccess(true);
+          setAddNew(false);
+        }).catch(error => {
           setErrorMsg(error.response.data);
+          setIsLoading(false);
         })
+      } else {
+        setIsLoading(false);
+      }
     }
   }
 
@@ -106,18 +140,44 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
     }
   }
 
-  const apyChange = (selectedObject: any) => {
-    apyValue.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setApyValueErr(true);
-    } else {
-      setApyValueErr(false);
-    }
-  };
 
   const linkHangler = (selectedObject: any) => {
     new HugsApi().marketClick(selectedObject.target.id);
   };
+
+  const minApyChange = (selectedObject: any) => {
+    minApyValue.current = selectedObject.target.value;
+    if (selectedObject.target.value === "") {
+      setMinApyValueError(true);
+    } else {
+      setMaxApyValueError(false);
+      setMinApyValueError(false);
+    }
+  };
+
+  const maxApyChange = (selectedObject: any) => {
+    maxApyValue.current = selectedObject.target.value;
+    if (selectedObject.target.value === "") {
+      setMaxApyValueError(true);
+    } else {
+      setMaxApyValueError(false);
+      setMinApyValueError(false);
+    }
+  };
+
+  const daysChange = (selectedObject: any) => {
+    days.current = selectedObject.target.value;
+    if (selectedObject.target.value == "") {
+      setDaysValueError(true);
+    } else {
+      setDaysValueError(false);
+    }
+  };
+
+  const stackingHandle = (selectedObject: any) => {
+    stakingValue.current = selectedObject.value;
+    setStackingValueErr(false);
+  }
 
   return (
     <section className={styles.oneCoinContainer}>
@@ -150,14 +210,34 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
                 <div className={oneMarketStyles.addNewContainer}>
                   <h2>Add new contribution for {oneMarketInfo.platform} <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/></h2>
                   <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={coinsList} onChange={coinListHandle}/>
-                  <TextField 
-                    id="apy-id" 
-                    label="Annual Percentage Yield"
+                  <TextField
+                    id="min-apy-id"
+                    label="Minimum Annual Percentage Yield"
                     placeholder="0.00"
                     variant="outlined"
+                    type="number" 
+                    className={minApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } 
+                    onChange={minApyChange}/>
+                
+                  <TextField
+                    id="max-apy-id"
+                    label="Maximum Annual Percentage Yield"
+                    placeholder="0.00"
+                    variant="outlined"
+                    type="number" 
+                    className={maxApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
+                    onChange={maxApyChange}/>
+                  
+                  <TextField 
+                    id="days-id"
+                    label="Days"
+                    placeholder="90"
+                    variant="outlined"
                     type="number"
-                    className={apyValueErr ? oneMarketStyles.newCoinInput + " " + oneMarketStyles.textFielInputLabel + " " + oneMarketStyles.newCoinInputError : oneMarketStyles.newCoinInput + " " + oneMarketStyles.textFielInputLabel} 
-                    onChange={apyChange}/>
+                    className={daysValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
+                    onChange={daysChange}/>
+                  
+                  <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                   {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
                   <button className={oneMarketStyles.submitBtn} onClick={validate}>Submit</button>
                   <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>

@@ -27,11 +27,12 @@ export interface ProjectTypes {
 
 export interface CoinMarkets {
   id: string;
-  apy: number;
+  min_apy: number;
+  max_apy: number;
+  days: number;
+  staking_type: string;
   last_updated: string;
   status: boolean;
-  locked: boolean;
-  open_contribution: boolean;
   market: {
     link: string;
     logo: string;
@@ -45,7 +46,10 @@ export interface CoinMarkets {
 export interface Review {
   id: number,
   time_left: string,
-  apy: number,
+  min_apy: number;
+  max_apy: number;
+  days: number;
+  staking_type: string;
   link: string,
   answer: boolean;
   coin: {
@@ -110,7 +114,10 @@ export interface ReviewRequest {
   time_left: string;
   contribution: {
     id: string;
-    apy: number;
+    min_apy: number;
+    max_apy: number;
+    days: number;
+    staking_type: string;
     uuid: string;
     child_uuid: string;
     contribution_type: number;
@@ -129,8 +136,10 @@ export interface ReviewRequest {
 
 export interface CoinContribution {
   id: string;
-  apy: number;
-  locked: boolean;
+  min_apy: number;
+  max_apy: number;
+  days: number;
+  staking_type: string;
   status: string;
   created_at: string;
   updated_at: string;

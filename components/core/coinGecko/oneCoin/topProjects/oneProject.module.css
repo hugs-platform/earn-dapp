@@ -409,12 +409,16 @@ border: 2px solid #000;
 }
 
 .modalContentSelect {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.modalContentSelect label {
+  z-index: 0;
 }
 
 .modalContentSelect * {
-  text-align: center;
   font-family: 'Gilroy';
   font-style: normal;
   font-weight: 600;
@@ -422,7 +426,8 @@ border: 2px solid #000;
   line-height: 17px;
 }
 
-.modalContentSelectError div {
+.modalContentSelectError div,
+.modalContentSelectError div fieldset {
   border-color: #E73656;
 }
 

@@ -50,7 +50,9 @@
 .hugsNavBarLink {
   font-size: 3em;
   font-weight: bold;
-  margin: 1em auto 1em 5em;
+  padding: 16px 0 16px 10%;
+  margin-left: 15%;
+  border-radius: 25px 0 0 25px;
 }
 
 .hugsNavBarLink:before {
@@ -62,6 +64,9 @@
   margin: 0 6px 0 0;
 }
 
+.hugsNavBarLinkActive {
+  background: #E4F7FC;
+}
 
 .hugsNavBarLinkActive:after {
   content:"\A";
@@ -119,7 +124,6 @@
   padding: 20px 0 100px 0;
   display: flex; 
   flex-direction: column; 
-  align-items: center;
 }
 
 .hugsSideNavBarTitle {
@@ -130,11 +134,12 @@
   background-size: contain;
   width: 150px;
   height: 150px;
+  margin: 0 auto;
 }
 
 .hugsSideNavBarFooter {
   width: 80%;
-  margin-bottom: 5em;
+  margin: 0 auto 25px auto;
   border: 1px solid #7CDBFF;
   border-radius: 15px;
 }
