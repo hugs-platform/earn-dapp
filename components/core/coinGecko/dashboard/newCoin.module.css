@@ -24,16 +24,24 @@
 .newCoinBannerColumn {
     padding-left: 5em;
     color: #FFFFFF;
-    width: 35%
+    width: 50%
 }
 
 .newCoinBannerColumn h1 {
+    font-family: 'Gilroy';
+    font-style: normal;
     font-weight: 600;
-    font-size: 4em;
+    font-size: 24px;
+    line-height: 143.5%;
+    color: #FFFFFF;
 }
 
 .newCoinBannerColumn h2 {
-    font-size: 3em;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143.5%;
 }
 
 .addNewCoinButton {
