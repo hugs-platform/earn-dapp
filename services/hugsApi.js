@@ -82,7 +82,7 @@ export class HugsApi {
         return;
     }
 
-    getCoinsList(page = 0, search = '', orderBy='-market_cup', per_page='all') {
+    getCoinsList(page = 0, search = '', orderBy='name', per_page='all') {
         let params = {'page': page, 'order_by': orderBy, 'per_page': per_page};
         if (search) {
             params['search'] = search;
@@ -172,7 +172,7 @@ export class HugsApi {
         return this.get(url)
     }
 
-    getMarketsList(page = 0, search = '', orderBy='-market_cup', per_page=25, status="") {
+    getMarketsList(page = 0, search = '', orderBy='name', per_page=25, status="") {
         let params = {'page': page, 'order_by': orderBy, 'per_page': per_page, 'status': status};
         if (search) {
             params['search'] = search;
