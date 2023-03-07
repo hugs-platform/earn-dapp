@@ -26,7 +26,7 @@ function App() {
   const isLoaded = useRef(true);
   const search = useRef("");
   const currentPage = useRef(0);
-  const orderBy= useRef("-market_cup");
+  const orderBy= useRef("name");
   const perPage = "25"; 
 
   const handleFetch = () => {

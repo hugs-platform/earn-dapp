@@ -78,7 +78,7 @@ function App() {
   const API = new HugsApi();
   const search = useRef("");
   const currentPage = useRef(0);
-  const orderBy = useRef("-market_cup");
+  const orderBy = useRef("name");
   const [ open, setOpen ] = useState(false);
   const [ isSuccess, setIsSuccess ] = useState(false);
   const handleOpen = () => setOpen(true);
