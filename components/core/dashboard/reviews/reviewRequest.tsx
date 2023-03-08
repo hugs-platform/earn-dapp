@@ -44,7 +44,7 @@ const style = {
  */
 function OneReviewRequest(props: ReviewProps) {
     const { reviewData } = props;
-    const Completionist = () => <span>expired</span>;
+    const [isShow, setIsShow] = useState(true);
     const [ open, setOpen ] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -56,6 +56,11 @@ function OneReviewRequest(props: ReviewProps) {
     const [ remarks, setRemarks ] = useState("");
     const [ isLoading, setIsLoading ] = useState(false);
     const validation = useRef(true);
+
+    const Completionist = () => {
+        setIsShow(false);
+        return <span>expired</span>;
+    };
 
     const closeSuccessModal = () => {
         setIsSuccess(false);
@@ -113,9 +118,9 @@ function OneReviewRequest(props: ReviewProps) {
             return () => [];
             }
         };
-      };
-    
-    return (
+    };
+
+    return (isShow ?
         <div className={styles.row}>
             {reviewData.contribution.contribution_type == 1 ?
                 <p className={styles.requestName}>New platform {reviewData.market.platform}</p>
@@ -270,6 +275,8 @@ function OneReviewRequest(props: ReviewProps) {
             </Fade>
         </Modal>
         </div>
+        :
+        <></>
     );
 }
 
