@@ -26,7 +26,7 @@ function App() {
   const isLoaded = useRef(true);
   const search = useRef("");
   const currentPage = useRef(0);
-  const orderBy= useRef("name");
+  const orderBy= useRef("-max_apy");
   const perPage = "25"; 
 
   const handleFetch = () => {
@@ -91,7 +91,10 @@ function App() {
           <p className={styles.allCoins_titles + " " + styles.textStart}>Name</p>
         </div>
         <div>
-          <p id='highest_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Highest APY</p>
+          <p id='max_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Max APY</p>
+        </div>
+        <div>
+          <p id='min_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Min APY</p>
         </div>
         <div>
           <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Age</p>
