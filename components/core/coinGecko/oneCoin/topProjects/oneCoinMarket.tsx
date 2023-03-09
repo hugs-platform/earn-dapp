@@ -172,10 +172,9 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
           <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo} />
           <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
         </div>
-        {oneProjectData.max_apy === oneProjectData.min_apy ? 
-          <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.max_apy}%</p>:
-          <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.min_apy}..{oneProjectData.max_apy}%</p>
-        }
+        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.max_apy}%</p>
+        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.min_apy}%</p>
+        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.days}</p>
         <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(oneProjectData.last_updated)}</p>
         <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.staking_type}</p>
         <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{oneProjectData.market.platform}</a>
@@ -195,7 +194,6 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
         <Select className={coinInMarketTypesErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
         {coinOnMarket ? 
           <div>
-            {/* TODO: */}
             <TextField
               id="min-apy-id"
               label="Minimum Annual Percentage Yield"

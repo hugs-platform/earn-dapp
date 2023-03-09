@@ -168,6 +168,8 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
           <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
         </div>
         <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.max_apy}%</p>
+        <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.min_apy}%</p>
+        <p className={styles.coinMarketsColumn}>{coinMarketsData.days}</p>
         <p className={styles.coinMarketsColumn}>{findTimeDelta(coinMarketsData.last_updated)}</p>
         <p className={styles.coinMarketsColumn}>{coinMarketsData.staking_type}</p>
         <div className={styles.coinMarketsColumn}>
@@ -176,7 +178,6 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
       </div>
       {isOpen? 
         <div className={styles.updateContainer}>
-          {/* TODO 2 */}
           <h2 className={styles.updateContainerTitle}>Update contribution for {coinMarketsData.coin.abbreviature} on {coinMarketsData.market.platform}</h2>
           <Select className={coinInMarketTypesErr ? styles.modalContentSelect + " " + styles.modalContentSelectError : styles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
           {coinOnMarket ? 

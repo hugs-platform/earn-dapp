@@ -5,7 +5,7 @@
 
 .oneCoinFull {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 15px 25px;
   background: #FFFFFF;
