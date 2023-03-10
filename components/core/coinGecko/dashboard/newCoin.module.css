@@ -97,8 +97,7 @@
 .newCoinInput {
     font-size: 2em;
     width: 100%;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin: 10px 0;
 }
 
 .newCoinInput div input fieldset legend {
