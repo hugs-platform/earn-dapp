@@ -50,7 +50,7 @@ const Home: NextPage<HomePageProps> = () => {
     <div className={styles.index_full}>
       <Favicon url="/favicon.ico"/>
       <title>(Alpha) Earn Markets</title>
-      <script type="module" src="https://dev-hugbunters-widget.s3.eu-central-1.amazonaws.com/dist/widget.js"/>
+      <script type="module" src={process.env.NEXT_PUBLIC_HUGBUNTERS_WIDGET_URL}/>
       <ChakraProvider>
         <Layout>
           <Navbar>
