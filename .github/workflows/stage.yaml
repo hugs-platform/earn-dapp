@@ -31,7 +31,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/stage' 
-
+    environment: stage
 
     steps:
       - name: Checkout
