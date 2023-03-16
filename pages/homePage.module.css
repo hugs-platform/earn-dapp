@@ -137,6 +137,34 @@
   margin: 0 auto;
 }
 
+.hugs_title_div {
+  display: flex;
+}
+
+.hugsSideNavBarShow {
+  background-image: url("/static/src/show.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  width: 24px;
+  height: 28px;
+  background-color: rgba(77, 147, 172, 0.2);
+  margin: auto 0 auto 0;
+  cursor: pointer;
+}
+
+.hugsSideNavBarLess {
+  background-image: url("/static/src/less.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  width: 24px;
+  height: 28px;
+  background-color: rgba(77, 147, 172, 0.2);
+  margin: auto 0 auto 0;
+  cursor: pointer;
+}
+
 .hugsSideNavBarFooter {
   width: 80%;
   margin: 0 auto 25px auto;
@@ -244,4 +272,81 @@
   min-height: 100%;
   margin-left: 20%;
   padding-bottom: 100px;
+}
+
+.updateProfileBody {
+  font-size: 2em;
+}
+
+.updateProfileBody p {
+  color: #d32f2f;
+  font-size: 1.4em;
+  margin: 0;
+  padding-left: 0.5em;
+}
+
+.updateProfileTile {
+  padding: 1em;
+  text-align: center;
+  font-weight: 600;
+}
+
+.updateProfileInput {
+  font-size: 2em;
+  width: 100%;
+  margin: 10px 0 !important;
+}
+
+.updateProfileInput div input fieldset legend {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #292D32;
+}
+
+.textFielInputLabel * {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.textFielInputLabel input {
+  padding: 14px;
+}
+
+.regularMsg {
+  color:#4D93AC !important;
+}
+
+.errorMsg {
+  color: #d32f2f;
+}
+
+.submitAddNewCoin {
+  text-align: center;
+}
+
+.updateProfileDiv {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 50vw !important;
+  border-radius: 25px !important;
+  background-color: #fff;
+  padding: 25px;
+}
+
+.updateProfileDivBG {
+  position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: var(--chakra-colors-blackAlpha-600);
+    z-index: var(--chakra-zIndices-modal);
 }

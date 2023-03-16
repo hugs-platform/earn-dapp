@@ -165,3 +165,13 @@ export interface CoinContribution {
     platform: string;
   };
 }
+
+export interface ProfileTypes {
+  id: string;
+  email: string;
+  is_admin: boolean;
+  is_active: boolean;
+  user: {
+    wallet: string;
+  }
+}
