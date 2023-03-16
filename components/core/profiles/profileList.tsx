@@ -17,7 +17,7 @@ function App() {
 
     useEffect(() => {
         API.getProfileList().then(response => {
-            setProfilesList(response.data);
+            setProfilesList(response.data.items);
         })
         .catch(error => {
             setErrorMsg("You don't have enough permissions");
