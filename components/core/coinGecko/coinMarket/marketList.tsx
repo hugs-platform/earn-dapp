@@ -25,7 +25,7 @@ function App() {
   const [pageCount, setPageCount] = useState(1);
   const search = useRef("");
   const currentPage = useRef(0);
-  const orderBy= useRef("-highest_apy");
+  const orderBy= useRef("-max_apy");
   const perPage = 25;
 
   const handleFetch = () => {
@@ -83,7 +83,8 @@ function App() {
       </div>
       <div className={styles.marketListContainer}>
         <p id='platform' className={`${styles.marketListTitle} ${styles.sortBy}`}>Name</p>
-        <p id='highest_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Highest APY</p>
+        <p id='max_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Max APY</p>
+        <p id='min_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Min APY</p>
         <p id='earn_coins' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Earn Coins</p>
         <p id='link' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Link</p>
         <p id='click' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>

@@ -8,7 +8,7 @@ export class HugsApi {
             headers: {}
         }
         
-        let token = this.getCookie();
+        let token = this.getCookie("token=");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -20,7 +20,7 @@ export class HugsApi {
             headers: {}
         }
 
-        let token = this.getCookie();
+        let token = this.getCookie("token=");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -32,7 +32,7 @@ export class HugsApi {
             headers: {}
         }
 
-        let token = this.getCookie();
+        let token = this.getCookie("token=");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -44,7 +44,7 @@ export class HugsApi {
             headers: {}
         }
 
-        let token = this.getCookie();
+        let token = this.getCookie("token=");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -52,8 +52,7 @@ export class HugsApi {
     }
 
 
-    getCookie() {
-        let name = "token" + "=";
+    getCookie(name) {
         let decodedCookie = decodeURIComponent(document.cookie);
         let ca = decodedCookie.split(';');
         for(let i = 0; i < ca.length; i++) {
@@ -66,20 +65,20 @@ export class HugsApi {
           }
         }
         return "";
-      }
+    }
+
+    deleteCookie(name){
+        if (this.getCookie(name)){
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        return true;
+    }
 
     async createToken() {
         window.web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.requestAccounts();
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/authentication";
-        this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
-            .then(response => {
-                if (response){
-                    let data = response.data;
-                    document.cookie = "token=" + data['token'] + ";expires=" + data['exp'] + ";path=/";
-                }
-            })
-        return;
+        return this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
     }
 
     getCoinsList(page = 0, search = '', orderBy='name', per_page='all') {
@@ -188,6 +187,29 @@ export class HugsApi {
     getProfile(){
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile";
         return this.get(url);
+    }
+
+    getProfileList(){
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile/list";
+        return this.get(url);
+    }
+
+    changeUserStatus(profile_id, status){
+        let body = {
+            "profile_id": profile_id,
+            "status": status
+        }
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile/list";
+        return this.post(url=url, body=body);
+    }
+
+    updateProfile(email, twitter){
+        let body = {
+            "email": email,
+            "social_link": twitter
+        }
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile";
+        return this.put(url, body=body);
     }
 
     sendReviewAnswer(answerId, answer, remarks) {

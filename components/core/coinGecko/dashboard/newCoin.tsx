@@ -206,7 +206,6 @@ function App() {
         }
       }
 
-      console.log(coinValue.current);
       if (coinValue.current == ""){
         setCoinValueErr(true);
         validation.current = false;

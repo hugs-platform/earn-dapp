@@ -24,7 +24,7 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const API = new HugsApi();
   const { oneCoinInfo } = props;
-  const { coin_id, name, abbreviature, image, last_updated, highest_apy } = oneCoinInfo;
+  const { coin_id, name, abbreviature, image, last_updated, max_apy, min_apy } = oneCoinInfo;
   const [setActive, setActiveState] = useState("");
   const userAccess = useRef(false);
   const [list, setList] = useState([]);
@@ -181,7 +181,16 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
             <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_abbreviature}`}>{name}</p>
           </div>
         </div>
-        <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{highest_apy}%</p>
+        {max_apy? 
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{max_apy}%</p>
+        :
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
+        }
+        {min_apy? 
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{min_apy}%</p>
+        :
+          <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
+        }
         <p className={`${styles.oneCoin_defaultStyling} ${styles.allignCenter}`}>{age}</p>
         {setActive === "active" ? <p className={`${styles.close} ${styles.allignRight}`} onClick={toggleAccordion}>Close</p> : <p className={`${styles.more} ${styles.allignRight}`} onClick={toggleAccordion}> More</p>}
       </article>
@@ -190,7 +199,9 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
           <section className={oneMarketStyles.coinMarketsTable}>
             <div className={oneMarketStyles.coinMarketsRow}>
               <p className={oneMarketStyles.coinMarketsColumn}>Platform</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Max APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Min APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Days</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Age</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Type</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Link</p>

@@ -5,7 +5,8 @@ export interface HomePageProps {
 
 export interface CoinTypes {
   coin_id: number;
-  highest_apy: number;
+  max_apy: number;
+  min_apy: number;
   name: string;
   abbreviature: string;
   image: string;
@@ -77,7 +78,8 @@ export interface Review {
 
 export interface MarketTypes {
   market_id: string,
-  highest_apy: number;
+  min_apy: number;
+  max_apy: number;
   last_update: string,
   click: number,
   link: string,
@@ -162,4 +164,14 @@ export interface CoinContribution {
     market_id: string;
     platform: string;
   };
+}
+
+export interface ProfileTypes {
+  id: string;
+  email: string;
+  is_admin: boolean;
+  is_active: boolean;
+  user: {
+    wallet: string;
+  }
 }

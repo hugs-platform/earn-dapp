@@ -24,7 +24,7 @@ export interface OneMarketProps {
 const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   const { oneMarketInfo } = props;
   const API = new HugsApi();
-  const { market_id, highest_apy, click, link, logo, platform, earn_coins } = oneMarketInfo;
+  const { market_id, click, link, logo, platform, earn_coins, max_apy, min_apy } = oneMarketInfo;
   const userAccess = useRef(false);
   const [list, setList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -186,7 +186,16 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
         {logo ? <Image className={styles.marketName_image} height={32} width={32} src={logo} />: <></>}
           <p className={`${styles.oneMarketDefaultStyling} ${styles.marketName_name}`}>{platform}</p>
         </div>
-        <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{highest_apy} %</p>
+        {max_apy? 
+          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{max_apy} %</p>
+        :
+          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
+        }
+        {min_apy? 
+          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{min_apy} %</p>
+        :
+          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
+        }
         <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter}`}>{earn_coins}</p>
         <a id={oneMarketInfo.market_id} className={oneMarketStyles.coinMarketsColumn} href={link} target="_blank" rel="noreferrer" onClick={linkHangler}>{platform}</a>
         <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter}`}>{click}</p>
@@ -197,7 +206,9 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
           <section className={oneMarketStyles.coinMarketsTable}>
             <div className={oneMarketStyles.coinMarketsRow}>
               <p className={oneMarketStyles.coinMarketsColumn}>Coin</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Max APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Min APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Days</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Age</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Type</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Contribute</p>
