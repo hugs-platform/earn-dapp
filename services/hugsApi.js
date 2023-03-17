@@ -200,7 +200,7 @@ export class HugsApi {
             "status": status
         }
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile/list";
-        return this.put(url=url, body=body);
+        return this.post(url=url, body=body);
     }
 
     updateProfile(email, twitter){
