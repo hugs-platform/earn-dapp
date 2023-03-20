@@ -126,6 +126,10 @@
   flex-direction: column; 
 }
 
+.hugsSideBarLogo {
+  display: flex;
+}
+
 .hugsSideNavBarTitle {
   background-image: url("/static/src/earn-alpha.png");
   background-repeat: no-repeat;

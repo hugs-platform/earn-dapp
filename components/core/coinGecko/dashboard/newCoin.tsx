@@ -308,7 +308,8 @@ function App() {
   }
 
   useEffect(() => {
-    API.getMarketsList().then(response => {
+    // page = 0, search = '', orderBy='name', per_page=25, status=""
+    API.getMarketsList(0, "", "platform", 25, "all").then(response => {
       const arr = new Array(0);
       arr.push({value: "create_new", label: "Create New"});
       response.data.items.map((market: any) => {
