@@ -189,8 +189,8 @@ export class HugsApi {
         return this.get(url);
     }
 
-    getProfileList(){
-        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile/list";
+    getProfileList(app_name){
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile/list?app_name=" + app_name;
         return this.get(url);
     }
 
