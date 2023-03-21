@@ -176,7 +176,7 @@ function App() {
 
   const daysChange = (selectedObject: any) => {
     days.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
+    if (selectedObject.target.value == "" && stakingValue.current != "Locked") {
       setDaysValueError(true);
     } else {
       setDaysValueError(false);
@@ -223,13 +223,6 @@ function App() {
         }
       }
 
-      if (days.current === ""){
-        setDaysValueError(true);
-        validation.current = false;
-      } else {
-        setDaysValueError(false)
-      }
-
       if (minApyValue.current === "" && maxApyValue.current === ""){
         setMaxApyValueError(true);
         setMinApyValueError(true);
@@ -242,11 +235,18 @@ function App() {
           maxApyValue.current = minApyValue.current;
         }
       }
+      
+      switch (stakingValue.current) {
+        case "":
+          setStackingValueErr(true);
+          validation.current = false;
+        case "Locked":
+          if (days.current === "") {
+            validation.current = false;
+            setDaysValueError(true);
+          }
+        }
 
-      if (stakingValue.current === ""){
-        setStackingValueErr(true);
-        validation.current = false;
-      }
       if (validation.current) {
         API.createCoinMarket(
           marketValue.current, 
@@ -412,7 +412,9 @@ function App() {
                   type="number" 
                   className={maxApyValueError? styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField + " " + styles.selectError : styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
                   onChange={maxApyChange}/>
-                
+
+                <Select styles={customStyles} isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+
                 <TextField 
                   id="days-id" 
                   label="Days"
@@ -422,7 +424,6 @@ function App() {
                   className={daysValueError? styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField + " " + styles.selectError : styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
                   onChange={daysChange}/>
 
-                <Select styles={customStyles} isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                 { stackingValueErr && <p>Select one</p>}
                 { errorMsg && <h2 className={styles.errorMsg}>{errorMsg}</h2>}
                 <Container className={styles.submitAddNewCoin}>
