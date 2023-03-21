@@ -68,7 +68,7 @@ function App() {
     <>
       <Dashboard></Dashboard>
       <div className={styles.cryptoHeader}>
-          <h1 className={styles.allCoins_title}>Coins</h1>
+          <h1 className={styles.allCoins_title}>Platforms</h1>
           <div>
             <TextField
               key="search-coin-list"
