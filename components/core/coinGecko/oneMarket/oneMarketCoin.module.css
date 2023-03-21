@@ -278,6 +278,10 @@
     margin: 1em auto;
 }
 
+.updateBtn:disabled {
+    cursor: wait !important;
+}
+
 .updateGreenText {
     font-family: 'Gilroy';
     font-style: normal;

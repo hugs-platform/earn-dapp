@@ -90,6 +90,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const validate = () => {
     if (isLoading === false){
       setIsLoading(true);
+      setErrorMsg("");
       validation.current = true;
       if (marketValue.current == ""){
         setMarketValueErr(true);
@@ -121,9 +122,13 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         API.createCoinMarket(marketValue.current, coin_id, maxApyValue.current, minApyValue.current, stakingValue.current, days.current).then(response => {
           setIsSuccess(true);
           setIsOpen(false);
+          setIsLoading(false);
         }).catch(error => {
-          setErrorMsg(error.response.data);
+          setIsLoading(false);
+          setErrorMsg(error.response.data.error);
         })
+      } else {
+        setIsLoading(false);
       }
     }
   }
@@ -245,7 +250,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                   
                   <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                   {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
-                  <button className={oneMarketStyles.submitBtn} onClick={validate}>Submit</button>
+                  <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
                   <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
                 </div>
               : isSuccess?

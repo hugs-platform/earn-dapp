@@ -518,6 +518,10 @@ border: 2px solid #000;
   margin: 1em auto;
 }
 
+.updateBtn:disabled {
+  cursor: wait !important;
+}
+
 .newCoinInput {
   font-size: 2em;
   width: 100%;
@@ -575,6 +579,10 @@ border: 2px solid #000;
   color: #FFFFFF;
   margin: 1em auto;
   width: 50%;
+}
+
+.submitBtn:disabled {
+  cursor: wait !important;
 }
 
 .cancelBtn {
