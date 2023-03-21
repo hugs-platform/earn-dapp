@@ -19,7 +19,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
   const { coinMarketsData } = props;
   const API = new HugsApi();
   const [isOpen, setIsOpen] = useState(false);
-  const [errMsg, setErrMsg] = useState();
+  const [errMsg, setErrMsg] = useState("");
   const [coinInMarketTypesErr, setCoinInMarketTypesErr] = useState(false);
   const [coinOnMarket, setCoinOnMarket] = useState(NaN);
   const [created, setCreated] = useState(false);
@@ -91,6 +91,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
     if (isLoading === false){
       setIsLoading(true)
       validation.current = true;
+      setErrMsg("");
       if (Object.is(coinOnMarket, NaN)) {
         setCoinInMarketTypesErr(true);
         validation.current = false;
@@ -135,7 +136,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
               })
               .catch(error => {
                 setIsLoading(false);
-                setErrMsg(error.response.data.detail);
+                setErrMsg(error.response.data.error);
             })
         }
       } else {
@@ -154,7 +155,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
         })
         .catch(error => {
           setIsLoading(false);
-          setErrMsg(error.response.data.detail);
+          setErrMsg(error.response.data.error);
         })
       }
     }
@@ -216,7 +217,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
           } 
         { errMsg ? <p className={styles.modalCloseError}>{errMsg}</p>: <></>}
         <div className={styles.modalSubmit}>
-            <button className={styles.updateBtn} onClick={validate}>Submit</button>
+            <button className={styles.updateBtn} disabled={isLoading} onClick={validate}>Submit</button>
         </div>
         </div>
       : exist ?

@@ -18,7 +18,7 @@ export interface OneProjectProps {
 const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   const { oneProjectData, oneCoinInfo } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [errMsg, setErrMsg] = useState();
+  const [errMsg, setErrMsg] = useState("");
   const [created, setCreated] = useState(false);
   const [exist, setExist] = useState(false);
   const [coinOnMarket, setCoinOnMarket] = useState(NaN);
@@ -98,7 +98,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
   const validate = () => {
     if (isLoading === false){
       setIsLoading(true);
-
+      setErrMsg("");
       if (Object.is(coinOnMarket, NaN)) {
         setCoinInMarketTypesErr(true);
         setIsLoading(false);
@@ -127,10 +127,9 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
             setStackingValueErr(true);
             validation.current = false;
           }
-          
           if (validation.current){
-            // Make update
             API.updateCoinMarket(oneProjectData.market.market_id, oneCoinInfo.coin_id, maxApyValue.current, minApyValue.current, stakingValue.current, days.current).then(response => {
+              setIsLoading(false);
               if (response.status == 200){
                 setExist(true);
                 setIsOpen(false);
@@ -140,12 +139,13 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
                 setIsOpen(false);
               }})
             .catch(error => {
-              setErrMsg(error.response.data.detail);
+              setIsLoading(false);
+              setErrMsg(error.response.data.error);
             })
+          } else {
             setIsLoading(false);
           }
         } else {
-          // DELETE CONTRIBUTION
           API.deleteCoinMarket(oneProjectData.id).then(response => {
             setIsLoading(false);
             if (response.status == 200){
@@ -158,7 +158,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
             }})
             .catch(error => {
               setIsLoading(false);
-              setErrMsg(error.response.data.detail);
+              setErrMsg(error.response.data.error);
             })
         }
       }
@@ -226,7 +226,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
         : <></>} 
         { errMsg ? <p className={oneMarketStyles.modalCloseError}>{errMsg}</p>: <></>}
         <div className={oneMarketStyles.modalSubmit}>
-            <button className={oneMarketStyles.updateBtn} onClick={validate}>Submit</button>
+            <button className={oneMarketStyles.updateBtn} disabled={isLoading} onClick={validate}>Submit</button>
         </div>
       </div>
       : exist ?
