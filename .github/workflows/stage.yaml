@@ -20,6 +20,7 @@ env:
   NEXT_PUBLIC_INFURA_ID: cdad7283e1ef4591b999551adfb7eca4
   NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL: https://api.ua.dev.hugsplatform.com/
   NEXT_PUBLIC_HUGS_LIMITED_CONTRIBUTION_API_URL: https://api.ua.dev.hugsplatform.com/
+  NEXT_PUBLIC_HUGBUNTERS_WIDGET_URL: https://stage-hugbunters-widget.s3.eu-central-1.amazonaws.com/dist/widget.js
   NEXT_PUBLIC_HUGS_APP_ID: 63a97e8a3c3e2b1e40ce69d0
 permissions:
   id-token: write # This is required for requesting the JWT
