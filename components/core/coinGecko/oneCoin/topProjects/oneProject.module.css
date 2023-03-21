@@ -409,8 +409,8 @@ border: 2px solid #000;
 }
 
 .modalContentSelect {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
   width: 100%;
 }
 
