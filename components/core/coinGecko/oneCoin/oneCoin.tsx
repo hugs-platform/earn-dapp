@@ -109,10 +109,16 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         }
       }
 
-      if (days.current === ""){
-        setDaysValueError(true);
-        validation.current = false;
-      }
+      switch (stakingValue.current) {
+        case "":
+          setStackingValueErr(true);
+          validation.current = false;
+        case "Locked":
+          if (days.current === "") {
+            validation.current = false;
+            setDaysValueError(true);
+          }
+        }
 
       if (stakingValue.current === ""){
         setStackingValueErr(true);
@@ -173,6 +179,9 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
 
   const stackingHandle = (selectedObject: any) => {
     stakingValue.current = selectedObject.value;
+    if (selectedObject.value != "Locked"){
+      setDaysValueError(false);
+    } 
     setStackingValueErr(false);
   }
 
@@ -239,6 +248,8 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                     className={maxApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
                     onChange={maxApyChange}/>
                   
+                  <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+
                   <TextField 
                     id="days-id"
                     label="Days"
@@ -248,7 +259,6 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                     className={daysValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
                     onChange={daysChange}/>
                   
-                  <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
                   {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
                   <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
                   <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
