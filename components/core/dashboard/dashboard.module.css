@@ -259,17 +259,15 @@
 
 .dashboard_card_profile_body {
     text-align: start;
-    display: flex;
+    display: grid;
     padding: 25px;
 }
 
 .dashboard_card_profile_body_col {
-    width: 150px;
+    width: auto;
     padding: 10px;
-}
-
-.dashboard_card_profile_body_col:first-child {
-    border-right: 1px solid rgba(41, 45, 50, 0.1);
+    text-align: center;
+    margin: auto;
 }
 
 .dashboard_card_profile_body_col p:first-child {
