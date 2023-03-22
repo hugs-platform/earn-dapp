@@ -83,7 +83,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
 
   const daysChange = (selectedObject: any) => {
     days.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
+    if (selectedObject.target.value == "" && stakingValue.current != "Locked") {
       setDaysValueError(true);
     } else {
       setDaysValueError(false);
@@ -92,6 +92,9 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
 
   const stackingHandle = (selectedObject: any) => {
     stakingValue.current = selectedObject.value;
+    if (selectedObject.value != "Locked"){
+      setDaysValueError(false);
+    }
     setStackingValueErr(false);
   }
 
@@ -118,10 +121,16 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
             }
           }
           
-          if (days.current === ""){
-            setDaysValueError(true);
-            validation.current = false;
-          }
+          switch (stakingValue.current) {
+            case "":
+              setStackingValueErr(true);
+              validation.current = false;
+            case "Locked":
+              if (days.current === "") {
+                validation.current = false;
+                setDaysValueError(true);
+              }
+            }
 
           if (stakingValue.current === ""){
             setStackingValueErr(true);
@@ -212,6 +221,8 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
               className={maxApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
               onChange={maxApyChange}/>
             
+            <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+            
             <TextField 
               id="days-id"
               label="Days"
@@ -220,8 +231,6 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
               type="number"
               className={daysValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
               onChange={daysChange}/>
-            
-            <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
           </div>
         : <></>} 
         { errMsg ? <p className={oneMarketStyles.modalCloseError}>{errMsg}</p>: <></>}

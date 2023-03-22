@@ -136,8 +136,10 @@ export class HugsApi {
             "coin_abbreviature": coin_abbreviature,
             "max_apy": max_apy,
             "min_apy": min_apy,
-            "staking_type": staking_type,
-            "days": days
+            "staking_type": staking_type
+        }
+        if (days) {
+            body['days'] = days
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.post(url=url, body=body)
@@ -149,8 +151,10 @@ export class HugsApi {
             "coin_id": coin_id,
             "max_apy": max_apy,
             "min_apy": min_apy,
-            "staking_type": staking_type,
-            "days": days
+            "staking_type": staking_type
+        }
+        if (days) {
+            body['days'] = days
         }
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market-coin/contributions";
         return this.put(url=url, body=body)
