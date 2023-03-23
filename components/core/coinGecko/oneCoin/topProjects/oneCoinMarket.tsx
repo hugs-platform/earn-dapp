@@ -178,7 +178,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
     <div key={oneProjectData.market.market_id}>
       <div className={oneMarketStyles.coinMarketsRow}>
         <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
-          <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo} />
+          {oneProjectData.market.logo? <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo}/>: <></>}
           <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
         </div>
         <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.max_apy}%</p>

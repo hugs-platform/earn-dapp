@@ -227,7 +227,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
             <div className={oneMarketStyles.coinMarketsRow}>
               {addNew ? 
                 <div className={oneMarketStyles.addNewContainer}>
-                  <h2>Add new contribution for {oneMarketInfo.platform} <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/></h2>
+                  <h2>Add new contribution for {oneMarketInfo.platform} {oneMarketInfo.logo? <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/> : <></>}</h2>
                   <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={coinsList} onChange={coinListHandle}/>
                   <TextField
                     id="min-apy-id"

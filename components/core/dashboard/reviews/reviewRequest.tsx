@@ -63,6 +63,7 @@ function OneReviewRequest(props: ReviewProps) {
     };
 
     const closeSuccessModal = () => {
+        setIsShow(false);
         setIsSuccess(false);
     }
 
@@ -250,7 +251,7 @@ function OneReviewRequest(props: ReviewProps) {
                         <textarea className={styles.dashboard_modal_main_text_area} onChange={inputHandler} placeholder="Remarks (Optional)"></textarea>
                     </Container>
                     <Container className={styles.dashboard_modal_submit_container}>
-                        <button className={styles.dasboard_modal_submit_btn} onClick={sendReview}>Submit</button>
+                        <button className={styles.dasboard_modal_submit_btn} disabled={isLoading} onClick={sendReview}>Submit</button>
                     </Container>
                 </Box>
             </Fade>
