@@ -98,6 +98,7 @@
     font-size: 2em;
     width: 100%;
     margin: 10px 0 !important;
+    background-color: #E2F5FA !important;
 }
 
 .newCoinInput div input fieldset legend {

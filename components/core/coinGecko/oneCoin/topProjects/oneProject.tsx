@@ -25,7 +25,7 @@ const OneProject: FC<OneProjectProps> = (props: OneProjectProps) => {
     <div className={styles.oneProject_full}>
       <p className={`${styles.oneProject_number} ${styles.allignLeft}`}>{placeOfProject + 1}</p>
       <div className={`${styles.oneProject_stakingLinkName_full} ${styles.allignLeft}`}>
-        <Image className={styles.oneProject_coinLogo} height={24} width={24} src={projectLogo} />
+        {projectLogo? <Image className={styles.oneProject_coinLogo} height={24} width={24} src={projectLogo}/> : <></>}
         <p className={`${styles.oneProject_name} ${styles.projectList_fontSize}`}>{oneProjectData.name}</p>
       </div>
       <div className={`${styles.oneProject_stakingLink_full} ${styles.allignRight}`}>
