@@ -186,6 +186,11 @@
     opacity: 0.75;
 }
 
+.dasboard_modal_submit_btn:disabled {
+    opacity: 1 !important;
+    cursor: wait !important;
+}
+
 .contribution_link {
     color: #638EFE;
     margin: auto;
