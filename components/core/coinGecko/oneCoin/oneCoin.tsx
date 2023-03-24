@@ -189,7 +189,11 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
     <section className={styles.oneCoinContainer}>
       <article className={styles.oneCoinFull}>
         <div className={styles.coinName}>
-          <Image className={styles.coinName_image} height={32} width={32} src={image} />
+          {image? 
+            <Image className={styles.coinName_image} height={32} width={32} src={image} />
+          :
+            <></>
+          }
           <div>
             <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{abbreviature}</p>
             <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_abbreviature}`}>{name}</p>
@@ -228,7 +232,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
             <div className={oneMarketStyles.coinMarketsRow}>
               {isOpen ? 
                 <div className={oneMarketStyles.addNewContainer}>
-                  <h2>Add new contribution for {name} <Image className={styles.coinName_image} height={24} width={24} src={image}/></h2>
+                  <h2>Add new contribution for {name} {image? <Image className={styles.coinName_image} height={24} width={24} src={image}/>: <></>}</h2>
                   <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
                   <TextField
                     id="min-apy-id"

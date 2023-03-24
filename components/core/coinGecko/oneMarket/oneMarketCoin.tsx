@@ -172,7 +172,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
     <div key={coinMarketsData.market.market_id}>
       <div className={styles.coinMarketsRow}>
         <div className={`${styles.coinMarketsColumn}  ${styles.allignLeft} ${styles.coinLogo}`}>
-          <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image} />
+          {coinMarketsData.coin.image? <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image}/>:<></>}
           <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
         </div>
         <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.max_apy}%</p>
