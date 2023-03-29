@@ -569,3 +569,41 @@
     opacity: 0.7;
     pointer-events: none;
 }
+
+.editIcon {
+    display: flex !important;
+    justify-content: end;
+    cursor: pointer !important;
+}
+
+.doneIcon {
+    padding: 15px;
+    color: #00C395;
+    cursor: pointer !important;
+}
+
+.doneIcon:disabled {
+    opacity: 0.5;
+}
+
+.closeIcon {
+    padding: 15px;
+    color: #FA584E;
+    cursor: pointer !important;
+}
+
+.input {
+    width: 100%;
+    border: 1px solid rgba(41, 45, 50, 0.1);
+    border-radius: 4px;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.inputFile {
+    margin: 10px 0;
+}
+
+.input:focus {
+    border: 3px solid rgba(41, 45, 50, 0.1) !important;
+}
