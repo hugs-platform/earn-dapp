@@ -7,7 +7,6 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      'assets.coingecko.com',
       'dev-earn-markets-assets.s3.eu-central-1.amazonaws.com', 
       'stage-earn-markets-assets.s3.eu-central-1.amazonaws.com'
     ]

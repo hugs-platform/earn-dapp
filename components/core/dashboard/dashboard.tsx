@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, ChangeEvent } from "react";
 import moment from "moment";
 import Select from "react-select";
 import ReactPaginate from "react-paginate";
@@ -37,6 +37,10 @@ function App() {
   const [contributionRequestLastMonth, setContributionRequestLastMonth] = useState(0);
   const [review, setReview] = useState(0);
   const [reviewLastMonth, setReviewLastMonth] = useState(0);
+  const [showIsEdit, setShowIsEdit] = useState(false);
+  const [newUserAlias, setNewUserAlias] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [newUserAvatar, setNewUserAvatar] = useState("");
   const page = useRef(0);
   const orderBy = useRef("-created_at");
   const prePage = useRef(10);
@@ -53,6 +57,8 @@ function App() {
     API.getProfile().then(response => {
       if (response) {
           setUserAlias(response.data.alias);
+          setNewUserAlias(response.data.alias);
+          setUserAvatar(response.data.avatar);
           setUserWallet(response.data.wallet);
           setUserReputation(response.data.reputation_score);
           setUserWalletDisplay(response.data.wallet.slice(0, 6) + "......." + response.data.wallet.slice(-6));
@@ -146,6 +152,38 @@ function App() {
     };
   };
 
+  const changeNewAlias = (selectedObject: any) => {
+    setNewUserAlias(selectedObject.target.value);
+  }
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = function() {
+        setNewUserAvatar(reader.result as string);
+      }
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const updateProfile = () => {
+    const body = {
+      'alias': newUserAlias,
+      'avatar': userAvatar
+    }
+    if (newUserAvatar){
+      body['avatar'] = newUserAvatar
+    }
+    API.updateProfile(body).then(response => {
+      if (response) {
+        setUserAlias(response.data['alias']);
+        setUserAvatar(response.data['avatar']);
+        setShowIsEdit(false);
+      }
+    })
+  }
+
   return (
     <>
       <Dashbord></Dashbord>
@@ -159,9 +197,23 @@ function App() {
           <div className={styles.dasboard_col_3}>
             <div className={styles.dashboard_card + " " + styles.dashboard_card_main_theme + " " + styles.dashboard_card_profile}>
               <div className={styles.dashboard_card_profile_title}>
-                <img className={styles.dashboard_card_profile_img} src='/static/src/default-profile.png'/>
+                <img className={styles.dashboard_card_profile_img} src={userAvatar? userAvatar : '/static/src/default-profile.png'}/>
                 <p>Welcome Back!</p>
-                <h1>{userAlias}</h1>
+                {showIsEdit?
+                  <div>
+                    <label>Your nickname:</label>
+                    <input onChange={changeNewAlias} className={styles.input} type="text" value={newUserAlias}></input>
+                    <label>Your avatar:</label>
+                    <input  className={styles.inputFile} name="avatar" type="file" accept="image/*" onChange={handleFileChange}></input>
+                    <i onClick={updateProfile} className={"fa-solid fa-check" + " " + styles.doneIcon}></i>
+                    <i onClick={() => {setShowIsEdit(false)}} className={"fa-solid fa-xmark" + " " + styles.closeIcon}></i>
+                  </div>
+                :
+                  <div>
+                    <h1>{userAlias}</h1> 
+                    <i onClick={() => {setShowIsEdit(true)}} className={"fa-solid fa-edit" + " " + styles.editIcon}></i>
+                  </div>
+                }
               </div>
               <div className={styles.dashboard_card_profile_body}>
                 <div className={styles.dashboard_card_profile_body_col}>
