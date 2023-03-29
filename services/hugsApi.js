@@ -207,11 +207,7 @@ export class HugsApi {
         return this.post(url=url, body=body);
     }
 
-    updateProfile(email, twitter){
-        let body = {
-            "email": email,
-            "social_link": twitter
-        }
+    updateProfile(body){
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/profile";
         return this.put(url, body=body);
     }

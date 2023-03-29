@@ -86,9 +86,11 @@ export default function ConnectButton({ handleOpenModal }: Props) {
       }
 
       if (validation.current) {
-        API.updateProfile(
-          userEmail.current, 
-          userSocialLink.current)
+        const data = {
+          'email': userEmail.current,
+          'social_link': userSocialLink.current
+        }
+        API.updateProfile(data)
           .then(response => {
             handleClose();
             setIsLoading(false);

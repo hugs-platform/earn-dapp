@@ -74,6 +74,7 @@ const Home: NextPage<HomePageProps> = () => {
       <Favicon url="/favicon.ico"/>
       <title>(Alpha) Earn Markets</title>
       <script type="module" src={process.env.NEXT_PUBLIC_HUGBUNTERS_WIDGET_URL}/>
+      <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet" />
       <ChakraProvider>
         <Layout>
           <Navbar>
