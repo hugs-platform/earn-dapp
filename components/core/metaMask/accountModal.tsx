@@ -7,13 +7,13 @@ import {
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     Text,
   } from "@chakra-ui/react";
   import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
   import { useEthers } from "@usedapp/core";
+  import { HugsApi } from "../../../services/hugsApi";
   
   type Props = {
     isOpen: any;
@@ -26,6 +26,7 @@ import {
    */
   export default function AccountModal({ isOpen, onClose }: Props) {
     const { account, deactivate } = useEthers();
+    const API = new HugsApi();
     
     /**
      * @class
@@ -34,6 +35,7 @@ import {
     function handleDeactivateAccount() {
       deactivate();
       onClose();
+      API.logout();
     }
   
     return (
@@ -139,23 +141,6 @@ import {
               </Flex>
             </Box>
           </ModalBody>
-  
-          <ModalFooter
-            justifyContent="end"
-            background="gray.700"
-            borderBottomLeftRadius="3xl"
-            borderBottomRightRadius="3xl"
-            p={6}
-          >
-            <Text
-              color="white"
-              textAlign="left"
-              fontWeight="medium"
-              fontSize="md"
-            >
-              Your transactions willl appear here...
-            </Text>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     );
