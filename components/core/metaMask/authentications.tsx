@@ -20,7 +20,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   const [ userEmailError, setUserEmailError ] = useState(true);
   const userSocialLink = useRef("");
   const [ userSocialLinkError, setUserSocialLinkError ] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const validation = useRef(false);
   const [ errorMsg, setErrorMsg ] = useState("");
 
@@ -75,8 +75,8 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   };
 
   const updateProfile = () => {
-    if (isLoading === false){
-      setIsLoading(true);
+    if (loading === false){
+      setLoading(true);
       validation.current = true;
       
       if (userSocialLink.current == ""){
@@ -97,19 +97,20 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         API.updateProfile(data)
           .then(response => {
             handleClose();
-            setIsLoading(false);
+            setLoading(false);
           })
           .catch(error => {
-            setIsLoading(false);
+            setLoading(false);
             setErrorMsg(error.response.data.error);
           })
       } else {
-        setIsLoading(false);
+        setLoading(false);
       }
     }
   };
 
   useEffect(() => {
+    window.dispatchEvent(new Event("profile_update"));
     const data = window.localStorage.getItem('wallet');
     if (account){
       if (data === null){
@@ -118,14 +119,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         if (data !== account) {
           deactivate();
           API.logout();
-          window.dispatchEvent(new Event("profile_update"));
         }
-      }
-    } else {
-      if (data) {
-        window.localStorage.removeItem('wallet');
-        API.logout();
-        window.dispatchEvent(new Event("profile_update"));
       }
     }
   });
@@ -161,7 +155,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
               </input>
             { errorMsg && <h2 className={styles.errorMsg}>{errorMsg}</h2>}
             <div className={styles.submitAddNewCoin}>
-              <button className={styles.mainButton} disabled={isLoading} onClick={updateProfile}>Submit</button>
+              <button className={styles.mainButton} disabled={loading} onClick={updateProfile}>Submit</button>
             </div>
           </div>
         </div>
