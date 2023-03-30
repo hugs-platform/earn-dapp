@@ -74,10 +74,26 @@ export class HugsApi {
         return true;
     }
 
+    logout() {
+        this.deleteCookie("token");
+        this.deleteCookie("isStaff");
+        window.localStorage.removeItem("username");
+        window.localStorage.removeItem("avatar");
+        window.localStorage.removeItem("wallet");
+        window.dispatchEvent(new Event("profile_update"));
+    }
+
+    async getMetaMaskWallet() {
+        window.web3 = new Web3(window.ethereum);
+        const accounts = await web3.eth.requestAccounts();
+        return  accounts[0] || null
+    }
+
     async createToken() {
         window.web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.requestAccounts();
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/authentication";
+        window.localStorage.setItem('wallet', accounts[0]);
         return this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
     }
 

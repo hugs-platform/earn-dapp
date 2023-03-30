@@ -1,9 +1,7 @@
-import { Button, Box, Text } from "@chakra-ui/react";
-import { useEthers, useEtherBalance } from "@usedapp/core";
-import { formatEther } from "@ethersproject/units";
+import { useEthers } from "@usedapp/core";
 import { HugsApi } from "../../../services/hugsApi";
 import styles from "../../../pages/homePage.module.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 type Props = {
   handleOpenModal: any;
@@ -14,8 +12,7 @@ type Props = {
  * @ignore 
  */
 export default function ConnectButton({ handleOpenModal }: Props) {
-  const { activateBrowserWallet, account } = useEthers();
-  const etherBalance = useEtherBalance(account);
+  const { account, activateBrowserWallet, deactivate } = useEthers();
   const API = new HugsApi();
   const [ open, setOpen ] = useState(false);
   const handleClose = () => setOpen(false);
@@ -35,6 +32,13 @@ export default function ConnectButton({ handleOpenModal }: Props) {
     activateBrowserWallet();
     API.createToken().then(response => {
       if (response){
+        if (response.data['alias']){
+          window.localStorage.setItem('username', response.data['alias']);
+        }
+        if (response.data['avatar']){
+          window.localStorage.setItem('avatar', response.data['avatar']);
+        }
+        window.dispatchEvent(new Event("profile_update"));
         document.cookie = "token=" + response.data['token'] + ";expires=" + response.data['exp'] + ";path=/";
         if (response.data['is_admin']){
           document.cookie = "isStaff=" + response.data['is_admin'] + ";expires=" + response.data['exp'] + ";path=/";
@@ -105,46 +109,38 @@ export default function ConnectButton({ handleOpenModal }: Props) {
     }
   };
 
+  useEffect(() => {
+    const data = window.localStorage.getItem('wallet');
+    if (account){
+      if (data === null){
+        window.localStorage.setItem('wallet', account);
+      } else {
+        if (data !== account) {
+          deactivate();
+          API.logout();
+          window.dispatchEvent(new Event("profile_update"));
+        }
+      }
+    } else {
+      if (data) {
+        window.localStorage.removeItem('wallet');
+        API.logout();
+        window.dispatchEvent(new Event("profile_update"));
+      }
+    }
+  });
+
   return account ? (
-    <Box
-      display="flex"
-      alignItems="center"
-      background="linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%)"
-      borderRadius="xl"
-      py="0"
-      max-width="150px"
-    >
-      <Box 
-        px="3"
-        max-width="150px"
-      >
-        <Text color="white" fontSize="md">
-          {etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)} ETH
-        </Text>
-      </Box>
-      <Button
-        onClick={handleOpenModal}
-        bg="gray.800"
-        border="1px solid transparent"
-        max-width="150px"
-        _hover={{
-          border: "1px",
-          borderStyle: "solid",
-          backgroundColor: "linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%)",
-        }}
-        borderRadius="xl"
-        m="1px"
-        px={3}
-        height="38px"
-      >
-        <Text color="white" fontSize="md" fontWeight="medium" mr="2" max-width="150px">
+    <div>
+      <button 
+        className={styles.walletLoginButton}
+        onClick={handleOpenModal}>
           {account &&
             `${account.slice(0, 6)}...${account.slice(
               account.length - 4,
               account.length
             )}`}
-        </Text>
-      </Button>
+      </button>
       {open?
         <div className={styles.updateProfileDivBG}>
           <div className={styles.updateProfileDiv}>
@@ -172,9 +168,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
       :
       <></>
       }
-    </Box>
-
-    
+      </div>
   ) : (
     <button 
       className={styles.walletLoginButton}

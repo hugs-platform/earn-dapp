@@ -54,6 +54,14 @@ function App() {
   ]
   
   useEffect(() => {
+    const userName = window.localStorage.getItem('username');
+    if (userName){
+      setUserAlias(userName);
+    }
+    const userAvatar = window.localStorage.getItem('avatar');
+    if (userAvatar){
+      setUserAvatar(userAvatar);
+    }
     API.getProfile().then(response => {
       if (response) {
           setUserAlias(response.data.alias);
@@ -71,6 +79,13 @@ function App() {
           setReview(response.data.reviews.total);
           setReviewLastMonth(response.data.reviews.scince_last_month);
           setUserEarnedRewards("250,000");
+          if (response.data.alias){
+            window.localStorage.setItem('username', response.data.alias);
+          }
+          if (response.data.avatar){
+            window.localStorage.setItem('avatar', response.data.avatar);
+          }
+          window.dispatchEvent(new Event("profile_update"));
       }
     });
     getReviewRequests();
@@ -169,17 +184,23 @@ function App() {
 
   const updateProfile = () => {
     const body = {
-      'alias': newUserAlias,
-      'avatar': userAvatar
+      'alias': newUserAlias
     }
-    if (newUserAvatar){
-      body['avatar'] = newUserAvatar
+    if (newUserAvatar !== ""){
+      Object.assign(body, {avatar: newUserAvatar});
     }
     API.updateProfile(body).then(response => {
       if (response) {
         setUserAlias(response.data['alias']);
         setUserAvatar(response.data['avatar']);
         setShowIsEdit(false);
+        if (response.data['alias']){
+          window.localStorage.setItem('username', response.data['alias']);
+        }
+        if (response.data['avatar']){
+          window.localStorage.setItem('avatar', response.data['avatar']);
+        }
+        window.dispatchEvent(new Event("profile_update"));
       }
     })
   }
@@ -202,7 +223,7 @@ function App() {
                 {showIsEdit?
                   <div>
                     <label>Your nickname:</label>
-                    <input onChange={changeNewAlias} className={styles.input} type="text" value={newUserAlias}></input>
+                    <input onChange={changeNewAlias} className={styles.input} type="text" maxLength={17} value={newUserAlias}></input>
                     <label>Your avatar:</label>
                     <input  className={styles.inputFile} name="avatar" type="file" accept="image/*" onChange={handleFileChange}></input>
                     <i onClick={updateProfile} className={"fa-solid fa-check" + " " + styles.doneIcon}></i>
