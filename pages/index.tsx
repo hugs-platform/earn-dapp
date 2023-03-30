@@ -30,10 +30,21 @@ const Home: NextPage<HomePageProps> = () => {
   const [ isPlatforms, setIsPlatforms ] = useState(false);
   const [ isProfiles, setIsProfiles ] = useState(false);
   const [ showMore, setShowMore ] = useState(false);
+  const [ isLogin, setIsLogin ] = useState(false);
+  const [ userName, setUserName ] = useState("");
+  const [ userAvatar, setUserAvater ] = useState("");
+  const [ currentPage, setCurrentPage ] = useState("Coins");
   const API = new HugsApi();
 
-  const handlePageChange = (selectedObject: any) => {
-    switch (selectedObject.target.innerText) {
+
+  /**
+   * @class
+   * @ignore
+   * @param {string} value - name of page 
+   */
+  function handlePageChange(value: string) {
+    setCurrentPage(value);
+    switch (value) {
       case "Coins":
         setIsCoins(true);
         setIsDashboard(false);
@@ -61,8 +72,32 @@ const Home: NextPage<HomePageProps> = () => {
     }
 	};
 
+  const checkUser = () => {
+    const username = window.localStorage.getItem('username');
+    if (username != null){
+      setUserName(username);
+    } else {
+      setUserName("");
+    }
+    const avatar = window.localStorage.getItem('avatar') ;
+    if (avatar != null){
+      setUserAvater(avatar);
+    } else {
+      setUserAvater("");
+    }
+	};
+
   useEffect(() => {
-    if (API.getCookie("isStaff=")){
+    window.addEventListener('profile_update', () => {checkUser();});
+    if (API.getCookie("token")){
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+      if (currentPage === "Dashboard" || currentPage === "Profiles"){
+        handlePageChange("Coins")
+      }
+    }
+    if (API.getCookie("isStaff")){
       setShowMore(true);
     } else {
       setShowMore(false);
@@ -74,7 +109,7 @@ const Home: NextPage<HomePageProps> = () => {
       <Favicon url="/favicon.ico"/>
       <title>(Alpha) Earn Markets</title>
       <script type="module" src={process.env.NEXT_PUBLIC_HUGBUNTERS_WIDGET_URL}/>
-      <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet" />
+      <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet"/>
       <ChakraProvider>
         <Layout>
           <Navbar>
@@ -84,11 +119,15 @@ const Home: NextPage<HomePageProps> = () => {
                   <Nav.Item className={styles.hugsSideNavBarTitle}></Nav.Item>
                   {/* <Nav.Item className={styles.hugsSideNavBarShow}></Nav.Item> */}
                 </div>
-                <Nav.Link onClick={handlePageChange} className={isCoins ? styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.overview}>Coins</Nav.Link>
-                <Nav.Link onClick={handlePageChange} className={isPlatforms ? styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.platform}>Platforms</Nav.Link>
-                <Nav.Link onClick={handlePageChange} className={isDashboard ? styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.dashboard}>Dashboard</Nav.Link>
-                {showMore?
-                  <Nav.Link onClick={handlePageChange} className={isProfiles ? styles.hugsNavBarLink + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink}>Profiles</Nav.Link>
+                <Nav.Link onClick={() => {handlePageChange("Coins")}} className={isCoins ? styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.overview}>Coins</Nav.Link>
+                <Nav.Link onClick={() => {handlePageChange("Platforms")}} className={isPlatforms ? styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.platform}>Platforms</Nav.Link>
+                {isLogin?
+                  <Nav.Link onClick={() => {handlePageChange("Dashboard")}} className={isDashboard ? styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink + " " + styles.dashboard}>Dashboard</Nav.Link>
+                :
+                  <></>
+                }
+                  {showMore?
+                  <Nav.Link onClick={() => {handlePageChange("Profiles")}} className={isProfiles ? styles.hugsNavBarLink + " " + styles.hugsNavBarLinkActive : styles.hugsNavBarLink}>Profiles</Nav.Link>
                 :
                   <></>
                 }
@@ -108,7 +147,18 @@ const Home: NextPage<HomePageProps> = () => {
                 <Nav.Link className={styles.hugsHeaderNavBarLink}>Overview</Nav.Link>
                 <Nav.Link className={styles.hugsHeaderNavBarLink}>How It works</Nav.Link>
                 <Nav.Link className={styles.hugsHeaderNavBarLink}>About Us</Nav.Link>
-                <Nav.Link className={styles.hugsHeaderNavBarLink}><ConnectButton handleOpenModal={onOpen}/></Nav.Link>
+                <Nav.Item className={styles.hugsHeaderNavBarLink}><ConnectButton handleOpenModal={onOpen}/></Nav.Item>
+                {userName?
+                  <Nav.Item className={styles.hugsHeaderNavBarItem}>{userName}</Nav.Item>
+                :
+                  <></>
+                }
+                {userAvatar?
+                  <Nav.Item className={styles.hugsHeaderNavBarItem}><img src={userAvatar}/></Nav.Item>
+                :
+                  <></>
+                }
+                
             </Navbar>
           </Container>
           

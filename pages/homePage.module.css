@@ -232,8 +232,26 @@
   display: flex;
 }
 
+.hugsHeaderNavBarItem {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.016em;
+  color: #292D32;
+  align-self: center;
+  padding: 0 15px;
+  margin: auto 0;
+}
+
+.hugsHeaderNavBarItem img {
+  height: 50px;
+  width: 50px;
+  border-radius: 25%;
+}
+
 .hugsHeaderNavBarLink {
-  font-size: 3em;
+  font-size: 14px;
   color: #4D93AC;
   padding: 1em;
   align-self: center;
@@ -243,7 +261,7 @@
   text-decoration: underline #4D93AC;
 }
 
-.hugsHeaderNavBarLink:last-child {
+.hugsHeaderNavBarLink:nth-child(4) {
   margin-left: auto;
 }
 
@@ -269,6 +287,11 @@
   border-radius: 8px;
   color: #FFFFFF;
   height: 50px;
+  cursor: pointer;
+}
+
+.walletLoginButton:hover {
+  text-decoration: none !important;
 }
 
 .mainPageContainer {
