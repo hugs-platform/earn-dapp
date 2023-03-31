@@ -178,8 +178,8 @@ const Home: NextPage<HomePageProps> = () => {
                   <></>
                 }
               </Nav.Item>
-              <Nav.Item className={styles.hugsNavBarItemFill}></Nav.Item>
-              <Nav.Item className={isProfiles? styles.giftDiv + " " + styles.BRT : styles.giftDiv}>
+              <Nav.Item className={isProfiles? styles.hugsNavBarItemFill + " " + styles.BRT :styles.hugsNavBarItemFill}></Nav.Item>
+              <Nav.Item className={styles.giftDiv}>
                 {giftShow?
                   <div className={styles.hugsSideNavBarFooterGiftDiv}>
                     <img className={styles.hugsSideNavBarFooterGift} src='/static/src/gift.png'/>

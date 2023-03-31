@@ -87,7 +87,7 @@
 }
 
 .hugsNavBarItem {
-  height: 54px;
+  min-height: 54px;
   display: flex;
   padding-left: 25px;
   align-items: center;
