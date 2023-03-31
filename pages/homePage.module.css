@@ -400,6 +400,7 @@
 .mainPageContainer {
   display: flex;
   width: 100%;
+  padding-bottom: 90px;
 }
 
 .updateProfileBody {
