@@ -48,11 +48,21 @@
 }
 
 .hugsNavBarLink {
-  font-size: 3em;
-  font-weight: bold;
-  padding: 16px 0 16px 10%;
-  margin-left: 15%;
-  border-radius: 25px 0 0 25px;
+  font-family: 'Gilroy-Bold';
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.016em;
+  color: rgba(42, 42, 42, 0.5);
+  height: 54px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.giftDiv {
+  background-color: #FFFFFF;
+  margin-top: auto;
 }
 
 .hugsNavBarLink:before {
@@ -65,7 +75,31 @@
 }
 
 .hugsNavBarLinkActive {
-  background: #E4F7FC;
+  background: #E4F7FC !important;
+  color: #2A2A2A;
+  border-radius: 25px 0 0 25px;
+}
+
+.hugsNavBarLinkActiveHide {
+  background: #E4F7FC !important;
+  color: #2A2A2A;
+  border-radius: 25px 0 0 25px;
+}
+
+.hugsNavBarItem {
+  min-height: 54px;
+  display: flex;
+  padding-left: 25px;
+  align-items: center;
+  background: #FFFFFF !important;
+}
+
+.hugsNavBarItemFill {
+  height: 100%;
+  display: flex;
+  padding-left: 25px;
+  align-items: center;
+  background: #FFFFFF !important;
 }
 
 .hugsNavBarLinkActive:after {
@@ -80,6 +114,10 @@
 
 .overview:before {
   background: url('/static/src/overview.svg') no-repeat;
+}
+
+.avatar:before {
+  background: url('/static/src/avatar.svg') no-repeat;
 }
 
 .platform:before {
@@ -103,31 +141,63 @@
   background: #E4F7FC;
 }
 
+.sidebarContainer {
+  min-height: calc(100vh - 95px);
+  width: 255px;
+  transition: all 1s ease;
+}
+
+.fillHeight {
+  height: 100%;
+}
+
+.mainContantContainer {
+  width: calc(100% - 255px);
+  transition: all 1s ease;
+}
+
+.mainContantContainerMore {
+  width: calc(100% - 110px);
+}
+
 .hugsSideNavContainer {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1% 2% 0 2% !important;
 }
 
+.showLessSidebar {
+  width: 110px;
+}
+
 .hugsSideNavBar {
-  border-radius: 0 25px 0 0;
   height: 100%;  
-  width: 20%;  
-  position: absolute; 
-  z-index: 1; 
-  top: 0; 
-  left: 0; 
-  background-color:#FFFFFF; 
+  width: 100%;  
   transition: .5s ease; 
   overflow-x: hidden; 
-  padding: 20px 0 100px 0;
   display: flex; 
   flex-direction: column; 
 }
 
+.BRB {
+  border-bottom-right-radius: 25px !important;
+}
+
+.BRT {
+  border-top-right-radius: 25px !important;
+}
+
 .hugsSideBarLogo {
   display: flex;
+  padding-top: 20px;
+  background-color:#FFFFFF;
+}
+
+.emptyFooter {
+  height: 95px;
+  background-color:#FFFFFF;
 }
 
 .hugsSideNavBarTitle {
@@ -139,6 +209,11 @@
   width: 150px;
   height: 150px;
   margin: 0 auto;
+  transition: all 1s ease;
+}
+
+.hugsSideNavBarTitleHide {
+  background-image: none;
 }
 
 .hugs_title_div {
@@ -180,17 +255,45 @@
   padding-top: 5em;
   text-align: center;
   font-size: 3em;
+  overflow: hidden;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 .hugsSideNavBarFooter p {
   padding: 0 3em;
   font-size: 2em;
   line-height: 2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.hugsSideNavBarFooterGiftDiv {
+  text-align: center;
+  padding: 15px;
 }
 
 .hugsSideNavBarFooterGift {
   margin: auto auto -12em auto;
   z-index: 1;
+}
+
+.hugsSideNavBarFooterGiftSmall {
+  margin: auto;
+  padding: 25px;
+}
+
+.hugsSideNavBarFooterGiftSmallLink {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 119.7%;
+  background: linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%), #FFFFFF;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hugsSideNavBarFooter button {
@@ -295,10 +398,8 @@
 }
 
 .mainPageContainer {
-  width: 80%;
-  min-height: 100%;
-  margin-left: 20%;
-  padding-bottom: 100px;
+  display: flex;
+  width: 100%;
 }
 
 .updateProfileBody {
