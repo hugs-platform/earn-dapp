@@ -143,6 +143,7 @@ const Home: NextPage<HomePageProps> = () => {
                     styles.hugsNavBarLink + " " + styles.overview + " " + styles.hugsNavBarLinkActiveHide
                   : 
                   styles.hugsNavBarLink + " " + styles.overview}>{fullSidebar? "Coins": ""}</Nav.Link>
+                  {fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Coins <img src="/static/src/overview.svg"></img></Nav.Item>: <></>}
               </Nav.Item>
               <Nav.Item className={isCoins? styles.hugsNavBarItem + " " + styles.BRT + " " + styles.BRT: isDashboard? styles.hugsNavBarItem + " " + styles.BRB : styles.hugsNavBarItem}>
                 <Nav.Link onClick={() => {handlePageChange("Platforms")}} className={isPlatforms ? 
@@ -152,6 +153,7 @@ const Home: NextPage<HomePageProps> = () => {
                     :
                   styles.hugsNavBarLink + " " + styles.platform
                   }>{fullSidebar? "Platforms": ""}</Nav.Link>
+                  {fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Platforms <img src="/static/src/platform.svg"></img></Nav.Item>: <></>}
               </Nav.Item>
               <Nav.Item className={isPlatforms? styles.hugsNavBarItem + " " + styles.BRT: isProfiles? styles.hugsNavBarItem + " " + styles.BRB : styles.hugsNavBarItem}>
                 {isLogin?
@@ -165,6 +167,7 @@ const Home: NextPage<HomePageProps> = () => {
                 :
                   <></>
                 }
+                {fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Dashboard <img src="/static/src/dashboard.svg"></img></Nav.Item> : <></>}
               </Nav.Item>
               <Nav.Item className={isDashboard? styles.hugsNavBarItem + " " + styles.BRT :styles.hugsNavBarItem}>
                 {showMore?
@@ -177,6 +180,8 @@ const Home: NextPage<HomePageProps> = () => {
                 :
                   <></>
                 }
+                {showMore && fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Profiles <img src="/static/src/settings.svg"></img></Nav.Item>: <></>}
+
               </Nav.Item>
               <Nav.Item className={isProfiles? styles.hugsNavBarItemFill + " " + styles.BRT :styles.hugsNavBarItemFill}></Nav.Item>
               <Nav.Item className={styles.giftDiv}>
