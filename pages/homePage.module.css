@@ -116,6 +116,16 @@
   display: block;
 } 
 
+.hugsNavBatHoverItem:before {
+  content: '';
+  position: absolute;
+  bottom: 40%;
+  left: -10px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 12px solid #FFFFFF;
+}
+
 .hugsNavBatHoverItem {
   display: none;
   width: 110px;
