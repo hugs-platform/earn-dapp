@@ -8,7 +8,7 @@ export class HugsApi {
             headers: {}
         }
         
-        let token = this.getCookie("token=");
+        let token = this.getCookie("token");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -20,7 +20,7 @@ export class HugsApi {
             headers: {}
         }
 
-        let token = this.getCookie("token=");
+        let token = this.getCookie("token");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -32,7 +32,7 @@ export class HugsApi {
             headers: {}
         }
 
-        let token = this.getCookie("token=");
+        let token = this.getCookie("token");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -44,7 +44,7 @@ export class HugsApi {
             headers: {}
         }
 
-        let token = this.getCookie("token=");
+        let token = this.getCookie("token");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
         }
@@ -53,17 +53,9 @@ export class HugsApi {
 
 
     getCookie(name) {
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
         return "";
     }
 
@@ -77,6 +69,7 @@ export class HugsApi {
     logout() {
         this.deleteCookie("token");
         this.deleteCookie("isStaff");
+        this.deleteCookie("hideBanner");
         window.localStorage.removeItem("username");
         window.localStorage.removeItem("avatar");
         window.localStorage.removeItem("wallet");

@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 
 // components
 import OneMarket from "../oneMarket/oneMarket";
-import Dashboard from "../dashboard/newCoin";
+import Banner from "../../banner/banner";
 
 // data
 import { HugsApi } from "../../../../services/hugsApi";
@@ -66,7 +66,7 @@ function App() {
 
   return (
     <>
-      <Dashboard></Dashboard>
+      <Banner></Banner>
       <div className={styles.cryptoHeader}>
           <h1 className={styles.allCoins_title}>Platforms</h1>
           <div>
