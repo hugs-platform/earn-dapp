@@ -211,7 +211,6 @@ const Home: NextPage<HomePageProps> = () => {
             <Layout>
               <Container className={styles.hugsSideNavContainer}>
                 <Navbar className={styles.hugsHeaderNavBar}>
-                    <Nav.Link className={styles.hugsHeaderNavBarLink}>Overview</Nav.Link>
                     <Nav.Link className={styles.hugsHeaderNavBarLink}>How It works</Nav.Link>
                     <Nav.Link className={styles.hugsHeaderNavBarLink}>About Us</Nav.Link>
                     <Nav.Item className={styles.hugsHeaderNavBarLink}><ConnectButton handleOpenModal={onOpen}/></Nav.Item>
