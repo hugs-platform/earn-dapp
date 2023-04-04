@@ -193,7 +193,7 @@ const Home: NextPage<HomePageProps> = () => {
                       <p>&#10004; Get full access</p>
                       <p>&#10004; Earn Rewards</p>
                       <p>&#10004; Gain Reputation.</p>
-                      <button className={styles.mainButton} type="button">Comming soon</button>
+                      <button className={styles.mainButton} type="button">Coming soon</button>
                     </Nav.Item>
                   </div>
                   :
@@ -211,7 +211,6 @@ const Home: NextPage<HomePageProps> = () => {
             <Layout>
               <Container className={styles.hugsSideNavContainer}>
                 <Navbar className={styles.hugsHeaderNavBar}>
-                    <Nav.Link className={styles.hugsHeaderNavBarLink}>Overview</Nav.Link>
                     <Nav.Link className={styles.hugsHeaderNavBarLink}>How It works</Nav.Link>
                     <Nav.Link className={styles.hugsHeaderNavBarLink}>About Us</Nav.Link>
                     <Nav.Item className={styles.hugsHeaderNavBarLink}><ConnectButton handleOpenModal={onOpen}/></Nav.Item>
