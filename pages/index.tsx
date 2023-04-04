@@ -193,7 +193,7 @@ const Home: NextPage<HomePageProps> = () => {
                       <p>&#10004; Get full access</p>
                       <p>&#10004; Earn Rewards</p>
                       <p>&#10004; Gain Reputation.</p>
-                      <button className={styles.mainButton} type="button">Comming soon</button>
+                      <button className={styles.mainButton} type="button">Coming soon</button>
                     </Nav.Item>
                   </div>
                   :
