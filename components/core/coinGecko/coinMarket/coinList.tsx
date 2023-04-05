@@ -478,7 +478,7 @@ function App() {
                   onChange={inputHandler}
                   id="search-coin-list-id"
                   variant="outlined"
-                  label="Coins/Platforms"
+                  label="Coins/Markets"
                   className={styles.search}
                 />
                 <button className={styles.searchBtn} onClick={handleFetch}><img src='/static/src/search-normal.svg'></img></button>

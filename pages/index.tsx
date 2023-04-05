@@ -53,7 +53,7 @@ const Home: NextPage<HomePageProps> = () => {
         setIsPlatforms(false);
         setIsProfiles(false);
         break;
-      case "Platforms":
+      case "Markets":
         setIsPlatforms(true);
         setIsCoins(false);
         setIsDashboard(false);
@@ -146,14 +146,14 @@ const Home: NextPage<HomePageProps> = () => {
                   {fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Coins <img src="/static/src/overview.svg"></img></Nav.Item>: <></>}
               </Nav.Item>
               <Nav.Item className={isCoins? styles.hugsNavBarItem + " " + styles.BRT + " " + styles.BRT: isDashboard? styles.hugsNavBarItem + " " + styles.BRB : styles.hugsNavBarItem}>
-                <Nav.Link onClick={() => {handlePageChange("Platforms")}} className={isPlatforms ? 
+                <Nav.Link onClick={() => {handlePageChange("Markets")}} className={isPlatforms ? 
                   fullSidebar?
                     styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActive :
                     styles.hugsNavBarLink + " " + styles.platform + " " + styles.hugsNavBarLinkActiveHide
                     :
                   styles.hugsNavBarLink + " " + styles.platform
-                  }>{fullSidebar? "Platforms": ""}</Nav.Link>
-                  {fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Platforms <img src="/static/src/platform.svg"></img></Nav.Item>: <></>}
+                  }>{fullSidebar? "Markets": ""}</Nav.Link>
+                  {fullSidebar === false? <Nav.Item className={styles.hugsNavBatHoverItem}>Markets <img src="/static/src/platform.svg"></img></Nav.Item>: <></>}
               </Nav.Item>
               <Nav.Item className={isPlatforms? styles.hugsNavBarItem + " " + styles.BRT: isProfiles? styles.hugsNavBarItem + " " + styles.BRB : styles.hugsNavBarItem}>
                 {isLogin?
