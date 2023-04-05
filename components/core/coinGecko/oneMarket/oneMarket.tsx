@@ -194,13 +194,13 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
         {logo ? <Image className={styles.marketName_image} height={32} width={32} src={logo} />: <></>}
           <p className={`${styles.oneMarketDefaultStyling} ${styles.marketName_name}`}>{platform}</p>
         </div>
-        {max_apy? 
-          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{max_apy} %</p>
+        {min_apy? 
+          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{min_apy} %</p>
         :
           <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
         }
-        {min_apy? 
-          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{min_apy} %</p>
+        {max_apy? 
+          <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}>{max_apy} %</p>
         :
           <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
         }
@@ -214,8 +214,8 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
           <section className={oneMarketStyles.coinMarketsTable}>
             <div className={oneMarketStyles.coinMarketsRow}>
               <p className={oneMarketStyles.coinMarketsColumn}>Coin</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Max APY</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Min APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Highest APY</p>
+              <p className={oneMarketStyles.coinMarketsColumn}>Lowest APY</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Days</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Age</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Type</p>
