@@ -464,7 +464,7 @@ function App() {
       :
         <div>
           <div className={styles.cryptoHeader}>
-              <h1 className={styles.allCoins_title}>Platforms</h1>
+              <h1 className={styles.allCoins_title}>Markets</h1>
               <button className={styles.addNewCoinButton} onClick={handleOpen} type="button">
                 + Add new coin
               </button>
@@ -474,7 +474,7 @@ function App() {
                   onChange={inputHandler}
                   id="search-coin-list-id"
                   variant="outlined"
-                  label="Coins/Platforms"
+                  label="Coins/Markets"
                   className={styles.search}
                 />
                 <button className={styles.searchBtn} onClick={handleFetch}><img src='/static/src/search-normal.svg'></img></button>
