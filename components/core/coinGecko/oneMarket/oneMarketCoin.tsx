@@ -175,8 +175,8 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
           {coinMarketsData.coin.image? <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image}/>:<></>}
           <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
         </div>
-        <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.max_apy}%</p>
         <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.min_apy}%</p>
+        <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.max_apy}%</p>
         <p className={styles.coinMarketsColumn}>{coinMarketsData.days}</p>
         <p className={styles.coinMarketsColumn}>{findTimeDelta(coinMarketsData.last_updated)}</p>
         <p className={styles.coinMarketsColumn}>{coinMarketsData.staking_type}</p>

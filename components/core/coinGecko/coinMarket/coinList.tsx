@@ -489,10 +489,10 @@ function App() {
               <p className={styles.allCoins_titles + " " + styles.textStart}>Name</p>
             </div>
             <div>
-              <p id='max_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Max APY</p>
+              <p id='min_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Lowest APY</p>
             </div>
             <div>
-              <p id='min_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Min APY</p>
+              <p id='max_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Highest APY</p>
             </div>
             <div>
               <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Age</p>

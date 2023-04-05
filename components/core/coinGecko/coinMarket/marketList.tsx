@@ -482,8 +482,8 @@ function App() {
           </div>
           <div className={styles.marketListContainer}>
             <p id='platform' className={`${styles.marketListTitle} ${styles.sortBy}`}>Name</p>
-            <p id='max_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Max APY</p>
-            <p id='min_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Min APY</p>
+            <p id='min_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Lowest APY</p>
+            <p id='max_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Highest APY</p>
             <p id='earn_coins' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Earn Coins</p>
             <p id='link' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Link</p>
             <p id='click' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>
