@@ -56,6 +56,10 @@
     background-color: #E2F5FA !important;
 }
 
+.newCoinInput label {
+    z-index: 0;
+}
+
 .newCoinInput div input fieldset legend {
     font-family: 'Gilroy';
     font-style: normal;
@@ -75,10 +79,6 @@
 
 .textFielInputLabel input {
     padding: 14px;
-}
-
-.newCoinInput label {
-    z-index: 0;
 }
 
 .submitAddNewCoin {

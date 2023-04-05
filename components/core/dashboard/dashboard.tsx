@@ -11,7 +11,6 @@ import styles from "../dashboard/dashboard.module.css";
 
 import { ReviewRequest, CoinContribution } from "../../../core/types/types";
 
-import Dashbord from "../coinGecko/dashboard/newCoin";
 import OneReviewRequest from "../dashboard/reviews/reviewRequest";
 import OneReview from "./reviews/review";
 import OneContribution from "./reviews/contribution";
@@ -207,7 +206,6 @@ function App() {
 
   return (
     <>
-      <Dashbord></Dashbord>
       <header className={styles.dashboard_header}>
         <hgroup>
             <h1>Dashboard</h1>

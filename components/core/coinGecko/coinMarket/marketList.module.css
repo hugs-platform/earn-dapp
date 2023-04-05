@@ -165,9 +165,133 @@ p.sortBy:after {
     height: 46px;
     width: 70px;
 }
-  
+
 .searchBtn img {
     margin: auto;
     width: 14px;
     height: 14px;
+}
+
+.newCoinContainer {
+    display: inline-block;
+    border: 0.1rem solid #eceff1;
+    padding: 25px;
+    width: 100%;
+    border-bottom: 0.1rem solid #eceff1;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
+    border-radius: 16px 16px;
+}
+
+.addNewCoinButton {
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    font: 400 11px system-ui;
+    font-size: 2.5em;
+    font-weight: 500;
+    padding: 1em 3em;
+    border-width: 1px;
+    border-style: solid;
+    border-image: initial;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    color: #000000;
+    float: right;
+    margin: 0 25px 0 auto;
+    height: auto;
+}
+
+.newCoinInput {
+    font-size: 2em;
+    max-width: 500px;
+    width: 100%;
+    margin: 10px 0 !important;
+    background-color: #E2F5FA !important;
+}
+
+.newCoinInput label {
+    z-index: 0;
+}
+
+.newCoinInput div input fieldset legend {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #292D32;
+}
+
+.grid {
+    display: grid;
+}
+
+.errorMsg {
+    text-align: center;
+    font-size: 1.5em;
+    color: #d32f2f;
+}
+
+.textFielInputLabel * {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.textFielInputLabel input {
+    padding: 14px;
+}
+
+.selectError div fieldset {
+    border-color: #E73656 !important;
+}
+
+.newCoinInputField {
+    background-color: #E2F5FA;
+}
+
+.newCoinBody {
+    font-size: 18px;
+}
+
+.newCoinBody p {
+    color: #d32f2f;
+    font-size: 14;
+    margin: 0;
+    padding-left: 0.5em;
+}
+
+.newCoinTile {
+    padding: 1em;
+    text-align: center;
+    font-weight: 600;
+}
+
+.newCoinTileBody {
+    padding: 1em;
+    text-align: center;
+    color: #00C495;
+}
+
+.newCoinBodyWarning {
+    margin: auto;
+}
+
+.newCoinDesc {
+    padding: 1em;
+    text-align: center;
+    color: #949698;
+}
+
+.submitAddNewCoin {
+    text-align: center;
 }
