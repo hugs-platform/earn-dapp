@@ -188,7 +188,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   }
 
   return (
-    <section className={styles.oneCoinContainer}>
+    <section className={styles.marketListContainer}>
       <article className={styles.oneMarketFull}>
         <div className={styles.marketName}>
         {logo ? <Image className={styles.marketName_image} height={32} width={32} src={logo} />: <></>}

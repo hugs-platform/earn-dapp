@@ -215,7 +215,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       {isOpenList ?
         <div ref={content} className={styles.accordion__content}>
           <section className={oneMarketStyles.coinMarketsTable}>
-            <div className={oneMarketStyles.coinMarketsRow}>
+            <div className={`${oneMarketStyles.coinMarketsRow} ${oneMarketStyles.coinMarketsRowHeader}`}>
               <p className={oneMarketStyles.coinMarketsColumn}>Platform</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Lowest APY</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Highest APY</p>
@@ -264,8 +264,10 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                     onChange={daysChange}/>
                   
                   {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
-                  <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
-                  <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
+                  <div>
+                    <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
+                    <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
+                  </div>
                 </div>
               : isSuccess?
                 <div className={oneMarketStyles.addNewContainer}>

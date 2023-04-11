@@ -21,6 +21,7 @@ export default function Layout({ children }: Props) {
       justifyContent="center"
       bg="white"
       background="E4F7FC"
+      margin="15px"
     >
       {children}
     </Flex>

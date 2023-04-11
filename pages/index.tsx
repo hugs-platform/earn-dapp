@@ -36,6 +36,7 @@ const Home: NextPage<HomePageProps> = () => {
   const [ currentPage, setCurrentPage ] = useState("Coins");
   const [ fullSidebar, setFullSidebar ] = useState(true);
   const [ giftShow, setGiftShow ] = useState(true);
+  const [size, setSize] = useState(1080);
   const API = new HugsApi();
 
 
@@ -89,7 +90,19 @@ const Home: NextPage<HomePageProps> = () => {
     }
 	};
 
+  const updateSize = () => {
+    setSize(window.innerWidth);
+  }
+
   useEffect(() => {
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    if (size < 768){
+      setFullSidebar(false);
+      setGiftShow(false);
+      window.removeEventListener('resize', updateSize);
+    }
+
     window.addEventListener('profile_update', () => {checkUser();});
     if (API.getCookie("token")){
       setIsLogin(true);
@@ -211,8 +224,8 @@ const Home: NextPage<HomePageProps> = () => {
             <Layout>
               <Container className={styles.hugsSideNavContainer}>
                 <Navbar className={styles.hugsHeaderNavBar}>
-                    <Nav.Link className={styles.hugsHeaderNavBarLink}>How It works</Nav.Link>
-                    <Nav.Link className={styles.hugsHeaderNavBarLink}>About Us</Nav.Link>
+                    <Nav.Item className={styles.hugsHeaderNavBarItem}>How It works</Nav.Item>
+                    <Nav.Item className={styles.hugsHeaderNavBarItem}>About Us</Nav.Item>
                     <Nav.Item className={styles.hugsHeaderNavBarLink}><ConnectButton handleOpenModal={onOpen}/></Nav.Item>
                     {userName?
                       <Nav.Item className={styles.hugsHeaderNavBarItem}>{userName}</Nav.Item>
