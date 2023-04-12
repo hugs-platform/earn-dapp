@@ -1,13 +1,23 @@
+.allCoins_container_main {
+  overflow: scroll;
+  background: #FFFFFF;
+  border-radius: 16px;
+}
+
 .allCoins_container {
   display: grid;
   border: 0.1rem solid #eceff1;
-  padding: 25px;
-  width: 100%;
+  min-width: 900px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
   border-bottom: 0.1rem solid #eceff1;
   background: #FFFFFF;
   box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
   border-radius: 16px 16px 0 0;
+}
+
+.allCoins_container div {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .allCoins_titles {
@@ -17,10 +27,6 @@
   font-size: 14px;
   line-height: 17px;
   color: #292D32;
-}
-
-.search {
-  width: 350px; 
 }
 
 .search div {
@@ -76,19 +82,61 @@
 
 .cryptoHeader {
   display: flex; 
-  justify-content: space-between;
   padding-top: 2.5em;
   padding-bottom: 2.5em;
-  height: 80px;
+}
+
+@media screen and (max-width: 555px) {
+  .allCoins_container {
+    padding: 15px;
+    white-space: nowrap;
+  }
+
+  .cryptoHeader {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .addNewCoinButton {
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .allCoins_title {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 556px) {
+  .allCoins_container {
+    padding: 25px;
+  }
+
+  .cryptoHeader {
+    justify-content: space-between;
+    height: 80px;
+    text-align: center;
+  }
+
+  .addNewCoinButton {
+    float: right;
+    margin: 15px 0;
+  }
+
+  .addNewCoinButton {
+    padding: 10px;
+    margin: 0 10px 0 auto;
+  }
 }
 
 .coinsListPagination {
   min-height: 50px;
   margin: auto;
-  padding: 3em;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   background: #FFFFFF;
+  min-width: 900px;
   border-radius: 0 0 16px 16px;
 }
 
@@ -179,16 +227,30 @@ p.sortBy:after {
   font: 400 11px system-ui;
   font-size: 2.5em;
   font-weight: 500;
-  padding: 1em 3em;
   border-width: 1px;
   border-style: solid;
   border-image: initial;
   background-color: #FFFFFF;
   border-radius: 8px;
   color: #000000;
-  float: right;
-  margin: 0 25px 0 auto;
   height: auto;
+}
+
+@media only screen and (max-width: 1150px) {
+  .search {
+    width: calc(100% - 70px); 
+  }
+}
+
+@media only screen and (min-width: 1151px) {
+  .addNewCoinButton {
+    margin: 0 25px 0 auto;
+    padding: 5px 25px;
+  }
+
+  .search {
+    width: 350px; 
+  }
 }
 
 .newCoinInput {

@@ -295,7 +295,6 @@ function App() {
                     ))}
                   </div>
                   <div className={styles.items_list_footer}>
-                    <img src='/static/src/expand.png'/>
                     {pageCount.current > 1 ?
                       <ReactPaginate
                         initialPage={0}

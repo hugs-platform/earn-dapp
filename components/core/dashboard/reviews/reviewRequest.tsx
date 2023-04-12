@@ -32,8 +32,10 @@ const style = {
     width: "75vw",
     bgcolor: 'background.paper',
     boxShadow: 24,
-    borderRadius: "25px",
+    borderRadius: "12px",
     p: 4,
+    maxHeight: "95vh",
+    overflow: "scroll"
 };
 
 
@@ -124,32 +126,32 @@ function OneReviewRequest(props: ReviewProps) {
     return (isShow ?
         <div className={styles.row}>
             {reviewData.contribution.contribution_type == 1 ?
-                <p className={styles.requestName}>New platform {reviewData.market.platform}</p>
+                <p className={`${styles.requestName} + ${styles.col_4}`}>New platform {reviewData.market.platform}</p>
             :
             reviewData.contribution.contribution_type == 2 ?
-                <p className={styles.requestName}>New coin {reviewData.coin.name}</p>
+                <p className={`${styles.requestName} + ${styles.col_4}`}>New coin {reviewData.coin.name}</p>
             :
             reviewData.contribution.contribution_type == 3 ?
-                <p className={styles.requestName}>Coin {reviewData.coin.name} staking on {reviewData.market.platform}</p>
+                <p className={`${styles.requestName} + ${styles.col_4}`}>Coin {reviewData.coin.name} staking on {reviewData.market.platform}</p>
             :
             reviewData.contribution.contribution_type == 4 ?
-                <p className={styles.requestName}>Remove coin {reviewData.coin.name}</p>
+                <p className={`${styles.requestName} + ${styles.col_4}`}>Remove coin {reviewData.coin.name}</p>
             :
             reviewData.contribution.contribution_type == 5 ?
-                <p className={styles.requestName}>Remove platform {reviewData.market.platform}</p>
+                <p className={`${styles.requestName} + ${styles.col_4}`}>Remove platform {reviewData.market.platform}</p>
             :
             reviewData.contribution.contribution_type == 7 ?
-                reviewData.contribution.min_apy != reviewData.contribution.max_apy?
-                    <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%</p>
+                reviewData.contribution.min_apy !== reviewData.contribution.max_apy?
+                    <p className={`${styles.requestName} + ${styles.col_4}`}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.min_apy}..{reviewData.contribution.max_apy}%</p>
                 :
-                <p className={styles.requestName}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.max_apy}%</p>
+                <p className={`${styles.requestName} + ${styles.col_4}`}>Remove coin {reviewData.market.platform} form platform {reviewData.market.platform} with APY:{reviewData.contribution.min_apy}%</p>
             :
                 <></>
             }
-            <Countdown className={styles.countdown} date={reviewData.time_left}>
+            <Countdown className={`${styles.countdown} + ${styles.col_4}`} date={reviewData.time_left}>
                 <Completionist />
             </Countdown>
-            <p className={styles.coinMarketsColumn + " " + styles.oneMarket_updateNowButton} onClick={handleOpen}>Update now</p>
+            <p className={styles.coinMarketsColumn + " " + styles.oneMarket_updateNowButton + " " + styles.col_4} onClick={handleOpen}>Update now</p>
 
         <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open} onClose={handleClose} closeAfterTransition>
             <Fade in={open}>
@@ -204,8 +206,10 @@ function OneReviewRequest(props: ReviewProps) {
                         :
                             <></>
                         }
-                        <button className={fitstQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerFirstQuestion(2)}>Yes</button>
-                        <button className={fitstQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerFirstQuestion(1)}>No</button>
+                        <div>
+                            <button className={fitstQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerFirstQuestion(2)}>Yes</button>
+                            <button className={fitstQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerFirstQuestion(1)}>No</button>
+                        </div>
                     </Container>
                     { fitstQuestionError && 
                         <Container className={styles.dashboard_modal_main_container_error}>
@@ -239,8 +243,10 @@ function OneReviewRequest(props: ReviewProps) {
                         :
                             <></>
                         }
-                        <button className={secondQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerSecondQuestion(2)}>Yes</button> 
-                        <button className={secondQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerSecondQuestion(1)}>No</button>
+                        <div>
+                            <button className={secondQuestion == 2 ? styles.dasboard_modal_accept_btn + " " + styles.clicked_btn : styles.dasboard_modal_accept_btn} onClick={() => answerSecondQuestion(2)}>Yes</button> 
+                            <button className={secondQuestion == 1 ? styles.dasboard_modal_reject_btn + " " + styles.clicked_btn : styles.dasboard_modal_reject_btn} onClick={() => answerSecondQuestion(1)}>No</button>
+                        </div>
                     </Container>
                     { secondQuestionError && 
                         <Container className={styles.dashboard_modal_main_container_error}>

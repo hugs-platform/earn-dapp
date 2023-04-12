@@ -1,5 +1,4 @@
 import React, { FC, useState, useRef } from "react";
-import Image from "next/image";
 import Select from "react-select";
 import TextField from "@mui/material/TextField";
 
@@ -178,16 +177,21 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
     <div key={oneProjectData.market.market_id}>
       <div className={oneMarketStyles.coinMarketsRow}>
         <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
-          {oneProjectData.market.logo? <Image className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo}/>: <></>}
+          <span>Platform:</span>  
+          {oneProjectData.market.logo? <img className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo}/>: <></>}
           <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
         </div>
-        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.min_apy}%</p>
-        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}>{oneProjectData.max_apy}%</p>
-        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.days}</p>
-        <p className={oneMarketStyles.coinMarketsColumn}>{findTimeDelta(oneProjectData.last_updated)}</p>
-        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.staking_type}</p>
-        <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{oneProjectData.market.platform}</a>
-        <p className={oneMarketStyles.coinMarketsColumn}>{oneProjectData.market.click}</p>
+        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}><span>Lowest APY:</span> {oneProjectData.min_apy}%</p>
+        <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}><span>Highest APY:</span> {oneProjectData.max_apy}%</p>
+        {oneProjectData.days?
+          <p className={oneMarketStyles.coinMarketsColumn}><span>Days:</span> {oneProjectData.days}</p>
+        :
+         <p className={oneMarketStyles.coinMarketsColumn}><span>Days:</span> Unknown</p>
+        }
+        <p className={oneMarketStyles.coinMarketsColumn}><span>Age:</span> {findTimeDelta(oneProjectData.last_updated)}</p>
+        <p className={oneMarketStyles.coinMarketsColumn}><span>Type:</span> {oneProjectData.staking_type}</p>
+        <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}><span>Link:</span> {oneProjectData.market.platform}</a>
+        <p className={oneMarketStyles.coinMarketsColumn}><span>Click:</span> {oneProjectData.market.click}</p>
         {isOpen ? 
             <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_closeNowButton} onClick={closeModal}>Close</p></div>:
         exist ?

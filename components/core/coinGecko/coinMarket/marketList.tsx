@@ -466,7 +466,7 @@ function App() {
           <div className={styles.cryptoHeader}>
               <h1 className={styles.allCoins_title}>Markets</h1>
               <button className={styles.addNewCoinButton} onClick={handleOpen} type="button">
-                + Add new coin
+                + Add new market
               </button>
               <div>
                 <TextField
@@ -480,42 +480,42 @@ function App() {
                 <button className={styles.searchBtn} onClick={handleFetch}><img src='/static/src/search-normal.svg'></img></button>
               </div>
           </div>
-          <div className={styles.marketListContainer}>
-            <p id='platform' className={`${styles.marketListTitle} ${styles.sortBy}`}>Name</p>
-            <p id='min_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Lowest APY</p>
-            <p id='max_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Highest APY</p>
-            <p id='earn_coins' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Earn Coins</p>
-            <p id='link' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Link</p>
-            <p id='click' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>
-            <p className={styles.marketListTitle}>View More</p>
-          </div>
+          <div className={styles.marketsContainer}>
+            <div className={styles.marketListContainer}>
+              <p id='platform' className={`${styles.marketListTitle} ${styles.sortBy}`}>Name</p>
+              <p id='min_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Lowest APY</p>
+              <p id='max_apy' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Highest APY</p>
+              <p id='earn_coins' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Earn Coins</p>
+              <p id='link' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Link</p>
+              <p id='click' className={styles.marketListTitle + " " + styles.sortBy} onClick={orderByChange}>Clicks</p>
+              <p className={styles.marketListTitle}>View More</p>
+            </div>
 
-          <div className={styles.marketList}>
             {list.map((market: MarketTypes) => (
               <OneMarket key={market.market_id} oneMarketInfo={market} />
             ))}
-          </div>
-          <div className={styles.marketListPagination}>
-            {pageCount > 1 ? (
-              <ReactPaginate
-                initialPage={0}
-                pageCount={pageCount}
-                pageRangeDisplayed={2}
-                marginPagesDisplayed={3}
-                onPageChange={handlePageChange}
-                containerClassName={styles.marketListPagination}
-                previousLinkClassName={styles.marketListPaginationPage}
-                breakClassName={styles.marketListPaginationPageBreak}
-                nextLinkClassName={styles.marketListPaginationPage}
-                pageClassName={styles.marketListPaginationPage}
-                nextClassName={styles.marketListPaginationPage}
-                previousClassName={styles.marketListPaginationPage}
-                disabledClassName={styles.marketListPaginationPageActiveDisabled}
-                activeClassName={styles.marketListPaginationPageActive}
-                previousLabel={'< Prev'}
-                nextLabel={'Next >'}
-              />
-            ) : <></>} 
+            <div className={styles.marketListPagination}>
+              {pageCount > 1 ? (
+                <ReactPaginate
+                  initialPage={0}
+                  pageCount={pageCount}
+                  pageRangeDisplayed={2}
+                  marginPagesDisplayed={3}
+                  onPageChange={handlePageChange}
+                  containerClassName={styles.marketListPagination}
+                  previousLinkClassName={styles.marketListPaginationPage}
+                  breakClassName={styles.marketListPaginationPageBreak}
+                  nextLinkClassName={styles.marketListPaginationPage}
+                  pageClassName={styles.marketListPaginationPage}
+                  nextClassName={styles.marketListPaginationPage}
+                  previousClassName={styles.marketListPaginationPage}
+                  disabledClassName={styles.marketListPaginationPageActiveDisabled}
+                  activeClassName={styles.marketListPaginationPageActive}
+                  previousLabel={'< Prev'}
+                  nextLabel={'Next >'}
+                />
+              ) : <></>} 
+            </div>
           </div>
         </div>
     }

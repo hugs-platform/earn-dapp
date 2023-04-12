@@ -25,6 +25,8 @@
 .profilesItemList {
     display: grid;
     grid-template-columns: 2fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    width: 100%;
+    overflow: scroll;
 }
 
 .profilesItemList > p {
