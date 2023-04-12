@@ -186,8 +186,8 @@ const Home: NextPage<HomePageProps> = () => {
                 {showMore?
                   <Nav.Link onClick={() => {handlePageChange("Profiles")}} className={isProfiles ? 
                     fullSidebar?
-                    styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive :
-                    styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActiveHide
+                    styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActive :
+                    styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActiveHide
                     : styles.hugsNavBarLink + " " + styles.avatar 
                   }>{fullSidebar? "Profiles": ""}</Nav.Link>
                 :

@@ -1,29 +1,15 @@
 .coinMarketsRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  min-width: 900px;
   justify-content: center;
-  margin-left: 15px;
   border-bottom: 0.1rem solid #eceff1;
+  padding: 10px 10px 10px 15px;
+  background-color: #ffffff;
   white-space: nowrap;
 }
 
-/* .coinMarketsRow p {
-  padding: 0 5px;
-} */
-
 @media only screen and (min-width: 767px) {
-  p.coinMarketsColumn {
-    font-size: 14px;
-  }
-  
-  a.coinMarketsColumn {
-    font-size: 14px;
-  }
-
-  .coinMarketsRow {
-    padding: 10px 5px 10px 25px;
-    align-items: center;
-  }
-
   .addNewContainer h2 {
     font-size: 24px;
   }
@@ -50,51 +36,11 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
-  p.coinMarketsColumn {
-    font-size: 24px;
-  }
-  
-  a.coinMarketsColumn {
-    font-size: 24px;
-  }
-
-  .coinMarketsRow {
-    align-items: stretch;
-    padding: 10px 5px 10px 15px;
-    flex-direction: column;
-  }
-
-  .coinMarketsColumn span {
-    color: rgba(41, 45, 50, 0.65) !important;
-  }
-
-  .coinMarketsRowHeader {
-    display: none;
-  }
-
-  .addNewContainer {
-    padding: 0;
-  }
-
-  .addNewContainer h2 {
-    font-size: 16px;
-  }
-
-  .coinMarketsColumn {
-    font-size: 24px;
-    flex: 1 1 0;
-    width: 100%;
-    padding: 5px 0;
-    justify-content: center !important;
-    text-align: center;
-  }
-}
-
 p.coinMarketsColumn {
   font-family: 'Gilroy';
   font-style: normal;
   font-weight: 500;
+  font-size: 14px;
   line-height: 19px;
   color: rgba(41, 45, 50, 0.65);
 }
@@ -103,6 +49,7 @@ a.coinMarketsColumn {
   font-family: 'Gilroy';
   font-style: normal;
   font-weight: 500;
+  font-size: 14px;
   line-height: 17px;
   color: #638FFE;
 }

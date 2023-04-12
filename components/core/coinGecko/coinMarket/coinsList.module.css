@@ -1,7 +1,13 @@
+.allCoins_container_main {
+  overflow: scroll;
+  background: #FFFFFF;
+  border-radius: 16px;
+}
+
 .allCoins_container {
   display: grid;
   border: 0.1rem solid #eceff1;
-  width: 100%;
+  min-width: 900px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
   border-bottom: 0.1rem solid #eceff1;
   background: #FFFFFF;
@@ -128,8 +134,9 @@
   min-height: 50px;
   margin: auto;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   background: #FFFFFF;
+  min-width: 900px;
   border-radius: 0 0 16px 16px;
 }
 

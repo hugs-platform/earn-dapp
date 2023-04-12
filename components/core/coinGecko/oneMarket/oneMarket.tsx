@@ -224,58 +224,56 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
             {list.map((coinMarkets: CoinMarkets) => (
               <OneCoinMarket key={coinMarkets.market.platform} coinMarketsData={coinMarkets}/>
             ))};
-            <div className={oneMarketStyles.coinMarketsRow}>
-              {addNew ? 
-                <div className={oneMarketStyles.addNewContainer}>
-                  <h2>Add new contribution for {oneMarketInfo.platform} {oneMarketInfo.logo? <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/> : <></>}</h2>
-                  <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={coinsList} onChange={coinListHandle}/>
-                  <TextField
-                    id="min-apy-id"
-                    label="Minimum Annual Percentage Yield"
-                    placeholder="0.00"
-                    variant="outlined"
-                    type="number" 
-                    className={minApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } 
-                    onChange={minApyChange}/>
+            {addNew ? 
+              <div className={oneMarketStyles.addNewContainer}>
+                <h2>Add new contribution for {oneMarketInfo.platform} {oneMarketInfo.logo? <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/> : <></>}</h2>
+                <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={coinsList} onChange={coinListHandle}/>
+                <TextField
+                  id="min-apy-id"
+                  label="Minimum Annual Percentage Yield"
+                  placeholder="0.00"
+                  variant="outlined"
+                  type="number" 
+                  className={minApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } 
+                  onChange={minApyChange}/>
 
-                  <TextField
-                    id="max-apy-id"
-                    label="Maximum Annual Percentage Yield"
-                    placeholder="0.00"
-                    variant="outlined"
-                    type="number" 
-                    className={maxApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
-                    onChange={maxApyChange}/>
-                  
-                  <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
-                  
-                  <TextField 
-                    id="days-id"
-                    label="Days"
-                    placeholder="90"
-                    variant="outlined"
-                    type="number"
-                    className={daysValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
-                    onChange={daysChange}/>
-                  
-                  {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
-                  <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
-                  <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
+                <TextField
+                  id="max-apy-id"
+                  label="Maximum Annual Percentage Yield"
+                  placeholder="0.00"
+                  variant="outlined"
+                  type="number" 
+                  className={maxApyValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
+                  onChange={maxApyChange}/>
+                
+                <Select className={stackingValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } isSearchable={true} placeholder="Select Staking type" options={stakingTypes} onChange={stackingHandle}/>
+                
+                <TextField 
+                  id="days-id"
+                  label="Days"
+                  placeholder="90"
+                  variant="outlined"
+                  type="number"
+                  className={daysValueError ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect }
+                  onChange={daysChange}/>
+                
+                {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
+                <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
+                <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
+              </div>
+            : isSuccess?
+              <div className={oneMarketStyles.addNewContainer}>
+                <h2 className={oneMarketStyles.updateContainerTitle}>APY Update added for Review.</h2>
+                <p className={oneMarketStyles.updateGreenText}>Thank you!! for Contributing to the Earn dApp.</p>
+                <p className={oneMarketStyles.updateGreyText}>Please note that your contribution will not be visible in the app right away.</p>
+                <p className={oneMarketStyles.updateGreyText}>This will be sent to a number of Reviewers first, who will then decide whether your entry should be Accepted or Rejected.</p>
+                <div className={oneMarketStyles.modalSubmit}>
+                  <button className={oneMarketStyles.updateBtn}  onClick={() => setIsSuccess(false)}>Close</button>
                 </div>
-              : isSuccess?
-                <div className={oneMarketStyles.addNewContainer}>
-                  <h2 className={oneMarketStyles.updateContainerTitle}>APY Update added for Review.</h2>
-                  <p className={oneMarketStyles.updateGreenText}>Thank you!! for Contributing to the Earn dApp.</p>
-                  <p className={oneMarketStyles.updateGreyText}>Please note that your contribution will not be visible in the app right away.</p>
-                  <p className={oneMarketStyles.updateGreyText}>This will be sent to a number of Reviewers first, who will then decide whether your entry should be Accepted or Rejected.</p>
-                  <div className={oneMarketStyles.modalSubmit}>
-                    <button className={oneMarketStyles.updateBtn}  onClick={() => setIsSuccess(false)}>Close</button>
-                  </div>
-                </div>
-              :
-                <p className={oneMarketStyles.coinMarketsColumn} onClick={openModal}>Add new</p>
-              }
-            </div>
+              </div>
+            :
+              <p className={oneMarketStyles.coinMarketsColumn} onClick={openModal}>Add new</p>
+            }
           </section>
         </div>
       :

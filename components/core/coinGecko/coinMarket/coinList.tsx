@@ -484,50 +484,52 @@ function App() {
                 <button className={styles.searchBtn} onClick={handleFetch}><img src='/static/src/search-normal.svg'></img></button>
               </div>
           </div>
-          <div className={styles.allCoins_container}>
-            <div>
-              <p className={styles.allCoins_titles + " " + styles.textStart}>Name</p>
+          <div className={styles.allCoins_container_main}>
+            <div className={styles.allCoins_container}>
+              <div>
+                <p className={styles.allCoins_titles + " " + styles.textStart}>Name</p>
+              </div>
+              <div>
+                <p id='min_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Lowest APY</p>
+              </div>
+              <div>
+                <p id='max_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Highest APY</p>
+              </div>
+              <div>
+                <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Age</p>
+              </div>
+              <div>
+                <p className={styles.allCoins_titles + " " + styles.textEnd}>View More</p>
+              </div>
             </div>
-            <div>
-              <p id='min_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Lowest APY</p>
+            <div className={styles.allCoins_group}>
+              {list.map((oneCoin: CoinTypes) => (
+                <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
+              ))}
             </div>
-            <div>
-              <p id='max_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Highest APY</p>
-            </div>
-            <div>
-              <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Age</p>
-            </div>
-            <div>
-              <p className={styles.allCoins_titles + " " + styles.textEnd}>View More</p>
-            </div>
+            {pageCount > 1 ? (
+              <ReactPaginate
+                initialPage={0}
+                pageCount={pageCount}
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={3}
+                onPageChange={handlePageChange}
+                containerClassName={styles.coinsListPagination}
+                previousLinkClassName={styles.coinsListPaginationPage}
+                breakClassName={styles.coinsListPaginationPageBreak}
+                nextLinkClassName={styles.coinsListPaginationPage}
+                pageClassName={styles.coinsListPaginationPage}
+                nextClassName={styles.coinsListPaginationPage}
+                previousClassName={styles.coinsListPaginationPage}
+                disabledClassName={styles.coinsListPaginationPageActiveDisabled}
+                activeClassName={styles.coinsListPaginationPageActive}
+                previousLabel={'< Prev'}
+                nextLabel={'Next >'}
+              />
+            ) : (
+              <div className={styles.coinsListPagination}></div>
+            )} 
           </div>
-          <div className={styles.allCoins_group}>
-            {list.map((oneCoin: CoinTypes) => (
-              <OneCoin key={oneCoin.coin_id} oneCoinInfo={oneCoin} />
-            ))}
-          </div>
-          {pageCount > 1 ? (
-            <ReactPaginate
-              initialPage={0}
-              pageCount={pageCount}
-              pageRangeDisplayed={2}
-              marginPagesDisplayed={3}
-              onPageChange={handlePageChange}
-              containerClassName={styles.coinsListPagination}
-              previousLinkClassName={styles.coinsListPaginationPage}
-              breakClassName={styles.coinsListPaginationPageBreak}
-              nextLinkClassName={styles.coinsListPaginationPage}
-              pageClassName={styles.coinsListPaginationPage}
-              nextClassName={styles.coinsListPaginationPage}
-              previousClassName={styles.coinsListPaginationPage}
-              disabledClassName={styles.coinsListPaginationPageActiveDisabled}
-              activeClassName={styles.coinsListPaginationPageActive}
-              previousLabel={'< Prev'}
-              nextLabel={'Next >'}
-            />
-          ) : (
-            <div className={styles.coinsListPagination}></div>
-          )} 
         </div>
       }
     </>
