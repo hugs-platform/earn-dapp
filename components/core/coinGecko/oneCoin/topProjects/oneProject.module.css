@@ -7,6 +7,7 @@
   padding: 10px 10px 10px 15px;
   background-color: #ffffff;
   white-space: nowrap;
+  align-items: center;
 }
 
 @media only screen and (min-width: 767px) {
@@ -141,6 +142,8 @@ a.coinMarketsColumn {
   border-radius: 5px;
   line-height: 25px !important;
   cursor: pointer !important;
+  padding: 0 5px;
+  text-align: center;
 }
 
 .oneProject_closeNowButton {
