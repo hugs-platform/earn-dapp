@@ -5,10 +5,15 @@
     padding-bottom: 2.5em;
 }
 
+.marketsContainerMain {
+    display: flex;
+    flex-direction: column;
+}
+
 .marketsContainer {
-    overflow: scroll;
     background: #FFFFFF;
     border-radius: 16px;
+    overflow: auto;
 }
 
 .marketListContainer {
