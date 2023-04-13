@@ -27,6 +27,7 @@
     margin: 10px;
     cursor: pointer;
     padding: 10px !important;
+    text-align: center;
 }
 
 .requestName {
@@ -171,6 +172,9 @@
     color: #ffffff;
     font-weight: 900;
     background-color: #307994;
+    background-color: #307994;
+    padding: 20px 50px;
+    font-size: 18px;
 }
 
 .dasboard_modal_submit_btn:hover {
