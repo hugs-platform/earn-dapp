@@ -5,16 +5,24 @@
     padding-bottom: 2.5em;
 }
 
+.marketsContainerMain {
+    display: flex;
+    flex-direction: column;
+}
+
+.marketsContainer {
+    background: #FFFFFF;
+    border-radius: 16px;
+    overflow: auto;
+}
+
 .marketListContainer {
     display: grid;
-    border: 0.1rem solid #eceff1;
-    padding: 25px;
-    width: 100%;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    min-width: 900px;
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr 1fr 1fr;
     border-bottom: 0.1rem solid #eceff1;
     background: #FFFFFF;
-    box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
-    border-radius: 16px 16px 0 0;
+    white-space: nowrap;
 }
 
 .marketListTitle:first-child {
@@ -83,7 +91,6 @@ p.sortBy:after {
     display: flex;
     justify-content: flex-end;
     background: #FFFFFF;
-    border-radius: 0 0 16px 16px;
 }
 
 .marketListPaginationPage a {
@@ -121,9 +128,7 @@ p.sortBy:after {
 }
 
 .marketList {
-    border-right: 0.1rem solid #eceff1;
     border-bottom: 0.1rem solid #eceff1;
-    border-left: 0.1rem solid #eceff1;
 }
 
 .oneMarketDefaultStyling {
@@ -174,7 +179,7 @@ p.sortBy:after {
 
 .newCoinContainer {
     display: inline-block;
-    border: 0.1rem solid #eceff1;
+    /* border: 0.1rem solid #eceff1; */
     padding: 25px;
     width: 100%;
     border-bottom: 0.1rem solid #eceff1;
@@ -196,16 +201,82 @@ p.sortBy:after {
     font: 400 11px system-ui;
     font-size: 2.5em;
     font-weight: 500;
-    padding: 1em 3em;
     border-width: 1px;
     border-style: solid;
     border-image: initial;
     background-color: #FFFFFF;
     border-radius: 8px;
     color: #000000;
-    float: right;
-    margin: 0 25px 0 auto;
     height: auto;
+}
+
+@media only screen and (max-width: 1150px) {
+    .search {
+      width: calc(100% - 70px); 
+    }
+  }
+  
+  @media only screen and (min-width: 1151px) {
+    .addNewCoinButton {
+      margin: 0 25px 0 auto;
+      padding: 5px 25px;
+    }
+  
+    .search {
+      width: 350px; 
+    }
+}
+
+@media screen and (max-width: 555px) {
+    .allCoins_container {
+      padding: 15px;
+      white-space: nowrap;
+    }
+  
+    .cryptoHeader {
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    .addNewCoinButton {
+      padding: 10px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  
+    .allCoins_title {
+      text-align: center;
+    }
+
+    .marketListContainer {
+        padding: 15px;
+    }
+}
+
+@media screen and (min-width: 556px) {
+    .marketListContainer {
+        padding: 25px;
+    }
+    
+    .allCoins_container {
+      padding: 25px;
+    }
+  
+    .cryptoHeader {
+      justify-content: space-between;
+      height: 80px;
+      text-align: center;
+    }
+  
+    .addNewCoinButton {
+      float: right;
+      margin: 15px 0;
+    }
+  
+    .addNewCoinButton {
+      padding: 10px;
+      margin: 0 10px 0 auto;
+    }
 }
 
 .newCoinInput {

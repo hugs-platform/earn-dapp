@@ -15,19 +15,62 @@
     grid-gap: 20px;
 }
 
-.dasboard_col_3 {
-    grid-column: span 3;
+@media only screen and (min-width: 1024px) {
+    .dasboard_col_3 {
+        grid-column: span 3;
+    }
+
+    .dasboard_col_4 {
+        grid-column: span 4;
+    }
+    
+    .dasboard_col_9 {
+        grid-column: span 9;
+    }
+
+    .dasboard_col_12 {
+        grid-column: span 12;
+    }
+
+    .dashboard_modal_main_container h1 {
+        width: 60%;
+    }
+
+    .dashboard_modal_main_container button {
+        width: 20%;
+    }
 }
 
-.dasboard_col_4 {
-    grid-column: span 4;
+@media only screen and (max-width: 1023px) {
+    .dasboard_col_3 {
+        grid-column: span 12;
+    }
+
+    .dasboard_col_4 {
+        grid-column: span 12;
+    }
+    
+    .dasboard_col_9 {
+        grid-column: span 12;
+    }
+
+    .dasboard_col_12 {
+        grid-column: span 12;
+    }
+
+    .dashboard_modal_main_container h1 {
+        width: 100%;
+    }
+    
+    .dashboard_modal_main_container button {
+        width: 50%;
+    }
 }
 
-.dasboard_col_9 {
-    grid-column: span 9;
-}
-.dasboard_col_12 {
-    grid-column: span 12;
+@media only screen and (max-width: 425px) {
+    .items_list h1 {
+        display: none;
+    }
 }
 
 .dashboard_header hgroup {
@@ -73,7 +116,7 @@
 
 .dashboard_modal_title_first {
     font-family: 'Gilroy-Bold';
-    font-size: 5em;
+    font-size: 24px;
     letter-spacing: 0.016em;
     font-weight: 900;
     text-align: center;
@@ -131,7 +174,6 @@
 }
 
 .dashboard_modal_main_container h1 {
-    width: 70%;
     background-color: #E2F6FA;
     padding: 1em;
     font-weight: 400;
@@ -139,7 +181,6 @@
 }
 
 .dashboard_modal_main_container button {
-    width: 15%;
     margin-left: 0.5em;
     font-size: 1em;
 }
@@ -170,6 +211,8 @@
     color: #ffffff;
     font-weight: 900;
     background-color: #307994;
+    padding: 20px 50px;
+    font-size: 18px;
 }
 
 .dasboard_modal_submit_btn:hover {
@@ -467,7 +510,6 @@
 .items_list {
     background: #FFFFFF;
     margin: 25px 0 25px 0;
-    display: grid;
 }
 
 .items_list h1 {
@@ -530,7 +572,6 @@
 
 .coinsListPagination {
     margin: auto;
-    padding: 3em;
     display: flex;
     justify-content: flex-end;
     background: #FFFFFF;

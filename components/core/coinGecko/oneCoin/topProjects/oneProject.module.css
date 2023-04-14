@@ -1,30 +1,47 @@
 .coinMarketsRow {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  min-width: 900px;
   justify-content: center;
-  margin: 0px 50px;
-  padding: 0.7rem;
   border-bottom: 0.1rem solid #eceff1;
+  padding: 10px 10px 10px 15px;
+  background-color: #ffffff;
+  white-space: nowrap;
+  align-items: center;
 }
 
-.coinMarketsColumn:first-child {
-  text-align: start;
-}
+@media only screen and (min-width: 767px) {
+  .addNewContainer h2 {
+    font-size: 24px;
+  }
 
-.coinMarketsColumn:not(:first-child){
-  text-align: center;
-}
+  .addNewContainer {
+    padding: 25px 50px;
+  }
 
-.coinMarketsColumn {
-  font-size: 2.5em;
-  flex: 1 1 0
+  .coinMarketsColumn span {
+    display: none;
+  }
+
+  .coinMarketsColumn:first-child {
+    text-align: start;
+  }
+  
+  .coinMarketsColumn:not(:first-child){
+    text-align: center;
+  }
+
+  .coinMarketsColumn {
+    font-size: 14px;
+    flex: 1 1 0
+  }
 }
 
 p.coinMarketsColumn {
   font-family: 'Gilroy';
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 19px;
   color: rgba(41, 45, 50, 0.65);
 }
@@ -63,9 +80,6 @@ a.coinMarketsColumn {
   font-size: 1.5rem;
 }
 
-.projectList_fontSize {
-  font-size: 1.4rem;
-}
 .oneProject_name {
   font-family: var(--InterRegular);
   color: var(--textBlack);
@@ -124,17 +138,19 @@ a.coinMarketsColumn {
   color: #1FADFF !important;
   border: 1px solid #1FADFF !important;
   margin: auto;
-  width: 100px;
+  width: auto;
   border-radius: 5px;
   line-height: 25px !important;
   cursor: pointer !important;
+  padding: 0 5px;
+  text-align: center;
 }
 
 .oneProject_closeNowButton {
   color: #E73656 !important;
   border: 1px solid #E73656 !important;
   margin: auto;
-  width: 100px;
+  width: auto;
   border-radius: 5px;
   line-height: 25px !important;
   cursor: pointer !important;
@@ -188,7 +204,6 @@ a.coinMarketsColumn {
 .allignCenter {
   display: flex;
   justify-content: center;
-  padding-right: 3rem;
 }
 
 .allignRight {
@@ -543,12 +558,12 @@ border: 2px solid #000;
 }
 
 .addNewContainer {
-  padding: 25px 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .addNewContainer h2 {
   font-family: 'Gilroy-Bold';
-  font-size: 24px;
   line-height: 28px;
   letter-spacing: 0.016em;
   color: #292D32;

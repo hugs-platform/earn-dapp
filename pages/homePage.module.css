@@ -30,9 +30,50 @@
   color: black;
 }
 
-.cryptoList {
-  margin-left: auto;
-  margin: 5em;
+@media only screen and (max-width: 767px) {
+  .cryptoList {
+    margin-left: auto;
+    margin: 15px;
+  }
+
+  .hugsSideNavBarShow {
+    display: none;
+  }
+
+  .showLessSidebar {
+    width: 60px;
+  }
+
+  .hugsNavBarItem {
+    padding-left: 5px;
+  }
+
+  .hugsHeaderNavBarItem {
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .cryptoList {
+    margin-left: auto;
+    margin: 15px;
+  }
+
+  .showLessSidebar {
+    width: 110px;
+  }
+
+  .hugsNavBarItem {
+    padding-left: 25px;
+  }
+
+  .hugsHeaderNavBarItem {
+    padding: 10px 15px;
+    font-size: 16px;
+    text-align: center;
+  }
 }
 
 .cryptoList_title {
@@ -89,7 +130,7 @@
 .hugsNavBarItem {
   min-height: 54px;
   display: flex;
-  padding-left: 25px;
+
   align-items: center;
   background: #FFFFFF !important;
 }
@@ -187,7 +228,6 @@
 
 .sidebarContainer {
   min-height: calc(100vh - 95px);
-  width: 255px;
   transition: all 1s ease;
 }
 
@@ -196,12 +236,14 @@
 }
 
 .mainContantContainer {
-  width: calc(100% - 255px);
+  width: 100vw;
+  background: #E4F7FC;
   transition: all 1s ease;
 }
 
 .mainContantContainerMore {
-  width: calc(100% - 110px);
+  width: 100vw;
+  background: #E4F7FC;
 }
 
 .hugsSideNavContainer {
@@ -209,11 +251,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1% 2% 0 2% !important;
-}
-
-.showLessSidebar {
-  width: 110px;
 }
 
 .hugsSideNavBar {
@@ -245,7 +282,6 @@
 }
 
 .hugsSideNavBarTitle {
-  background-image: url("/static/src/earn-alpha.png");
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
@@ -258,6 +294,7 @@
 
 .hugsSideNavBarTitleHide {
   background-image: none;
+  /* display: none; */
 }
 
 .hugs_title_div {
@@ -286,17 +323,18 @@
   background-color: rgba(77, 147, 172, 0.2);
   margin: auto 0 auto 0;
   cursor: pointer;
+  border-radius: 4px 0 0 4px;
 }
 
 .hugsSideNavBarFooter {
-  width: 80%;
+  width: 100%;
   margin: 0 auto 25px auto;
   border: 1px solid #7CDBFF;
   border-radius: 15px;
 }
 
 .hugsSideNavBarFooter h1 {
-  padding-top: 5em;
+  padding-top: 100px;
   text-align: center;
   font-size: 3em;
   overflow: hidden;
@@ -325,7 +363,7 @@
 
 .hugsSideNavBarFooterGiftSmall {
   margin: auto;
-  padding: 25px;
+  padding-bottom: 15px;
 }
 
 .hugsSideNavBarFooterGiftSmallLink {
@@ -383,11 +421,9 @@
   font-family: 'Gilroy';
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
   letter-spacing: 0.016em;
   color: #292D32;
   align-self: center;
-  padding: 0 15px;
   margin: auto 0;
 }
 
@@ -397,11 +433,34 @@
   border-radius: 25%;
 }
 
+@media only screen and (max-width: 767) {
+  .walletLoginButton {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .hugsHeaderNavBarLink {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
+
+@media only screen and (min-width: 768) {
+  .walletLoginButton {
+    padding: 15px 30px;
+    font-size: 14px;
+  }
+
+  .hugsHeaderNavBarLink {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
 .hugsHeaderNavBarLink {
-  font-size: 14px;
   color: #4D93AC;
-  padding: 1em;
   align-self: center;
+  font-size: 14px;
 }
 
 .hugsHeaderNavBarLink:hover {
@@ -413,20 +472,14 @@
 }
 
 .walletLoginButton {
-  all: initial;
-  text-rendering: auto;
-  letter-spacing: normal;
-  word-spacing: normal;
-  text-transform: none;
-  text-indent: 0px;
-  text-shadow: none;
-  display: inline-block;
   text-align: center;
   align-items: flex-start;
   box-sizing: border-box;
-  font: 400 11px system-ui;
-  font-size: 14px;
-  padding: 1em 3em;
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17px;
+  padding: 10px 15px;
   border-width: 1px;
   border-style: solid;
   border-image: initial;
@@ -435,6 +488,7 @@
   color: #FFFFFF;
   height: 50px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .walletLoginButton:hover {
