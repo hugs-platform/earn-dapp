@@ -208,15 +208,15 @@
 }
 
 .dasboard_modal_submit_btn {
-    color: #ffffff;
-    font-weight: 900;
-    background-color: #307994;
-    padding: 20px 50px;
-    font-size: 18px;
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    background-color: #307994 !important;
+    padding: 20px 50px !important;
+    font-size: 18px !important;
 }
 
 .dasboard_modal_submit_btn:hover {
-    opacity: 0.75;
+    opacity: 0.75 !important;
 }
 
 .dasboard_modal_submit_btn:disabled {

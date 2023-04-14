@@ -282,13 +282,14 @@
 }
 
 .hugsSideNavBarTitle {
+  background-image: url("/static/src/earn-alpha.png");
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
   background-size: contain;
   width: 150px;
   height: 150px;
-  margin: 0 auto;
+  margin: 0 10px 0 auto;
   transition: all 1s ease;
 }
 
