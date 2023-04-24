@@ -416,6 +416,7 @@
   border-radius: 10px;
   width: 100%;
   display: flex;
+  padding: 10px;
 }
 
 .hugsHeaderNavBarItem {
