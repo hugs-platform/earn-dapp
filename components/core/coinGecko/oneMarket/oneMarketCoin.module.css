@@ -1,15 +1,13 @@
 .coinMarketsRow {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-    grid-auto-flow: column;
-    overflow: scroll;
-    padding: 10px 5px 10px 25px;
     min-width: 900px;
-    margin-left: 10px;
-    align-items: center;
     justify-content: center;
     border-bottom: 0.1rem solid #eceff1;
+    padding: 10px 10px 10px 15px;
+    background-color: #ffffff;
     white-space: nowrap;
+    align-items: center;
 }
 
 .coinMarketsColumn:first-child {
