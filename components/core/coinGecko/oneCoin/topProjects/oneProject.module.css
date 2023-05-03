@@ -1,0 +1,631 @@
+.coinMarketsRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  min-width: 900px;
+  justify-content: center;
+  border-bottom: 0.1rem solid #eceff1;
+  padding: 10px 10px 10px 15px;
+  background-color: #ffffff;
+  white-space: nowrap;
+  align-items: center;
+}
+
+@media only screen and (min-width: 767px) {
+  .addNewContainer h2 {
+    font-size: 24px;
+  }
+
+  .addNewContainer {
+    padding: 25px 50px;
+  }
+
+  .coinMarketsColumn span {
+    display: none;
+  }
+
+  .coinMarketsColumn:first-child {
+    text-align: start;
+  }
+  
+  .coinMarketsColumn:not(:first-child){
+    text-align: center;
+  }
+
+  .coinMarketsColumn {
+    font-size: 14px;
+    flex: 1 1 0
+  }
+}
+
+p.coinMarketsColumn {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: rgba(41, 45, 50, 0.65);
+}
+
+a.coinMarketsColumn {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #638FFE;
+}
+
+.oneProject_full {
+  display: grid;
+  grid-template-columns: 0.5fr 4.5fr 1.25fr 2.5fr 2.5fr 1.6fr 1.35fr;
+  padding: 0.7rem 0rem;
+  border-bottom: 0.1rem solid #eceff1;
+}
+
+.allignLeft {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.allignRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.oneProject_number {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+  font-size: 1.5rem;
+}
+
+.oneProject_name {
+  font-family: var(--InterRegular);
+  color: var(--textBlack);
+  padding-left: 0.8rem;
+}
+
+.oneProject_stakingLink_full {
+  cursor: pointer;
+}
+
+.oneProject_stakingLink {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+  padding-right: 0.7rem;
+}
+
+.oneProject_totalValue {
+  font-family: var(--InterMedium);
+  color: var(--textGrey);
+}
+
+.oneProject_apy {
+  font-family: var(--InterMedium);
+  color: var(--textBlack);
+  padding-left: 0.8rem;
+}
+
+.oneProject_lastUpdated {
+  font-family: var(--Helvetica);
+  font-weight: 300;
+}
+
+.allign_updateButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.oneProject_updateButton {
+  width: 6.9rem;
+  height: 3.3rem;
+  border-radius: 0.4rem;
+  color: white;
+  border: none;
+  background-color: var(--lighterBlue);
+  font-size: 1.4rem;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.oneProject_updateButton:hover {
+  background-color: var(--darkBlue);
+}
+
+.oneProject_updateNowButton{
+  color: #1FADFF !important;
+  border: 1px solid #1FADFF !important;
+  margin: auto;
+  width: auto;
+  border-radius: 5px;
+  line-height: 25px !important;
+  cursor: pointer !important;
+  padding: 0 5px;
+  text-align: center;
+}
+
+.oneProject_closeNowButton {
+  color: #E73656 !important;
+  border: 1px solid #E73656 !important;
+  margin: auto;
+  width: auto;
+  border-radius: 5px;
+  line-height: 25px !important;
+  cursor: pointer !important;
+}
+
+.pointer_cursor {
+  cursor: pointer !important;
+}
+
+.add_new {
+  margin-right: auto;
+}
+
+.oneProject_upToDate {
+  color: #2AAE39 !important;
+}
+
+.apy {
+  font-size: 16px;
+  line-height: 19px;
+  color: #2AAF38 !important;
+}
+
+/* Style the accordion section */
+.oneCoinContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for structure of 1 coin */
+.oneCoinFull {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  transition: background-color 0.5s ease;
+  align-items: center;
+  padding: 2rem 0.65rem 2rem 2.5rem;
+}
+
+/* 1 COIN STYLING */
+
+.accordeonSVG {
+  cursor: pointer;
+}
+
+/* alignment for each part of the "oneCoin" */
+.allignLeft {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.allignCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.allignRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* text Styling one Coin */
+.oneCoin_defaultStyling {
+  font-size: 1.4rem;
+  font-family: var(--Helvetica);
+  font-weight: 400;
+  color: var(--darkBlackText);
+}
+
+.oneCoin_updateButton {
+  background-color: var(--darkBlue);
+  border: none;
+  width: 6.9rem;
+  height: 3.3rem;
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--Helvetica);
+  font-size: 1.4rem;
+  transition: 0.5s;
+}
+
+.oneCoin_updateButton:hover {
+  background-color: var(--lighterBlue);
+}
+
+.oneCoin_highestAPY {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.coinNameShort {
+  color: #748596;
+}
+
+/* coinName styling */
+.coinName {
+  display: flex;
+  align-items: center;
+}
+
+.coinName_name {
+  margin: 0rem 1.6rem;
+}
+
+.coinName_image {
+  border-radius: 50rem;
+}
+
+/* different background-color on hover of full coin */
+.oneCoinFull:hover {
+  background-color: var(--hoverAndActiveColor);
+}
+
+.oneCoinFull:active .showMoreImage {
+  transform: rotate(180deg);
+}
+
+/* CONTENT OF 1 COIN PANEL. Note: hidden by default */
+.accordion__content {
+  background-color: white;
+  /* overflow: auto; */
+  transition: max-height 0.6s ease;
+}
+
+.accordion__text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 18px;
+}
+
+.pagination {
+  display: flex;
+    list-style: none;
+}
+
+.container {
+  display: flex;
+  list-style: none;
+}
+
+.page {
+padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  
+}
+
+.active {
+border: 2px solid #000;
+  font-weight: bold;
+}
+
+.previous {
+  padding: 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.break {
+  padding: 10px;
+}
+
+.next {
+  padding: 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.modal {
+  --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #222;
+  text-align: left;
+  box-sizing: border-box;
+  transition: opacity .15s linear;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 15px;
+  display: block;
+}
+
+.modalDialog {
+  --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #222;
+  text-align: left;
+  box-sizing: border-box;
+  position: relative;
+  width: auto;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  margin: 1.75rem auto;
+  min-height: calc(100% - 3.5rem);
+  max-width: 800px;
+  transition: transform .3s ease-out;
+  transform: none;
+}
+
+.modalContent {
+  padding: 0.5em 1em;
+  font-size: 3em;
+  --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #222;
+  text-align: left;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: lightblue;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+  outline: 0;
+  text-align: center;
+}
+
+.modalContent h2 {
+  border-bottom: 0.5rem solid #000;
+  text-align: center;
+}
+
+.modalContent p a {
+  color: #129a2e;
+  text-decoration: underline;
+}
+
+.modalClose {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: -15px;
+  right: -5px;
+  color: black;
+}
+
+.modalClose::before{
+  content: "\00d7";
+}
+
+.modalContentSelect {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  width: 100%;
+}
+
+.modalContentSelect label {
+  z-index: 0;
+}
+
+.modalContentSelect * {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.modalContentSelectError div,
+.modalContentSelectError div fieldset {
+  border-color: #E73656;
+}
+
+.modalSubmit {
+  text-align: center;
+}
+
+.modalSubmitBtn {
+  width: 200px;
+  margin: 0.5em;
+  color: #ffffff;
+  background-color: #000;
+  padding: 0.25em 1em;
+}
+
+.modalCloseError {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #E73656;
+  text-align: center;
+}
+
+.updateContainer {
+  padding: 25px 50px;
+}
+
+.updateContainerTitle {
+  font-family: 'Gilroy-Bold';
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.016em;
+  color: #292D32;
+  text-align: center;
+}
+
+.updateGreenText {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  color: #00C395;
+  padding: 25px 0;
+}
+
+.updateGreyText {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: rgba(41, 45, 50, 0.5);
+  padding: 15px 0;
+}
+
+.updateInput {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(41, 45, 50, 0.5);
+} 
+
+.updateBtn {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  padding: 1em 3em;
+  border-width: 1px;
+  border-style: solid;
+  -o-border-image: none;
+  border-image: none;
+  -o-border-image: initial;
+  border-image: initial;
+  background: linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%);
+  border-radius: 8px;
+  color: #FFFFFF;
+  margin: 1em auto;
+}
+
+.updateBtn:disabled {
+  cursor: wait !important;
+}
+
+.newCoinInput {
+  font-size: 2em;
+  width: 100%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.newCoinInput div input fieldset legend {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #292D32;
+}
+
+.newCoinInput label {
+  z-index: 0;
+}
+
+.addNewContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.addNewContainer h2 {
+  font-family: 'Gilroy-Bold';
+  line-height: 28px;
+  letter-spacing: 0.016em;
+  color: #292D32;
+  text-align: center;
+}
+
+.submitBtn {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  padding: 1em 3em;
+  border-width: 1px;
+  border-style: solid;
+  -o-border-image: none;
+  border-image: none;
+  -o-border-image: initial;
+  border-image: initial;
+  background: linear-gradient(157.59deg, #4DCAFA 6.59%, #2F7994 74.48%);
+  border-radius: 8px;
+  color: #FFFFFF;
+  margin: 1em auto;
+  width: 50%;
+}
+
+.submitBtn:disabled {
+  cursor: wait !important;
+}
+
+.cancelBtn {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  padding: 1em 3em;
+  border-width: 1px;
+  border-style: solid;
+  -o-border-image: none;
+  border-image: none;
+  -o-border-image: initial;
+  border-image: initial;
+  background: linear-gradient(157.59deg, #E73656 6.59%, #E73656 74.48%);
+  border-radius: 8px;
+  color: #FFFFFF;
+  margin: 1em auto;
+  width: 50%;
+}
+
+.newCoinInputError div fieldset {
+  border-color: #E73656 !important;
+}

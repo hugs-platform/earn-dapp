@@ -1,34 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# folder structure explained
 
-## Getting Started
+## public folder
 
-First, run the development server:
+- static folder (to keep your static assets in it with all assets bundling and compressing benefits.)
+  1. assets (contains static images (jpeg, avif, webp, svg...) OR video format (not recommended))
+  2. styles (plain general css: reset, fonts, vars, globals, etc...)
+     - reset (resets all your css)
+     - fonts (@font-face = allows for costum fonts on websites)
+     - vars (for styling that maybe needs to be changed later)
+     - globals (for all css that needs to be global + converts 1rem to 10px )
+  3. fonts (all your fonts in files (woff, woff2, ttf, etc...))
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## pages
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- for all your page/routing (navigation is with folders in nextJS)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## components
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- for all components you may need,
+  - general rules of these are:
+    1. create a good structure (not all components in one folder)
+    2. each folder has a separate css file
+    3. it is okay to create a folder for each component (containing the ts,js,tsx or jsx file + css file)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## src
 
-## Learn More
+- (to be continued)
 
-To learn more about Next.js, take a look at the following resources:
+## core
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ###### utils
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  - (to be continued)
 
-## Deploy on Vercel
+  1. returning functions (converters map)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - explenainion converters functions (to be continued)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  2. helper functions (helpers map)
+
+  - explenainion helper functions (to be continued)
+
+- ###### values
+  - (to be continued)
+
+## .env && .env.local
+
+- for all secrets (access_tokens, api keys, secrret id's, etc...) that can't be pushed to a repo
+- you can't find this files when cloning or copying from a repo (obviously)
+
+## .gitignore
+
+- for files or folders that shouldn't be pushed to a repo (node modules, .env files, images or video's etc...)
+
+## tsconfig
+
+- for typescript configuration
+
+## testing
+
+- for all your test like (give this also a logical structure):
+  1. Unit tests
+  2. integration tests
+  3. ...
+
+## TODO
+
+1. map(s) for collecting, converting and sending database data

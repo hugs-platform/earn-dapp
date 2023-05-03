@@ -1,0 +1,26 @@
+:root {
+  --hoverAndActiveColor: #e4faff;
+
+  --darkBlueText: #113353;
+  --darkBlackText: #050f19;
+
+  --darkBlue: #003256;
+  --lighterBlue: #00acd2;
+  --lightestBlue: #e4faff;
+  --green: #3acc8a;
+  --red: #df2f2f;
+
+  --textGrey: #656c7e;
+  --textBlack: #222531;
+
+  --darkGrey: #969696;
+  --mediumGrey: #d8d8d8;
+  --lightGrey: #eceff1;
+
+  --InterRegular: "Inter-Regular";
+  --InterMedium: "Inter-Medium";
+  --InterBold: "Inter-Bold";
+  --FiraCodeBold: "FiraCode-Bold";
+
+  --Helvetica: Helvetica Neue, Arial;
+}

@@ -1,0 +1,249 @@
+.row {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid rgba(41, 45, 50, 0.1);
+}
+
+.row p,
+.row span {
+    padding: 15px;
+}
+
+.row h1 {
+    font-size: 18px;
+    padding: 15px;
+}
+
+.row h2 {
+    font-size: 18px;
+    padding: 15px;
+}
+
+.oneMarket_updateNowButton {
+    color: #FF7A00;
+    border: 1px solid #FF7A00;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 10px !important;
+    text-align: center;
+}
+
+.requestName {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(41, 45, 50, 0.5);
+}
+
+.countdown {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #E73656;
+}
+
+.dashboard_modal_title_first {
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    letter-spacing: 0.016em;
+    font-weight: 900;
+    text-align: center;
+    line-height: 3em;
+}
+
+.dashboard_modal_title_second_span {
+    text-align: center;
+    color: #949698;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3em;
+    line-height: 1.5em;
+}
+
+.dashboard_modal_main {
+    color: #4C92AB;
+    font-weight: 700;
+    justify-content: space-between;
+}
+
+.dashboard_modal_main a {
+    padding-left: 0.5vw;
+    color: #638EFE;
+}
+
+.dashboard_modal_main_second_info {
+    font-size: 3.5em;
+    color: #949698;
+    text-align: end;
+    
+}
+
+.dashboard_modal_main_second_info a {
+    color: #638EFE;
+}
+
+.marketLink {
+    color: #638EFE;
+}
+
+.dashboard_modal_main_container {
+    font-size: 3.5em;
+    display: flex;
+    padding: 0.5em 0;
+}
+
+.dashboard_modal_main_container h1 {
+    background-color: #E2F6FA;
+    padding: 1em;
+    font-weight: 400;
+    border-radius: 10px;
+}
+
+.dashboard_modal_main_container div button {
+    font-size: 14px;
+}
+
+.clicked_btn {
+    opacity: 1 !important;
+}
+
+.dasboard_modal_accept_btn:hover,
+.dasboard_modal_reject_btn:hover{
+    opacity: 1;
+}
+
+.dasboard_modal_accept_btn {
+    color: #ffffff;
+    font-weight: 900;
+    background-color: #00C395;
+    opacity: 0.7;
+}
+
+.dasboard_modal_reject_btn {
+    color: #ffffff;
+    font-weight: 900;
+    background-color: #FA584E;
+    opacity: 0.75;
+}
+
+.dashboard_modal_main_container_error {
+    font-size: 2em;
+    display: flex;
+    padding: 0.5em 0;
+}
+
+.dashboard_modal_main_container_error p {
+    width: 70%;
+    color: #ff0000;
+    padding: 1em;
+    font-weight: 400;
+}
+
+.dashboard_modal_main_text_area {
+    width: 100%;
+    height: 350px;
+    border-color: #D8D8D8;
+    box-shadow: 0 0 10px #719ECE;
+    border-radius: 15px;
+    padding: 1em;
+}
+
+.dashboard_modal_submit_container {
+    text-align: center;
+    padding: 5em 0;
+}
+
+.dashboard_modal_submit_container div button {
+    padding: 1em 2em; 
+    font-family: 'Gilroy';
+    font-weight: 600;
+    font-size: 3em;
+    line-height: 119.7%;
+}
+
+.dasboard_modal_submit_btn {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    background-color: #307994 !important;
+    padding: 20px 50px !important;
+    font-size: 18px !important;
+}
+
+.dasboard_modal_submit_btn:hover {
+    opacity: 0.75 !important;
+}
+
+.dasboard_modal_submit_btn:disabled {
+    opacity: 1 !important;
+    cursor: wait !important;
+}
+
+.contribution_link {
+    color: #638EFE;
+    margin: auto;
+}
+
+.approve {
+    color: green;
+}
+
+.decline {
+    color: red;
+}
+
+@media only screen and (min-width: 1024px) {
+    .col_4 {
+        width: 33%;
+    }
+
+    .dashboard_modal_main_container h1 {
+        width: 60%;
+    }
+
+    .dashboard_modal_main_container div {
+        width: 40%;
+    }
+
+    .dashboard_modal_main_container div button {
+        width: calc(50% - 10px);
+        margin-left: 10px;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .row {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .dashboard_modal_main_container {
+        flex-direction: column;
+    }
+
+    .dashboard_modal_main_container h1 {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .dashboard_modal_main_container div button:nth-child(1) {
+        width: calc(50% - 5px);
+        margin-right: 5px;
+        padding: 15px;
+    }
+
+    .dashboard_modal_main_container div button:nth-child(2) {
+        width: calc(50% - 5px);
+        margin-left: 5px;
+        padding: 15px;
+    }
+}

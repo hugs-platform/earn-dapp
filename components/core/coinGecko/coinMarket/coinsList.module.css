@@ -1,0 +1,346 @@
+.allCoins_container_main {
+  display: flex;
+  flex-direction: column;
+}
+
+.allCoins_container_scroll {
+  overflow: auto;
+  background: #FFFFFF;
+  border-radius: 16px;
+}
+
+.allCoins_container {
+  display: grid;
+  border: 0.1rem solid #eceff1;
+  min-width: 900px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+  border-bottom: 0.1rem solid #eceff1;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
+  border-radius: 16px 16px 0 0;
+}
+
+.allCoins_container div {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.allCoins_titles {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #292D32;
+}
+
+.search div {
+  background: #CAE4EE;
+  border-radius: 12px 0 0 12px;
+  height: 46px;
+}
+
+.searchBtn {
+  background: #4D93AC;
+  border-radius: 0 12px 12px 0;
+  height: 46px;
+  width: 70px;
+}
+
+.searchBtn img {
+  margin: auto;
+  width: 14px;
+  height: 14px;
+}
+
+.allCoins_container div:not(:last-child),
+.allCoins_container div:not(:first-child) {
+  text-align: center;
+}
+
+.allCoins_group {
+  border-bottom: 0.1rem solid #eceff1;
+  border-left: 0.1rem solid #eceff1;
+}
+
+.textCenter {
+  margin: auto;
+}
+
+.textStart {
+  text-align: start;
+}
+
+.textEnd {
+  text-align: end;
+}
+
+.allCoins_title {
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    color: #00261C;
+    margin: auto 0 auto 0;
+}
+
+.cryptoHeader {
+  display: flex; 
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+}
+
+@media screen and (max-width: 555px) {
+  .allCoins_container {
+    padding: 15px;
+    white-space: nowrap;
+  }
+
+  .cryptoHeader {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .addNewCoinButton {
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .allCoins_title {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 556px) {
+  .allCoins_container {
+    padding: 25px;
+  }
+
+  .cryptoHeader {
+    justify-content: space-between;
+    height: 80px;
+    text-align: center;
+  }
+
+  .addNewCoinButton {
+    float: right;
+    margin: 15px 0;
+  }
+
+  .addNewCoinButton {
+    padding: 10px;
+    margin: 0 10px 0 auto;
+  }
+}
+
+.coinsListPagination {
+  min-height: 50px;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  background: #FFFFFF;
+  min-width: 900px;
+  border-radius: 0 0 16px 16px;
+}
+
+.coinsListPaginationPage a {
+  all: initial;
+  border: none;
+  color: #000000;
+  width: 6.9rem;
+  height: 3.3rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--Helvetica);
+  font-size: 1.4rem;
+  transition: 0.5s;
+}
+
+.coinsListPaginationPage a:hover {
+  background-color: #F3F3F3;
+}
+
+.coinsListPaginationPageActive a {
+  background-color: #F3F3F3;
+}
+
+.coinsListPaginationPageBreak {
+  margin: 0;
+  padding: 0;
+}
+
+.coinsListPaginationPageActiveDisabled a {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+p.sortBy {
+  display: block;
+  width: max-content;
+  padding-right: 18px;
+	position: relative;
+}
+
+p.sortBy:before,
+p.sortBy:after {
+	border: 4px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	right: 5px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+}
+
+p.sortBy:before {
+	border-bottom-color: #666;
+	margin-top: -9px;
+}
+
+p.sortBy:after {
+	border-top-color: #666;
+	margin-top: 1px;
+}
+
+.newCoinContainer {
+  display: inline-block;
+  border: 0.1rem solid #eceff1;
+  padding: 25px;
+  width: 100%;
+  border-bottom: 0.1rem solid #eceff1;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 40px rgba(0, 222, 163, 0.11);
+  border-radius: 16px 16px;
+}
+
+.addNewCoinButton {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  font-size: 2.5em;
+  font-weight: 500;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  color: #000000;
+  height: auto;
+}
+
+@media only screen and (max-width: 1150px) {
+  .search {
+    width: calc(100% - 70px); 
+  }
+}
+
+@media only screen and (min-width: 1151px) {
+  .addNewCoinButton {
+    margin: 0 25px 0 auto;
+    padding: 5px 25px;
+  }
+
+  .search {
+    width: 350px; 
+  }
+}
+
+.newCoinInput {
+  font-size: 2em;
+  max-width: 500px;
+  width: 100%;
+  margin: 10px 0 !important;
+  background-color: #E2F5FA !important;
+}
+
+.newCoinInput label {
+  z-index: 0;
+}
+
+.newCoinInput div input fieldset legend {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #292D32;
+}
+
+.grid {
+  display: grid;
+}
+
+.errorMsg {
+  text-align: center;
+  font-size: 1.5em;
+  color: #d32f2f;
+}
+
+.textFielInputLabel * {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.textFielInputLabel input {
+  padding: 14px;
+}
+
+.selectError div fieldset {
+  border-color: #E73656 !important;
+}
+
+.newCoinInputField {
+  background-color: #E2F5FA;
+}
+
+.newCoinBody {
+  font-size: 18px;
+}
+
+.newCoinBody p {
+  color: #d32f2f;
+  font-size: 14;
+  margin: 0;
+  padding-left: 0.5em;
+}
+
+.newCoinTile {
+  padding: 1em;
+  text-align: center;
+  font-weight: 600;
+}
+
+.newCoinTileBody {
+  padding: 1em;
+  text-align: center;
+  color: #00C495;
+}
+
+.newCoinBodyWarning {
+  margin: auto;
+}
+
+.newCoinDesc {
+  padding: 1em;
+  text-align: center;
+  color: #949698;
+}
+
+.submitAddNewCoin {
+  text-align: center;
+}

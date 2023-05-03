@@ -1,0 +1,88 @@
+.footer {
+    width: 100%;
+    height: 95px;
+    background-color: #FFFFFF;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+}
+
+@media only screen and (min-width: 767px) {
+    .footerNavBar {
+        justify-content: end;
+    }
+
+    .footerNavBarItem {
+        font-size: 14px;
+    }
+
+    .footer {
+        padding: 0px 25px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .footerNavBar {
+        justify-content: center;
+    }
+
+    .footerNavBarItem {
+        font-size: 12px;
+    }
+}
+
+.footer p {
+    display: flex;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.02em;
+    color: rgba(41, 45, 50, 0.5);
+    padding-right: 100px;
+}
+
+.footer img {
+    background-image: url("/static/src/hugs-footer-logo.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 70px 25px;
+    width: 70px;
+    height: 25px;
+}
+
+.footerNavBar {
+    width: 100%;
+    height: 45px;
+    display: flex;
+}
+
+.footerNavBarItem {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: -0.02em;
+    color: #4D93AC;
+    padding: 0 1em 0 1em;
+    align-self: center;
+}
+
+.footerNavBarItem a:hover {
+    cursor: pointer;
+    text-decoration: underline #4D93AC;
+}
+
+.footerNavBarItemCreatedBy {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.02em;
+    padding: 0 0.5em 0 0.5em;
+    align-self: center;
+    color: rgba(41, 45, 50, 0.5) !important;
+}

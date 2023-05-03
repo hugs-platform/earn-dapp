@@ -1,0 +1,43 @@
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Coin {
+  id      Int     @id @default(autoincrement())
+  symbol  String  @unique
+  name    String
+  apys    Apy[]
+}
+
+model Project {
+  id            Int  @id @default(autoincrement())
+  name          String
+  referralLink String
+  apys    Apy[]
+}
+
+model Apy {
+  coin          Coin   @relation(fields: [coinId], references: [id])
+  coinId        Int
+  project       Project @relation(fields: [projectId], references: [id])
+  projectId     Int
+  apy        Decimal
+
+  @@id([coinId, projectId])
+
+}
+
+// eens database gemaakt -> npx prisma migrate dev
+// npx prisma studio -> opent prisma studio in de browser
+
+// gebruiken in components
+// import {PrismaClient} from "@prisma/client"
+// prisma = new PrismaClient();
+
