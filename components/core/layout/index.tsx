@@ -249,7 +249,7 @@ export default function Layout({children}: Props) {
                             <Container className={styles.hugsSideNavContainer}>
                                 <Navbar className={styles.hugsHeaderNavBar}>
                                     <Link href={'/how-it-works'}><Nav.Item className={styles.hugsHeaderNavBarItem}>How It works</Nav.Item></Link>
-                                    <Nav.Item className={styles.hugsHeaderNavBarItem}>About Us</Nav.Item>
+                                    <Link href={'/about-us'}><Nav.Item className={styles.hugsHeaderNavBarItem}>About Us</Nav.Item></Link>
                                     <Nav.Item className={styles.hugsHeaderNavBarLink}><ConnectButton
                                         handleOpenModal={onOpen}/></Nav.Item>
                                     {userName ?
