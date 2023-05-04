@@ -427,6 +427,11 @@
   color: #292D32;
   align-self: center;
   margin: auto 0;
+  cursor: pointer;
+  transition: all ease-in-out .2s;
+  &:hover {
+    color: #57AEDE;
+  }
 }
 
 .hugsHeaderNavBarItem img {
