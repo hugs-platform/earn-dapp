@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styles from "./oneProject.module.css";
+import styles from "./oneProject.module.scss";
 import Image from "next/image";
 
 // images

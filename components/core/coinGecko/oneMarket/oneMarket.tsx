@@ -1,6 +1,6 @@
 import React, { useState, useRef, FC, useEffect } from "react";
 import styles from "../oneMarket/oneMarket.module.css";
-import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.css";
+import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.scss";
 import Select from "react-select";
 import TextField from "@mui/material/TextField";
 
@@ -13,6 +13,7 @@ import { HugsApi } from "../../../../services/hugsApi";
 
 // types
 import { MarketTypes, CoinMarkets } from "../../../../core/types/types";
+import classNames from "classnames";
 
 
 // types
@@ -212,18 +213,17 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
       {isOpen? 
         <div ref={content} className={styles.accordion__content}>
           <section className={oneMarketStyles.coinMarketsTable}>
-            <div className={oneMarketStyles.coinMarketsRow}>
+            <div className={classNames(oneMarketStyles.coinMarketsRow, [oneMarketStyles.coinMarketsRow__oneMarket])}>
               <p className={oneMarketStyles.coinMarketsColumn}>Coin</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Highest APY</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Lowest APY</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Days</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Age</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Type</p>
               <p className={oneMarketStyles.coinMarketsColumn}>Contribute</p>
             </div>
             {list.map((coinMarkets: CoinMarkets) => (
               <OneCoinMarket key={coinMarkets.market.platform} coinMarketsData={coinMarkets}/>
-            ))};
+            ))}
             {addNew ? 
               <div className={oneMarketStyles.addNewContainer}>
                 <h2>Add new contribution for {oneMarketInfo.platform} {oneMarketInfo.logo? <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/> : <></>}</h2>

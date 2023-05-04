@@ -488,7 +488,7 @@ function App() {
             <div className={styles.allCoins_container_scroll}>
               <div className={styles.allCoins_container}>
                 <div>
-                  <p className={styles.allCoins_titles + " " + styles.textStart}>Name</p>
+                  <p className={styles.allCoins_titles + " " + styles.textStart}>Coins</p>
                 </div>
                 <div>
                   <p id='min_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Lowest APY</p>
@@ -497,7 +497,7 @@ function App() {
                   <p id='max_apy' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Highest APY</p>
                 </div>
                 <div>
-                  <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Age</p>
+                  <p id='last_updated' className={styles.allCoins_titles + " " + styles.sortBy + " " + styles.textCenter} onClick={orderByChange}>Last update</p>
                 </div>
                 <div>
                   <p className={styles.allCoins_titles + " " + styles.textEnd}>View More</p>
