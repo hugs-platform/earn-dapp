@@ -9,7 +9,7 @@ type Props = {
  * @class
  * @ignore
  */
-export default function Layout({ children }: Props) {
+export default function LayoutComponent({ children }: Props) {
   /**
    * @class
    * @ignore

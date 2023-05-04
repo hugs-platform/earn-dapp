@@ -8,8 +8,8 @@ import { HugsApi } from "../../../../services/hugsApi";
 import { findTimeDelta } from "../../../../core/utils/converters/timeDelta";
 import { CoinMarkets } from "../../../../core/types/types";
 
-import styles from "../oneMarket/oneMarketCoin.module.css";
-import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.css";
+import styles from "../oneMarket/oneMarketCoin.module.scss";
+import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.scss";
 
 export interface OneMarketCoinProps {
     coinMarketsData: CoinMarkets
@@ -170,14 +170,13 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
 
   return (
     <div key={coinMarketsData.market.market_id}>
-      <div className={styles.coinMarketsRow}>
+      <div className={`${styles.coinMarketsRow} ${styles.coinMarketsRow__oneMarketCoin}`}>
         <div className={`${styles.coinMarketsColumn}  ${styles.allignLeft}`}>
           {coinMarketsData.coin.image? <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image}/>:<></>}
           <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
         </div>
         <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.min_apy}%</p>
         <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.max_apy}%</p>
-        <p className={styles.coinMarketsColumn}>{coinMarketsData.days}</p>
         <p className={styles.coinMarketsColumn}>{findTimeDelta(coinMarketsData.last_updated)}</p>
         <p className={styles.coinMarketsColumn}>{coinMarketsData.staking_type}</p>
         <div className={styles.coinMarketsColumn}>

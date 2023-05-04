@@ -1,6 +1,6 @@
 import { useEthers } from "@usedapp/core";
 import { HugsApi } from "../../../services/hugsApi";
-import styles from "../../../pages/homePage.module.css";
+import styles from "../layout/homePage.module.scss";
 import { useRef, useState, useEffect } from "react";
 
 type Props = {

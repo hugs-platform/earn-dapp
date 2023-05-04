@@ -7,7 +7,7 @@ import { HugsApi } from "../../../../../services/hugsApi";
 import { findTimeDelta } from "../../../../../core/utils/converters/timeDelta";
 import { CoinMarkets, CoinTypes } from "../../../../../core/types/types";
 
-import oneMarketStyles from "../../oneCoin/topProjects/oneProject.module.css";
+import oneMarketStyles from "../../oneCoin/topProjects/oneProject.module.scss";
 
 export interface OneProjectProps {
   oneProjectData: CoinMarkets;
@@ -178,16 +178,11 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
       <div className={oneMarketStyles.coinMarketsRow}>
         <div className={`${oneMarketStyles.coinMarketsColumn} ${oneMarketStyles.oneProject_stakingLinkName_full} ${oneMarketStyles.allignLeft}`}>
           <span>Platform:</span>  
-          {oneProjectData.market.logo? <img className={oneMarketStyles.oneProject_coinLogo} height={24} width={24} src={oneProjectData.market.logo}/>: <></>}
           <p className={`${oneMarketStyles.oneProject_name} ${oneMarketStyles.projectList_fontSize}`}>{oneProjectData.market.platform}</p>
         </div>
         <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}><span>Lowest APY:</span> {oneProjectData.min_apy}%</p>
         <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.apy}><span>Highest APY:</span> {oneProjectData.max_apy}%</p>
-        {oneProjectData.days?
-          <p className={oneMarketStyles.coinMarketsColumn}><span>Days:</span> {oneProjectData.days}</p>
-        :
-         <p className={oneMarketStyles.coinMarketsColumn}><span>Days:</span> Unknown</p>
-        }
+
         <p className={oneMarketStyles.coinMarketsColumn}><span>Age:</span> {findTimeDelta(oneProjectData.last_updated)}</p>
         <p className={oneMarketStyles.coinMarketsColumn}><span>Type:</span> {oneProjectData.staking_type}</p>
         <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}><span>Link:</span> {oneProjectData.market.platform}</a>
