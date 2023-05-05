@@ -31,7 +31,7 @@ function App() {
                 <Nav.Item>Created by:</Nav.Item>
             </Nav.Item>
             <Nav.Item className={styles.footerNavBarItemCreatedBy}>
-                <Nav.Item><img src="/static/src/hugs-footer-logo.png"></img></Nav.Item>
+                <Nav.Item><a href="https://crtr.tech/" target="_blank" rel="noreferrer"><img src="/static/src/hugs-footer-logo.png"></img></a></Nav.Item>
             </Nav.Item>
         </Nav>
       </section>

@@ -15,7 +15,7 @@ import { MarketTypes } from "../../../../core/types/types";
 
 // styles
 import styles from "../coinMarket/marketList.module.css";
-import mainStyles from "../../../../pages/homePage.module.css";
+import mainStyles from "../../layout/homePage.module.scss";
 
 const customStyles = {
   control: (base: any, state: any) => ({

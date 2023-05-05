@@ -1,6 +1,6 @@
 import React, { useState, useRef, FC } from "react";
 import styles from "./oneCoin.module.css";
-import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.css";
+import oneMarketStyles from "../oneCoin/topProjects/oneProject.module.scss";
 import Select from "react-select";
 import TextField from "@mui/material/TextField";
 
@@ -14,6 +14,7 @@ import { HugsApi } from "../../../../services/hugsApi";
 
 // types
 import { CoinTypes, CoinMarkets } from "../../../../core/types/types";
+import classNames from "classnames";
 
 // types
 export interface OneCoinProps {
@@ -216,19 +217,18 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
         <div ref={content} className={styles.accordion__content}>
           <section className={oneMarketStyles.coinMarketsTable}>
             <div className={`${oneMarketStyles.coinMarketsRow} ${oneMarketStyles.coinMarketsRowHeader}`}>
-              <p className={oneMarketStyles.coinMarketsColumn}>Platform</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Lowest APY</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Highest APY</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Days</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Age</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Type</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Link</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Clicks</p>
-              <p className={oneMarketStyles.coinMarketsColumn}>Contribute</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Platforms</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Lowest APY</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Highest APY</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Age</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Type</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Link</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Clicks</p>
+              <p className={classNames(oneMarketStyles.coinMarketsColumn, [oneMarketStyles.coinMarketsColumn__label])}>Contribute</p>
             </div>
             {list.map((coinMarkets: CoinMarkets) => (
               <OneCoinMarket key={coinMarkets.market.platform} oneProjectData={coinMarkets} oneCoinInfo={oneCoinInfo}/>
-            ))};
+            ))}
             {isOpen ? 
               <div className={oneMarketStyles.addNewContainer}>
                 <h2>Add new contribution for {name} {image? <Image className={styles.coinName_image} height={24} width={24} src={image}/>: <></>}</h2>
@@ -265,7 +265,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                 {errorMsg? <p className={oneMarketStyles.modalCloseError}>{errorMsg}</p>: <></>}
                 <div>
                   <button className={oneMarketStyles.submitBtn} disabled={isLoading} onClick={validate}>Submit</button>
-                  <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cencel</button>
+                  <button className={oneMarketStyles.cancelBtn} onClick={closeModal}>Cancel</button>
                 </div>
               </div>
             : isSuccess?
@@ -278,8 +278,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                   <button className={oneMarketStyles.updateBtn}  onClick={() => setIsSuccess(false)}>Close</button>
                 </div>
               </div>
-            :
-            <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.pointer_cursor + " " + oneMarketStyles.add_new} onClick={openModal}>Add new</p>
+            : <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.pointer_cursor + " " + oneMarketStyles.add_new} onClick={openModal}>Add new</p>
             }
           </section>
         </div>

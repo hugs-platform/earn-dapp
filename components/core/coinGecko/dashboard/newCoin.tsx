@@ -13,7 +13,7 @@ import { HugsApi } from "../../../../services/hugsApi";
 
 // styles
 import styles from "./newCoin.module.css";
-import mainStyles from "../../../../pages/homePage.module.css";
+import mainStyles from "../../layout/homePage.module.scss";
 
 
 const style = {

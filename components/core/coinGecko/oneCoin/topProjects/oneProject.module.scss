@@ -1,13 +1,17 @@
 .coinMarketsRow {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   min-width: 900px;
   justify-content: center;
   border-bottom: 0.1rem solid #eceff1;
-  padding: 10px 10px 10px 15px;
+  padding: 10px 0;
   background-color: #ffffff;
   white-space: nowrap;
   align-items: center;
+
+  &__oneMarket {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
 }
 
 @media only screen and (min-width: 767px) {
@@ -38,12 +42,18 @@
 }
 
 p.coinMarketsColumn {
-  font-family: 'Gilroy';
+  font-family: 'Gilroy-bold';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 19px;
-  color: rgba(41, 45, 50, 0.65);
+  color: #000;
+}
+
+.coinMarketsColumn {
+  &__label {
+    font-family: 'Gilroy-bold'!important;
+  }
 }
 
 a.coinMarketsColumn {
@@ -83,7 +93,6 @@ a.coinMarketsColumn {
 .oneProject_name {
   font-family: var(--InterRegular);
   color: var(--textBlack);
-  padding-left: 0.8rem;
 }
 
 .oneProject_stakingLink_full {
