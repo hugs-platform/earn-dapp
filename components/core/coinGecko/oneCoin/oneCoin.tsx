@@ -278,7 +278,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
                   <button className={oneMarketStyles.updateBtn}  onClick={() => setIsSuccess(false)}>Close</button>
                 </div>
               </div>
-            : <></>
+            : <p className={oneMarketStyles.coinMarketsColumn + " " + oneMarketStyles.pointer_cursor + " " + oneMarketStyles.add_new} onClick={openModal}>Add new</p>
             }
           </section>
         </div>
