@@ -48,7 +48,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         if (['social_link'] && response.data['email']) {
           setOpen(false);
         } else {
-          setOpen(true);
+          setOpen(false);
         }
       }
     })
