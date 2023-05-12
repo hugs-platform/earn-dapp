@@ -7,8 +7,6 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      'dev-earn-markets-assets.s3.eu-central-1.amazonaws.com', 
-      'stage-earn-markets-assets.s3.eu-central-1.amazonaws.com',
       'api.crtc.tech.assets.s3.eu-central-1.amazonaws.com'
     ]
   },
