@@ -9,9 +9,12 @@ const nextConfig = {
     domains: [
       'dev-earn-markets-assets.s3.eu-central-1.amazonaws.com', 
       'stage-earn-markets-assets.s3.eu-central-1.amazonaws.com',
-      'api.crtc.tech.assets.s3.eu-central-1.amazonaws.com'
+      'api.crtc.tech.assets.s3.eu-central-1.amazonaws.com',
+      'api.crtc.tech.assets.s3.eu-central-1.amazonaws.com',
+      'stage-earn-markets-assets.s3.eu-central-1.amazonaws.com',
+      'dev-earn-markets-assets.s3.eu-central-1.amazonaws.com'
     ]
-  },
+  }
 }
 
 module.exports = nextConfig

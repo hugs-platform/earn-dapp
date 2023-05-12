@@ -191,7 +191,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       <article className={styles.oneCoinFull}>
         <div className={styles.coinName}>
           {image? 
-            <Image className={styles.coinName_image} height={32} width={32} src={image} />
+            <img className={styles.coinName_image} height={32} width={32} src={image} />
           :
             <></>
           }
