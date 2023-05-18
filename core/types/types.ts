@@ -142,10 +142,10 @@ export interface CoinContribution {
   max_apy: number;
   days: number;
   staking_type: string;
-  status: number;
+  status: string;
   created_at: string;
   updated_at: string;
-  contribution_type: number;
+  contribution_type: string;
   coin: {
     abbreviature: string;
     click: number;
