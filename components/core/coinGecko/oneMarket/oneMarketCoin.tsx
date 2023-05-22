@@ -1,5 +1,4 @@
 import React, { FC, useState, useRef } from "react";
-import Image from "next/image";
 import Select from "react-select";
 import TextField from "@mui/material/TextField";
 
@@ -172,7 +171,7 @@ const OneMarketCoin: FC<OneMarketCoinProps> = (props: OneMarketCoinProps) => {
     <div key={coinMarketsData.market.market_id}>
       <div className={`${styles.coinMarketsRow} ${styles.coinMarketsRow__oneMarketCoin}`}>
         <div className={`${styles.coinMarketsColumn}  ${styles.allignLeft}`}>
-          {coinMarketsData.coin.image? <Image className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image}/>:<></>}
+          {coinMarketsData.coin.image? <img className={styles.oneProject_coinLogo} height={24} width={24} src={coinMarketsData.coin.image}/>:<></>}
           <p className={styles.oneMarketName}>{coinMarketsData.coin.name}</p>
         </div>
         <p className={styles.coinMarketsColumn + " " + styles.highest_apy}>{coinMarketsData.min_apy}%</p>
