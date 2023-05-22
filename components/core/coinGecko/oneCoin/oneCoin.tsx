@@ -6,7 +6,6 @@ import TextField from "@mui/material/TextField";
 
 import OneCoinMarket from "../oneCoin/topProjects/oneCoinMarket";
 // import styles from "./projectList.module.css";
-import Image from "next/image";
 import { findTimeDelta } from "../../../../core/utils/converters/timeDelta";
 
 // data
@@ -231,7 +230,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
             ))}
             {isOpen ? 
               <div className={oneMarketStyles.addNewContainer}>
-                <h2>Add new contribution for {name} {image? <Image className={styles.coinName_image} height={24} width={24} src={image}/>: <></>}</h2>
+                <h2>Add new contribution for {name} {image? <img className={styles.coinName_image} height={24} width={24} src={image}/>: <></>}</h2>
                 <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={marketsList} onChange={marketListHandle}/>
                 <TextField
                   id="min-apy-id"

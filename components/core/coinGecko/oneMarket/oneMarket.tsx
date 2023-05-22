@@ -5,8 +5,6 @@ import Select from "react-select";
 import TextField from "@mui/material/TextField";
 
 import OneCoinMarket from "../oneMarket/oneMarketCoin";
-// import styles from "./projectList.module.css";
-import Image from "next/image";
 
 // data
 import { HugsApi } from "../../../../services/hugsApi";
@@ -192,7 +190,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
     <section className={styles.marketListContainer}>
       <article className={styles.oneMarketFull}>
         <div className={styles.marketName}>
-        {logo ? <Image className={styles.marketName_image} height={32} width={32} src={logo} />: <></>}
+        {logo ? <img className={styles.marketName_image} height={32} width={32} src={logo} />: <></>}
           <p className={`${styles.oneMarketDefaultStyling} ${styles.marketName_name}`}>{platform}</p>
         </div>
         {min_apy? 
@@ -226,7 +224,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
             ))}
             {addNew ? 
               <div className={oneMarketStyles.addNewContainer}>
-                <h2>Add new contribution for {oneMarketInfo.platform} {oneMarketInfo.logo? <Image className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/> : <></>}</h2>
+                <h2>Add new contribution for {oneMarketInfo.platform} {oneMarketInfo.logo? <img className={styles.coinName_image} height={24} width={24} src={oneMarketInfo.logo}/> : <></>}</h2>
                 <Select className={marketValueErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect} isSearchable={true} placeholder="Select Market" options={coinsList} onChange={coinListHandle}/>
                 <TextField
                   id="min-apy-id"

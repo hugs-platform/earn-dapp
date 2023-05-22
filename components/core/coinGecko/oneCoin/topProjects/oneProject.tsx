@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styles from "./oneProject.module.scss";
-import Image from "next/image";
 
 // images
 import projectLogo from "../../../../../public/static/assets/oneCoin/projects/project_logo.svg";
@@ -25,12 +24,12 @@ const OneProject: FC<OneProjectProps> = (props: OneProjectProps) => {
     <div className={styles.oneProject_full}>
       <p className={`${styles.oneProject_number} ${styles.allignLeft}`}>{placeOfProject + 1}</p>
       <div className={`${styles.oneProject_stakingLinkName_full} ${styles.allignLeft}`}>
-        {projectLogo? <Image className={styles.oneProject_coinLogo} height={24} width={24} src={projectLogo}/> : <></>}
+        {projectLogo? <img className={styles.oneProject_coinLogo} height={24} width={24} src={projectLogo}/> : <></>}
         <p className={`${styles.oneProject_name} ${styles.projectList_fontSize}`}>{oneProjectData.name}</p>
       </div>
       <div className={`${styles.oneProject_stakingLink_full} ${styles.allignRight}`}>
         <a className={`${styles.oneProject_stakingLink} ${styles.projectList_fontSize}`}>{oneProjectData.stakingLink}</a>
-        <Image className={styles.oneProject_stakingLink} height={10} width={10} src={stakingLink} />
+        <img className={styles.oneProject_stakingLink} height={10} width={10} src={stakingLink} />
       </div>
       <p className={`${styles.oneProject_totalValue} ${styles.projectList_fontSize} ${styles.allignRight}`}>
         {toAmericanCurrencyNotation(oneProjectData.totalValue)}
