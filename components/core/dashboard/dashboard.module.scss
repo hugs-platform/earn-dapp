@@ -386,6 +386,16 @@
 
 .dashboard_card_review_requests {
     background-color: #2B3EE9;
+    h1 {
+        display: flex;
+        span {
+            margin-left: auto;
+            display: inline-block;
+            background: #CF3063;
+            padding: 6px 10px;
+            border-radius: 50%;
+        }
+    }
 }
 
 .dashboard_card_review_contribtuions {

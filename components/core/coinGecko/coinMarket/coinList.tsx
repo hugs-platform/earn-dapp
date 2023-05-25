@@ -103,6 +103,7 @@ function App() {
   const [ minApyValueError, setMinApyValueError ] = useState(false);
   const maxApyValue = useRef("");
   const [ maxApyValueError, setMaxApyValueError ] = useState(false);
+  const [ blockDays, setBlockDays ] = useState(false);
   const stakingValue = useRef("");
   const [stackingValueErr, setStackingValueErr] = useState(false);
   const [ errorMsg, setErrorMsg ] = useState("");
@@ -238,6 +239,11 @@ function App() {
   const stackingHandle = (selectedObject: any) => {
     stakingValue.current = selectedObject.value;
     setStackingValueErr(false);
+    if(selectedObject.value == 'Flexible') {
+      setBlockDays(true);
+    } else {
+      setBlockDays(false);
+    }
   }
 
   const daysChange = (selectedObject: any) => {
@@ -453,7 +459,8 @@ function App() {
                     label="Days"
                     placeholder="0.00"
                     variant="outlined"
-                    type="number" 
+                    type="number"
+                    disabled={blockDays}
                     className={daysValueError? styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField + " " + styles.selectError : styles.newCoinInput + " " + styles.textFielInputLabel + " " + styles.newCoinInputField} 
                     onChange={daysChange}/>
 
