@@ -5,13 +5,14 @@ import { useRef, useState, useEffect } from "react";
 
 type Props = {
   handleOpenModal: any;
+  handleCheckLogin: any;
 };
 
 /**
  * @class
  * @ignore 
  */
-export default function ConnectButton({ handleOpenModal }: Props) {
+export default function ConnectButton({ handleOpenModal, handleCheckLogin }: Props) {
   const { account, activateBrowserWallet, deactivate } = useEthers();
   const API = new HugsApi();
   const [ open, setOpen ] = useState(false);
@@ -40,6 +41,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         }
         window.dispatchEvent(new Event("profile_update"));
         document.cookie = "token=" + response.data['token'] + ";expires=" + response.data['exp'] + ";path=/";
+        handleCheckLogin()
         if (response.data['is_admin']){
           document.cookie = "isStaff=" + response.data['is_admin'] + ";expires=" + response.data['exp'] + ";path=/";
         } else {
