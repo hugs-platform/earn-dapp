@@ -57,6 +57,7 @@ export default function Layout({children}: Props) {
      * @param {string} value - name of page
      */
     function handlePageChange(value: string) {
+        console.log(currentPage, isAdmin)
         setCurrentPage(value);
         switch (value) {
             case "Coins":
