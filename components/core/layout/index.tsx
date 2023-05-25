@@ -15,6 +15,11 @@ import LayoutComponent from "./LayoutComponent";
 import Footer from "../footer/footer";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import {useSelector} from "react-redux";
+import store from "../../../services/store/store";
+import {setNotifications, setUser} from "../../../services/store/actions";
+import moment from "moment";
+import classNames from "classnames";
 
 // types
 
@@ -31,7 +36,6 @@ export default function Layout({children}: Props) {
     const router = useRouter()
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [showMore, setShowMore] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
     const [userName, setUserName] = useState("");
     const [userAvatar, setUserAvater] = useState("");
     const [currentPage, setCurrentPage] = useState("Coins");
@@ -39,6 +43,12 @@ export default function Layout({children}: Props) {
     const [giftShow, setGiftShow] = useState(true);
     const [size, setSize] = useState(1080);
     const API = new HugsApi();
+    const notificationsList = useSelector((state: any) => state.wallet.notifications);
+    const notifications = notificationsList?.filter((el: any) => new Date(el.time_left).getTime() > new Date().getTime())
+    const user = useSelector((state: any) => state.wallet.user);
+
+    const [isLogin, setIsLogin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(user?.is_admin);
 
 
     /**
@@ -95,20 +105,70 @@ export default function Layout({children}: Props) {
         window.addEventListener('profile_update', () => {
             checkUser();
         });
-        if (API.getCookie("token")) {
-            setIsLogin(true);
-        } else {
-            setIsLogin(false);
-            if (currentPage === "Dashboard" || currentPage === "Profiles") {
-                handlePageChange("Coins")
-            }
-        }
         if (API.getCookie("isStaff")) {
             setShowMore(true);
         } else {
             setShowMore(false);
         }
     });
+    useEffect(() => {
+        if (!user) {
+            handleCheckLogin()
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (user) {
+            setIsAdmin(user?.is_admin)
+            setIsLogin(true)
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (isLogin) {
+            API.getReviews(0, 'name', 1000, 'pending').then(response => {
+                if (response) {
+                    store.dispatch(setNotifications({payload: response.data.items}));
+                }
+            })
+        }
+    }, [isLogin])
+
+    const handleCheckLogin = () => {
+        if (API.getCookie("token")) {
+            setIsLogin(true);
+            API.getProfile().then(response => {
+                if (response) {
+                    const user = {
+                        alias: response.data.alias,
+                        wallet: response.data.wallet,
+                        reputation: response.data.reputation_score,
+                        registrationDate: moment(Date.parse(response.data.registration_date)).format("MMM DD YYYY"),
+                        reviewsRequestTotal: response.data.reviews.request_total,
+                        reviewsRequestLastMonth: response.data.reviews.request_scince_last_month,
+                        contributionTotal: response.data.contributions.total,
+                        contributionRequestLastMonth: response.data.contributions.scince_last_month,
+                        reviewLastMonth: response.data.reviews.scince_last_month,
+                        reviewTotal: response.data.reviews.total,
+                        search: response.data.search,
+                        rewards: response.data.rewards,
+                        email: response.data.email,
+                        social_link: response.data.social_link,
+                        is_admin: response.data.is_admin,
+                        is_active: response.data.is_active,
+                        role: response.data.role,
+                    }
+                    setIsAdmin(response.data.is_admin)
+                    store.dispatch(setUser({user}));
+                }
+            });
+        } else {
+            setIsLogin(false);
+            if (router.pathname.includes('dashboard') || router.pathname.includes('profiles')) {
+                router.push('/')
+            }
+        }
+    }
 
     const ShowLess = () => {
         setFullSidebar(false);
@@ -183,11 +243,11 @@ export default function Layout({children}: Props) {
                                         handlePageChange("Dashboard")
                                     }} className={router.pathname.includes('dashboard') ?
                                         fullSidebar ?
-                                            styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActive :
+                                            styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActiveWithNotifications :
                                             styles.hugsNavBarLink + " " + styles.dashboard + " " + styles.hugsNavBarLinkActiveHide
                                         :
                                         styles.hugsNavBarLink + " " + styles.dashboard
-                                    }>{fullSidebar ? "Dashboard" : ""}</Nav.Link>
+                                    }>{fullSidebar ? "Dashboard" : ""}<span>{notifications.length}</span></Nav.Link>
                                     :
                                     <></>
                                 }
@@ -213,7 +273,7 @@ export default function Layout({children}: Props) {
                                 }
                                 {showMore && !fullSidebar &&
                                     <Nav.Item className={styles.hugsNavBatHoverItem}>
-                                      Profiles <img src="/static/src/settings.svg"/>
+                                        Profiles <img src="/static/src/settings.svg"/>
                                     </Nav.Item>}
 
                             </Nav.Item>
@@ -248,10 +308,22 @@ export default function Layout({children}: Props) {
                         <LayoutComponent>
                             <Container className={styles.hugsSideNavContainer}>
                                 <Navbar className={styles.hugsHeaderNavBar}>
-                                    <Link href={'/how-it-works'}><Nav.Item className={styles.hugsHeaderNavBarItem}>How It works</Nav.Item></Link>
-                                    <Link href={'/about-us'}><Nav.Item className={styles.hugsHeaderNavBarItem}>About Us</Nav.Item></Link>
-                                    <Nav.Item className={styles.hugsHeaderNavBarLink}><ConnectButton
-                                        handleOpenModal={onOpen}/></Nav.Item>
+                                    <Link href={'/how-it-works'}><Nav.Item className={styles.hugsHeaderNavBarItem}>How
+                                        It works</Nav.Item></Link>
+                                    <Link href={'/about-us'}><Nav.Item className={styles.hugsHeaderNavBarItem}>About
+                                        Us</Nav.Item></Link>
+                                    {!!notifications.length && <Link href={'/dashboard'}>
+                                        <Nav.Item
+                                            className={classNames(styles.hugsHeaderNavBarItem, [styles.hugsHeaderNavBarItemNotification])}>
+                                            {notifications.length} reviews waiting for you
+                                        </Nav.Item>
+                                    </Link>}
+                                    <Nav.Item className={styles.hugsHeaderNavBarLink}>
+                                        <ConnectButton
+                                            handleOpenModal={onOpen}
+                                            handleCheckLogin={handleCheckLogin}
+                                        />
+                                    </Nav.Item>
                                     {userName ?
                                         <Nav.Item className={styles.hugsHeaderNavBarItem}>{userName}</Nav.Item>
                                         :

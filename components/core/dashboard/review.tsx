@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Container from 'react-bootstrap/Container';
 
 // styles
-import styles from "../dashboard/dashboard.module.css";
+import styles from "../dashboard/dashboard.module.scss";
 
 // types
 import { Review } from "../../../core/types/types";
