@@ -240,4 +240,12 @@ export class HugsApi {
         let url =  process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/coins/list";
         return this.post(url=url, body=body)
     }
+
+    changeProfileRole(application_id, profile_id, role){
+        let body = {
+            "role": role
+        }
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "/applications/" + application_id + "/profiles/" + profile_id +"/change-role";
+        return this.post(url=url, body=body)
+    }
 }

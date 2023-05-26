@@ -171,6 +171,8 @@ export interface ProfileTypes {
   email: string;
   is_admin: boolean;
   is_active: boolean;
+  role: string;
+  application_id: string;
   user: {
     wallet: string;
   }
