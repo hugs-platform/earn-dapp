@@ -3,7 +3,6 @@ import {ChakraProvider, useDisclosure} from "@chakra-ui/react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Favicon from "react-favicon";
 import {HugsApi} from "../../../services/hugsApi";
 
 import styles from "./homePage.module.scss";
