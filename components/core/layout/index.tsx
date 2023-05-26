@@ -1,9 +1,8 @@
-import {useState, useEffect, ReactNode} from "react";
+import React, {useState, useEffect, ReactNode} from "react";
 import {ChakraProvider, useDisclosure} from "@chakra-ui/react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Favicon from "react-favicon";
 import {HugsApi} from "../../../services/hugsApi";
 
 import styles from "./homePage.module.scss";
@@ -49,6 +48,27 @@ export default function Layout({children}: Props) {
 
     const [isLogin, setIsLogin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(user?.is_admin);
+
+    const [widgetInstalled, setWidgetInstalled] = useState(false);
+
+    useEffect(() => {
+        if (document) {
+            if (document.readyState === 'complete' && !widgetInstalled) {
+                const widget = document.getElementById('widget-root')
+                if (!widget) {
+                    // @ts-ignore
+                    const HB = window.HB
+                    new HB({
+                        position: 'bottom-left',
+                        widgetId: '87fc5fb6-f891-11ed-916b-0ac3ab91b571',
+                        apiUrl: process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL,
+                        appId: '63f32751fbb45d9b726276d9'
+                    })
+                    setWidgetInstalled(true)
+                }
+            }
+        }
+    })
 
 
     /**
@@ -185,10 +205,7 @@ export default function Layout({children}: Props) {
 
     return (
         <div className={styles.index_full}>
-            <Favicon url="/favicon.ico"/>
-            <title>(Alpha) Earn Markets</title>
-            <script type="module" src={process.env.NEXT_PUBLIC_HUGBUNTERS_WIDGET_URL}/>
-            <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet"/>
+
             <Container className={styles.mainPageContainer}>
                 <Container
                     className={fullSidebar ? styles.sidebarContainer : styles.sidebarContainer + " " + styles.showLessSidebar}>
