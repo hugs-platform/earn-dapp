@@ -67,7 +67,9 @@ const OneRole: FC<ProfielProps> = (props: ProfielProps) => {
       if (response.status === 200) {
         setUserRole(selectedObject.value);
       }
-  })
+    }).catch(error => {
+      alert(error.response.data);
+    })
   }
 
 
