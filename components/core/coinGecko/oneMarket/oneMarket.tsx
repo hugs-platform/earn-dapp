@@ -24,7 +24,6 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   const { oneMarketInfo } = props;
   const API = new HugsApi();
   const { market_id, click, link, logo, platform, earn_coins, max_apy, min_apy } = oneMarketInfo;
-  const userAccess = useRef(false);
   const [list, setList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -77,7 +76,6 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
       API.getMarketCoinsList(market_id)
         .then(response => {
           setList(response.data.items);
-          userAccess.current = response.data.user_access;
         }) 
         return () => [];
     }

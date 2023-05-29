@@ -26,7 +26,6 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const { oneCoinInfo } = props;
   const { coin_id, name, abbreviature, image, last_updated, max_apy, min_apy } = oneCoinInfo;
   const [setActive, setActiveState] = useState("");
-  const userAccess = useRef(false);
   const [list, setList] = useState([]);
   const [isOpenList, setIsOpenList] = useState(false);
   const [marketsList, setMarketsList] = useState([""]);
@@ -79,7 +78,6 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
       API.getCoinMarketsList(coin_id)
         .then(response => {
           setList(response.data.items);
-          userAccess.current = response.data.user_access;
         }) 
         return () => [];
     } else {
