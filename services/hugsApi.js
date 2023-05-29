@@ -245,7 +245,7 @@ export class HugsApi {
         let body = {
             "role": role
         }
-        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "/applications/" + application_id + "/profiles/" + profile_id +"/change-role";
+        let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/" + application_id + "/profiles/" + profile_id +"/change-role";
         return this.post(url=url, body=body)
     }
 }
