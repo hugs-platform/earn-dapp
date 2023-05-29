@@ -92,6 +92,9 @@ export default function Layout({children}: Props) {
             case "Profiles":
                 router.push('/profiles')
                 break;
+            case "Roles":
+                router.push('/roles')
+                break;
         }
     }
 
@@ -276,7 +279,7 @@ export default function Layout({children}: Props) {
                                 }
                             </Nav.Item>
                             <Nav.Item
-                                className={router.pathname.includes('dashboard') ? styles.hugsNavBarItem + " " + styles.BRT : styles.hugsNavBarItem}>
+                                className={router.pathname.includes('dashboard') ? styles.hugsNavBarItem + " " + styles.BRT : router.pathname.includes('roles') ? styles.hugsNavBarItem + " " + styles.BRB : styles.hugsNavBarItem}>
                                 {showMore ?
                                     <Nav.Link onClick={() => {
                                         handlePageChange("Profiles")
@@ -296,7 +299,27 @@ export default function Layout({children}: Props) {
 
                             </Nav.Item>
                             <Nav.Item
-                                className={router.pathname.includes('profiles') ? styles.hugsNavBarItemFill + " " + styles.BRT : styles.hugsNavBarItemFill}/>
+                                className={router.pathname.includes('profiles') ? styles.hugsNavBarItem + " " + styles.BRT : styles.hugsNavBarItem}>
+                                {showMore ?
+                                    <Nav.Link onClick={() => {
+                                        handlePageChange("Roles")
+                                    }} className={router.pathname.includes('roles') ?
+                                        fullSidebar ?
+                                            styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActive :
+                                            styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActiveHide
+                                        : styles.hugsNavBarLink
+                                    }>{fullSidebar ? "Roles" : ""}</Nav.Link>
+                                    :
+                                    <></>
+                                }
+                                {showMore && !fullSidebar &&
+                                    <Nav.Item className={styles.hugsNavBatHoverItem}>
+                                        Roles <img src="/static/src/settings.svg"/>
+                                    </Nav.Item>}
+
+                            </Nav.Item>
+                            <Nav.Item
+                                className={router.pathname.includes('roles') ? styles.hugsNavBarItemFill + " " + styles.BRT : styles.hugsNavBarItemFill}/>
                             <Nav.Item className={styles.giftDiv}>
                                 {giftShow ?
                                     <div className={styles.hugsSideNavBarFooterGiftDiv}>
