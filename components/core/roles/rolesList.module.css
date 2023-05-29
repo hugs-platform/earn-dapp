@@ -1,10 +1,10 @@
-.profileBody {
+.rolesBody {
     background-color: #FFFFFF;
     border-radius: 16px;
     padding: 25px;
 }
 
-.profileBody h1 {
+.rolesBody h1 {
     font-family: 'Gilroy-Bold';
     font-size: 24px;
     line-height: 28px;
@@ -22,13 +22,15 @@
     margin: auto 0 auto 0;
 }
 
-.profilesItemList {
+.rolesItemList {
     display: grid;
-    grid-template-columns: 2fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 2fr 2fr 1fr;
     width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.profilesItemList > p {
+.rolesItemList > p {
     font-family: 'Gilroy-Bold';
     font-size: 18px;
     line-height: 28px;
@@ -37,7 +39,7 @@
     overflow-wrap: anywhere;
 }
 
-.profilesItemList > button {
+.rolesItemList > button {
     margin: 5px;
     border-radius: 4px;
     font-size: 18px;
