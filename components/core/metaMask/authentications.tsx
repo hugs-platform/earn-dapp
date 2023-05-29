@@ -42,7 +42,7 @@ export default function ConnectButton({ handleOpenModal, handleCheckLogin }: Pro
         window.dispatchEvent(new Event("profile_update"));
         document.cookie = "token=" + response.data['token'] + ";expires=" + response.data['exp'] + ";path=/";
         handleCheckLogin()
-        if (response.data['role'] !== 'user'){
+        if (response.data['role'] !== 'User'){
           document.cookie = "isStaff=" + response.data['is_admin'] + ";expires=" + response.data['exp'] + ";path=/";
         } else {
           API.deleteCookie("isStaff=");
