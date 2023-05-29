@@ -216,7 +216,8 @@ export default function Layout({children}: Props) {
                         <Nav className={styles.hugsSideNavBar}>
                             <div
                                 className={router.asPath === '/' ? styles.hugsSideBarLogo + " " + styles.BRB + " " + styles.BRT : styles.hugsSideBarLogo + " " + styles.BRT}>
-                                <Nav.Item
+                                <Nav.Link
+                                    onClick={() => {handlePageChange("Coins")}}
                                     className={fullSidebar ? styles.hugsSideNavBarTitle : styles.hugsSideNavBarTitle + " " + styles.hugsSideNavBarTitleHide}/>
                                 {fullSidebar ?
                                     <Nav.Item onClick={ShowLess} className={styles.hugsSideNavBarLess}/>
@@ -253,7 +254,7 @@ export default function Layout({children}: Props) {
                                 }>{fullSidebar ? "Markets" : ""}</Nav.Link>
                                 {!fullSidebar &&
                                     <Nav.Item className={styles.hugsNavBatHoverItem}>
-                                        Markets <img alt='platform' src="/static/src/platform.svg"/>
+                                        Markets 123 <img alt='platform' src="/static/src/platform.svg"/>
                                     </Nav.Item>
                                 }
                             </Nav.Item>
@@ -307,7 +308,7 @@ export default function Layout({children}: Props) {
                                         fullSidebar ?
                                             styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActive :
                                             styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActiveHide
-                                        : styles.hugsNavBarLink
+                                        : styles.hugsNavBarLink + " " + styles.avatar
                                     }>{fullSidebar ? "Roles" : ""}</Nav.Link>
                                     :
                                     <></>
@@ -315,7 +316,8 @@ export default function Layout({children}: Props) {
                                 {showMore && !fullSidebar &&
                                     <Nav.Item className={styles.hugsNavBatHoverItem}>
                                         Roles <img src="/static/src/settings.svg"/>
-                                    </Nav.Item>}
+                                    </Nav.Item>
+                                }
 
                             </Nav.Item>
                             <Nav.Item
