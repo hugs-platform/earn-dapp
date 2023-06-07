@@ -5,9 +5,9 @@ import { headers } from "../next.config";
 export class HugsApi {
     get(url) {
         let config = {
-            headers: {}
+            headers: {"X-Curator-Token": process.env.NEXT_PUBLIC_X_CURATOR_TOKEN}
         }
-        
+
         let token = this.getCookie("token");
         if (token) {
             config.headers['Authorization'] = "Bearer " + token
@@ -17,7 +17,7 @@ export class HugsApi {
 
     post(url, body) {
         let config = {
-            headers: {}
+            headers: {"X-Curator-Token": process.env.NEXT_PUBLIC_X_CURATOR_TOKEN}
         }
 
         let token = this.getCookie("token");
@@ -29,7 +29,7 @@ export class HugsApi {
 
     put(url, body) {
         let config = {
-            headers: {}
+            headers: {"X-Curator-Token": process.env.NEXT_PUBLIC_X_CURATOR_TOKEN}
         }
 
         let token = this.getCookie("token");
@@ -41,7 +41,7 @@ export class HugsApi {
 
     delete(url) {
         let config = {
-            headers: {}
+            headers: {"X-Curator-Token": process.env.NEXT_PUBLIC_X_CURATOR_TOKEN}
         }
 
         let token = this.getCookie("token");
