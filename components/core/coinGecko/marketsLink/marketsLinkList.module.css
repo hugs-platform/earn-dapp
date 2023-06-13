@@ -1,0 +1,128 @@
+.marketsBody {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.marketsBody h1 {
+    font-family: 'Gilroy-Bold';
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    color: #00261C;
+    margin: auto 0 auto 0;
+}
+
+.marketsItemList {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.marketsItemList > p {
+    font-family: 'Gilroy-Bold';
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.016em;
+    padding: 4px 8px;
+    overflow-wrap: anywhere;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.marketsItemList > p > img {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.marketsItemList > div > a {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #638FFE;
+}
+
+.marketsItemList > div > img {
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+    margin-left: 10px;
+}
+
+.searchDiv {
+    padding: 10px 0 10px 0;
+    float: right;
+}
+
+.search div {
+    background: #CAE4EE;
+    border-radius: 12px 0 0 12px;
+    height: 46px;
+}
+
+.searchBtn {
+    background: #4D93AC;
+    border-radius: 0 12px 12px 0;
+    height: 46px;
+    width: 70px;
+}
+
+.searchBtn img {
+    margin: auto;
+    width: 14px;
+    height: 14px;
+}
+
+.marketsListPagination {
+    min-height: 50px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+    min-width: 900px;
+    border-radius: 0 0 16px 16px;
+}
+
+.marketsListPaginationPage a {
+    all: initial;
+    border: none;
+    color: #000000;
+    width: 6.9rem;
+    height: 3.3rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--Helvetica);
+    font-size: 1.4rem;
+    transition: 0.5s;
+}
+
+.marketsListPaginationPage a:hover {
+    background-color: #F3F3F3;
+}
+
+.marketsListPaginationPageActive a {
+    background-color: #F3F3F3;
+}
+
+.marketsListPaginationPageBreak {
+    margin: 0;
+    padding: 0;
+}
+
+.marketsListPaginationPageActiveDisabled a {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.editText {
+    font-family: "Gilroy";
+    font-size: 14px;
+    color: #638FFE;
+    width: 90%;
+}
