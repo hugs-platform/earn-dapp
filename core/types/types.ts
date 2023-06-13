@@ -35,6 +35,7 @@ export interface CoinMarkets {
   last_updated: string;
   status: boolean;
   market: {
+    redirect_link: string;
     link: string;
     logo: string;
     market_id: string;
@@ -77,12 +78,14 @@ export interface Review {
 }
 
 export interface MarketTypes {
+  id: string,
   market_id: string,
   min_apy: number;
   max_apy: number;
   last_update: string,
   click: number,
   link: string,
+  redirect_link: string,
   logo: string,
   platform: string,
   earn_coins: number
