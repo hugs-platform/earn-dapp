@@ -250,9 +250,10 @@ export class HugsApi {
     }
 
     changeMarketRedirectLink(market_id, link){
-        let body = {
-            "redirect_link": link
-        }
+        let body = {}
+        if (link) {
+            body["redirect_link"] = link
+        } 
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/market/" + market_id;
         return this.post(url=url, body=body)
     }
