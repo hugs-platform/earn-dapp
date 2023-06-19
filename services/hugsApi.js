@@ -135,14 +135,14 @@ export class HugsApi {
         return this.get(url=url)
     }
 
-    createCoinMarket(market_id, coin_id, max_apy, min_apy, staking_type, days, market_name="", market_link="", coin_name="", coin_abbreviature="") {
+    createCoinMarket(market_id, coin_id, max_apy, min_apy, staking_type, days, market_name="", market_link="", coin_name="", symbol="") {
         let body = {
             "market_id": market_id,
             "market_name": market_name,
             "market_link": market_link,
             "coin_id": coin_id,
             "coin_name": coin_name,
-            "coin_abbreviature": coin_abbreviature,
+            "symbol": symbol,
             "max_apy": max_apy,
             "min_apy": min_apy,
             "staking_type": staking_type
@@ -230,10 +230,10 @@ export class HugsApi {
         return this.post(url=url, body=body)
     }
 
-    createNewCoin(coinName, coinAbbreviature, marketCup, price) {
+    createNewCoin(coinName, symbol, marketCup, price) {
         let body = {
             "coin_name": coinName,
-            "coin_abbreviature": coinAbbreviature,
+            "symbol": symbol,
             "market_cup": marketCup,
             "price": price
         }
