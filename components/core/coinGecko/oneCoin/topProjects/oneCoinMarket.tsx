@@ -198,7 +198,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
       </div>
       {isOpen ?
       <div className={oneMarketStyles.updateContainer}>
-        <h2 className={oneMarketStyles.updateContainerTitle}>Update contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform}</h2>
+        <h2 className={oneMarketStyles.updateContainerTitle}>Update contribution for {oneCoinInfo.symbol} on {oneProjectData.market.platform}</h2>
         <Select className={coinInMarketTypesErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
         {coinOnMarket ? 
           <div>
