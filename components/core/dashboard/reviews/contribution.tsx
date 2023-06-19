@@ -26,7 +26,7 @@ const OneContribution: FC<ContributionProps> = (props: ContributionProps) => {
                 <h2>Append new {contributionData.coin.name} to market {contributionData.market.platform} with APY: {contributionData.max_apy}%</h2> 
             :
             contributionData.contribution_type === "2" ? 
-                <h2>Add new coin: {contributionData.coin.name} {contributionData.coin.abbreviature}</h2>
+                <h2>Add new coin: {contributionData.coin.name} {contributionData.coin.symbol}</h2>
             :
             contributionData.contribution_type === "1" ? 
                 <h2>Add new market: {contributionData.market.platform} with <a className={styles.marketLink} href={contributionData.market.link} target="_blank" rel="noreferrer">link</a></h2>

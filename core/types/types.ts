@@ -8,7 +8,7 @@ export interface CoinTypes {
   max_apy: number;
   min_apy: number;
   name: string;
-  abbreviature: string;
+  symbol: string;
   image: string;
   last_updated: string;
   price: number;
@@ -55,7 +55,7 @@ export interface Review {
   link: string,
   answer: boolean;
   coin: {
-    abbreviature: string;
+    symbol: string;
     click: number;
     coin_id: string;
     market_cup: number;
@@ -98,7 +98,7 @@ export interface ReviewRequest {
   expired: boolean;
   answer: boolean;
   coin: {
-    abbreviature: string;
+    symbol: string;
     click: number;
     coin_id: string;
     market_cup: number;
@@ -150,7 +150,7 @@ export interface CoinContribution {
   updated_at: string;
   contribution_type: string;
   coin: {
-    abbreviature: string;
+    symbol: string;
     click: number;
     coin_id: string;
     market_cup: number;

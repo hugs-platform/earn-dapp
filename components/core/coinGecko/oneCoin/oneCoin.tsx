@@ -24,7 +24,7 @@ export interface OneCoinProps {
 const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
   const API = new HugsApi();
   const { oneCoinInfo } = props;
-  const { coin_id, name, abbreviature, image, last_updated, max_apy, min_apy } = oneCoinInfo;
+  const { coin_id, name, symbol, image, last_updated, max_apy, min_apy } = oneCoinInfo;
   const [setActive, setActiveState] = useState("");
   const [list, setList] = useState([]);
   const [isOpenList, setIsOpenList] = useState(false);
@@ -193,7 +193,7 @@ const OneCoin: FC<OneCoinProps> = (props: OneCoinProps) => {
             <></>
           }
           <div>
-            <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{abbreviature}</p>
+            <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_name}`}>{symbol}</p>
             <p className={`${styles.oneCoin_defaultStyling} ${styles.coinName_abbreviature}`}>{name}</p>
           </div>
         </div>
