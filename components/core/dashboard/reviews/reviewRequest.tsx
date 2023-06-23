@@ -187,7 +187,7 @@ function OneReviewRequest(props: ReviewProps) {
                             <h1>Platform {reviewData.market.platform} exist?</h1>
                         :
                         reviewData.contribution.contribution_type == 2 ?
-                            <h1>Coin {reviewData.coin.name}(reviewData.coin.abbreviature) exist?</h1>
+                            <h1>Coin {reviewData.coin.name}(reviewData.coin.symbol) exist?</h1>
                         :
                         reviewData.contribution.contribution_type == 3 ?
                             <h1>Coin {reviewData.coin.name} staking on {reviewData.market.platform}?</h1>

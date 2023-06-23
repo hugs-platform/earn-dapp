@@ -321,7 +321,7 @@ function App() {
       const arr = new Array(0);
       arr.push({value: "create_new", label: "Create New"});
       response.data.items.map((coin: any) => {
-        return arr.push({value: coin['coin_id'], label: coin['abbreviature'] + " - " + coin['name']})
+        return arr.push({value: coin['coin_id'], label: coin['symbol'] + " - " + coin['name']})
       })
       setCoinsList(arr);
     })
@@ -386,8 +386,8 @@ function App() {
                       onChange={coinNameChange}/>
 
                     <TextField 
-                      id="coin-abbreviature-id" 
-                      label="Coin Abbreviature" 
+                      id="coin-symbol-id" 
+                      label="Coin Symbol" 
                       variant="outlined"
                       error={coinAbbreviatureError == true}
                       helperText={coinAbbreviatureError == true ? '(required)' : ''}

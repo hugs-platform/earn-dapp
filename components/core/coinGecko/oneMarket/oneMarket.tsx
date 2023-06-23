@@ -23,7 +23,7 @@ export interface OneMarketProps {
 const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
   const { oneMarketInfo } = props;
   const API = new HugsApi();
-  const { market_id, click, link, logo, platform, earn_coins, max_apy, min_apy } = oneMarketInfo;
+  const { market_id, click, logo, platform, earn_coins, max_apy, min_apy } = oneMarketInfo;
   const [list, setList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -202,7 +202,7 @@ const OneMarket: FC<OneMarketProps> = (props: OneMarketProps) => {
           <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter} ${styles.highest_apy}`}></p>
         }
         <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter}`}>{earn_coins}</p>
-        <a id={oneMarketInfo.market_id} className={oneMarketStyles.coinMarketsColumn} href={link} target="_blank" rel="noreferrer" onClick={linkHangler}>{platform}</a>
+        <a id={oneMarketInfo.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneMarketInfo.redirect_link ? oneMarketInfo.redirect_link : oneMarketInfo.link} target="_blank" rel="noreferrer" onClick={linkHangler}>{platform}</a>
         <p className={`${styles.oneMarketDefaultStyling} ${styles.allignCenter}`}>{click}</p>
         {isOpen ? <p className={`${styles.close} ${styles.allignRight}`} onClick={toggleAccordion}>Close</p> : <p className={`${styles.more} ${styles.allignRight}`} onClick={toggleAccordion}> More</p>}
       </article>
