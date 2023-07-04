@@ -185,7 +185,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
 
         <p className={oneMarketStyles.coinMarketsColumn}><span>Age:</span> {findTimeDelta(oneProjectData.last_updated)}</p>
         <p className={oneMarketStyles.coinMarketsColumn}><span>Type:</span> {oneProjectData.staking_type}</p>
-        <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}><span>Link:</span> {oneProjectData.market.platform}</a>
+        <a id={oneProjectData.market.market_id} className={oneMarketStyles.coinMarketsColumn} href={oneProjectData.market.redirect_link ? oneProjectData.market.redirect_link : oneProjectData.market.link} target="_blank" rel="noreferrer" onClick={linkHangler}><span>Link:</span> {oneProjectData.market.platform}</a>
         <p className={oneMarketStyles.coinMarketsColumn}><span>Click:</span> {oneProjectData.market.click}</p>
         {isOpen ? 
             <div className={oneMarketStyles.coinMarketsColumn}><p className={oneMarketStyles.oneProject_closeNowButton} onClick={closeModal}>Close</p></div>:
@@ -198,7 +198,7 @@ const OneCoinMarket: FC<OneProjectProps> = (props: OneProjectProps) => {
       </div>
       {isOpen ?
       <div className={oneMarketStyles.updateContainer}>
-        <h2 className={oneMarketStyles.updateContainerTitle}>Update contribution for {oneCoinInfo.abbreviature} on {oneProjectData.market.platform}</h2>
+        <h2 className={oneMarketStyles.updateContainerTitle}>Update contribution for {oneCoinInfo.symbol} on {oneProjectData.market.platform}</h2>
         <Select className={coinInMarketTypesErr ? oneMarketStyles.modalContentSelect + " " + oneMarketStyles.modalContentSelectError : oneMarketStyles.modalContentSelect } placeholder="Coin still on market?" options={coinInMarketTypes} onChange={coinOnMarketHandle}/>
         {coinOnMarket ? 
           <div>

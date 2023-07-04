@@ -85,20 +85,14 @@ function App() {
   const handleSuccessClose = () => setIsSuccess(false);
   const [ marketValueErr, setMarketValueErr ] = useState(false);
   const marketValue = useRef("");
-  const [showNewMarket, setShowNewMarket] = useState(false);
-  const [ marketsList, setMarketsList ] = useState([{value: "create_new", label: "Create new"}]);
+  const [ marketsList, setMarketsList ] = useState([{}]);
   const marketName = useRef("");
-  const [ marketNameError , setMarketNameError ] = useState(false);
   const marketLink = useRef("");
-  const [ marketLinkError , setMarketLinkError ] = useState(false);
-  const [ coinsList, setCoinsList ] = useState([{value: "create_new", label: "Create new"}]);
+  const [ coinsList, setCoinsList ] = useState([{}]);
   const coinValue = useRef("");
-  const [showNewCoin, setShowNewCoin] = useState(false);
   const [ coinValueErr, setCoinValueErr ] = useState(false);
-  const [ coinNameError , setCoinNameError ] = useState(false);
   const coinName = useRef("");
   const coinAbbreviature = useRef("");
-  const [ coinAbbreviatureError, setCoinAbbreviatureError ] = useState(false);
   const minApyValue = useRef("");
   const [ minApyValueError, setMinApyValueError ] = useState(false);
   const maxApyValue = useRef("");
@@ -154,11 +148,6 @@ function App() {
 
   const marketListHandle = (selectedObject: any) => {
     marketValue.current = selectedObject.value;
-    if (marketValue.current == 'create_new') {
-      setShowNewMarket(true);
-    } else {
-      setShowNewMarket(false);
-    }
     if ( selectedObject.value == undefined) {
       setMarketValueErr(true)
     } else {
@@ -166,55 +155,14 @@ function App() {
     }
   }
 
-  const newMarketNameChange = (selectedObject: any) => {
-    marketName.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setMarketNameError(true);
-    } else {
-      setMarketNameError(false);
-    }
-  };
-
-  const newMarketLinkChange = (selectedObject: any) => {
-    marketLink.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setMarketLinkError(true);
-    } else {
-      setMarketLinkError(false);
-    }
-  };
-
   const coinListHandle = (selectedObject: any) => {
     coinValue.current = selectedObject.value;
-    if (coinValue.current == 'create_new'){
-      setShowNewCoin(true);
-    } else {
-      setShowNewCoin(false);
-    }
     if ( selectedObject.value == undefined) {
       setCoinValueErr(true)
     } else {
       setCoinValueErr(false)
     }
   }
-
-  const coinNameChange = (selectedObject: any) => {
-    coinName.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setCoinNameError(true);
-    } else {
-      setCoinNameError(false);
-    }
-  };
-
-  const coinAbbreviatureChange = (selectedObject: any) => {
-    coinAbbreviature.current = selectedObject.target.value;
-    if (selectedObject.target.value == "") {
-      setCoinAbbreviatureError(true);
-    } else {
-      setCoinAbbreviatureError(false);
-    }
-  };
 
   const minApyChange = (selectedObject: any) => {
     minApyValue.current = selectedObject.target.value;
@@ -265,34 +213,9 @@ function App() {
         validation.current = false;
       }
 
-      if (marketValue.current == 'create_new') {
-        if (marketName.current == ""){
-          setMarketNameError(true);
-        } else {
-          setMarketNameError(false);
-        }
-        if (marketLink.current == "") {
-          setMarketLinkError(true);
-        } else {
-          setMarketLinkError(false)
-        }
-      }
-
       if (coinValue.current == ""){
         setCoinValueErr(true);
         validation.current = false;
-      }
-
-      if (coinValue.current == 'create_new') {
-        if (coinName.current == ""){
-          validation.current = false;
-          setCoinNameError(true);
-        }
-        
-        if (coinAbbreviature.current == ""){
-          validation.current = false;
-          setCoinAbbreviatureError(true);
-        }
       }
 
       if (minApyValue.current === "" && maxApyValue.current === ""){
@@ -349,7 +272,6 @@ function App() {
     handleFetch();
     API.getMarketsList(0, "", "platform", 25, "all").then(response => {
       const arr = new Array(0);
-      arr.push({value: "create_new", label: "Create New"});
       response.data.items.map((market: any) => {
         return arr.push({value: market.market_id, label: market.platform});
       })
@@ -358,9 +280,8 @@ function App() {
 
     API.getCoinsList(currentPage.current, search.current, orderBy.current, 'all').then(response => {
       const arr = new Array(0);
-      arr.push({value: "create_new", label: "Create New"});
       response.data.items.map((coin: any) => {
-        return arr.push({value: coin['coin_id'], label: coin['abbreviature'] + " - " + coin['name']})
+        return arr.push({value: coin['coin_id'], label: coin['symbol'] + " - " + coin['name']})
       })
       setCoinsList(arr);
     })
@@ -391,49 +312,8 @@ function App() {
             <div className={styles.newCoinContainer}>
               <Select styles={customStyles} isSearchable={true} placeholder="Select a market" options={marketsList} onChange={marketListHandle}/>
               { marketValueErr && <p>Select one</p>}
-              { showNewMarket && 
-                  <div className={styles.grid}>
-                    <TextField 
-                      id="market-name-id" 
-                      label="Market Name"
-                      hiddenLabel
-                      variant="outlined"
-                      error={marketNameError == true}
-                      helperText={marketNameError == true ? '(required)' : ''}
-                      className={styles.newCoinInput} 
-                      onChange={newMarketNameChange}/>
-                    <TextField 
-                      id="market-link-id" 
-                      label="Market Link" 
-                      variant="outlined"
-                      error={marketLinkError == true}
-                      helperText={marketLinkError == true ? '(required)' : ''}
-                      className={styles.newCoinInput} 
-                      onChange={newMarketLinkChange}/>
-                  </div>
-              }
               <Select styles={customStyles} isSearchable={true} placeholder="Select a coin" options={coinsList} onChange={coinListHandle}/>
                   { coinValueErr && <p>Select one</p>}
-                  { showNewCoin &&
-                    <div className={styles.grid}>
-                      <TextField 
-                        id="coin-name-id" 
-                        label="Coin Name" 
-                        variant="outlined"
-                        error={coinNameError == true}
-                        helperText={coinNameError == true ? '(required)' : ''}
-                        className={styles.newCoinInput} 
-                        onChange={coinNameChange}/>
-                      <TextField 
-                        id="coin-abbreviature-id" 
-                        label="Coin Abbreviature" 
-                        variant="outlined"
-                        error={coinAbbreviatureError == true}
-                        helperText={coinAbbreviatureError == true ? '(required)' : ''}
-                        className={styles.newCoinInput} 
-                        onChange={coinAbbreviatureChange}/>
-                    </div>
-                  }
                 <div className={styles.grid}>
                   <TextField 
                     id="min-apy-id" 

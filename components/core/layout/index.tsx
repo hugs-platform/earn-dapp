@@ -95,6 +95,9 @@ export default function Layout({children}: Props) {
             case "Roles":
                 router.push('/roles')
                 break;
+            case "MarketsLink":
+                router.push('/market-link')
+                break;
         }
     }
 
@@ -300,7 +303,7 @@ export default function Layout({children}: Props) {
 
                             </Nav.Item>
                             <Nav.Item
-                                className={router.pathname.includes('profiles') ? styles.hugsNavBarItem + " " + styles.BRT : styles.hugsNavBarItem}>
+                                className={router.pathname.includes('profiles') ? styles.hugsNavBarItem + " " + styles.BRT : router.pathname.includes('market-link') ? styles.hugsNavBarItem + " " + styles.BRB : styles.hugsNavBarItem}>
                                 {showMore ?
                                     <Nav.Link onClick={() => {
                                         handlePageChange("Roles")
@@ -321,7 +324,28 @@ export default function Layout({children}: Props) {
 
                             </Nav.Item>
                             <Nav.Item
-                                className={router.pathname.includes('roles') ? styles.hugsNavBarItemFill + " " + styles.BRT : styles.hugsNavBarItemFill}/>
+                                className={router.pathname.includes('roles') ? styles.hugsNavBarItem + " " + styles.BRT : styles.hugsNavBarItem}>
+                                {showMore ?
+                                    <Nav.Link onClick={() => {
+                                        handlePageChange("MarketsLink")
+                                    }} className={router.pathname.includes('market-link') ?
+                                        fullSidebar ?
+                                            styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActive :
+                                            styles.hugsNavBarLink + " " + styles.avatar + " " + styles.hugsNavBarLinkActiveHide
+                                        : styles.hugsNavBarLink + " " + styles.avatar
+                                    }>{fullSidebar ? "Market Link" : ""}</Nav.Link>
+                                    :
+                                    <></>
+                                }
+                                {showMore && !fullSidebar &&
+                                    <Nav.Item className={styles.hugsNavBatHoverItem}>
+                                        Markets Link <img src="/static/src/settings.svg"/>
+                                    </Nav.Item>
+                                }
+
+                            </Nav.Item>
+                            <Nav.Item
+                                className={router.pathname.includes('market-link') ? styles.hugsNavBarItemFill + " " + styles.BRT : styles.hugsNavBarItemFill}/>
                             <Nav.Item className={styles.giftDiv}>
                                 {giftShow ?
                                     <div className={styles.hugsSideNavBarFooterGiftDiv}>
@@ -337,7 +361,7 @@ export default function Layout({children}: Props) {
                                     :
                                     <div className={styles.hugsSideNavBarFooterGiftDiv}>
                                         <img className={styles.hugsSideNavBarFooterGiftSmall}
-                                             src='/static/src/small-gift.svg'/>
+                                            src='/static/src/small-gift.svg'/>
                                         <a className={styles.hugsSideNavBarFooterGiftSmallLink}>Mint now</a>
                                     </div>
                                 }
