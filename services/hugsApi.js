@@ -114,7 +114,7 @@ export class HugsApi {
     }
 
     getReviews(page, orderBy, per_page, status) {
-        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page, 'status': status};
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page, 'status': status, 'application_id': process.env.NEXT_PUBLIC_HUGS_APP_ID};
 
         let query = Object.keys(params)
             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
@@ -125,7 +125,7 @@ export class HugsApi {
     }
 
     getContributions(page, orderBy, per_page) {
-        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page};
+        let params = {'page': page, 'order_by': orderBy, 'per_page': per_page, 'application_id': process.env.NEXT_PUBLIC_HUGS_APP_ID};
 
         let query = Object.keys(params)
             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
