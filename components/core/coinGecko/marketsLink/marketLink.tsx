@@ -45,8 +45,6 @@ const OneMarkerLink: FC<MarketProps> = (props: MarketProps) => {
                 alert("Something went wrong");
                 break;
         }
-
-        console.log(error.response.status);
     })
     }
 

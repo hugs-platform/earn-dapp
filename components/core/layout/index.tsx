@@ -20,8 +20,6 @@ import {setNotifications, setUser} from "../../../services/store/actions";
 import moment from "moment";
 import classNames from "classnames";
 
-// types
-
 
 type Props = {
     children?: ReactNode;
@@ -51,25 +49,24 @@ export default function Layout({children}: Props) {
 
     const [widgetInstalled, setWidgetInstalled] = useState(false);
 
-    useEffect(() => {
-        if (document) {
-            if (document.readyState === 'complete' && !widgetInstalled) {
-                const widget = document.getElementById('widget-root')
-                if (!widget) {
-                    // @ts-ignore
-                    const HB = window.HB
-                    new HB({
-                        position: 'bottom-left',
-                        widgetId: '87fc5fb6-f891-11ed-916b-0ac3ab91b571',
-                        apiUrl: process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL,
-                        appId: '63f32751fbb45d9b726276d9'
-                    })
-                    setWidgetInstalled(true)
-                }
-            }
-        }
-    })
-
+    // useEffect(() => {
+    //     if (document) {
+    //         if (document.readyState === 'complete' && !widgetInstalled) {
+    //             const widget = document.getElementById('widget-root')
+    //             if (!widget) {
+    //                 // @ts-ignore
+    //                 const HB = window.HB
+    //                 new HB({
+    //                     position: 'bottom-left',
+    //                     widgetId: '87fc5fb6-f891-11ed-916b-0ac3ab91b571',
+    //                     apiUrl: process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL,
+    //                     appId: '63f32751fbb45d9b726276d9'
+    //                 })
+    //                 setWidgetInstalled(true)
+    //             }
+    //         }
+    //     }
+    // })
 
     /**
      * @class
@@ -77,7 +74,6 @@ export default function Layout({children}: Props) {
      * @param {string} value - name of page
      */
     function handlePageChange(value: string) {
-        console.log(currentPage, isAdmin)
         setCurrentPage(value);
         switch (value) {
             case "Coins":
@@ -211,7 +207,6 @@ export default function Layout({children}: Props) {
 
     return (
         <div className={styles.index_full}>
-
             <Container className={styles.mainPageContainer}>
                 <Container
                     className={fullSidebar ? styles.sidebarContainer : styles.sidebarContainer + " " + styles.showLessSidebar}>
