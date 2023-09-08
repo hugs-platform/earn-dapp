@@ -35,7 +35,6 @@ export default function Layout({children}: Props) {
     const [showMore, setShowMore] = useState(false);
     const [userName, setUserName] = useState("");
     const [userAvatar, setUserAvater] = useState("");
-    const [currentPage, setCurrentPage] = useState("Coins");
     const [fullSidebar, setFullSidebar] = useState(true);
     const [giftShow, setGiftShow] = useState(true);
     const [size, setSize] = useState(1080);
@@ -43,30 +42,7 @@ export default function Layout({children}: Props) {
     const notificationsList = useSelector((state: any) => state.wallet.notifications);
     const notifications = notificationsList?.filter((el: any) => new Date(el.time_left).getTime() > new Date().getTime())
     const user = useSelector((state: any) => state.wallet.user);
-
     const [isLogin, setIsLogin] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(user?.is_admin);
-
-    const [widgetInstalled, setWidgetInstalled] = useState(false);
-
-    // useEffect(() => {
-    //     if (document) {
-    //         if (document.readyState === 'complete' && !widgetInstalled) {
-    //             const widget = document.getElementById('widget-root')
-    //             if (!widget) {
-    //                 // @ts-ignore
-    //                 const HB = window.HB
-    //                 new HB({
-    //                     position: 'bottom-left',
-    //                     widgetId: '87fc5fb6-f891-11ed-916b-0ac3ab91b571',
-    //                     apiUrl: process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL,
-    //                     appId: '63f32751fbb45d9b726276d9'
-    //                 })
-    //                 setWidgetInstalled(true)
-    //             }
-    //         }
-    //     }
-    // })
 
     /**
      * @class
@@ -74,7 +50,6 @@ export default function Layout({children}: Props) {
      * @param {string} value - name of page
      */
     function handlePageChange(value: string) {
-        setCurrentPage(value);
         switch (value) {
             case "Coins":
                 router.push('/')
@@ -142,7 +117,6 @@ export default function Layout({children}: Props) {
 
     useEffect(() => {
         if (user) {
-            setIsAdmin(user?.is_admin)
             setIsLogin(true)
         }
     }, [user]);
@@ -181,7 +155,6 @@ export default function Layout({children}: Props) {
                         is_active: response.data.is_active,
                         role: response.data.role,
                     }
-                    setIsAdmin(response.data.is_admin)
                     store.dispatch(setUser({user}));
                 }
             });
