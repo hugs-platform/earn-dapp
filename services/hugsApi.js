@@ -85,9 +85,16 @@ export class HugsApi {
     async createToken() {
         window.web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.requestAccounts();
+        const exampleMessage = 'Curator Session';
+        const from = accounts[0];
+        const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
+        const sign = await ethereum.request({
+            method: 'personal_sign',
+            params: [msg, from],
+        });
         let url = process.env.NEXT_PUBLIC_HUGS_LIMITED_APPLICATION_API_URL + "applications/authentication";
         window.localStorage.setItem('wallet', accounts[0]);
-        return this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID})
+        return this.post(url, {"wallet": accounts[0], "app_id": process.env.NEXT_PUBLIC_HUGS_APP_ID, "sign": sign})
     }
 
     getCoinsList(page = 0, search = '', orderBy='name', per_page='all') {
