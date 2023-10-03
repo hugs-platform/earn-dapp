@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 import store from "../services/store/store";
 import Favicon from "react-favicon";
 import Head from "next/head";
+import Script from "next/script";
 
 /**
  * Configuration for connect to Infura network
@@ -31,12 +32,24 @@ function App({Component, pageProps}: AppProps) {
         <DAppProvider config={config}>
             <Provider store={store}>
                 <Head>
-                    <script type="module" src={widget}/>
                     <title>(Alpha) Earn Markets</title>
                     <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet"/>
                     <Favicon url="/favicon.ico"/>
                 </Head>
                 <Component {...pageProps} />
+                <Script src={widget}
+                        strategy='beforeInteractive'/>
+                <Script>
+                    {`
+                 if (!document.getElementById('widget-root')) {
+        let HB = window.HB
+        new HB({             
+            position: 'bottom-left',             
+            widgetId: 'f99a973a-4591-11ee-9dde-0a58a9feac02',             
+            apiUrl: 'https://api.app.crtr.tech/',             
+            appId: '63f32751fbb45d9b726276d9'         
+        })}`}
+                </Script>
             </Provider>
         </DAppProvider>
     );
